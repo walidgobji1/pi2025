@@ -16,15 +16,7 @@ class FormationType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('duree')
-            ->add('niveau', ChoiceType::class, [
-                'choices' => [
-                    'Débutant' => 'Débutant',
-                    'Intermédiaire' => 'Intermédiaire',
-                    'Avancé' => 'Avancé',
-                ],
-                'placeholder' => 'Choisir un niveau',
-                'attr' => ['class' => 'form-select'], // Bootstrap styling
-            ])
+            ->add('niveau')
             ->add('dateCreation', null, [
                 'widget' => 'single_text',
             ])

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,16 +14,13 @@ class Lecon
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'veuillez introduire un titre')]
     private ?string $titre = null;
 
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'veuillez introduire le contenu de leçon')]
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'veuillez introduire la date')]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\ManyToOne(inversedBy: 'lecons')]

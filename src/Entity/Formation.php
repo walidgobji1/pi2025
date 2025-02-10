@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
+
 use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,46 +17,22 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'veuillez saisir un titre')]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'veuillez introduire la description ')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'veuillez introduire la dureé de la formation')]
     private ?string $duree = null;
 
     #[ORM\Column(length: 255)]
     private ?string $niveau = null;
 
-   /* #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'veuillez introduire la date')]
-    private ?\DateTimeInterface $dateCreation = null;*/
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-#[Assert\NotBlank(message: 'Veuillez introduire la date.')]
-#[Assert\Date(message: 'La date doit être valide (format attendu : AAAA-MM-JJ).')]
-private ?string $dateCreation = null;
+    private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'veuillez introduire le prix')]
     private ?float $prix = null;
-
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    private ?Categorie $categorie = null;
-
-    /**
-     * @var Collection<int, Lecon>
-     */
-    #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation')]
-    private Collection $lecons;
-
-    public function __construct()
-    {
-        $this->lecons = new ArrayCollection();
-    }
-
 
     public function getId(): ?int
     {
@@ -134,6 +110,24 @@ private ?string $dateCreation = null;
 
         return $this;
     }
+
+
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    private ?Categorie $categorie = null;
+
+    /**
+     * @var Collection<int, Lecon>
+     */
+    #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation')]
+    private Collection $lecons;
+
+    public function __construct()
+    {
+        $this->lecons = new ArrayCollection();
+    }
+
+
 
     public function getCategorie(): ?Categorie
     {
