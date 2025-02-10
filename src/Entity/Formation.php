@@ -122,9 +122,16 @@ class Formation
     #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation')]
     private Collection $lecons;
 
+    /**
+     * @var Collection<int, Avis>
+     */
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'formation')]
+    private Collection $avis;
+
     public function __construct()
     {
         $this->lecons = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
 
@@ -165,6 +172,36 @@ class Formation
             // set the owning side to null (unless already changed)
             if ($lecon->getFormation() === $this) {
                 $lecon->setFormation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getFormation() === $this) {
+                $avi->setFormation(null);
             }
         }
 
