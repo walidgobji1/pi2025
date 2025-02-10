@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InscriptionCours index{% endblock %}
+
+{% block body %}
+    <h1>InscriptionCours index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>DateInscreption</th>
+                <th>Montant</th>
+                <th>TypePaiement</th>
+                <th>NomApprenant</th>
+                <th>NomFormation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription_cour in inscription_cours %}
+            <tr>
+                <td>{{ inscription_cour.id }}</td>
+                <td>{{ inscription_cour.status }}</td>
+                <td>{{ inscription_cour.dateInscreption ? inscription_cour.dateInscreption|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ inscription_cour.montant }}</td>
+                <td>{{ inscription_cour.typePaiement }}</td>
+                <td>{{ inscription_cour.nomApprenant }}</td>
+                <td>{{ inscription_cour.nomFormation }}</td>
+                <td>
+                    <a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}">show</a>
+                    <a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_inscription_cours_new') }}">Create new</a>
+{% endblock %}
