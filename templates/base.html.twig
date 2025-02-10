@@ -44,7 +44,7 @@
                   <a class="nav-link" href="{{ path('app_home') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="client/about.html.twig"> About</a>
+                  <a class="nav-link" href="{{ path('app_about') }}">About</a>
                 </li>
                <li class="nav-item">
   <a class="nav-link" href="{{ path('app_formations') }}">Formation</a>
@@ -53,30 +53,13 @@
                   <a class="nav-link" href="{{ path('app_instructeur')}}">Instructeurs</a>
                 </li>
                 <li class="nav-item">
-  <a class="nav-link" href="">Messages</a>
+                    <a class="nav-link" href="{{ path('app_message')}}">Message</a>
+
 </li>
                 
-                <li class="nav-item">
-                  <a class="nav-link" href="client/contact.html.twig">Contact Us</a>
-                </li>
+                
               </ul>
-            </div>
-            <div class="quote_btn-container">
-              <a href="">
-                <span>
-                  Login
-                </span>
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </div>
-          </div>
-        </nav>
-      </div>
+            
     </header> 
     
     

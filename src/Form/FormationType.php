@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Formation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,12 +16,19 @@ class FormationType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('duree')
-            ->add('niveau')
-            ->add('dateCreation', null, [
-                'widget' => 'single_text'
+            ->add('niveau', ChoiceType::class, [
+                'choices' => [
+                    'Débutant' => 'Débutant',
+                    'Intermédiaire' => 'Intermédiaire',
+                    'Avancé' => 'Avancé',
+                ],
+                'placeholder' => 'Choisir un niveau',
+                'attr' => ['class' => 'form-select'], // Bootstrap styling
             ])
-            ->add('prix')
-        ;
+            ->add('dateCreation', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('prix');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

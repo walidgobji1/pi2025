@@ -1,0 +1,42 @@
+{% block body %}
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>{{ button_label|default('Ajouter') }} une Leçon</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    
+                    <div class="mb-3">
+                        {{ form_label(form.titre) }}
+                        {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.contenu) }}
+                        {{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.dateCreation) }}
+                        {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(form.formation) }}
+                        {{ form_widget(form.formation, {'attr': {'class': 'form-select'}}) }}
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-2">{{ button_label|default('Save') }}</button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

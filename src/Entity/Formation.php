@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\FormationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,22 +17,46 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'veuillez saisir un titre')]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'veuillez introduire la description ')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'veuillez introduire la dureé de la formation')]
     private ?string $duree = null;
 
     #[ORM\Column(length: 255)]
     private ?string $niveau = null;
 
+   /* #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'veuillez introduire la date')]
+    private ?\DateTimeInterface $dateCreation = null;*/
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateCreation = null;
+#[Assert\NotBlank(message: 'Veuillez introduire la date.')]
+#[Assert\Date(message: 'La date doit être valide (format attendu : AAAA-MM-JJ).')]
+private ?string $dateCreation = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'veuillez introduire le prix')]
     private ?float $prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    private ?Categorie $categorie = null;
+
+    /**
+     * @var Collection<int, Lecon>
+     */
+    #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation')]
+    private Collection $lecons;
+
+    public function __construct()
+    {
+        $this->lecons = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -108,4 +134,52 @@ class Formation
 
         return $this;
     }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lecon>
+     */
+    public function getLecons(): Collection
+    {
+        return $this->lecons;
+    }
+
+    public function addLecon(Lecon $lecon): static
+    {
+        if (!$this->lecons->contains($lecon)) {
+            $this->lecons->add($lecon);
+            $lecon->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLecon(Lecon $lecon): static
+    {
+        if ($this->lecons->removeElement($lecon)) {
+            // set the owning side to null (unless already changed)
+            if ($lecon->getFormation() === $this) {
+                $lecon->setFormation(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    
+  
+
+   
 }
