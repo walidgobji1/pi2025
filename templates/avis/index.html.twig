@@ -25,7 +25,7 @@
                 <td>{{ avi.dateCreation ? avi.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ avi.updateDate ? avi.updateDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_avis_show', {'id': avi.id}) }}">show</a>
+                    <a href="{{ path('app_avis_index', {'id': avi.id}) }}">show</a>
                     <a href="{{ path('app_avis_edit', {'id': avi.id}) }}">edit</a>
                 </td>
             </tr>
@@ -37,5 +37,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_avis_new') }}">Create new</a>
+    {% if formationId is defined and userId is defined %}
+    <a href="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}">Create new</a>
+{% else %}
+    <p>Formation or User not specified, cannot create new Avis.</p>
+{% endif %}
+
 {% endblock %}

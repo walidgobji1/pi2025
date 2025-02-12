@@ -1,11 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Avis{% endblock %}
+{% block title %}Ajouter un Avis{% endblock %}
 
 {% block body %}
-    <h1>Create new Avis</h1>
+    <h1>Donnez votre avis sur la formation</h1>
 
-    {{ include('avis/_form.html.twig') }}
+    <form id="avisForm" action="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}" method="POST">
+        {{ form_start(form) }}
+        
+        <div>
+            <label>Note :</label>
+            <div class="rating">
+                {% for i in 1..5 %}
+                    <input type="radio" id="star{{ i }}" name="avis[note]" value="{{ i }}" {% if i == form.note.vars.value %} checked {% endif %}>
+                    <label for="star{{ i }}">★</label>
+                {% endfor %}
+            </div>
+        </div>
 
-    <a href="{{ path('app_avis_index') }}">back to list</a>
+        <div>
+            <label>Commentaire :</label>
+            {{ form_widget(form.commentaire) }}
+        </div>
+
+        <button type="submit">Envoyer</button>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </form>
+
+    <div id="avisMessage"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#avisForm").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Get the CSRF token from the form
+                const csrfToken = $("input[name='_token']").val();
+
+                // Get form data
+                const formData = $(this).serialize(); // The CSRF token is already included in the form data
+
+                // Send the data via AJAX
+                $.ajax({
+                    type: "POST",
+                    url: $(this).attr('action'),
+                    data: formData + "&_token=" + csrfToken, // Explicitly adding CSRF token to the data
+                    success: function (response) {
+                        if (response.status === 'success') {
+                            $("#avisMessage").html("<p style='color: green;'>" + response.message + "</p>");
+                        } else {
+                            $("#avisMessage").html("<p style='color: red;'>" + response.message + "</p>");
+                        }
+                    },
+                    error: function () {
+                        $("#avisMessage").html("<p style='color: red;'>Erreur lors de l'envoi de l'avis. Veuillez réessayer.</p>");
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
