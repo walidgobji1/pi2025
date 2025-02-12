@@ -39,52 +39,77 @@ final class AvisController extends AbstractController
     }
 
     #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
-public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager): Response
-{
-    // Fetch the user and formation from the database
-    $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
-    $formation = $entityManager->getRepository(Formation::class)->find($formationId);
-
-    if (!$userById || !$formation) {
-        // If the formation or user doesn't exist, return an error page or redirect
-        return $this->render('error.html.twig', [
-            'message' => 'Utilisateur ou formation non trouvé !'
-        ]);
-    }
-
-    // Create the Avis entity and set it up
-    $avi = new Avis();
-    $avi->setApprenant($userById);
-    $avi->setFormation($formation);
-
-    // Create and handle the form
-    $form = $this->createForm(AvisType::class, $avi);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        try {
-            $entityManager->persist($avi);
-            $entityManager->flush();
-
-            return $this->json([
-                'status' => 'success',
-                'message' => 'Avis ajouté avec succès',
-            ]);
-        } catch (\Exception $e) {
-            return $this->json([
-                'status' => 'error',
-                'message' => 'Une erreur est survenue lors de l\'ajout de l\'avis.',
+    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Fetch the user and formation from the database
+        $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
+        $formation = $entityManager->getRepository(Formation::class)->find($formationId);
+    
+        if (!$userById || !$formation) {
+            // If the formation or user doesn't exist, return an error page or redirect
+            return $this->render('error.html.twig', [
+                'message' => 'Utilisateur ou formation non trouvé !'
             ]);
         }
+    
+        // Create the Avis entity and set it up
+        $avi = new Avis();
+        $avi->setApprenant($userById);
+        $avi->setFormation($formation);
+    
+        // Create and handle the form
+        $form = $this->createForm(AvisType::class, $avi);
+        $form->handleRequest($request);
+    
+        // If the form is submitted and valid
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                // Persist the new review
+                $entityManager->persist($avi);
+                $entityManager->flush();
+    
+                // Fetch the updated list of reviews
+                $avis = $entityManager->getRepository(Avis::class)->findBy(['formation' => $formation]);
+    
+                // Check if the request is AJAX
+                if ($request->isXmlHttpRequest()) {
+                    // Return the updated reviews list as HTML in the response
+                    $html = $this->renderView('avis/_avis_list.html.twig', [
+                        'avis' => $avis,
+                        'formationId' => $formationId,
+                        'userId' => $userId
+                    ]);
+    
+                    return $this->json([
+                        'status' => 'success',
+                        'message' => 'Avis ajouté avec succès!',
+                        'html' => $html
+                    ]);
+                }
+    
+                // Return the full page render if it's not an AJAX request
+                return $this->render('avis/index.html.twig', [
+                    'avis' => $avis,
+                    'formationId' => $formationId,
+                    'userId' => $userId
+                ]);
+    
+            } catch (\Exception $e) {
+                return $this->json([
+                    'status' => 'error',
+                    'message' => 'Une erreur est survenue lors de l\'ajout de l\'avis.'
+                ]);
+            }
+        }
+    
+        // On GET request, render the form page
+        return $this->render('avis/new.html.twig', [
+            'form' => $form->createView(),
+            'formationId' => $formationId,
+            'userId' => $userId,
+        ]);
     }
-
-    // On GET request, render the form page
-    return $this->render('avis/new.html.twig', [
-        'form' => $form->createView(),
-        'formationId' => $formationId,
-        'userId' => $userId,
-    ]);
-}
+    
 
     
 

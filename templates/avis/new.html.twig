@@ -5,62 +5,68 @@
 {% block body %}
     <h1>Donnez votre avis sur la formation</h1>
 
-    <form id="avisForm" action="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}" method="POST">
-        {{ form_start(form) }}
-        
+    {{ form_start(form) }}
+    
+    <div>
+        {{ form_label(form.note) }}
+        {{ form_widget(form.note) }}
         <div>
-            <label>Note :</label>
-            <div class="rating">
-                {% for i in 1..5 %}
-                    <input type="radio" id="star{{ i }}" name="avis[note]" value="{{ i }}" {% if i == form.note.vars.value %} checked {% endif %}>
-                    <label for="star{{ i }}">★</label>
-                {% endfor %}
-            </div>
+            {{ form_errors(form.note) }}
         </div>
+    </div>
 
+    <div>
+        {{ form_label(form.commentaire) }}
+        {{ form_widget(form.commentaire) }}
         <div>
-            <label>Commentaire :</label>
-            {{ form_widget(form.commentaire) }}
+            {{ form_errors(form.commentaire) }}
         </div>
+    </div>
 
-        <button type="submit">Envoyer</button>
-        {{ form_rest(form) }}
-        {{ form_end(form) }}
-    </form>
-
-    <div id="avisMessage"></div>
+    <button type="submit">Envoyer</button>
+    
+    {{ form_end(form) }}
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#avisForm").submit(function (event) {
-                event.preventDefault(); // Prevent the default form submission
+$(document).ready(function() {
+    // Handle form submission
+    $("#avisForm").submit(function(event) {
+        event.preventDefault();  // Prevent the default form submission (page reload)
 
-                // Get the CSRF token from the form
-                const csrfToken = $("input[name='_token']").val();
+        // Get the CSRF token and form data
+        const csrfToken = $("input[name='_token']").val();
+        const formData = $(this).serialize();
 
-                // Get form data
-                const formData = $(this).serialize(); // The CSRF token is already included in the form data
+        // Send AJAX request to submit the form
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),  // Get the form action URL
+            data: formData + "&_token=" + csrfToken,  // Add CSRF token to the data
+            success: function(response) {
+                // Update the reviews list without reloading the page
+                if (response.status === 'success') {
+                    // Display success message
+                    $("#avisMessage").html("<p style='color: green;'>" + response.message + "</p>");
 
-                // Send the data via AJAX
-                $.ajax({
-                    type: "POST",
-                    url: $(this).attr('action'),
-                    data: formData + "&_token=" + csrfToken, // Explicitly adding CSRF token to the data
-                    success: function (response) {
-                        if (response.status === 'success') {
-                            $("#avisMessage").html("<p style='color: green;'>" + response.message + "</p>");
-                        } else {
-                            $("#avisMessage").html("<p style='color: red;'>" + response.message + "</p>");
-                        }
-                    },
-                    error: function () {
-                        $("#avisMessage").html("<p style='color: red;'>Erreur lors de l'envoi de l'avis. Veuillez réessayer.</p>");
-                    }
-                });
-            });
+                    // Update the reviews list with the new review
+                    $("#avisList").html(response.html);  // Assuming you return the updated reviews HTML in response
+                } else {
+                    // Display error message
+                    $("#avisMessage").html("<p style='color: red;'>" + response.message + "</p>");
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                console.log("Error:", error);
+                $("#avisMessage").html("<p style='color: red;'>Erreur lors de l'envoi de l'avis. Veuillez réessayer.</p>");
+            }
         });
+    });
+});
+
+
     </script>
 {% endblock %}
