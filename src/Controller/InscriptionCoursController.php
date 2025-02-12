@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/inscription/cours')]
-final class InscriptionCoursController extends AbstractController
+ #[Route('/inscription/cours')]
+ final class InscriptionCoursController extends AbstractController
 {
     #[Route(name: 'app_inscription_cours_index', methods: ['GET'])]
     public function index(InscriptionCoursRepository $inscriptionCoursRepository): Response
@@ -23,26 +23,49 @@ final class InscriptionCoursController extends AbstractController
     }
 
     #[Route('/new', name: 'app_inscription_cours_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $inscriptionCour = new InscriptionCours();
-        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
-        $form->handleRequest($request);
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $inscriptionCour = new InscriptionCours();
+    $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($inscriptionCour);
-            $entityManager->flush();
+    // Vérifier si le formulaire a été soumis et est valide
+    if ($form->isSubmitted() && $form->isValid()) {
 
-            return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
+        // Vérifier et définir un statut si nécessaire
+        if ($inscriptionCour->getStatus() === null) {
+            $inscriptionCour->setStatus('en attente');
         }
 
-        return $this->render('inscription_cours/new.html.twig', [
-            'inscription_cour' => $inscriptionCour,
-            'form' => $form,
-        ]);
+        // Vérifier et définir la date d'inscription si nécessaire
+        if ($inscriptionCour->getDateInscreption() === null) {
+            $inscriptionCour->setDateInscreption(new \DateTimeImmutable());
+        }
+
+        // Vérifier et définir un montant par défaut si nécessaire
+        if ($inscriptionCour->getMontant() === null) {
+            $inscriptionCour->setMontant(0.0);
+        }
+
+        // Débogage : afficher les données de l'entité
+        dump($inscriptionCour); // ou dd($inscriptionCour) pour arrêter l'exécution
+
+        // Persister l'entité en base de données
+        $entityManager->persist($inscriptionCour);
+        $entityManager->flush();
+
+        // Redirection vers la liste des inscriptions après l'enregistrement
+        return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'app_inscription_cours_show', methods: ['GET'])]
+    // Rendu de la vue du formulaire
+    return $this->render('inscription_cours/new.html.twig', [
+        'inscription_cour' => $inscriptionCour,
+        'form' => $form->createView(),
+    ]);
+}
+
+  #[Route('/{id}', name: 'app_inscription_cours_show', methods: ['GET'])]
     public function show(InscriptionCours $inscriptionCour): Response
     {
         return $this->render('inscription_cours/show.html.twig', [

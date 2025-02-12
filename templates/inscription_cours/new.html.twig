@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New InscriptionCours{% endblock %}
+{% block title %}Formulaire d'Inscription{% endblock %}
 
 {% block body %}
-    <h1>Create new InscriptionCours</h1>
 
     {{ include('inscription_cours/_form.html.twig') }}
 
-    <a href="{{ path('app_inscription_cours_index') }}">back to list</a>
+    <a href="{{ path('app_inscription_cours_index') }}">Retour à la liste des inscriptions</a>
 {% endblock %}
