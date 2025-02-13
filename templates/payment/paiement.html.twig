@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+    <h2>Page de Paiement</h2>
+    <button id="checkout-button">Payer</button>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+    const stripe = Stripe('pk_test_51PIetLRt6ryr9tuOakALb3ORAwL81fhW0qhpkEyYhW8ZHSyi8CHCvnVSKnO1d8ZZCHPD3EUROj4jM7kHctjabchR007oLu0KI3'); // Remplacez par votre clé publique Stripe
+
+    document.getElementById('payButton').addEventListener('click', function () {
+        // Appel à la route /checkout pour créer une session de paiement
+        fetch('/checkout', {
+            method: 'POST',
+        })
+        .then((response) => response.json())
+        .then((session) => {
+            // Redirection vers la page de paiement Stripe
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then((result) => {
+            // Si une erreur se produit lors de la redirection
+            if (result.error) {
+                alert(result.error.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Erreur:', error);
+        });
+    });
+</script>
+
+{% endblock %}
+
+{% endblock %}

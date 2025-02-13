@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Nom Apprenant</th>
-                <th>Formation</th>
+                <th>Nom Formation</th>
                 <th>Email</th>
                 <th>CIN</th>
                 <th>Status</th>
@@ -26,7 +26,7 @@
                 <td>{{ inscription_cour.email }}</td>
                 <td>{{ inscription_cour.cin }}</td>
                 <td>{{ inscription_cour.status }}</td>
-                <td>{{ inscription_cour.montant }} €</td>
+                <td>{{ inscription_cour.montant }} dt</td>
                 <td>{{inscription_cour.dateInscreption|date('Y-m-d H:i:s') }}</td>
                 <td>
                     <a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}">detaile</a>
