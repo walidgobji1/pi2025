@@ -46,13 +46,11 @@ final class AvisController extends AbstractController
         $formation = $entityManager->getRepository(Formation::class)->find($formationId);
     
         if (!$userById || !$formation) {
-            // If the formation or user doesn't exist, return an error page or redirect
-            return $this->render('error.html.twig', [
-                'message' => 'Utilisateur ou formation non trouvé !'
-            ]);
+            $this->addFlash('error', 'Utilisateur ou formation non trouvé !');
+            return $this->redirectToRoute('homepage'); // Redirect to homepage or another relevant page
         }
     
-        // Create the Avis entity and set it up
+        // Create the Avis entity
         $avi = new Avis();
         $avi->setApprenant($userById);
         $avi->setFormation($formation);
@@ -61,54 +59,32 @@ final class AvisController extends AbstractController
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
     
-        // If the form is submitted and valid
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 // Persist the new review
                 $entityManager->persist($avi);
                 $entityManager->flush();
+                // Reset the form after submission
+        $form = $this->createForm(AvisType::class);  // Recreate the form to reset fields
+
     
-                // Fetch the updated list of reviews
-                $avis = $entityManager->getRepository(Avis::class)->findBy(['formation' => $formation]);
     
-                // Check if the request is AJAX
-                if ($request->isXmlHttpRequest()) {
-                    // Return the updated reviews list as HTML in the response
-                    $html = $this->renderView('avis/_avis_list.html.twig', [
-                        'avis' => $avis,
-                        'formationId' => $formationId,
-                        'userId' => $userId
-                    ]);
+                $this->addFlash('success', 'Votre avis a été ajouté avec succès.');
     
-                    return $this->json([
-                        'status' => 'success',
-                        'message' => 'Avis ajouté avec succès!',
-                        'html' => $html
-                    ]);
-                }
-    
-                // Return the full page render if it's not an AJAX request
-                return $this->render('avis/index.html.twig', [
-                    'avis' => $avis,
-                    'formationId' => $formationId,
-                    'userId' => $userId
-                ]);
-    
+                // Redirect to the list of reviews
+                return $this->redirectToRoute('app_avis_list', ['formationId' => $formationId]);
             } catch (\Exception $e) {
-                return $this->json([
-                    'status' => 'error',
-                    'message' => 'Une erreur est survenue lors de l\'ajout de l\'avis.'
-                ]);
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'ajout de l\'avis.');
             }
         }
     
-        // On GET request, render the form page
+        // Render the form page
         return $this->render('avis/new.html.twig', [
             'form' => $form->createView(),
             'formationId' => $formationId,
             'userId' => $userId,
         ]);
-    }
+    }    
     
 
     

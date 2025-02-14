@@ -1,12 +1,10 @@
 <?php
 
-// src/Form/AvisType.php
-
 namespace App\Form;
 
 use App\Entity\Avis;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,26 +16,27 @@ class AvisType extends AbstractType
     {
         $builder
             // Note field with validation constraints (Assert)
-            ->add('note', IntegerType::class, [
-                'label' => 'Note',
-                'required' => true,
-                'constraints' => [
+            ->add('note', ChoiceType::class, [
+                'label' => false, // No default label
+                'required' => true, // This is required
+                'attr' => [
+                    'class' => 'rating-input',
+                ],
+                'expanded' => true, // Display choices as clickable radio buttons
+                'multiple' => false,
+                'choices' => [
+                    '★' => 1,
+                    '★★' => 2,
+                    '★★★' => 3,
+                    '★★★★' => 4,
+                    '★★★★★' => 5,
+                ],
+               'constraints' => [
                     new Assert\NotBlank([
-                        'message' => 'Veuillez donner une note.',
-                    ]),
-                    new Assert\Range([
-                        'min' => 1,
-                        'max' => 5,
-                        'notInRangeMessage' => 'La note doit être entre {{ min }} et {{ max }}.',
+                        'message' => 'Veuillez ajouter un note.',
                     ]),
                 ],
-                'attr' => [
-                    'class' => 'note-field',
-                    'placeholder' => 'Note (1-5)',
-                    'min' => 1,
-                    'max' => 5,
-                    'step' => 1,
-                ]
+                
             ])
             // Commentaire field with validation constraints (Assert)
             ->add('commentaire', TextareaType::class, [
@@ -55,7 +54,7 @@ class AvisType extends AbstractType
                     ]),
                 ],
                 'attr' => [
-                    'placeholder' => 'Laissez un commentaire...',
+                    'class' => 'form-control commentaire',
                     'rows' => 5
                 ]
             ]);
@@ -69,5 +68,3 @@ class AvisType extends AbstractType
         ]);
     }
 }
-
-
