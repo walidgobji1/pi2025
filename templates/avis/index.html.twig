@@ -3,44 +3,117 @@
 {% block title %}Avis index{% endblock %}
 
 {% block body %}
-    <h1>Avis index</h1>
+    <h1 class="mb-4">Avis</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Note</th>
-                <th>Commentaire</th>
-                <th>DateCreation</th>
-                <th>UpdateDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for avi in avis %}
-            <tr>
-                <td>{{ avi.id }}</td>
-                <td>{{ avi.note }}</td>
-                <td>{{ avi.commentaire }}</td>
-                <td>{{ avi.dateCreation ? avi.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ avi.updateDate ? avi.updateDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_avis_index', {'id': avi.id}) }}">show</a>
-                    <a href="{{ path('app_avis_edit', {'id': avi.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <!-- Note and Date de Création on the Same Line -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Displaying Stars for the Note -->
+                            <h5 class="card-title mb-0">
+                                {% if avi.note is not empty %}
+                                    {% set filled_stars = avi.note %}
+                                    {% set empty_stars = 5 - avi.note %}
+
+                                    <!-- Loop for filled stars -->
+                                    {% for i in 1..filled_stars %}
+                                        <span class="fa fa-star checked"></span>
+                                    {% endfor %}
+
+                                    <!-- Loop for empty stars -->
+                                    {% for i in 1..empty_stars %}
+                                        <span class="fa fa-star empty"></span>
+                                    {% endfor %}
+                                {% endif %}
+                            </h5>
+
+                            <!-- Displaying Date Creation with an Agenda Icon -->
+                            <p class="text-muted mb-0">
+                                <i class="fa fa-clock" style="font-size: 1.2rem; margin-right: 5px;"></i>
+                                 {{ avi.dateCreation ? avi.dateCreation|date('Y-m-d H:i:s') : 'Non spécifiée' }}
+                            </p>
+                        </div>
+
+                        <p class="card-text">{{ avi.commentaire }}</p>
+
+                        <!-- Displaying Update Date if Available -->
+                        <p class="text-muted">
+                            {% if avi.updateDate %}
+                                Dernière mise à jour: {{ avi.updateDate|date('Y-m-d H:i:s') }}
+                            {% endif %}
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <form method="POST" action="{{ path('app_avis_delete', {'id': avi.id}) }}" style="display: inline;">
+    <button type="submit" class="btn btn-info btn-sm">Supprimer</button>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
+</form>
+                        <a href="{{ path('app_avis_edit', {'id': avi.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    Aucun avis trouvé.
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
     {% if formationId is defined and userId is defined %}
-    <a href="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}">Create new</a>
-{% else %}
-    <p>Formation or User not specified, cannot create new Avis.</p>
-{% endif %}
+        <a href="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}" class="btn btn-primary mt-4">Ajouter un avis</a>
+    {% else %}
+        <p class="mt-4">Formation ou utilisateur non spécifié, impossible de créer un nouvel avis.</p>
+    {% endif %}
+
+    <!-- CSS for Styling -->
+    <style>
+        /* Star Rating */
+        .checked {
+            color: gold; /* Filled stars in gold */
+        }
+
+        .empty {
+            color: #e0e0e0; /* Empty stars in light grey */
+        }
+
+        /* Optional: Customize the icon size */
+        .fa-star {
+            font-size: 1.5rem;
+            margin-right: 2px;
+        }
+
+        /* Clock Icon */
+        .fa-clock {
+            color: #6c757d;
+            margin-right: 5px;
+            
+        }
+
+        /* Optional: Debug Styling */
+        .debug-info {
+            color: red;
+            font-size: 14px;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 8px;
+        }
+
+        /* Button Styling */
+        .btn {
+            margin-top: 10px;
+        }
+
+        /* Center Content */
+        .card-body {
+            text-align: left;
+        }
+    </style>
 
 {% endblock %}
