@@ -22,21 +22,22 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
-    #[Route(name: 'app_avis_index', methods: ['GET'])]
-    public function index(AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
-    {
-        $avis = $entityManager->getRepository(Avis::class)->findAll();
+#[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
+public function index(int $formationId = 1, AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
+{
+    $userId = 2;
 
-        // Get formationId and userId dynamically, this is temporary for now
-        $formationId = 1; // This will be dynamic later
-        $userId = 1; // Get the user ID from authentication
+    $avis = $entityManager->getRepository(Avis::class)->findBy(
+        ['formation' => $formationId], 
+        ['id' => 'DESC']
+    );
 
-        return $this->render('avis/index.html.twig', [
-            'avis' => $avis,
-            'formationId' => $formationId, // Temporary for now
-            'userId' => $userId,           // Get dynamic user ID from the authentication system
-        ]);
-    }
+    return $this->render('avis/index.html.twig', [
+        'avis' => $avis,
+        'formationId' => $formationId,
+        'userId' => $userId,
+    ]);
+}
 
     #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
     public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager): Response
@@ -44,47 +45,44 @@ final class AvisController extends AbstractController
         // Fetch the user and formation from the database
         $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
         $formation = $entityManager->getRepository(Formation::class)->find($formationId);
-    
+
         if (!$userById || !$formation) {
             $this->addFlash('error', 'Utilisateur ou formation non trouvé !');
             return $this->redirectToRoute('homepage'); // Redirect to homepage or another relevant page
         }
-    
+
         // Create the Avis entity
         $avi = new Avis();
         $avi->setApprenant($userById);
         $avi->setFormation($formation);
-    
+
         // Create and handle the form
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 // Persist the new review
                 $entityManager->persist($avi);
                 $entityManager->flush();
-                // Reset the form after submission
-        $form = $this->createForm(AvisType::class);  // Recreate the form to reset fields
 
-    
-    
+                // Add success flash message
                 $this->addFlash('success', 'Votre avis a été ajouté avec succès.');
-    
+
                 // Redirect to the list of reviews
-                return $this->redirectToRoute('app_avis_list', ['formationId' => $formationId]);
+                return $this->redirectToRoute('app_avis_index', ['formationId' => $formationId]);
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Une erreur est survenue lors de l\'ajout de l\'avis.');
             }
         }
-    
+
         // Render the form page
         return $this->render('avis/new.html.twig', [
             'form' => $form->createView(),
             'formationId' => $formationId,
             'userId' => $userId,
         ]);
-    }    
+    }   
     
 
     
