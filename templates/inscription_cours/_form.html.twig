@@ -9,6 +9,26 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     <style>
+        
+        /* Style du header */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Style du footer */
+        footer {
+            background-color: #f8f9fa;
+            color: #007bff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
         .btn_box {
             display: flex;
             justify-content: center;
@@ -38,9 +58,10 @@
         .form-control {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            max-width: 100%;
         }
 
         .form-group {
@@ -51,16 +72,24 @@
             color: red;
             font-size: 14px;
         }
+
+        body {
+            margin: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        section {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
 
 <section class="contact_section layout_padding">
     <div class="container">
-        <div class="heading_container text-center">
-            <h2>Formulaire d'Inscription</h2>
-        </div>
-
         <div class="form_container">
             {{ form_start(form) }}
 
@@ -71,8 +100,9 @@
                 {{ form_errors(form.nomApprenant) }}
             </div>
             
+            <!-- Nom de la formation -->
             <div class="form-group">
-                {{ form_label(form.nomFormation) }}
+                {{ form_label(form.nomFormation, "Nom de la formation") }}
                 {{ form_widget(form.nomFormation, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.nomFormation) }}
             </div>
@@ -97,29 +127,35 @@
                 {{ form_widget(form.typePaiement, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.typePaiement) }}
             </div>
+
+            <!-- Apprenant -->
             <div class="form-group">
-        {{ form_label(form.apprenant) }}
-        {{ form_widget(form.apprenant, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.apprenant) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.formation) }}
-        {{ form_widget(form.formation, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.formation) }}
-    </div>
-
-            <!-- Affichage du bouton de soumission -->
-           <div class="btn_box">
-                <button type="submit" class="btn-primary">{{ button_label|default('S\'inscrire') }}</button>
+                {{ form_label(form.apprenant, "Sélectionner un apprenant") }}
+                {{ form_widget(form.apprenant, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.apprenant) }}
             </div>
 
-            {{ form_errors(form) }}
+            <!-- Formation -->
+            <div class="form-group">
+                {{ form_label(form.formation, "Sélectionner une formation") }}
+                {{ form_widget(form.formation, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.formation) }}
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="btn_box">
+                <button type="submit" class="btn btn-primary">
+                    {{ button_label|default("S'inscrire") }}
+                </button>
+            </div>
+
+            {{ form_end(form) }}
         </div>
     </div>
 </section>
 
 </body>
 </html>
+
 
 {{ form_end(form) }}

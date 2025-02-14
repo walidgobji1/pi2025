@@ -2,7 +2,17 @@
 
 {% block title %}Formulaire d'Inscription{% endblock %}
 
+{% block stylesheets %}
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
+<h1 class="text-center mt-4">Formulaire d'Inscription</h1>
 
     {{ include('inscription_cours/_form.html.twig') }}
 

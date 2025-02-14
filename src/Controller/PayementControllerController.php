@@ -3,38 +3,47 @@
 namespace App\Controller;
 
 use Stripe\Stripe;
-use Stripe\Checkout\Session;
+use Stripe\PaymentIntent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 
 
 final class PayementControllerController extends AbstractController{
-#[Route('/checkout', name: 'checkout', methods: ['GET', 'POST'])]
-    public function checkout(Request $request): JsonResponse
+    #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['GET', 'POST'])]
+    public function createPaymentIntent(Request $request): JsonResponse
     {
-        Stripe::setApiKey($this->getParameter('stripe_secret_key'));
+        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => [
-                        'name' => 'Nom du produit',
-                    ],
-                    'unit_amount' => 1000, 
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => $this->generateUrl('payment_success', [], 0),
-            'cancel_url' => $this->generateUrl('payment_cancel', [], 0),
-        ]);
+        $data = json_decode($request->getContent(), true);
+        $amount = $data['amount'] ?? 1000; // Montant par défaut : 10€
 
-        return new JsonResponse(['id' => $session->id]);
+        try {
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $amount,
+                'currency' => 'eur',
+                'payment_method_types' => ['card'],
+            ]);
+
+            return new JsonResponse([
+                'clientSecret' => $paymentIntent->client_secret
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 500);
+        }
     }
+    
+    #[Route('/payment', name: 'payment_page', methods: ['GET'])]
+    public function paymentPage(ParameterBagInterface $params): Response
+{  
+    return $this->render('payment/payment.html.twig', [
+        'stripe_public_key' => $params->get('STRIPE_PUBLIC_KEY'),
+    ]);
+}
 
     #[Route('/success', name: 'payment_success')]
     public function success()

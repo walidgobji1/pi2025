@@ -1,45 +1,77 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}InscriptionCours index{% endblock %}
+{% block title %}Gestion des Inscriptions{% endblock %}
 
 {% block body %}
-    <h1>InscriptionCours index</h1>
+  <main id="main" class="main">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom Apprenant</th>
-                <th>Nom Formation</th>
-                <th>Email</th>
-                <th>CIN</th>
-                <th>Status</th>
-                <th>Montant</th>
-                <th>Date d'inscription</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for inscription_cour in inscription_cours %}
-            <tr>
-                <td>{{ inscription_cour.nomApprenant }}</td>
-                <td>{{ inscription_cour.nomFormation }}</td>
-                <td>{{ inscription_cour.email }}</td>
-                <td>{{ inscription_cour.cin }}</td>
-                <td>{{ inscription_cour.status }}</td>
-                <td>{{ inscription_cour.montant }} dt</td>
-                <td>{{inscription_cour.dateInscreption|date('Y-m-d H:i:s') }}</td>
-                <td>
-                    <a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}">detaile</a>
-                    <a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mt-4">
+        <h5 class="card-title text-center">Liste des Inscriptions</h5>
 
-    <a href="{{ path('app_inscription_cours_new') }}">Create new</a>
+        <div class="card">
+            <div class="card-body">
+                <!-- Table avec DataTables -->
+                <table class="table datatable table-striped">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th>id</th>
+                            <th>Nom Apprenant</th>
+                            <th>Nom Formation</th>
+                            <th>Email</th>
+                            <th>CIN</th>
+                            <th>Status</th>
+                            <th>Montant</th>
+                            <th>Date d'inscription</th>
+                            <th>Actions</th> <!-- Ajout de la colonne actions -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inscription_cour in inscription_cours %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ inscription_cour.nomApprenant }}</td>
+                                <td>{{ inscription_cour.nomFormation }}</td>
+                                <td>{{ inscription_cour.email }}</td>
+                                <td>{{ inscription_cour.cin }}</td>
+                                <td>
+                                    {% if inscription_cour.status == 'payé' %}
+                                        <span class="badge bg-success">Payé</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">En attente</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ inscription_cour.montant }} dt</td>
+                                <td>{{ inscription_cour.dateInscreption|date('Y-m-d') }}</td>
+                                <td class="d-flex">
+                         <!-- Bouton Détails -->
+                              <a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}" class="btn btn-info btn-sm me-2">
+                              <i class="fas fa-eye"></i> Détails
+                                </a>
+                           <!-- Bouton Modifier -->
+                                 <a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}" class="btn btn-warning btn-sm me-2">
+                               <i class="fas fa-edit"></i> Modifier
+                                 </a>
+                          <!-- Bouton Supprimer -->
+                               <form method="post" action="{{ path('app_inscription_cours_delete', {'id': inscription_cour.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inscription ?');">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription_cour.id) }}">
+                               <button type="submit" class="btn btn-danger btn-sm">
+                               <i class="fas fa-trash-alt"></i> Supprimer
+                              </button>
+                             </form>
+                                </td>
+
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="9" class="text-center text-muted">Aucune inscription trouvée</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- Fin de la table -->
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}
