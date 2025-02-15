@@ -8,12 +8,14 @@ use App\Entity\Apprenant;
 
 
 use App\Form\AvisType;
+use App\Entity\FormationScore;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManager;
 
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FormationScoreRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +42,7 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
 }
 
     #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
-    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager): Response
+    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager , FormationScoreRepository $formationScoreRepository,): Response
     {
         // Fetch the user and formation from the database
         $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
@@ -56,11 +58,39 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
         $avi->setApprenant($userById);
         $avi->setFormation($formation);
 
+        //handel creation formationscore 
+        // Check if FormationScore exists
+        $formationScore = $formationScoreRepository->findOneBy(['formation' => $formation]);
+        if (!$formationScore) {
+            // Create new FormationScore if it doesn't exist
+            $formationScore = new FormationScore();
+            $formationScore->setFormation($formation);
+            $formationScore->setNombreAvis(0);
+            $formationScore->setNoteMoyenne(0);
+            $formationScore->setClassement(0); // You can update ranking logic later
+
+            $entityManager->persist($formationScore);
+        }
+        $avi->setFormationScore($formationScore);
+         
+
+
         // Create and handle the form
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $avi->getNote();
+            $count=$formationScore->getNombreAvis();
+            if ($count > 0) {
+                // If there are existing reviews, calculate the new average
+                $newAverage = ($formationScore->getNoteMoyenne() * $count + $avi->getNote()) / ($count + 1);
+            } else {
+                // If there are no reviews, set the average to the new rating
+                $newAverage = $avi->getNote();
+            }
+            $formationScore->setNoteMoyenne($newAverage);
+            $formationScore->setNombreAvis($count+1);
             try {
                 // Persist the new review
                 $entityManager->persist($avi);
