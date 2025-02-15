@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class AvisController extends AbstractController
 {
     #[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
-    public function index(int $formationId = 1, AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
+    public function index(int $formationId , AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
     {
         $userId = 2;
 
@@ -149,7 +149,8 @@ final class AvisController extends AbstractController
             $entityManager->persist($formationScore);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_avis_index', ['formationId' => $avi->getFormation()->getId()], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->render('avis/edit.html.twig', [
@@ -187,6 +188,7 @@ final class AvisController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_avis_index', ['formationId' => $avi->getFormation()->getId()], Response::HTTP_SEE_OTHER);
+
     }
 }

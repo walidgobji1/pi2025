@@ -108,7 +108,9 @@ $(document).ready(function() {
   
 <div class="d-flex flex-column align-items-center">
     <button type="submit" class="btn custom-red w-50 py-2 mb-3">Envoyer</button>
-    <a href="{{ path('app_avis_index') }}" class="btn btn-secondary w-50">Liste Avis</a>
+<a href="{{ path('app_avis_index', {'formationId': formationId}) }}" class="btn btn-secondary w-50">
+    Liste Avis
+</a>
 </div>
 
 
