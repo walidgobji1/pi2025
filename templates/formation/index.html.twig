@@ -1,46 +1,42 @@
-
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}Formation index{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Duree</th>
-                <th>Niveau</th>
-                <th>DateCreation</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for formation in formations %}
-            <tr>
-                <td>{{ formation.id }}</td>
-                <td>{{ formation.titre }}</td>
-                <td>{{ formation.description }}</td>
-                <td>{{ formation.duree }}</td>
-                <td>{{ formation.niveau }}</td>
-                <td>{{ formation.dateCreation ? formation.dateCreation|date('Y-m-d') : '' }}</td>
-                <td>{{ formation.prix }}</td>
-                <td>
-                    <a href="{{ path('app_formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('app_formation_edit', {'id': formation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <div class="row">
+            {% for formation in formations %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ formation.titre }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ formation.description }}</p>
+                            <ul class="list-unstyled">
+                                <li><strong>Durée:</strong> {{ formation.duree }}</li>
+                                <li><strong>Niveau:</strong> {{ formation.niveau }}</li>
+                                <li><strong>Date de création:</strong> {{ formation.dateCreation ? formation.dateCreation|date('Y-m-d') : '' }}</li>
+                                <li><strong>Prix:</strong> {{ formation.prix }} DT</li>
+                                <li><strong>Catégorie:</strong> {{ formation.categorie ? formation.categorie.nom }}</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{{ path('app_formation_show_admin', {'id': formation.id}) }}" class="btn btn-info btn-sm">Afficher</a>
+                            <a href="{{ path('app_formation_edit', {'id': formation.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{{ path('app_lecon_new', {'id': formation.id}) }}" class="btn btn-secondary btn-sm">Ajouter leçon</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-warning" role="alert">
+                        Aucun enregistrement trouvé.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
-    <a href="{{ path('app_formation_new') }}">Create new</a>
 {% endblock %}
