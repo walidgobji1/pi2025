@@ -42,7 +42,7 @@ final class AvisController extends AbstractController
     }
 
     #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
-    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository,): Response
+    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
     {
         // Fetch the user and formation from the database
         $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
@@ -131,7 +131,7 @@ final class AvisController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Recalculate the average after the review is updated
             $count = $formationScore->getNombreAvis();
-            
+
             $newNote = $avi->getNote(); // The new rating
 
             // Calculate the new average
@@ -161,8 +161,28 @@ final class AvisController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_avis_delete', methods: ['POST'])]
-    public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager , FormationScoreRepository $formationScoreRepository): Response
     {
+        $formation = $avi->getFormation();
+        $formationScore = $formationScoreRepository->findOneBy(['formation' => $formation]);
+        // Get the current number of reviews and the average score
+        $count = $formationScore->getNombreAvis();
+        $oldNote = $avi->getNote(); // The old rating (before the deletion)
+        if ($count > 1) {
+            // Recalculate the new total score after removing the old note
+            $newTotal = ($formationScore->getNoteMoyenne() * $count) - $oldNote;
+            $newAverage = $newTotal / ($count - 1);
+        } else {
+            // If only one review exists, reset the average to 0
+            $newAverage = 0;
+        }
+    
+        // Update the FormationScore with the new values
+        $formationScore->setNoteMoyenne($newAverage);
+        $formationScore->setNombreAvis($count - 1); // Decrease the number of reviews by 1
+    
+        // Persist the updated FormationScore
+        $entityManager->persist($formationScore);
         // CSRF validation
         if ($this->isCsrfTokenValid('delete' . $avi->getId(), $request->request->get('_token'))) {
             // Delete the Avis entity
