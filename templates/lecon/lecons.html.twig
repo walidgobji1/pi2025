@@ -1,0 +1,45 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Leçons de {{ formation.titre }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Leçons de la formation "{{ formation.titre }}"</h1>
+
+        {% if lessons is empty %}
+            <p>Aucune leçon disponible pour cette formation.</p>
+        {% else %}
+            <ul class="nav nav-tabs" id="lessonTabs" role="tablist">
+                {% for lecon in lessons %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if loop.first %}active{% endif %}" id="tab{{ lecon.id }}" data-bs-toggle="tab" data-bs-target="#content{{ lecon.id }}" type="button" role="tab" aria-controls="content{{ lecon.id }}" aria-selected="{{ loop.first ? 'true' : 'false' }}">
+                            {{ lecon.titre }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content mt-3" id="lessonTabsContent">
+                {% for lecon in lessons %}
+                    <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="content{{ lecon.id }}" role="tabpanel" aria-labelledby="tab{{ lecon.id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ lecon.titre }}</h5>
+                                <p class="card-text">{{ lecon.contenu }}</p>
+                                <p class="text-muted">Créé le {{ lecon.dateCreation|date('d/m/Y') }}</p>
+                                <button class="btn btn-primary" disabled>Télécharger le cours</button>
+                                 <a href="{{ path('app_lecon_edit', {'id': lecon.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                                       {{ include('lecon/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{{ path('app_formation_show_admin', {'id': formation.id}) }}" class="btn btn-secondary mt-3">Retour à la formation</a>
+    </div>
+
+    {# Bootstrap JS for tabs functionality #}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

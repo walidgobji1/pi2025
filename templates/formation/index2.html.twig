@@ -11,23 +11,24 @@
     </div>
     <div class="container-fluid pr-0">
       <div class="heading_container">
-        <h2>Nos Formations</h2>
-        <p>Découvrez nos formations pour enrichir vos compétences.</p>
+        <h2>
+          Nos Formations
+        </h2>
+        <p>
+          Découvrez nos formations pour enrichir vos compétences.
+        </p>
       </div>
       <div class="course_container">
-        <div class="course_owl-carousel owl-carousel owl-theme">
+        <div class="row">
           {% for formation in formations %}
-            <div class="item">
-              <div class="box">
-                <div class="img-box">
-                 
-                </div>
-                <div class="detail-box">
-                  <h4>{{ formation.titre }}</h4>
-                  <p>{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
-                  <a href="{{ path('app_formation_show', {'id': formation.id}) }}">
-                    Voir Détail
-                  </a>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img src="{{ asset('frontOffice/images/default-course.jpg') }}" class="card-img-top" alt="{{ formation.titre }}">
+                <div class="card-body">
+                
+                  <h5 class="card-title">{{ formation.titre }}</h5>
+                  <p class="card-text">{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
+                  <a href="{{ path('app_formation_show', {'id': formation.id}) }}" class="btn btn-primary">Voir Détails</a>
                 </div>
               </div>
             </div>

@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Categorie List{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            {% for categorie in categories %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ categorie.nom }}</h5>
+                            <p class="card-text">{{ categorie.description }}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-warning">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12 text-center">
+                    <h5>No categories found</h5>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_categorie_new') }}" class="btn btn-success">Create new</a>
+        </div>
+    </div>
+{% endblock %}

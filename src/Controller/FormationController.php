@@ -14,10 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/formation')]
 final class FormationController extends AbstractController{
     #[Route('/formations', name: 'app_formations')]
-    public function indexTemp(): Response
+    public function indextemp(FormationRepository $formationRepository): Response
     {
-        return $this->render('formation/formations.html.twig', [
-            'controller_name' => 'FormationsController',
+        $formations = $formationRepository->findAll(); // Récupération des formations
+
+        return $this->render('/formation/formations.html.twig', [
+            'formations' => $formations, // Envoi des formations à la vue
         ]);
     }
     #[Route(name: 'app_formation_index', methods: ['GET'])]
@@ -34,13 +36,14 @@ final class FormationController extends AbstractController{
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
-
+   
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($formation);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
-        }
+        } 
 
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
@@ -48,8 +51,16 @@ final class FormationController extends AbstractController{
         ]);
     }
 
+
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function show(Formation $formation): Response
+    public function showForClient(Formation $formation): Response
+    {
+        return $this->render('formation/showClient.html.twig', [
+            'formation' => $formation,
+        ]);
+    }
+    #[Route('/ad/{id}', name: 'app_formation_show_admin', methods: ['GET'])]
+    public function showAdmin(Formation $formation): Response
     {
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,
@@ -74,14 +85,32 @@ final class FormationController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
-    public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($formation);
-            $entityManager->flush();
-        }
+    // #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
+    // public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->getPayload()->getString('_token'))) {
+    //         $entityManager->remove($formation);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+    //     return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+    // }
+
+    #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
+public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
+{
+    if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->getPayload()->getString('_token'))) {
+        $hasLessons = !$formation->getLecons()->isEmpty();
+
+        $entityManager->remove($formation);
+        $entityManager->flush();
+
+        $this->addFlash('success', $hasLessons 
+            ? 'La formation et ses leçons associées ont été supprimées avec succès.' 
+            : 'La formation a été supprimée avec succès.');
     }
+
+    return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
+}
+
 }
