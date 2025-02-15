@@ -1,0 +1,18 @@
+{% if categorie.formations|length == 0 %}
+    <form method="post" action="{{ path('app_categorie_delete', {'id': categorie.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+{% else %}
+    <button type="button" class="btn btn-danger" disabled 
+            data-bs-toggle="tooltip" title="Impossible de supprimer une catégorie contenant des formations">
+        Supprimer
+    </button>
+{% endif %}
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>

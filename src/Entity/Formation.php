@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\FormationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,22 +18,43 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez saisir un titre')]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez introduire la description')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez introduire la durée de la formation')]
     private ?string $duree = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez introduire le niveau')]
     private ?string $niveau = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'Veuillez introduire la date')]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Veuillez introduire le prix')]
     private ?float $prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    private ?Categorie $categorie = null;
+
+    /**
+     * @var Collection<int, Lecon>
+     */
+    #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation', cascade: ['remove'], orphanRemoval: true)]
+    private Collection $lecons;
+
+    public function __construct()
+    {
+        $this->lecons = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -47,7 +69,6 @@ class Formation
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
         return $this;
     }
 
@@ -59,7 +80,6 @@ class Formation
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -71,7 +91,6 @@ class Formation
     public function setDuree(string $duree): static
     {
         $this->duree = $duree;
-
         return $this;
     }
 
@@ -83,7 +102,6 @@ class Formation
     public function setNiveau(string $niveau): static
     {
         $this->niveau = $niveau;
-
         return $this;
     }
 
@@ -95,7 +113,6 @@ class Formation
     public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
-
         return $this;
     }
 
@@ -107,24 +124,7 @@ class Formation
     public function setPrix(float $prix): static
     {
         $this->prix = $prix;
-
         return $this;
-    }
-
-
-
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    private ?Categorie $categorie = null;
-
-    /**
-     * @var Collection<int, Lecon>
-     */
-    #[ORM\OneToMany(targetEntity: Lecon::class, mappedBy: 'formation')]
-    private Collection $lecons;
-
-    public function __construct()
-    {
-        $this->lecons = new ArrayCollection();
     }
 
 
@@ -137,7 +137,6 @@ class Formation
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
-
         return $this;
     }
 
@@ -155,25 +154,17 @@ class Formation
             $this->lecons->add($lecon);
             $lecon->setFormation($this);
         }
-
         return $this;
     }
 
     public function removeLecon(Lecon $lecon): static
     {
         if ($this->lecons->removeElement($lecon)) {
-            // set the owning side to null (unless already changed)
             if ($lecon->getFormation() === $this) {
                 $lecon->setFormation(null);
             }
         }
-
         return $this;
     }
 
-
-    
-  
-
-   
 }
