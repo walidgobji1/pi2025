@@ -24,25 +24,25 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
-#[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
-public function index(int $formationId = 1, AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
-{
-    $userId = 2;
+    #[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
+    public function index(int $formationId = 1, AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
+    {
+        $userId = 2;
 
-    $avis = $entityManager->getRepository(Avis::class)->findBy(
-        ['formation' => $formationId], 
-        ['id' => 'DESC']
-    );
+        $avis = $entityManager->getRepository(Avis::class)->findBy(
+            ['formation' => $formationId],
+            ['id' => 'DESC']
+        );
 
-    return $this->render('avis/index.html.twig', [
-        'avis' => $avis,
-        'formationId' => $formationId,
-        'userId' => $userId,
-    ]);
-}
+        return $this->render('avis/index.html.twig', [
+            'avis' => $avis,
+            'formationId' => $formationId,
+            'userId' => $userId,
+        ]);
+    }
 
     #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
-    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager , FormationScoreRepository $formationScoreRepository,): Response
+    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository,): Response
     {
         // Fetch the user and formation from the database
         $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
@@ -72,7 +72,7 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
             $entityManager->persist($formationScore);
         }
         $avi->setFormationScore($formationScore);
-         
+
 
 
         // Create and handle the form
@@ -81,7 +81,7 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avi->getNote();
-            $count=$formationScore->getNombreAvis();
+            $count = $formationScore->getNombreAvis();
             if ($count > 0) {
                 // If there are existing reviews, calculate the new average
                 $newAverage = ($formationScore->getNoteMoyenne() * $count + $avi->getNote()) / ($count + 1);
@@ -90,7 +90,7 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
                 $newAverage = $avi->getNote();
             }
             $formationScore->setNoteMoyenne($newAverage);
-            $formationScore->setNombreAvis($count+1);
+            $formationScore->setNombreAvis($count + 1);
             try {
                 // Persist the new review
                 $entityManager->persist($avi);
@@ -112,19 +112,43 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
             'formationId' => $formationId,
             'userId' => $userId,
         ]);
-    }   
-    
+    }
 
-    
+
+
 
 
     #[Route('/{id}/edit', name: 'app_avis_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Avis $avi, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
     {
+        // Get the current formation associated with the avis
+        $formation = $avi->getFormation();
+        $formationScore = $formationScoreRepository->findOneBy(['formation' => $formation]);
+        $oldNote = $avi->getNote(); // The old rating (before the edit)
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Recalculate the average after the review is updated
+            $count = $formationScore->getNombreAvis();
+            
+            $newNote = $avi->getNote(); // The new rating
+
+            // Calculate the new average
+            if ($count > 0) {
+                // Recalculate the total score
+                $newTotal = ($formationScore->getNoteMoyenne() * $count) - $oldNote + $newNote;
+                $newAverage = $newTotal / $count;
+            } else {
+                // If no reviews yet, the new note is the average
+                $newAverage = $newNote;
+            }
+
+            // Update the FormationScore with the new values
+            $formationScore->setNoteMoyenne($newAverage);
+
+            // Persist the updated FormationScore
+            $entityManager->persist($formationScore);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
@@ -137,16 +161,15 @@ public function index(int $formationId = 1, AvisRepository $avisRepository, Enti
     }
 
     #[Route('/{id}', name: 'app_avis_delete', methods: ['POST'])]
-public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
-{
-    // CSRF validation
-    if ($this->isCsrfTokenValid('delete' . $avi->getId(), $request->request->get('_token'))) {
-        // Delete the Avis entity
-        $entityManager->remove($avi);
-        $entityManager->flush();
+    public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
+    {
+        // CSRF validation
+        if ($this->isCsrfTokenValid('delete' . $avi->getId(), $request->request->get('_token'))) {
+            // Delete the Avis entity
+            $entityManager->remove($avi);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    return $this->redirectToRoute('app_avis_index', [], Response::HTTP_SEE_OTHER);
-}
-
 }
