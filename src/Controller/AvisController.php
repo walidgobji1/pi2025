@@ -83,20 +83,18 @@ final class AvisController extends AbstractController
             $avi->getNote();
             $count = $formationScore->getNombreAvis();
             if ($count > 0) {
-                // If there are existing reviews, calculate the new average
                 $newAverage = ($formationScore->getNoteMoyenne() * $count + $avi->getNote()) / ($count + 1);
-            } else {
-                // If there are no reviews, set the average to the new rating
+            } else {     
                 $newAverage = $avi->getNote();
             }
             $formationScore->setNoteMoyenne($newAverage);
             $formationScore->setNombreAvis($count + 1);
             try {
-                // Persist the new review
+                
                 $entityManager->persist($avi);
                 $entityManager->flush();
 
-                // Add success flash message
+                
                 $this->addFlash('success', 'Votre avis a été ajouté avec succès.');
 
                 // Redirect to the list of reviews
@@ -167,19 +165,18 @@ final class AvisController extends AbstractController
         $formationScore = $formationScoreRepository->findOneBy(['formation' => $formation]);
         // Get the current number of reviews and the average score
         $count = $formationScore->getNombreAvis();
-        $oldNote = $avi->getNote(); // The old rating (before the deletion)
+        $oldNote = $avi->getNote(); 
         if ($count > 1) {
-            // Recalculate the new total score after removing the old note
+      
             $newTotal = ($formationScore->getNoteMoyenne() * $count) - $oldNote;
             $newAverage = $newTotal / ($count - 1);
         } else {
-            // If only one review exists, reset the average to 0
             $newAverage = 0;
         }
     
         // Update the FormationScore with the new values
         $formationScore->setNoteMoyenne($newAverage);
-        $formationScore->setNombreAvis($count - 1); // Decrease the number of reviews by 1
+        $formationScore->setNombreAvis($count - 1); 
     
         // Persist the updated FormationScore
         $entityManager->persist($formationScore);
