@@ -127,6 +127,8 @@ class Formation
         return $this;
     }
 
+
+
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;
@@ -164,4 +166,5 @@ class Formation
         }
         return $this;
     }
+
 }
