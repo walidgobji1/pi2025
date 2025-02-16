@@ -68,6 +68,7 @@ final class AvisController extends AbstractController
             $formationScore->setNombreAvis(0);
             $formationScore->setNoteMoyenne(0);
             $formationScore->setClassement(0); // You can update ranking logic later
+            
 
             $entityManager->persist($formationScore);
         }
@@ -89,6 +90,9 @@ final class AvisController extends AbstractController
             }
             $formationScore->setNoteMoyenne($newAverage);
             $formationScore->setNombreAvis($count + 1);
+            // Update classement
+            $classement = $formationScoreRepository->calculateClassement($formationScore);
+            $formationScore->setClassement($classement);
             try {
                 
                 $entityManager->persist($avi);
