@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/formation')]
-final class FormationController extends AbstractController{
+final class FormationController extends AbstractController
+{
     #[Route('/formations', name: 'app_formations')]
     public function indextemp(FormationRepository $formationRepository): Response
     {
@@ -36,14 +37,14 @@ final class FormationController extends AbstractController{
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
-   
-        
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($formation);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
-        } 
+        }
 
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
@@ -97,20 +98,19 @@ final class FormationController extends AbstractController{
     // }
 
     #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
-public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
-{
-    if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->getPayload()->getString('_token'))) {
-        $hasLessons = !$formation->getLecons()->isEmpty();
+    public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $formation->getId(), $request->getPayload()->getString('_token'))) {
+            $hasLessons = !$formation->getLecons()->isEmpty();
 
-        $entityManager->remove($formation);
-        $entityManager->flush();
+            $entityManager->remove($formation);
+            $entityManager->flush();
 
-        $this->addFlash('success', $hasLessons 
-            ? 'La formation et ses leçons associées ont été supprimées avec succès.' 
-            : 'La formation a été supprimée avec succès.');
+            $this->addFlash('success', $hasLessons
+                ? 'La formation et ses leçons associées ont été supprimées avec succès.'
+                : 'La formation a été supprimée avec succès.');
+        }
+
+        return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
-}
-
 }

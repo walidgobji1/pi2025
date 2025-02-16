@@ -137,9 +137,13 @@ class InscriptionCours
 
     public function setFormation(?Formation $formation): static
     {
-        $this->formation = $formation;
-        return $this;
+    $this->formation = $formation;
+    if ($formation) {
+        $this->nomFormation = $formation->getTitre(); // Récupère automatiquement le nom de la formation
     }
+    return $this;
+   }
+
 
     public function getNomApprenant(): ?string
     {

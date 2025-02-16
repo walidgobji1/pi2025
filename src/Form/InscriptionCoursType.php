@@ -44,13 +44,13 @@ class InscriptionCoursType extends AbstractType
                 'attr' => ['placeholder' => 'Votre CIN', 'class' => 'form-control'],
             ])
             ->add('status', HiddenType::class, [
-                'data' => 'en attente', // Valeur par défaut
-                'empty_data' => 'en attente', // Évite que Symfony considère la valeur comme null
+                'data' => 'en attente', 
+                'empty_data' => 'en attente', 
             ])
             ->add('montant', HiddenType::class, [
-                'data' => 0.0, // ✅ Valeur par défaut en float
-                'mapped' => true, // S'assurer que le champ est bien mappé
-                'empty_data' => '0', // ✅ Évite que Symfony passe null au setter
+                'data' => 0.0, 
+                'mapped' => true, 
+                'empty_data' => '0', 
             ])
             ->add('dateInscreption', HiddenType::class, [
                 'data' => (new \DateTimeImmutable())->format('Y-m-d H:i:s'), // Date actuelle formatée
@@ -62,8 +62,8 @@ class InscriptionCoursType extends AbstractType
                 'label' => "Sélectionner un apprenant",
             ])
             ->add('formation', EntityType::class, [
-                'class' => Formation::class,
-                'choice_label' => 'id',
+                'class' => Formation::class, // C'est ici que l'entité Formation est utilisée
+                'choice_label' => 'id', 
                 'label' => "Sélectionner une formation",
             ]);
     }

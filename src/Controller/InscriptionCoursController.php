@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\InscriptionCours;
+use App\Entity\Formation; 
 use App\Form\InscriptionCoursType;
 use App\Repository\InscriptionCoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
  #[Route('/dashboard/inscription/cours')]
  final class InscriptionCoursController extends AbstractController
@@ -22,48 +23,56 @@ use Symfony\Component\Routing\Attribute\Route;
         ]);
     }
 
-    #[Route('/new', name: 'app_inscription_cours_new', methods: ['GET', 'POST'])]
-       public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'app_inscription_cours_new', methods: ['GET', 'POST'])]
+    public function new($id, Request $request, EntityManagerInterface $entityManager): Response
     {
-    $inscriptionCour = new InscriptionCours();
-    $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
-    $form->handleRequest($request);
+        // Récupérer la formation par son ID
+        $formation = $entityManager->getRepository(Formation::class)->find($id);
 
-    // Vérifier si le formulaire a été soumis et est valide
-    if ($form->isSubmitted() && $form->isValid()) {
-
-        // Vérifier et définir un statut si nécessaire
-        if ($inscriptionCour->getStatus() === null) {
-            $inscriptionCour->setStatus('en attente');
+        // Si la formation n'est pas trouvée, rediriger avec un message d'erreur
+        if (!$formation) {
+            $this->addFlash('error', 'Formation non trouvée');
+            return $this->redirectToRoute('app_formation_index'); // Redirige vers la liste des formations ou une autre route appropriée
         }
 
-        // Vérifier et définir la date d'inscription si nécessaire
-        if ($inscriptionCour->getDateInscreption() === null) {
-            $inscriptionCour->setDateInscreption(new \DateTimeImmutable());
+        // Créer une nouvelle inscription de cours
+        $inscriptionCour = new InscriptionCours();
+        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
+
+        // Lier automatiquement la formation à l'inscription
+        $inscriptionCour->setFormation($formation);
+
+        // Traiter le formulaire
+        $form->handleRequest($request);
+
+        // Vérifier si le formulaire a été soumis et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Définir des valeurs par défaut si nécessaire
+            if ($inscriptionCour->getStatus() === null) {
+                $inscriptionCour->setStatus('en attente');
+            }
+            if ($inscriptionCour->getDateInscreption() === null) {
+                $inscriptionCour->setDateInscreption(new \DateTimeImmutable());
+            }
+            if ($inscriptionCour->getMontant() === null) {
+                $inscriptionCour->setMontant(0.0);
+            }
+
+            // Sauvegarder l'inscription dans la base de données
+            $entityManager->persist($inscriptionCour);
+            $entityManager->flush();
+
+            // Rediriger vers la page des inscriptions après avoir enregistré
+            return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        // Vérifier et définir un montant par défaut si nécessaire
-        if ($inscriptionCour->getMontant() === null) {
-            $inscriptionCour->setMontant(0.0);
-        }
-
-        // Débogage : afficher les données de l'entité
-        dump($inscriptionCour); // ou dd($inscriptionCour) pour arrêter l'exécution
-
-        // Persister l'entité en base de données
-        $entityManager->persist($inscriptionCour);
-        $entityManager->flush();
-
-        // Redirection vers la liste des inscriptions après l'enregistrement
-        return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
+        // Rendu de la vue du formulaire
+        return $this->render('inscription_cours/new.html.twig', [
+            'inscription_cour' => $inscriptionCour,
+            'form' => $form->createView(),
+            'formation' => $formation, // Passer la formation à la vue
+        ]);
     }
-
-    // Rendu de la vue du formulaire
-    return $this->render('inscription_cours/new.html.twig', [
-        'inscription_cour' => $inscriptionCour,
-        'form' => $form->createView(),
-    ]);
-}
 
   #[Route('/{id}', name: 'app_inscription_cours_show', methods: ['GET'])]
     public function show(InscriptionCours $inscriptionCour): Response
