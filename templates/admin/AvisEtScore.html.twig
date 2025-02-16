@@ -1,0 +1,36 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion des Formations{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Liste des Formations</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Score Moyenne</th>
+                <th>Nombre d'Avis</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in formationData %}
+                <tr>
+                    <td>{{ data.formation.titre }}</td>
+                    <td>{{ data.formation.description|slice(0, 100) ~ '...' }}</td>
+                    <td>{{ data.score is not null ? data.score|number_format(1) ~ ' / 5' : 'Aucune note' }}</td>
+                    <td>{{ data.avis|length }}</td>
+                    <td>
+                        <a href="{{ path('admin_formation_show', { 'id': data.formation.id }) }}" class="btn btn-info btn-sm">Avis</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">Aucune formation disponible.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
