@@ -13,7 +13,7 @@
                 <div class="row">
                     {% for avis in avisList %}
                         <div class="col-md-6">
-                            <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card mb-3 border-0 shadow-sm {% if avis.isFlagged %}border-danger{% endif %}">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-2">
                                         <span class="text-warning fs-5">
@@ -25,11 +25,22 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </span>
+                                        {% if avis.isFlagged %}
+                                            <span class="badge bg-danger ms-2">Flagged</span>
+                                        {% endif %}
                                     </div>
                                     <p class="card-text text-muted">{{ avis.commentaire }}</p>
                                     <small class="text-secondary">
                                         Submitted on {{ avis.dateCreation|date('d M Y') }}
                                     </small>
+
+                                    {# Delete button under the review if flagged #}
+                                    <div class="mt-2">
+                                        <form action="{{ path('admin_avis_delete', {'id': avis.id}) }}" method="POST" style="display:inline;">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avis.id) }}">
+                                            <button type="submit" class="btn btn-danger btn-sm {% if not avis.isFlagged %}d-none{% endif %}">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

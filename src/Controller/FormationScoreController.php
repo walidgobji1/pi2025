@@ -12,6 +12,7 @@ use App\Service\FormationScoreService;
 use App\Entity\Formation;
 use App\Entity\Avis;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
@@ -41,6 +42,7 @@ public function index(FormationRepository $formationRepository, FormationScoreRe
     ]);
 }
 
+// all the back office methode for gestion avis 
  // Fetch formation, avis et score avec la nouvelle fonction
  #[Route('/admin/formations', name: 'admin_formation_list')]
  public function fetchAll(FormationRepository $formationRepository, AvisRepository $avisRepository, FormationScoreRepository $scoreRepository): Response
@@ -93,15 +95,64 @@ public function showAvis(int $id, EntityManagerInterface $em)
         if (!$formation) {
             throw $this->createNotFoundException('Formation not found');
         }
-
+        $badWords = ['badword1', 'badword2', 'badword3'];
         // Fetch the avis associated with the formation
         $avisList = $em->getRepository(Avis::class)->findBy(['formation' => $formation]);
-
+        foreach ($avisList as $avis) {
+            $avis->isFlagged = false;  // Default: not flagged
+    
+            // Check for bad words in the comment
+            foreach ($badWords as $word) {
+                if (stripos($avis->getCommentaire(), $word) !== false) {
+                    $avis->isFlagged = true;  // Flag if bad word is found
+                    break;
+                }
+            }
+        }
         // Pass the formation and avis to the template
         return $this->render('admin/formation_avis.html.twig', [
             'formation' => $formation,
             'avisList' => $avisList,
         ]);
     }
+    #[Route('/admin/avis/{id}', name: 'admin_avis_delete', methods: ['POST'])]
+public function deleteAvis(Request $request, Avis $avi, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
+{
+    // Get the formation related to the review
+    $formation = $avi->getFormation();
+    $formationScore = $formationScoreRepository->findOneBy(['formation' => $formation]);
+
+    // Get the current number of reviews and the average score
+    $count = $formationScore->getNombreAvis();
+    $oldNote = $avi->getNote();
+    
+    if ($count > 1) {
+        // Recalculate the new average after deleting the review
+        $newTotal = ($formationScore->getNoteMoyenne() * $count) - $oldNote;
+        $newAverage = $newTotal / ($count - 1);
+    } else {
+        $newAverage = 0; // If there are no reviews left, set average to 0
+    }
+
+    // Update the FormationScore with the new values
+    $formationScore->setNoteMoyenne($newAverage);
+    $formationScore->setNombreAvis($count - 1);
+
+    // Persist the updated FormationScore
+    $entityManager->persist($formationScore);
+    
+    // CSRF validation
+    if ($this->isCsrfTokenValid('delete' . $avi->getId(), $request->request->get('_token'))) {
+        // Remove the review (Avis) from the database
+        $entityManager->remove($avi);
+        $entityManager->flush();
+    }
+
+    // Optionally add a flash message to notify the admin of the deletion
+    $this->addFlash('success', 'L\'avis a été supprimé avec succès.');
+
+    // Redirect back to the formation's review page
+    return $this->redirectToRoute('admin_formation_show', ['id' => $formation->getId()], Response::HTTP_SEE_OTHER);
+}
 
 }
