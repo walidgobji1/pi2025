@@ -25,6 +25,26 @@
                 <div class="detail-box">
                   <h4>{{ formation.titre }}</h4>
                   <p>{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
+                 {# Directly check if the formation's score exists by comparing the formation id #}
+        
+        {# {% for score in formationScores %}
+        {% if score.formation.id == formation.id %}
+        <p>Note Moyenne: {{ score.noteMoyenne|number_format(1) }} / 5</p>
+                    <p>Nombre d'avis: {{ score.nombreAvis }}</p>
+                    {% endif %}
+
+{% endfor %} #}
+{% if formationScores is defined %}
+    {% for score in formationScores %}
+        {% if score.formation.id == formation.id %}
+            <p>Note Moyenne: {{ score.noteMoyenne|number_format(1) }} / 5</p>
+            <p>Nombre d'avis: {{ score.nombreAvis }}</p>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <p>No scores available</p>
+{% endif %}
+      
                   <a href="{{ path('app_formation_show', {'id': formation.id}) }}">
                     Voir Détail
                   </a>

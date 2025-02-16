@@ -10,17 +10,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\FormationScoreService; // Import the service
 
 #[Route('/formation')]
 final class FormationController extends AbstractController{
+    private $formationScoreService;
+
+    // Inject the FormationScoreService into the controller
+    public function __construct(FormationScoreService $formationScoreService)
+    {
+        $this->formationScoreService = $formationScoreService;
+    }
     #[Route('/formations', name: 'app_formations')]
     public function indextemp(FormationRepository $formationRepository): Response
     {
         $formations = $formationRepository->findAll(); // Récupération des formations
-
+        // Fetch all scores using the service
+        $formationScores = $this->formationScoreService->getAllScores();// Récupération des scores
         return $this->render('/formation/formations.html.twig', [
             'formations' => $formations, // Envoi des formations à la vue
+            'formationScores' => $formationScores,
         ]);
+        
     }
     #[Route(name: 'app_formation_index', methods: ['GET'])]
     public function index(FormationRepository $formationRepository): Response
