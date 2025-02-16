@@ -1,0 +1,10 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Lecon{% endblock %}
+
+{% block body %}
+
+    {{ include('lecon/_form.html.twig') }}
+
+    <a href="{{ path('app_lecon_index') }}">back to list</a>
+{% endblock %}
