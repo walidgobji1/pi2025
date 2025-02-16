@@ -25,9 +25,48 @@
                 <div class="detail-box">
                   <h4>{{ formation.titre }}</h4>
                   <p>{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
+
+<div class="score-section">
+    {% if formationScores is defined %}
+        {% set foundScore = false %}
+        {% for score in formationScores %}
+            {% if score.formation.id == formation.id %}
+                <div class="d-flex flex-column mt-2">
+                    <div class="d-flex align-items-center">
+                        <!-- Thumbs up icon with red color to match the template -->
+                        <i class="fas fa-thumbs-up" style="color: #FF4C4C; margin-right: 8px;"></i>
+                        <strong style="color: black;">{{ score.noteMoyenne|number_format(1) }} / 5</strong>
+                    </div>
+                    <div class="d-flex align-items-center mt-1">
+                        <!-- Comment icon in gray to match the template -->
+                        <i class="fas fa-comment-alt" style="color: #A9A9A9; margin-right: 8px;"></i>
+                        <span style="color: black;">{{ score.nombreAvis }} Avis</span>
+                    </div>
+                </div>
+                {% set foundScore = true %}
+            {% endif %}
+        {% endfor %}
+        {% if not foundScore %}
+            <div class="d-flex align-items-center text-muted mt-2">
+                <i class="fas fa-ban" style="color: #A9A9A9; margin-right: 8px;"></i>
+                <span style="color: #A9A9A9;">Aucune note</span>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="d-flex align-items-center text-muted mt-2">
+            <i class="fas fa-ban" style="color: #A9A9A9; margin-right: 8px;"></i>
+            <span style="color: #A9A9A9;">Aucune note</span>
+        </div>
+    {% endif %}
+</div>
+
+      
                   <a href="{{ path('app_formation_show', {'id': formation.id}) }}">
                     Voir Détail
                   </a>
+                  <a href="{{ path('app_avis_index', {'formationId': formation.id}) }}" class="btn btn-info">
+                  Avis
+                </a>
                 </div>
               </div>
             </div>
@@ -44,4 +83,14 @@
       </div>
     </div>
   </section>
+  <style>
+  .score-section {
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+  </style>
 {% endblock %}
