@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
@@ -17,18 +18,18 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez saisir le nom de la categorie')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez saisir une description')]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateCreation = null;
 
     /**
      * @var Collection<int, formation>
      */
-    #[ORM\OneToMany(targetEntity: formation::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'categorie')]
     private Collection $formations;
 
     public function __construct()
@@ -65,17 +66,7 @@ class Categorie
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->dateCreation;
-    }
-
-    public function setDateCreation(\DateTimeInterface $dateCreation): static
-    {
-        $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, formation>

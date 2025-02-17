@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,19 +16,24 @@ class Lecon
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez introduire un titre')]
     private ?string $titre = null;
 
-
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Veuillez introduire le contenu de la leçon')]
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'Veuillez introduire la date')]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\ManyToOne(inversedBy: 'lecons')]
     private ?Formation $formation = null;
 
-   
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -41,7 +48,6 @@ class Lecon
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
         return $this;
     }
 
@@ -53,7 +59,6 @@ class Lecon
     public function setContenu(string $contenu): static
     {
         $this->contenu = $contenu;
-
         return $this;
     }
 
@@ -65,7 +70,6 @@ class Lecon
     public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
-
         return $this;
     }
 
@@ -77,8 +81,6 @@ class Lecon
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
-
         return $this;
     }
-
 }
