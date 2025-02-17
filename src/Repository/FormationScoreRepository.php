@@ -40,4 +40,22 @@ class FormationScoreRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function calculateClassement(FormationScore $formationScore): int
+{
+    $query = $this->createQueryBuilder('fs')
+        ->orderBy('fs.noteMoyenne', 'DESC') // Sort by highest average rating
+        ->getQuery();
+
+    $allScores = $query->getResult();
+    
+    // Find the position of the current formation in the ranking
+    foreach ($allScores as $index => $score) {
+        if ($score === $formationScore) {
+            return $index + 1; // Rank starts from 1, not 0
+        }
+    }
+
+    return 1; // Default to 1 if something goes wrong
+}
+
 }
