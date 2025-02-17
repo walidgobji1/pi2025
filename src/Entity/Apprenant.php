@@ -2,19 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ApprenantRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ApprenantRepository::class)]
-class Apprenant
+#[ORM\Entity]
+class Apprenant extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "integer", nullable: true)]
+    private ?int $niveau_etude = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    public function getNiveauEtude(): ?int { return $this->niveau_etude; }
+    public function setNiveauEtude(?int $niveau_etude): self { $this->niveau_etude = $niveau_etude; return $this; }
 }
