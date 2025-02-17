@@ -20,8 +20,9 @@
                     <p><strong>Prix :</strong> {{ formation.prix }} DT</p>
                 </div>
             </div>
+            <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
+
             <div class="text-center mt-4">
-            <!-- Ce bouton dois etre disabled si l'apprenant n'est pas inscrit à la formation @Hazem + ajoute un bouton s'inscrire  !-->
             <a href="{{ path('app_formation_lessons_c', {'id': formation.id}) }}" class="btn btn-danger">Accéder à la formation</a>
 
             </div>

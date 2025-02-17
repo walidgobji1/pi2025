@@ -11,16 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-
-
-final class PayementControllerController extends AbstractController{
-    #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['GET', 'POST'])]
+final class PayementControllerController extends AbstractController
+{
+    #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['POST'])]
     public function createPaymentIntent(Request $request): JsonResponse
     {
-        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+        // Utilisation des paramètres Symfony pour les clés
+        Stripe::setApiKey($this->getParameter('stripe_secret_key'));
 
         $data = json_decode($request->getContent(), true);
-        $amount = $data['amount'] ?? 1000; // Montant par défaut : 10€
+        // Validation du montant
+        $amount = isset($data['amount']) && is_numeric($data['amount']) && $data['amount'] > 0
+            ? $data['amount']
+            : 1000; // Montant par défaut : 10€
 
         try {
             $paymentIntent = PaymentIntent::create([
@@ -36,14 +39,15 @@ final class PayementControllerController extends AbstractController{
             return new JsonResponse(['error' => $e->getMessage()], 500);
         }
     }
-    
+
     #[Route('/payment', name: 'payment_page', methods: ['GET'])]
-    public function paymentPage(ParameterBagInterface $params): Response
-{  
-    return $this->render('payment/payment.html.twig', [
-        'stripe_public_key' => $params->get('STRIPE_PUBLIC_KEY'),
-    ]);
-}
+    public function paymentPage(): Response
+    {
+        // Retourne la page de paiement avec la clé publique Stripe
+        return $this->render('payment/payment.html.twig', [
+            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+        ]);
+    }
 
     #[Route('/success', name: 'payment_success')]
     public function success()

@@ -1,0 +1,44 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Modifier la promotion{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="container mt-4">
+            <h5 class="card-title text-center mb-4">Modifier la Promotion</h5>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Formulaire de modification</h5>
+                            
+                            {{ form_start(form) }}
+                                <div class="mb-3">
+                                    {{ form_label(form.codePromo) }}
+                                    {{ form_widget(form.codePromo, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_label(form.description) }}
+                                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_label(form.remise) }}
+                                    {{ form_widget(form.remise, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_label(form.dateExpiration) }}
+                                    {{ form_widget(form.dateExpiration, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_label(form.inscriptionCours) }}
+                                    {{ form_widget(form.inscriptionCours, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <button type="submit" class="btn btn-warning w-100">Mettre à jour</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
