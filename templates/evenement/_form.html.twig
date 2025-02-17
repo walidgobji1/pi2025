@@ -1,0 +1,114 @@
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+
+    <h2 class="formbold-form-title">
+      {{ button_label|default('Créer un événement') }}
+    </h2>
+
+   {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    <div class="formbold-mb-3">
+      {{ form_label(form.titre, 'Titre de l\'événement', {'label_attr': {'class': 'formbold-form-label'}}) }}
+      {{ form_widget(form.titre, {'attr': {'class': 'formbold-form-input'}}) }}
+      {{ form_errors(form.titre, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+    </div>
+
+    <div class="formbold-mb-3">
+      {{ form_label(form.date, 'Date de l\'événement', {'label_attr': {'class': 'formbold-form-label'}}) }}
+      {{ form_widget(form.date, {'attr': {'class': 'formbold-form-input'}}) }}
+      {{ form_errors(form.date, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+    </div>
+
+    <div class="formbold-mb-3">
+      {{ form_label(form.description, 'Description', {'label_attr': {'class': 'formbold-form-label'}}) }}
+      {{ form_widget(form.description, {'attr': {'class': 'formbold-form-input', 'rows': '4'}}) }}
+      {{ form_errors(form.description, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+    </div>
+
+    <button type="submit" class="formbold-btn">
+      {{ button_label|default('Créer') }}
+    </button>
+
+    {{ form_end(form) }}
+    
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+
+  .formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 570px;
+    width: 100%;
+    background: white;
+    padding: 40px;
+  }
+
+  .formbold-form-title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    color: #07074d;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .formbold-form-input {
+    text-align: center;
+    width: 100%;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #dde3ec;
+    background: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+    color: #536387;
+    outline: none;
+    resize: none;
+  }
+
+  .formbold-form-input:focus {
+    border-color: #6a64f1;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .formbold-form-label {
+    color: #536387;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .formbold-btn {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: #6a64f1;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+    width: 100%;
+  }
+
+  .formbold-btn:hover {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  }
+</style>
