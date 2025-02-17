@@ -1,0 +1,86 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Liste des événements{% endblock %}
+
+{% block body %}
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <h2 class="formbold-form-title text-center">Liste des événements</h2>
+
+        {% for evenement in evenements %}
+            <div class="formbold-mb-3">
+                <h3 class="text-xl font-semibold text-gray-800">{{ evenement.titre }}</h3>
+                <p class="text-gray-600">{{ evenement.date|date('d M Y') }}</p>
+                <p class="text-gray-700 mt-2">{{ evenement.description }}</p>
+               
+                {% if evenement.notification is null %}
+                <div>
+                    <form action="{{ path('app_notification_new', {'id': evenement.id}) }}" method="get">
+                        <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Informer les apprenants</button>
+                    </form>
+                     <form action="{{ path('app_evenement_edit', {'id': evenement.id}) }}" method="get">
+                    <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Modifier</button>
+                </form>
+                {{ include('evenement/_delete_form.html.twig') }}
+                    </div>
+                </form>
+                {% else %}
+                    <button class="bg-green-500 text-black px-4 py-2 rounded cursor-not-allowed opacity-50" disabled>
+                        Notification déjà envoyée
+                    </button>
+                {% endif %}
+            </div>
+            <hr class="my-4">
+        {% else %}
+            <p class="text-gray-600">Aucun événement à afficher pour le moment.</p>
+        {% endfor %}
+
+    </div>
+</div>
+
+<style>
+  .formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+  }
+
+  .formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 570px;
+    width: 100%;
+    background: white;
+    padding: 40px;
+  }
+
+  .formbold-form-title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    color: #07074d;
+    margin-bottom: 30px;
+  }
+
+  .formbold-mb-3 {
+    margin-bottom: 20px;
+  }
+
+  .formbold-mb-3 h3 {
+    font-size: 24px;
+    color: #07074d;
+  }
+
+  .formbold-mb-3 p {
+    font-size: 16px;
+    color: #536387;
+    line-height: 1.5;
+  }
+
+  .my-4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+</style>
+
+{% endblock %}
