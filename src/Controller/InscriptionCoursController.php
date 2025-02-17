@@ -37,10 +37,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
         // Créer une nouvelle inscription de cours
         $inscriptionCour = new InscriptionCours();
-        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
-
+        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour, [
+            'formation' => $formation, // Passer la formation au formulaire
+        ]);
         // Lier automatiquement la formation à l'inscription
         $inscriptionCour->setFormation($formation);
+        $inscriptionCour->setNomFormation($formation->getTitre()); // Assigner le titre de la formation
+
 
         // Traiter le formulaire
         $form->handleRequest($request);
@@ -57,6 +60,7 @@ use Symfony\Component\Routing\Annotation\Route;
             if ($inscriptionCour->getMontant() === null) {
                 $inscriptionCour->setMontant(0.0);
             }
+            
 
             // Sauvegarder l'inscription dans la base de données
             $entityManager->persist($inscriptionCour);

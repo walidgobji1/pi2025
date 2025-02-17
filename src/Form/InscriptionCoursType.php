@@ -18,6 +18,8 @@ class InscriptionCoursType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $formation = $options['formation'] ?? null;
+
         $builder
             ->add('typePaiement', ChoiceType::class, [
                 'label' => "Type de paiement",
@@ -31,10 +33,12 @@ class InscriptionCoursType extends AbstractType
                 'label' => "Nom de l'apprenant",
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('nomFormation', TextType::class, [
-                'label' => "Nom de la formation",
-                'attr' => ['class' => 'form-control'],
+            ->add('nomFormation', HiddenType::class, [
+                'data' => $formation ? $formation->getTitre() : '', // Assigner le titre de la formation par défaut
+                'mapped' => false, // Si ce champ n'est pas mappé à l'entité InscriptionCours
+
             ])
+            // Ajouter d'autres champs si nécessaire
             ->add('email', EmailType::class, [
                 'label' => "Email",
                 'attr' => ['placeholder' => 'Votre Email', 'class' => 'form-control'],
@@ -61,10 +65,9 @@ class InscriptionCoursType extends AbstractType
                 'choice_label' => 'id',
                 'label' => "Sélectionner un apprenant",
             ])
-            ->add('formation', EntityType::class, [
-                'class' => Formation::class, // C'est ici que l'entité Formation est utilisée
-                'choice_label' => 'id', 
-                'label' => "Sélectionner une formation",
+            ->add('formation', HiddenType::class, [
+                'data' => $options['formation'] ? $options['formation']->getId() : null, // Vérifier que formation est défini
+                'mapped' => false,  // Ne pas mapper ce champ à l'entité InscriptionCours
             ]);
     }
 
@@ -72,6 +75,7 @@ class InscriptionCoursType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => InscriptionCours::class,
+            'formation' => null,
         ]);
     }
 }
