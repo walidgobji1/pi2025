@@ -30,7 +30,7 @@ final class PromotionController extends AbstractController
         $promotion = new Promotion();
         $form = $this->createForm(PromotionType::class, $promotion);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($promotion);
             $entityManager->flush();

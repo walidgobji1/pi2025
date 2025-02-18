@@ -3,14 +3,15 @@
 {% block title %}Paiement{% endblock %}
 
 {% block body %}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
 <style>
-    /* Permet au contenu de remplir l'espace entre header et footer */
     .content-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 80vh; /* S'assure que la section paiement prend de l'espace sans écraser le footer */
+        min-height: 80vh;
         padding: 20px;
     }
 
@@ -21,10 +22,6 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
         width: 400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 
     h1 {
@@ -69,13 +66,34 @@
         margin-top: 10px;
     }
 
-    button:hover {
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
         background-color: #0056b3;
     }
 
     #payment-message {
         margin-top: 10px;
         font-weight: bold;
+        color: red;
+    }
+
+    .loading-spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: auto;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 </style>
 
@@ -94,7 +112,7 @@
                 <label for="country">Pays ou région</label>
                 <select id="country" required>
                     <option value="FR">France</option>
-                    <option value="US">États-Unis</option>
+                    <option value="US">Tunisia</option>
                     <option value="CA">Canada</option>
                     <option value="GB">Royaume-Uni</option>
                     <option value="DE">Allemagne</option>
@@ -111,8 +129,8 @@
                 <input type="text" id="postal-code" placeholder="Code postal" required>
             </div>
 
-            <!-- Affichage du prix de la formation -->
             <button type="submit" id="pay-button">Payer {{ inscription_cour.formation.prix }} DT</button>
+            <div class="loading-spinner" id="loading-spinner"></div>
             <p id="payment-message"></p>
         </form>
     </div>
@@ -120,44 +138,81 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe("{{ stripe_public_key }}");
-    var elements = stripe.elements();
-    var cardElement = elements.create("card", { hidePostalCode: true });
-    cardElement.mount("#card-element");
+    document.addEventListener("DOMContentLoaded", function() {
+        var stripe = Stripe("{{ stripe_public_key }}");
+        var elements = stripe.elements();
+        var cardElement = elements.create("card", { hidePostalCode: true });
+        cardElement.mount("#card-element");
 
-    document.getElementById("payment-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        document.getElementById("payment-message").textContent = "Traitement du paiement...";
+        document.getElementById("payment-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var payButton = document.getElementById("pay-button");
+            var paymentMessage = document.getElementById("payment-message");
+            var loadingSpinner = document.getElementById("loading-spinner");
 
-        // Avant de créer le PaymentIntent, envoyer les données pour enregistrement
-        fetch("{{ path('save_payment_data') }}", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-        inscriptionId: {{ inscription_id }},
-        amount: {{ amount }},
-        cardholderName: document.getElementById("cardholder-name").value
-    })
-})
-.then(response => response.json())
-.then(data => {
-    console.log(data);  // Afficher la réponse pour debug
-    if (data.success) {
-        // Poursuivre avec la création du PaymentIntent
-    } else {
-        document.getElementById("payment-message").textContent = "Erreur lors de l'enregistrement des données.";
-    }
-})
-.catch(error => {
-    console.error("Erreur:", error);  // Afficher l'erreur
-    document.getElementById("payment-message").textContent = "Erreur : " + error.message;
-});
+            var cardholderName = document.getElementById("cardholder-name").value;
+            var postalCode = document.getElementById("postal-code").value;
 
+            if (!cardholderName || !postalCode) {
+                paymentMessage.textContent = "Veuillez remplir tous les champs obligatoires.";
+                paymentMessage.style.color = "red";
+                return;
+            }
 
+            payButton.disabled = true;
+            loadingSpinner.style.display = "block";
+            paymentMessage.textContent = "Traitement du paiement...";
+            paymentMessage.style.color = "black";
+
+            fetch("{{ path('create_payment_intent') }}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    inscriptionId: {{ inscription_id }},
+                    amount: {{ amount }},
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) throw new Error(data.error);
+
+                return stripe.confirmCardPayment(data.clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: cardholderName,
+                            address: { postal_code: postalCode }
+                        }
+                    }
+                });
+            })
+            .then(result => {
+                if (result.error) throw new Error(result.error.message);
+
+                return fetch("{{ path('payment_success', {'id': inscription_id}) }}", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ paymentIntentId: result.paymentIntent.id })
+                });
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) throw new Error(data.error);
+
+                alert("✅ Paiement réussi !");
+                window.location.href = "{{ path('payment_success_page', {'id': inscription_id}) }}"; 
+            })
+            .catch(error => {
+                console.error("Erreur :", error);
+                paymentMessage.textContent = "❌ Erreur : " + error.message;
+                paymentMessage.style.color = "red";
+                payButton.disabled = false;
+                loadingSpinner.style.display = "none";
+            });
+        });
     });
 </script>
-
-
 
 
 {% endblock %}

@@ -1,90 +1,93 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Gestion des Inscriptions{% endblock %}
+{% block title %}Gestion des Inscriptions
+{% endblock %}
 
 {% block body %}
- 
 
-   
 
- <section class="section">
-    <div class="container mt-4">
-        <h5 class="card-title text-center">Liste des Inscriptions</h5>
-       <div class="row">
-        <div class="col-lg-12">
+	<section class="section">
+		<div class="container mt-4">
+			<h5 class="card-title text-center">Liste des Inscriptions</h5>
+			<div class="row">
+				<div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-                <!-- Table avec DataTables -->
-                <table class="table datatable table-striped">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th>id</th>
-                            <th>Nom Apprenant</th>
-                            <th>Nom Formation</th>
-                            <th>ID Formation</th>
-                            <th>Email</th>
-                            <th>CIN</th>
-                            <th>Status</th>
-                            <th>Montant</th>
-                            <th>Date d'inscription</th>
-                            <th>Actions</th> <!-- Ajout de la colonne actions -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for inscription_cour in inscription_cours %}
-                            <tr>
-                                 <td>{{ inscription_cour.id }}</td>
-                                <td>{{ inscription_cour.nomApprenant }}</td>
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title"></h5>
+							<!-- Table avec DataTables -->
+							<table class="table datatable table-striped">
+								<thead class="table-dark text-center">
+									<tr>
+										<th>id</th>
+										<th>Nom Apprenant</th>
+										<th>Nom Formation</th>
+										<th>Email</th>
+										<th>CIN</th>
+										<th>Status</th>
+										<th>Montant</th>
+										<th>Date d'inscription</th>
+										<th>Actions</th>
+										<!-- Ajout de la colonne actions -->
+									</tr>
+								</thead>
+								<tbody>
+									{% for inscription_cour in inscription_cours %}
+										<tr>
+											<td>{{ inscription_cour.id }}</td>
+											<td>{{ inscription_cour.nomApprenant }}</td>
 
-                                <td>{{ inscription_cour.formation.titre }}</td>
-                                <td>{{ inscription_cour.formation.id }}</td> 
+											<td>{{ inscription_cour.formation.titre }}</td>
 
-                                <td>{{ inscription_cour.email }}</td>
-                                <td>{{ inscription_cour.cin }}</td>
-                                <td>
-                                    {% if inscription_cour.status == 'payé' %}
-                                        <span class="badge bg-success">Payé</span>
-                                    {% else %}
-                                        <span class="badge bg-warning text-dark">En attente</span>
-                                    {% endif %}
-                                </td>
-                                <td>{{ inscription_cour.montant }} dt</td>
-                                <td>{{ inscription_cour.dateInscreption|date('Y-m-d') }}</td>
-                                <td class="d-flex">
-                         <!-- Bouton Détails -->
-                              <a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}" class="btn btn-info btn-sm me-2">
-                              <i class="fas fa-eye"></i> Détails
-                                </a>
-                           <!-- Bouton Modifier -->
-                                 <a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}" class="btn btn-warning btn-sm me-2">
-                                <i class="fas fa-edit"></i> Modifier
-                                 </a>
+											<td>{{ inscription_cour.email }}</td>
+											<td>{{ inscription_cour.cin }}</td>
+											<td>
+												{% if inscription_cour.status == 'paid' %}
+													<span class="badge bg-success">Payé</span>
+												{% else %}
+													<span class="badge bg-warning text-dark">En attente</span>
+												{% endif %}
+											</td>
+											<td>{{ inscription_cour.montant }}
+												dt</td>
+											<td>{{ inscription_cour.dateInscreption|date('Y-m-d') }}</td>
+											<td
+												class="d-flex">
+												<!-- Bouton Détails -->
+												<a href="{{ path('app_inscription_cours_show', {'id': inscription_cour.id}) }}" class="btn btn-info btn-sm me-2">
+													<i class="fas fa-eye"></i>
+													Détails
+												</a>
+												<!-- Bouton Modifier -->
+												<a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}" class="btn btn-warning btn-sm me-2">
+													<i class="fas fa-edit"></i>
+													Modifier
+												</a>
 
-                          <!-- Bouton Supprimer -->
-                               <form method="post" action="{{ path('app_inscription_cours_delete', {'id': inscription_cour.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inscription ?');">
-                              <input type="hidden" name="_method" value="DELETE">
-                              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription_cour.id) }}">
-                               <button type="submit" class="btn btn-danger btn-sm">
-                               <i class="fas fa-trash-alt"></i> Supprimer
-                              </button>
-                             </form>
-                                </td>
+												<!-- Bouton Supprimer -->
+												<form method="post" action="{{ path('app_inscription_cours_delete', {'id': inscription_cour.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inscription ?');">
+													<input type="hidden" name="_method" value="DELETE">
+													<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription_cour.id) }}">
+													<button type="submit" class="btn btn-danger btn-sm">
+														<i class="fas fa-trash-alt"></i>
+														Supprimer
+													</button>
+												</form>
+											</td>
 
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="9" class="text-center text-muted">Aucune inscription trouvée</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <!-- Fin de la table -->
-            </div>
-        </div>
-    </div>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="9" class="text-center text-muted">Aucune inscription trouvée</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+							<!-- Fin de la table -->
+						</div>
+					</div>
+				</div>
 
-</section>
+			</section>
 
-{% endblock %}
+		{% endblock %}

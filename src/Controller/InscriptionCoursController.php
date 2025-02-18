@@ -26,47 +26,46 @@ use Symfony\Component\Routing\Annotation\Route;
    // InscriptionCoursController.php
 
    #[Route('/new/{id}', name: 'app_inscription_cours_new', methods: ['GET', 'POST'])]
-public function new($id, Request $request, EntityManagerInterface $entityManager): Response
-{
-    // Récupérer la formation
-    $formation = $entityManager->getRepository(Formation::class)->find($id);
-
-    if (!$formation) {
-        $this->addFlash('error', 'Formation non trouvée');
-        return $this->redirectToRoute('app_formation_index');
-    }
-
-    // Créer une nouvelle inscription
-    $inscriptionCour = new InscriptionCours();
-    $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour, [
-        'formation' => $formation,
-    ]);
-
-    // Assigner la formation à l'inscription
-    $inscriptionCour->setFormation($formation);
-    $inscriptionCour->setNomFormation($formation->getTitre());
-    $inscriptionCour->setStatus('en attente');
-    $inscriptionCour->setMontant(0.0);
-
-    // Traitement du formulaire
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Enregistrer l'inscription
-        $entityManager->persist($inscriptionCour);
-        $entityManager->flush();
-
-        // Rediriger vers la page de paiement avec l'ID de l'inscription
-        return $this->redirectToRoute('payment_page', ['id' => $inscriptionCour->getId()]);
-    }
-
-    return $this->render('inscription_cours/new.html.twig', [
-        'form' => $form->createView(),
-        'formation' => $formation,
-    ]);
-}
-
-
+   public function new($id, Request $request, EntityManagerInterface $entityManager): Response
+   {
+       // Récupérer la formation
+       $formation = $entityManager->getRepository(Formation::class)->find($id);
+   
+       if (!$formation) {
+           $this->addFlash('error', 'Formation non trouvée');
+           return $this->redirectToRoute('app_formation_index');
+       }
+   
+       // Créer une nouvelle inscription
+       $inscriptionCour = new InscriptionCours();
+       $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour, [
+           'formation' => $formation,
+       ]);
+   
+       // Assigner la formation à l'inscription
+       $inscriptionCour->setFormation($formation);
+       $inscriptionCour->setNomFormation($formation->getTitre());
+       $inscriptionCour->setStatus('en attente'); // Assigner 'en attente'
+       $inscriptionCour->setMontant(0.0);
+   
+       // Traitement du formulaire
+       $form->handleRequest($request);
+   
+       if ($form->isSubmitted() && $form->isValid()) {
+           // Enregistrer l'inscription
+           $entityManager->persist($inscriptionCour);
+           $entityManager->flush();
+   
+           // Rediriger vers la page de paiement avec l'ID de l'inscription
+           return $this->redirectToRoute('payment_page', ['id' => $inscriptionCour->getId()]);
+       }
+   
+       return $this->render('inscription_cours/new.html.twig', [
+           'form' => $form->createView(),
+           'formation' => $formation,
+       ]);
+   }
+   
 
 
   #[Route('/{id}', name: 'app_inscription_cours_show', methods: ['GET'])]

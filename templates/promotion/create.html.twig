@@ -3,42 +3,192 @@
 {% block title %}Créer une nouvelle promotion{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Créer une nouvelle promotion</h1>
+    <style>
+        /* Centrage du formulaire */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f7fa;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        /* Titre du formulaire */
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Carte du formulaire */
+        .form-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Groupes de champs */
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        /* Labels */
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* Champs de formulaire */
+        .form-control,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            background: #fafafa;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        /* Focus sur les champs */
+        .form-control:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Textarea spécifique */
+        .form-textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        /* Bouton de soumission */
+        .submit-button {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #2980b9, #6c5ce7);
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Effet hover sur le bouton */
+        .submit-button:hover {
+            background: linear-gradient(135deg, #1f78a4, #5e3bb3);
+        }
+
+        /* Messages d'erreur */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Liste des erreurs */
+        .form-errors ul {
+            color: red;
+            font-size: 12px;
+            padding-left: 15px;
+        }
+
+        .form-errors li {
+            list-style-type: disc;
+        }
+    </style>
+
+   <div class="form-container">
+    <div class="form-card">
 
         {{ form_start(form) }}
-        
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Formulaire de Promotion</h5>
 
-                <div class="mb-3">
-                    {{ form_label(form.codePromo, 'Code Promo', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(form.codePromo, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_label(form.remise, 'Remise (%)', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(form.remise, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_label(form.dateExpiration, 'Date d’Expiration', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(form.dateExpiration, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_label(form.inscriptionCours, 'Inscription Cours', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(form.inscriptionCours, {'attr': {'class': 'form-control'}}) }}
-                </div>
+        <!-- Messages d'erreur généraux -->
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Créer</button>
+        <div class="card-body">
+            <h5 class="form-title">Formulaire de Promotion</h5>
+
+            <!-- Code Promo -->
+            <div class="form-group">
+                {{ form_label(form.codePromo, 'Code Promo', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.codePromo, {'attr': {'class': 'form-control'}}) }}
+                <!-- Affichage des erreurs spécifiques -->
+                <div class="form-errors">
+                    {{ form_errors(form.codePromo) }}
                 </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                <!-- Affichage des erreurs spécifiques -->
+                <div class="form-errors">
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+
+            <!-- Remise -->
+            <div class="form-group">
+                {{ form_label(form.remise, 'Remise (%)', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.remise, {'attr': {'class': 'form-control'}}) }}
+                <!-- Affichage des erreurs spécifiques -->
+                <div class="form-errors">
+                    {{ form_errors(form.remise) }}
+                </div>
+            </div>
+
+            <!-- Date d'Expiration -->
+            <div class="form-group">
+                {{ form_label(form.dateExpiration, 'Date d’Expiration', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.dateExpiration, {'attr': {'class': 'form-control'}}) }}
+                <!-- Affichage des erreurs spécifiques -->
+                <div class="form-errors">
+                    {{ form_errors(form.dateExpiration) }}
+                </div>
+            </div>
+
+            <!-- Inscription Cours -->
+            <div class="form-group">
+                {{ form_label(form.inscriptionCours, 'Inscription Cours', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.inscriptionCours, {'attr': {'class': 'form-control'}}) }}
+                <!-- Affichage des erreurs spécifiques -->
+                <div class="form-errors">
+                    {{ form_errors(form.inscriptionCours) }}
+                </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="text-center form-group">
+                <button type="submit" class="submit-button">Créer</button>
             </div>
         </div>
 
         {{ form_end(form) }}
     </div>
+   </div>
+
 {% endblock %}

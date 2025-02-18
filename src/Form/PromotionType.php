@@ -20,26 +20,27 @@ class PromotionType extends AbstractType
         $builder
             ->add('codePromo', TextType::class, [
                 'label' => 'Code Promo',
-                'required' => true
+                'required' => false
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',
-                'required' => true
+                'required' => false
             ])
             ->add('remise', NumberType::class, [
                 'label' => 'Remise (%)',
-                'required' => true
+                'required' => false
             ])
             ->add('inscriptionCours', EntityType::class, [
                 'class' => InscriptionCours::class,
                 'choice_label' => 'id', // Remplace par le champ à afficher
                 'placeholder' => 'Sélectionnez une inscription',
-                'required' => true, // Mettre false si facultatif
+                'required' => false, // Mettre false si facultatif
             ])
             ->add('dateExpiration', DateTimeType::class, [
                 'label' => 'Date d’expiration',
                 'widget' => 'single_text',
-                'required' => true
+                'required' => false, // Permet à la date d'être vide
+                'empty_data' => null, // Si aucun champ n'est rempli, la valeur sera `null`
             ]);
 
     
