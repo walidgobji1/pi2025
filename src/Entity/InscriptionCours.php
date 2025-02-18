@@ -42,8 +42,7 @@ class InscriptionCours
     private ?Formation $formation = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de l'apprenant est requis.")]
-    #[Assert\Length(min: 3, max: 255, minMessage: "Le nom doit contenir au moins 3 caractères.")]
+    #[Assert\NotBlank(message: "Le nom de l'apprenant est obligatoire.")]
     private ?string $nomApprenant = null;
 
     #[ORM\Column(length: 255)]
@@ -51,13 +50,13 @@ class InscriptionCours
     private ?string $nomFormation = null;
 
     #[ORM\Column(length: 8, unique: true)]
-    #[Assert\NotBlank(message: "Le CIN est requis.")]
+    #[Assert\NotBlank(message: "Le CIN est obligatoire.")]
     #[Assert\Length(min: 8, max: 8, exactMessage: "Le CIN doit contenir exactement 8 chiffres.")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Le CIN doit contenir uniquement des chiffres.")]
     private ?string $cin = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank(message: "L'email est requis.")]
+    #[Assert\NotBlank(message: "L'email est obligatoire.")]
     #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     private ?string $email = null;
 

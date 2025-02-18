@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 final class PayementControllerController extends AbstractController
 {
-    #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['POST'])]
+    #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['GET','POST'])]
     public function createPaymentIntent(Request $request): JsonResponse
     {
         // Utilisation des paramètres Symfony pour les clés
