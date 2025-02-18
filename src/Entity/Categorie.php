@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,18 +17,29 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Veuillez saisir le nom de la categorie')]
+    #[Assert\NotBlank(message: 'Veuillez saisir le nom de la catégorie')]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: "Le nom doit contenir au moins {{ limit }} caractères",
+        maxMessage: "Le nom ne doit pas dépasser {{ limit }} caractères"
+    )]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 500)]
     #[Assert\NotBlank(message: 'Veuillez saisir une description')]
+    #[Assert\Length(
+        min: 10,
+        max: 500,
+        minMessage: "La description doit contenir au moins {{ limit }} caractères",
+        maxMessage: "La description ne doit pas dépasser {{ limit }} caractères"
+    )]
     private ?string $description = null;
 
-
     /**
-     * @var Collection<int, formation>
+     * @var Collection<int, Formation>
      */
-    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Formation::class, mappedBy: 'categorie', cascade: ['remove'], orphanRemoval: true)]
     private Collection $formations;
 
     public function __construct()
@@ -50,7 +60,6 @@ class Categorie
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -62,21 +71,18 @@ class Categorie
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
-   
-
     /**
-     * @return Collection<int, formation>
+     * @return Collection<int, Formation>
      */
     public function getFormations(): Collection
     {
         return $this->formations;
     }
 
-    public function addFormation(formation $formation): static
+    public function addFormation(Formation $formation): static
     {
         if (!$this->formations->contains($formation)) {
             $this->formations->add($formation);
@@ -86,7 +92,7 @@ class Categorie
         return $this;
     }
 
-    public function removeFormation(formation $formation): static
+    public function removeFormation(Formation $formation): static
     {
         if ($this->formations->removeElement($formation)) {
             // set the owning side to null (unless already changed)
