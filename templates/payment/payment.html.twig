@@ -100,17 +100,19 @@
                     <option value="DE">Allemagne</option>
                 </select>
             </div>
-               <div class="form-group">
-               <label for="cardholder-name">Nom du titulaire</label>
-              <input type="text" id="cardholder-name" placeholder="Nom du titulaire" required>
-                </div>
+
+            <div class="form-group">
+                <label for="cardholder-name">Nom du titulaire</label>
+                <input type="text" id="cardholder-name" placeholder="Nom du titulaire" required>
+            </div>
 
             <div class="form-group">
                 <label for="postal-code">Code postal</label>
                 <input type="text" id="postal-code" placeholder="Code postal" required>
             </div>
 
-            <button type="submit" id="pay-button">Payer</button>
+            <!-- Affichage du prix de la formation -->
+            <button type="submit" id="pay-button">Payer {{ inscription_cour.formation.prix }} DT</button>
             <p id="payment-message"></p>
         </form>
     </div>
@@ -120,53 +122,42 @@
 <script>
     var stripe = Stripe("{{ stripe_public_key }}");
     var elements = stripe.elements();
-    var cardElement = elements.create("card", {hidePostalCode: true});
+    var cardElement = elements.create("card", { hidePostalCode: true });
     cardElement.mount("#card-element");
 
     document.getElementById("payment-form").addEventListener("submit", function (event) {
         event.preventDefault();
         document.getElementById("payment-message").textContent = "Traitement du paiement...";
-        console.log("Début de la requête de paiement...");
 
-        fetch("{{ path('create_payment_intent') }}", { 
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                amount: 1000,  // Exemple : 10€
-                currency: "eur",
-                cardholderName: document.getElementById("cardholder-name").value,
-                country: document.getElementById("country").value,
-                postalCode: document.getElementById("postal-code").value
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.clientSecret) {
-                stripe.confirmCardPayment(data.clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: document.getElementById("cardholder-name").value,
-                            address: {
-                                country: document.getElementById("country").value,
-                                postal_code: document.getElementById("postal-code").value
-                            }
-                        }
-                    }
-                }).then(function (result) {
-                    if (result.error) {
-                        document.getElementById("payment-message").textContent = "Erreur : " + result.error.message;
-                    } else {
-                        document.getElementById("payment-message").textContent = "Paiement réussi !";
-                    }
-                });
-            } else {
-                document.getElementById("payment-message").textContent = "Erreur lors de la création du paiement.";
-            }
-        })
-        .catch(error => {
-            document.getElementById("payment-message").textContent = "Erreur : " + error.message;
-        });
+        // Avant de créer le PaymentIntent, envoyer les données pour enregistrement
+        fetch("{{ path('save_payment_data') }}", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        inscriptionId: {{ inscription_id }},
+        amount: {{ amount }},
+        cardholderName: document.getElementById("cardholder-name").value
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);  // Afficher la réponse pour debug
+    if (data.success) {
+        // Poursuivre avec la création du PaymentIntent
+    } else {
+        document.getElementById("payment-message").textContent = "Erreur lors de l'enregistrement des données.";
+    }
+})
+.catch(error => {
+    console.error("Erreur:", error);  // Afficher l'erreur
+    document.getElementById("payment-message").textContent = "Erreur : " + error.message;
+});
+
+
     });
 </script>
+
+
+
+
 {% endblock %}

@@ -45,6 +45,12 @@ class InscriptionCoursType extends AbstractType
             'attr' => ['placeholder' => 'Votre Email', 'class' => 'form-control'],
             'required' => false, // Suppression du required
         ])
+        ->add('nomFormation', HiddenType::class, [
+            'label' => "Formation",
+            'mapped' => false,  // ✅ Ce champ ne sera pas enregistré directement
+            'data' => $formation ? $formation->getTitre() : '',  // ✅ Affiche le titre de la formation
+            'attr' => ['readonly' => true],  // ✅ Rendre le champ non modifiable
+        ])
         ->add('cin', TextType::class, [
             'label' => "CIN",
             'attr' => ['placeholder' => 'Votre CIN', 'class' => 'form-control'],
