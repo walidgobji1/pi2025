@@ -43,6 +43,15 @@
             {% endfor %}
         </div>
 
+        <!-- Champ PDF -->
+        <div class="form-group">
+            {{ form_label(form.pdfFile, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.pdfFile, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.pdfFile.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
         <!-- Bouton de soumission -->
         <button type="submit" class="submit-button">💾 {{ button_label|default('Enregistrer') }}</button>
 
