@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LeconRepository::class)]
+#[Vich\Uploadable]
 class Lecon
 {
     #[ORM\Id]
@@ -41,6 +44,22 @@ class Lecon
     #[ORM\ManyToOne(inversedBy: 'lecons')]
     #[Assert\NotNull(message: 'Veuillez associer la leçon à une formation')]
     private ?Formation $formation = null;
+
+    #[Vich\UploadableField(mapping: 'lecon_pdfs', fileNameProperty: 'pdfFileName')]
+    #[Assert\NotNull(message: 'Veuillez entrer votre leçon pdf')]
+
+    #[Assert\File(
+        maxSize: '5M',
+        mimeTypes: ['application/pdf'],
+        mimeTypesMessage: 'Veuillez télécharger un fichier PDF valide'
+    )]
+    private ?File $pdfFile = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pdfFileName = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -93,6 +112,44 @@ class Lecon
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
+        return $this;
+    }
+
+    public function getPdfFile(): ?File
+    {
+        return $this->pdfFile;
+    }
+
+    public function setPdfFile(?File $pdfFile = null): static
+    {
+        $this->pdfFile = $pdfFile;
+
+        if ($pdfFile) {
+            $this->updatedAt = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    public function getPdfFileName(): ?string
+    {
+        return $this->pdfFileName;
+    }
+
+    public function setPdfFileName(?string $pdfFileName): static
+    {
+        $this->pdfFileName = $pdfFileName;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }

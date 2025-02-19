@@ -2,29 +2,36 @@
 
 namespace App\Form;
 
-use App\Entity\Formation;
 use App\Entity\Lecon;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 class LeconType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
+            ->add('titre', TextType::class, [
+                'label' => 'Titre',
+            ])
             ->add('contenu', TextareaType::class, [
-                'attr' => ['rows' => 10, 'cols' => 40]  // You can adjust the number of rows and columns as needed
+                'label' => 'Contenu de la leçon',
+            ])
+            ->add('pdfFile', FileType::class, [
+                'label' => 'Fichier PDF',
+                'mapped' => false, // No direct mapping to the database field
+                'required' => false, // Optional upload
+                'attr' => ['accept' => '.pdf'],
             ])
             ->add('dateCreation', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                'data' => new \DateTime(), // Set default value to today's date
-                'required' => true,
-                'attr' => ['placeholder' => 'AAAA-MM-JJ']
+                'label' => 'Date de création',
+                'data' => new \DateTime(), // Default to current date
             ])
         ;
     }
