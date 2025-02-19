@@ -1,0 +1,62 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion des Inscriptions{% endblock %}
+
+{% block body %}
+ 
+
+   
+
+ <section class="section">
+    <div class="container mt-4">
+        <h5 class="card-title text-center">Liste des Inscriptions</h5>
+       <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+                <!-- Table avec DataTables -->
+                <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Code Promo</th>
+                        <th>Description</th>
+                        <th>Remise</th>
+                        <th>Date d'expiration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for promotion in promotions %}
+                        <tr>
+                            <td>{{ promotion.id }}</td>
+                            <td>{{ promotion.codePromo }}</td>
+                            <td>{{ promotion.description }}</td>
+                            <td>{{ promotion.remise }}%</td>
+                            <td>{{ promotion.dateExpiration|date('d/m/Y') }}</td>
+                            <td>
+                                <a href="{{ path('admin_promotion_edit', { id: promotion.id }) }}" class="btn btn-warning btn-sm">Modifier</a>
+                                
+                                <form action="{{ path('admin_promotion_delete', { id: promotion.id }) }}" method="post" style="display:inline;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promotion.id) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?');">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">Aucune promotion trouvée.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                <!-- Fin de la table -->
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -61,6 +61,9 @@ class InscriptionCours
     #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(inversedBy: 'promotion')]
+    private ?Promotion $promotion = null;
+
     public function __construct()
     {
         $this->dateInscreption = new \DateTimeImmutable(); // Date actuelle
@@ -68,8 +71,8 @@ class InscriptionCours
         $this->status = "en attente"; // Par défaut "en attente"
     }
 
-
     // Getters et Setters
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,12 +94,12 @@ class InscriptionCours
         return $this->dateInscreption;
     }
 
-
     public function setDateInscreption(\DateTimeImmutable $dateInscreption): static
     {
         $this->dateInscreption = $dateInscreption;
         return $this;
     }
+
     public function getMontant(): ?float
     {
         return $this->montant;
@@ -135,9 +138,10 @@ class InscriptionCours
         return $this->formation;
     }
 
-    public function setFormation(?Formation $formation): static
+    public function setFormation(?Formation $formation): self
     {
         $this->formation = $formation;
+
         return $this;
     }
 
@@ -182,6 +186,18 @@ class InscriptionCours
     public function setEmail(string $email): static
     {
         $this->email = $email;
+        return $this;
+    }
+
+    public function getPromotion(): ?Promotion
+    {
+        return $this->promotion;
+    }
+
+    public function setPromotion(?Promotion $promotion): static
+    {
+        $this->promotion = $promotion;
+
         return $this;
     }
 }

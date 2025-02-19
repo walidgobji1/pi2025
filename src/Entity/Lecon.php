@@ -17,17 +17,29 @@ class Lecon
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez introduire un titre')]
+    #[Assert\Length(
+        min: 3,
+        max: 100,
+        minMessage: "Le titre doit contenir au moins {{ limit }} caractères",
+        maxMessage: "Le titre ne doit pas dépasser {{ limit }} caractères"
+    )]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Veuillez introduire le contenu de la leçon')]
+    #[Assert\Length(
+        min: 10,
+        minMessage: "Le contenu doit contenir au moins {{ limit }} caractères"
+    )]
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: 'Veuillez introduire la date')]
+    #[Assert\Type(\DateTimeInterface::class, message: 'La date doit être valide')]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\ManyToOne(inversedBy: 'lecons')]
+    #[Assert\NotNull(message: 'Veuillez associer la leçon à une formation')]
     private ?Formation $formation = null;
 
     public function __construct()
