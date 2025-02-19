@@ -15,7 +15,7 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                default_target_path: app_dashboard  # Redirects after login
+                default_target_path: app_redirect_after_login  # ✅ Redirect to the redirect controller after login
 
             logout:
                 path: app_logout
@@ -24,7 +24,7 @@ security:
 
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
         - { path: ^/apprenant, roles: ROLE_APPRENANT }
         - { path: ^/instructeur, roles: ROLE_INSTRUCTEUR }
 

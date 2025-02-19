@@ -1,72 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Connexion
+{% endblock %}
 
 {% block body %}
-<div class="hero_area">
-    <!-- Login Section -->
-    <section class="slider_section">
-        <div class="slider_bg_box">
-            <div class="bg_img_box">
-                <img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="detail-box text-center">
-                        <h1 class="text-white">
-                            Connectez-vous à <br>
-                            Formini
-                        </h1>
-                        <p class="text-white">
-                            Accédez à votre espace et continuez votre apprentissage en ligne.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+	<div
+		class="hero_area">
+		<!-- Login Section -->
+		<section class="slider_section">
+			<div class="slider_bg_box">
+				<div class="bg_img_box">
+					<img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
+				</div>
+			</div>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="detail-box text-center">
+							<h1 class="text-white">
+								Connectez-vous à
+								<br>
+								Formini
+							</h1>
+							<p class="text-white">
+								Accédez à votre espace et continuez votre apprentissage en ligne.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 
-<!-- Login Form Section -->
-<section class="contact_section layout_padding">
-    <div class="container">
-        <div class="heading_container text-center">
-            <h2>Connexion</h2>
-            <p>Entrez vos identifiants pour accéder à votre compte.</p>
-        </div>
+	<!-- Login Form Section -->
+	<section class="contact_section layout_padding">
+		<div class="container">
+			<div class="heading_container text-center">
+				<h2>Connexion</h2>
+				<p>Entrez vos identifiants pour accéder à votre compte.</p>
+			</div>
 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="form_container">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="form_container">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
 
-                    <form method="post">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="_username" id="email" placeholder="Votre email" class="form-control" required>
-                        </div>
+						<form method="post">
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" name="_username" id="email" placeholder="Votre email" class="form-control" required>
+							</div>
 
-                        <div class="form-group mt-3">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="_password" id="password" placeholder="Votre mot de passe" class="form-control" required>
-                        </div>
+							<div class="form-group mt-3">
+								<label for="password">Mot de passe</label>
+								<input type="password" name="_password" id="password" placeholder="Votre mot de passe" class="form-control" required>
+							</div>
 
-                        <div class="btn_box text-center mt-4">
-                            <button type="submit" class="btn btn-primary">Se connecter</button>
-                        </div>
-                    </form>
+							<div class="btn_box text-center mt-4">
+								<button type="submit" class="btn btn-primary">Se connecter</button>
+							</div>
+						</form>
 
-                    <div class="text-center mt-3">
-                        <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous ici</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+						<div class="text-center mt-3">
+							<p>Vous n'avez pas de compte ?</p>
+							<p>
+								<a href="{{ path('app_register') }}" class="btn btn-primary btn-sm">S'inscrire en tant qu'Apprenant</a>
+								<a href="{{ path('app_register_instructeur') }}" class="btn btn-secondary btn-sm">S'inscrire en tant qu'Instructeur</a>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 {% endblock %}

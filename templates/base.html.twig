@@ -42,9 +42,9 @@
 		<link href="{{asset('frontOffice/css/responsive.css')}}" rel="stylesheet"/> {% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}
 		</head>
 		<body>
-			<header class="header_section ">
+			<header class="header_section">
 				<div class="container-fluid">
-					<nav class="navbar navbar-expand-lg custom_nav-container ">
+					<nav class="navbar navbar-expand-lg custom_nav-container">
 						<a class="navbar-brand" href="{{ path('app_home') }}">
 							<img src="{{ asset('frontOffice/images/formini.jpeg') }}" alt="Formini Logo" style="max-height: 70px;">
 						</a>
@@ -55,9 +55,7 @@
 							<div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
 								<ul class="navbar-nav">
 									<li class="nav-item active">
-										<a class="nav-link" href="{{ path('app_home') }}">Home
-											<span class="sr-only">(current)</span>
-										</a>
+										<a class="nav-link" href="{{ path('app_home') }}">Home</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="{{ path('app_about') }}">About</a>
@@ -71,47 +69,66 @@
 									<li class="nav-item">
 										<a class="nav-link" href="{{ path('app_message')}}">Message</a>
 									</li>
-									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-											<i class="bi bi-box-arrow-in-right"></i>
-											S'inscrire
-										</a>
-										<ul class="dropdown-menu" aria-labelledby="loginDropdown">
-											<li>
-												<a class="dropdown-item" href="{{ path('app_register', {'role': 'apprenant'}) }}">
-													<i class="bi bi-person"></i>
-													Apprenant
-												</a>
-											</li>
 
-											<li>
-												<a class="dropdown-item" href="{{ path('app_home') }}">
-													<i class="bi bi-mortarboard"></i>
-													Instructeur
-												</a>
-											</li>
-										</ul>
-									</li>
-									<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-											s'authentifier
-										</a>
-										<ul class="dropdown-menu" aria-labelledby="loginDropdown">
-											<li>
-												<a class="dropdown-item" href="{{ path('app_login', {'role': 'admin'}) }}">
-													<i class="bi bi-person"></i>
-													Admin
-												</a>
-											</li>
-
-										</ul>
-									</li>
+									{% if app.user %}
+										{# ✅ User is Logged In #}
+										<li class="nav-item dropdown">
+											<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												<i class="bi bi-person-circle"></i>
+												{{ app.user.nom }}
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="userDropdown">
+												{% if 'ROLE_ADMIN' in app.user.roles %}
+													<li>
+														<a class="dropdown-item" href="{{ path('app_dashboard') }}">
+															<i class="bi bi-speedometer2"></i>
+															Dashboard</a>
+													</li>
+												{% endif %}
+												<li>
+													<a class="dropdown-item" href="{{ path('app_logout') }}">
+														<i class="bi bi-box-arrow-right"></i>
+														Déconnexion
+													</a>
+												</li>
+											</ul>
+										</li>
+									{% else %}
+										{# ✅ User is NOT Logged In #}
+										<li class="nav-item dropdown">
+											<a class="nav-link dropdown-toggle" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												<i class="bi bi-person"></i>
+												S'inscrire
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="registerDropdown">
+												<li>
+													<a class="dropdown-item" href="{{ path('app_register', {'role': 'apprenant'}) }}">
+														<i class="bi bi-person"></i>
+														Apprenant
+													</a>
+												</li>
+												<li>
+													<a class="dropdown-item" href="{{ path('app_register_instructeur', {'role': 'instructeur'}) }}">
+														<i class="bi bi-mortarboard"></i>
+														Instructeur
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="{{ path('app_login') }}">
+												<i class="bi bi-box-arrow-in-right"></i>
+												S'authentifier
+											</a>
+										</li>
+									{% endif %}
 								</ul>
 							</div>
 						</div>
 					</nav>
 				</div>
 			</header>
+
 			{% block body %}{% endblock %}
 			<footer class="footer_section">
 				<div class="container">
