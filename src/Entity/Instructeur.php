@@ -7,16 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InstructeurRepository::class)]
-class Instructeur
+#[ORM\Entity]
+class Instructeur extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $cv = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $CV = null;
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $niveau = null;
@@ -46,63 +44,75 @@ class Instructeur
         return $this->id;
     }
 
-    public function getCV(): ?string
+    // Getter and Setter for cv
+    public function getCv(): ?string
     {
-        return $this->CV;
+        return $this->cv;
     }
 
-    public function setCV(?string $CV): static
+    public function setCv(?string $cv): self
     {
-        $this->CV = $CV;
-
+        $this->cv = $cv;
         return $this;
     }
 
+    // Getter and Setter for image
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    // Getter and Setter for niveau
     public function getNiveau(): ?string
     {
         return $this->niveau;
     }
 
-    public function setNiveau(?string $niveau): static
+    public function setNiveau(?string $niveau): self
     {
         $this->niveau = $niveau;
-
         return $this;
     }
 
+    // Getter and Setter for scoreEvaluation
     public function getScoreEvaluation(): ?float
     {
         return $this->scoreEvaluation;
     }
 
-    public function setScoreEvaluation(?float $scoreEvaluation): static
+    public function setScoreEvaluation(?float $scoreEvaluation): self
     {
         $this->scoreEvaluation = $scoreEvaluation;
-
         return $this;
     }
 
+    // Getter and Setter for scoreAvis
     public function getScoreAvis(): ?float
     {
         return $this->scoreAvis;
     }
 
-    public function setScoreAvis(?float $scoreAvis): static
+    public function setScoreAvis(?float $scoreAvis): self
     {
         $this->scoreAvis = $scoreAvis;
-
         return $this;
     }
 
+    // Getter and Setter for status
     public function isStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(?bool $status): static
+    public function setStatus(?bool $status): self
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -114,7 +124,7 @@ class Instructeur
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): static
+    public function addAvi(Avis $avi): self
     {
         if (!$this->avis->contains($avi)) {
             $this->avis->add($avi);
@@ -124,10 +134,9 @@ class Instructeur
         return $this;
     }
 
-    public function removeAvi(Avis $avi): static
+    public function removeAvi(Avis $avi): self
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
             if ($avi->getInstructeur() === $this) {
                 $avi->setInstructeur(null);
             }
