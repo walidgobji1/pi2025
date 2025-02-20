@@ -60,20 +60,7 @@ final class LeconController extends AbstractController
         $form = $this->createForm(LeconType::class, $lecon);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $pdfFile */
-            $pdfFile = $form->get('pdfFile')->getData();
-
-            if ($pdfFile) {
-                $lecon->setPdfFile($pdfFile);
-                $lecon->setUpdatedAt(new \DateTime()); // Update the updatedAt timestamp
-            }
-
-            $entityManager->persist($lecon);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_formation_lessons', ['id' => $formation->getId()], Response::HTTP_SEE_OTHER);
-        }
+       
 
         return $this->render('lecon/new.html.twig', [
             'lecon' => $lecon,
@@ -96,38 +83,14 @@ final class LeconController extends AbstractController
         $form = $this->createForm(LeconType::class, $lecon);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $pdfFile */
-            $pdfFile = $form->get('pdfFile')->getData();
-
-            if ($pdfFile) {
-                $lecon->setPdfFile($pdfFile);
-                $lecon->setUpdatedAt(new \DateTime()); // Update the updatedAt timestamp
-            }
-
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_formation_lessons', ['id' => $lecon->getFormation()->getId()], Response::HTTP_SEE_OTHER);
-        }
+        
 
         return $this->render('lecon/edit.html.twig', [
             'lecon' => $lecon,
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/{id}/download', name: 'app_lecon_download_pdf', methods: ['GET'])]
-public function downloadPdf(Lecon $lecon): Response
-{
-    // Récupérer le chemin complet du fichier PDF
-    $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/lecons/' . $lecon->getPdfFileName();
-
-    // Vérifier si le fichier existe
-    if (file_exists($filePath)) {
-        return $this->file($filePath); // Renvoie le fichier au navigateur
-    }
-
-    throw $this->createNotFoundException('Le fichier PDF n\'existe pas.');
-}
+   
 
 
     #[Route('/{id}', name: 'app_lecon_delete', methods: ['POST'])]

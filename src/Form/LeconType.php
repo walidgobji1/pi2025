@@ -22,12 +22,8 @@ class LeconType extends AbstractType
             ->add('contenu', TextareaType::class, [
                 'label' => 'Contenu de la leçon',
             ])
-            ->add('pdfFile', FileType::class, [
-                'label' => 'Fichier PDF',
-                'mapped' => false, // No direct mapping to the database field
-                'required' => false, // Optional upload
-                'attr' => ['accept' => '.pdf'],
-            ])
+           
+            
             ->add('dateCreation', DateType::class, [
                 'widget' => 'single_text',
                 'label' => 'Date de création',

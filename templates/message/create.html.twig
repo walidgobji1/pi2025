@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container py-5">
+        <h2>Nouvelle Discussion</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="receiver_id">Choisir un destinataire :</label>
+                <select name="receiver_id" id="receiver_id" class="form-control" required>
+                    <option value="">Sélectionnez un destinataire</option>
+                    {% for utilisateur in utilisateurs %}
+                     {% if utilisateur.id != 1 %}
+                        <option value="{{ utilisateur.id }}">{{ utilisateur.username }}</option>
+                         {% endif %}   
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Créer la discussion</button>
+        </form>
+    </div>
+{% endblock %}
