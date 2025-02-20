@@ -27,7 +27,13 @@
                                 <h5 class="card-title">{{ lecon.titre }}</h5>
                                 <p class="card-text">{{ lecon.contenu }}</p>
                                 <p class="text-muted">Créé le {{ lecon.dateCreation|date('d/m/Y') }}</p>
-                                <button class="btn btn-primary" disabled>Télécharger le cours</button>
+
+                                {% if lecon.pdfFileName %}
+                                    <a href="{{ path('app_lecon_download_pdf', {'id': lecon.id}) }}" class="btn btn-primary">Télécharger le cours</a>
+                                {% else %}
+                                    <button class="btn btn-secondary" disabled>Aucun PDF disponible</button>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>
