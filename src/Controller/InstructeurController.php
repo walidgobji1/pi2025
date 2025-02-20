@@ -15,5 +15,3 @@ final class InstructeurController extends AbstractController{
         ]);
     } 
 }
-
-
