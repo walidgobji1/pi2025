@@ -42,17 +42,16 @@ class Lecon
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\ManyToOne(inversedBy: 'lecons')]
-    #[Assert\NotNull(message: 'Veuillez associer la leçon à une formation')]
     private ?Formation $formation = null;
 
     #[Vich\UploadableField(mapping: 'lecon_pdfs', fileNameProperty: 'pdfFileName')]
-    #[Assert\NotNull(message: 'Veuillez entrer votre leçon pdf')]
 
     #[Assert\File(
         maxSize: '5M',
         mimeTypes: ['application/pdf'],
         mimeTypesMessage: 'Veuillez télécharger un fichier PDF valide'
     )]
+    
     private ?File $pdfFile = null;
 
     #[ORM\Column(length: 255, nullable: true)]

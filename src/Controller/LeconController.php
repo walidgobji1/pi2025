@@ -23,12 +23,17 @@ final class LeconController extends AbstractController
             'lecons' => $leconRepository->findAll(),
         ]);
     }
-
     #[Route('/formation/{id}/lessons', name: 'app_formation_lessons', methods: ['GET'])]
-    public function showLessons(Formation $formation, LeconRepository $leconRepository): Response
+    public function showLessons(int $id, EntityManagerInterface $em, LeconRepository $leconRepository): Response
     {
+        $formation = $em->getRepository(Formation::class)->find($id);
+    
+        if (!$formation) {
+            throw $this->createNotFoundException('Formation not found');
+        }
+    
         $lessons = $leconRepository->findBy(['formation' => $formation]);
-
+    
         return $this->render('lecon/lecons.html.twig', [
             'formation' => $formation,
             'lessons' => $lessons,
@@ -110,6 +115,20 @@ final class LeconController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/{id}/download', name: 'app_lecon_download_pdf', methods: ['GET'])]
+public function downloadPdf(Lecon $lecon): Response
+{
+    // Récupérer le chemin complet du fichier PDF
+    $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/lecons/' . $lecon->getPdfFileName();
+
+    // Vérifier si le fichier existe
+    if (file_exists($filePath)) {
+        return $this->file($filePath); // Renvoie le fichier au navigateur
+    }
+
+    throw $this->createNotFoundException('Le fichier PDF n\'existe pas.');
+}
+
 
     #[Route('/{id}', name: 'app_lecon_delete', methods: ['POST'])]
     public function delete(Request $request, Lecon $lecon, EntityManagerInterface $entityManager): Response
