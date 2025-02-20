@@ -4,13 +4,11 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LeconRepository::class)]
-#[Vich\Uploadable]
 class Lecon
 {
     #[ORM\Id]
@@ -44,13 +42,7 @@ class Lecon
     #[ORM\ManyToOne(inversedBy: 'lecons')]
     private ?Formation $formation = null;
 
-    #[Vich\UploadableField(mapping: 'lecon_pdfs', fileNameProperty: 'pdfFileName')]
-
-    #[Assert\File(
-        maxSize: '5M',
-        mimeTypes: ['application/pdf'],
-        mimeTypesMessage: 'Veuillez télécharger un fichier PDF valide'
-    )]
+    
     
     private ?File $pdfFile = null;
 
@@ -111,33 +103,6 @@ class Lecon
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
-        return $this;
-    }
-
-    public function getPdfFile(): ?File
-    {
-        return $this->pdfFile;
-    }
-
-    public function setPdfFile(?File $pdfFile = null): static
-    {
-        $this->pdfFile = $pdfFile;
-
-        if ($pdfFile) {
-            $this->updatedAt = new \DateTime();
-        }
-
-        return $this;
-    }
-
-    public function getPdfFileName(): ?string
-    {
-        return $this->pdfFileName;
-    }
-
-    public function setPdfFileName(?string $pdfFileName): static
-    {
-        $this->pdfFileName = $pdfFileName;
         return $this;
     }
 
