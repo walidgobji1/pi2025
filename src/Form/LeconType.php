@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Formation;
 use App\Entity\Lecon;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,14 +16,18 @@ class LeconType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
-            ->add('contenu')
-            ->add('dateCreation', null, [
-                'widget' => 'single_text'
+            ->add('titre', TextType::class, [
+                'label' => 'Titre',
             ])
-            ->add('formation', EntityType::class, [
-                'class' => Formation::class,
-'choice_label' => 'id',
+            ->add('contenu', TextareaType::class, [
+                'label' => 'Contenu de la leçon',
+            ])
+           
+            
+            ->add('dateCreation', DateType::class, [
+                'widget' => 'single_text',
+                'label' => 'Date de création',
+                'data' => new \DateTime(), // Default to current date
             ])
         ;
     }

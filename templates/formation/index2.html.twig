@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+  <section class="course_section layout_padding">
+    <div class="course_bg_box">
+      <div class="bg_img_box">
+        <img src="{{ asset('frontOffice/images/course-bg.jpg') }}" alt="">
+      </div>
+    </div>
+    <div class="container-fluid pr-0">
+      <div class="heading_container">
+        <h2>
+          Nos Formations
+        </h2>
+        <p>
+          Découvrez nos formations pour enrichir vos compétences.
+        </p>
+      </div>
+      <div class="course_container">
+        <div class="row">
+          {% for formation in formations %}
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img src="{{ asset('frontOffice/images/default-course.jpg') }}" class="card-img-top" alt="{{ formation.titre }}">
+                <div class="card-body">
+                
+                  <h5 class="card-title">{{ formation.titre }}</h5>
+                  <p class="card-text">{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
+                  <a href="{{ path('app_formation_show', {'id': formation.id}) }}" class="btn btn-primary">Voir Détails</a>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class="col-12">
+              <div class="alert alert-warning text-center">
+                Aucune formation disponible pour le moment.
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

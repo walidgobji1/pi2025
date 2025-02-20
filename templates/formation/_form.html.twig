@@ -1,4 +1,187 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% block body %}
+<div class="form-container">
+    <h2 class="form-title">📂 {{ button_label|default('Ajouter') }} une formation</h2>
+
+    <div class="form-card">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <!-- Gestion des erreurs globales -->
+        {% if form.vars.errors|length > 0 %}
+            <div class="form-errors">
+                <ul>
+                    {% for error in form.vars.errors %}
+                        <li>⚠️ {{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Champ Titre -->
+        <div class="form-group">
+            {{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre de la formation'}}) }}
+            {% for error in form.titre.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Description -->
+        <div class="form-group">
+            {{ form_label(form.description, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control form-textarea', 'placeholder': 'Description de la formation'}}) }}
+            {% for error in form.description.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Durée -->
+        <div class="form-group">
+            {{ form_label(form.duree, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.duree, {'attr': {'class': 'form-control', 'placeholder': 'Durée'}}) }}
+            {% for error in form.duree.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Niveau -->
+        <div class="form-group">
+            {{ form_label(form.niveau, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.niveau, {'attr': {'class': 'form-control', 'placeholder': 'Niveau'}}) }}
+            {% for error in form.niveau.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Date de Création -->
+        <div class="form-group">
+            {{ form_label(form.dateCreation, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control', 'placeholder': 'AAAA/MM/JJ'}}) }}
+            {% for error in form.dateCreation.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Prix -->
+        <div class="form-group">
+            {{ form_label(form.prix, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
+            {% for error in form.prix.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Sélection de la catégorie -->
+        <div class="form-group">
+            {{ form_label(form.categorie, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-select'}}) }}
+            {% for error in form.categorie.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="submit-button">💾 {{ button_label|default('Enregistrer') }}</button>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+<!-- Ajout du style -->
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #f4f7fa;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .form-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .form-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control, .form-textarea, .form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+        background: #fafafa;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus, .form-textarea:focus, .form-select:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    .form-textarea {
+        height: 80px;
+        resize: none;
+    }
+
+    .submit-button {
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #2980b9, #6c5ce7);
+        border: none;
+        border-radius: 6px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+        background: linear-gradient(135deg, #1f78a4, #5e3bb3);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .form-errors ul {
+        color: red;
+        font-size: 12px;
+        padding-left: 15px;
+    }
+
+    .form-errors li {
+        list-style-type: disc;
+    }
+    
+</style>
+{% endblock %}

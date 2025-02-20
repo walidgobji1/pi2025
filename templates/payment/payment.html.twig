@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+<style>
+    /* Permet au contenu de remplir l'espace entre header et footer */
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh; /* S'assure que la section paiement prend de l'espace sans écraser le footer */
+        padding: 20px;
+    }
+
+    .payment-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /*#card-element {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        background: #fff;
+    }*/
+
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #payment-message {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="content-wrapper">
+    <div class="payment-container">
+        <h1>Page de Paiement</h1>
+        <p>Veuillez entrer vos informations de paiement.</p>
+
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="card-element">Informations de la carte</label>
+                <div id="card-element"><!-- Stripe Elements apparaîtra ici --></div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Pays ou région</label>
+                <select id="country" required>
+                    <option value="FR">France</option>
+                    <option value="US">États-Unis</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">Royaume-Uni</option>
+                    <option value="DE">Allemagne</option>
+                </select>
+            </div>
+               <div class="form-group">
+               <label for="cardholder-name">Nom du titulaire</label>
+              <input type="text" id="cardholder-name" placeholder="Nom du titulaire" required>
+                </div>
+
+            <div class="form-group">
+                <label for="postal-code">Code postal</label>
+                <input type="text" id="postal-code" placeholder="Code postal" required>
+            </div>
+
+            <button type="submit" id="pay-button">Payer</button>
+            <p id="payment-message"></p>
+        </form>
+    </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe("{{ stripe_public_key }}");
+    var elements = stripe.elements();
+    var cardElement = elements.create("card", {hidePostalCode: true});
+    cardElement.mount("#card-element");
+
+    document.getElementById("payment-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        document.getElementById("payment-message").textContent = "Traitement du paiement...";
+        console.log("Début de la requête de paiement...");
+
+        fetch("{{ path('create_payment_intent') }}", { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                amount: 1000,  // Exemple : 10€
+                currency: "eur",
+                cardholderName: document.getElementById("cardholder-name").value,
+                country: document.getElementById("country").value,
+                postalCode: document.getElementById("postal-code").value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.clientSecret) {
+                stripe.confirmCardPayment(data.clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: document.getElementById("cardholder-name").value,
+                            address: {
+                                country: document.getElementById("country").value,
+                                postal_code: document.getElementById("postal-code").value
+                            }
+                        }
+                    }
+                }).then(function (result) {
+                    if (result.error) {
+                        document.getElementById("payment-message").textContent = "Erreur : " + result.error.message;
+                    } else {
+                        document.getElementById("payment-message").textContent = "Paiement réussi !";
+                    }
+                });
+            } else {
+                document.getElementById("payment-message").textContent = "Erreur lors de la création du paiement.";
+            }
+        })
+        .catch(error => {
+            document.getElementById("payment-message").textContent = "Erreur : " + error.message;
+        });
+    });
+</script>
+{% endblock %}

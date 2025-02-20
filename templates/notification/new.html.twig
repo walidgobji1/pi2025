@@ -1,0 +1,21 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Notification{% endblock %}
+
+{% block body %}
+
+    {{ include('notification/_form.html.twig') }}
+
+   <a href="{{ path('app_notification_index') }}" class="btn">Retour à la liste</a>
+    <style>
+    .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    </style>
+{% endblock %}

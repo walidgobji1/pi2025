@@ -1,0 +1,212 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Avis{% endblock %}
+
+{% block body %}
+    <h1>Donnez votre avis sur la formation</h1>
+
+    {{ form_start(form) }}
+    
+    <div>
+        {{ form_label(form.note) }}
+        {{ form_widget(form.note) }}
+        <div>
+            {{ form_errors(form.note) }}
+        </div>
+    </div>
+
+    <div>
+        {{ form_label(form.commentaire) }}
+        {{ form_widget(form.commentaire) }}
+        <div>
+            {{ form_errors(form.commentaire) }}
+        </div>
+    </div>
+
+    <button type="submit">Envoyer</button>
+    
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(document).ready(function() {
+    // Handle form submission
+    $("#avisForm").submit(function(event) {
+        event.preventDefault();  // Prevent the default form submission (page reload)
+
+        // Get the CSRF token and form data
+        const csrfToken = $("input[name='_token']").val();
+        const formData = $(this).serialize();
+
+        // Send AJAX request to submit the form
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),  // Get the form action URL
+            data: formData + "&_token=" + csrfToken,  // Add CSRF token to the data
+            success: function(response) {
+                // Update the reviews list without reloading the page
+                if (response.status === 'success') {
+                    // Display success message
+                    $("#avisMessage").html("<p style='color: green;'>" + response.message + "</p>");
+
+                    // Update the reviews list with the new review
+                    $("#avisList").html(response.html);  // Assuming you return the updated reviews HTML in response
+                } else {
+                    // Display error message
+                    $("#avisMessage").html("<p style='color: red;'>" + response.message + "</p>");
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors
+                console.log("Error:", error);
+                $("#avisMessage").html("<p style='color: red;'>Erreur lors de l'envoi de l'avis. Veuillez réessayer.</p>");
+            }
+        });
+    });
+});
+
+
+    </script>
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%; margin-bottom: 30px;">
+        <h2 class="text-center mb-4">Laisser un avis</h2>
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <div class="mb-3">
+            <label class="form-label">Note</label>
+            
+            <div class="rating">
+                {{ form_widget(form.note) }}  <!-- Render the star rating from the form directly -->
+                <div class="form-errors">
+                    {% if form.note.vars.errors|length > 0 %}
+                        <div class="error-icon">⚠️</div>
+                        {{ form_errors(form.note) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.commentaire, 'Votre commentaire', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.commentaire, {'attr': {'id': 'commentaire', 'class': 'form-control' ,'placeholder': 'Écrivez votre avis...', 'rows': 4}}) }}
+            <div class="form-errors">
+                {% if form.commentaire.vars.errors|length > 0 %}
+                    <div class="error-icon">⚠️</div>
+                    {{ form_errors(form.commentaire) }}
+                {% endif %}
+            </div>
+        </div>
+
+  
+<div class="d-flex flex-column align-items-center">
+    <button type="submit" class="btn custom-red w-50 py-2 mb-3">Envoyer</button>
+<a href="{{ path('app_avis_index', {'formationId': formationId}) }}" class="btn btn-secondary w-50">
+    Liste Avis
+</a>
+</div>
+
+
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{% block stylesheets %}
+    <style>
+        /* Rating Stars */
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .rating input:checked ~ label {
+            color: gold;
+        }
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: gold;
+        }
+
+        /* Custom Button Style */
+        .custom-red {
+            background-color: #d52a27;
+            border-color: #d52a27;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .custom-red:hover {
+            background-color: #b2271f;
+            transform: scale(1.05);
+        }
+
+        .custom-red:active {
+            transform: scale(0.98);
+        }
+
+        /* Form Input Styles */
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #d52a27;
+            box-shadow: 0 0 5px rgba(213, 42, 39, 0.5);
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 12px;
+        }
+
+        /* Modernized Error Messages */
+        .form-errors {
+            color: #d52a27;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 5px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .error-icon {
+            font-size: 18px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* Add margin to the top of the card */
+        .container {
+            margin-top: 60px;  /* Adjust the top margin of the form container */
+        }
+
+        /* Adjust margins for other sections if needed */
+        .mb-3 {
+            margin-bottom: 10px;  /* Adjust the bottom margin of each form group */
+        }
+    </style>
+{% endblock %}
+{% endblock %}
+
+
+
+
+
