@@ -3,16 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Lecon;
+use App\Entity\Formation;
 use App\Form\LeconType;
 use App\Repository\LeconRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[Route('/lecon')]
-final class LeconController extends AbstractController{
+final class LeconController extends AbstractController
+{
     #[Route(name: 'app_lecon_index', methods: ['GET'])]
     public function index(LeconRepository $leconRepository): Response
     {
@@ -21,23 +24,56 @@ final class LeconController extends AbstractController{
         ]);
     }
 
-    #[Route('/new', name: 'app_lecon_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/formation/{id}/lessons', name: 'app_formation_lessons', methods: ['GET'])]
+    public function showLessons(Formation $formation, LeconRepository $leconRepository): Response
+    {
+        $lessons = $leconRepository->findBy(['formation' => $formation]);
+
+        return $this->render('lecon/lecons.html.twig', [
+            'formation' => $formation,
+            'lessons' => $lessons,
+        ]);
+    }
+
+    #[Route('/formation/c/{id}/lessons', name: 'app_formation_lessons_c', methods: ['GET'])]
+    public function showLessonsC(Formation $formation, LeconRepository $leconRepository): Response
+    {
+        $lessons = $leconRepository->findBy(['formation' => $formation]);
+
+        return $this->render('lecon/showClient.html.twig', [
+            'formation' => $formation,
+            'lessons' => $lessons,
+        ]);
+    }
+
+    #[Route('/new/{id}', name: 'app_lecon_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
     {
         $lecon = new Lecon();
+        $lecon->setFormation($formation);
+
         $form = $this->createForm(LeconType::class, $lecon);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $pdfFile */
+            $pdfFile = $form->get('pdfFile')->getData();
+
+            if ($pdfFile) {
+                $lecon->setPdfFile($pdfFile);
+                $lecon->setUpdatedAt(new \DateTime()); // Update the updatedAt timestamp
+            }
+
             $entityManager->persist($lecon);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_lecon_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_formation_lessons', ['id' => $formation->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('lecon/new.html.twig', [
             'lecon' => $lecon,
-            'form' => $form,
+            'form' => $form->createView(),
+            'formation' => $formation,
         ]);
     }
 
@@ -56,25 +92,35 @@ final class LeconController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $pdfFile */
+            $pdfFile = $form->get('pdfFile')->getData();
+
+            if ($pdfFile) {
+                $lecon->setPdfFile($pdfFile);
+                $lecon->setUpdatedAt(new \DateTime()); // Update the updatedAt timestamp
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_lecon_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_formation_lessons', ['id' => $lecon->getFormation()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('lecon/edit.html.twig', [
             'lecon' => $lecon,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_lecon_delete', methods: ['POST'])]
     public function delete(Request $request, Lecon $lecon, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$lecon->getId(), $request->getPayload()->getString('_token'))) {
+        $formationId = $lecon->getFormation()->getId();
+
+        if ($this->isCsrfTokenValid('delete' . $lecon->getId(), $request->get('token'))) {
             $entityManager->remove($lecon);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_lecon_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_formation_lessons', ['id' => $formationId], Response::HTTP_SEE_OTHER);
     }
 }

@@ -10,16 +10,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Service\FormationScoreService; // Import du service
 
 #[Route('/formation')]
-final class FormationController extends AbstractController{
-    #[Route('/formations', name: 'app_formations')]
-    public function indexTemp(): Response
+final class FormationController extends AbstractController
+{
+    private $formationScoreService;
+
+    // Injection du service FormationScoreService dans le contrôleur
+    public function __construct(FormationScoreService $formationScoreService)
     {
-        return $this->render('formation/formations.html.twig', [
-            'controller_name' => 'FormationsController',
+        $this->formationScoreService = $formationScoreService;
+    }
+
+    #[Route('/formations', name: 'app_formations')]
+    public function indextemp(FormationRepository $formationRepository): Response
+    {
+        $formations = $formationRepository->findAll(); // Récupération des formations
+        $formationScores = $this->formationScoreService->getAllScores(); // Récupération des scores
+
+        return $this->render('/formation/formations.html.twig', [
+            'formations' => $formations,
+            'formationScores' => $formationScores,
         ]);
     }
+
     #[Route(name: 'app_formation_index', methods: ['GET'])]
     public function index(FormationRepository $formationRepository): Response
     {
@@ -49,7 +64,15 @@ final class FormationController extends AbstractController{
     }
 
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function show(Formation $formation): Response
+    public function showForClient(Formation $formation): Response
+    {
+        return $this->render('formation/showClient.html.twig', [
+            'formation' => $formation,
+        ]);
+    }
+
+    #[Route('/ad/{id}', name: 'app_formation_show_admin', methods: ['GET'])]
+    public function showAdmin(Formation $formation): Response
     {
         return $this->render('formation/show.html.twig', [
             'formation' => $formation,
@@ -77,9 +100,15 @@ final class FormationController extends AbstractController{
     #[Route('/{id}', name: 'app_formation_delete', methods: ['POST'])]
     public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$formation->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $formation->getId(), $request->getPayload()->getString('_token'))) {
+            $hasLessons = !$formation->getLecons()->isEmpty();
+
             $entityManager->remove($formation);
             $entityManager->flush();
+
+            $this->addFlash('success', $hasLessons
+                ? 'La formation et ses leçons associées ont été supprimées avec succès.'
+                : 'La formation a été supprimée avec succès.');
         }
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
