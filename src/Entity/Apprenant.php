@@ -7,13 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ApprenantRepository::class)]
-class Apprenant
+#[ORM\Entity]
+class Apprenant extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: "integer", nullable: true)]
+    private ?int $niveau_etude = null;
 
     /**
      * @var Collection<int, Avis>
@@ -26,6 +24,19 @@ class Apprenant
         $this->avis = new ArrayCollection();
     }
 
+    // Getter and Setter for niveau_etude
+    public function getNiveauEtude(): ?int
+    {
+        return $this->niveau_etude;
+    }
+
+    public function setNiveauEtude(?int $niveau_etude): self
+    {
+        $this->niveau_etude = $niveau_etude;
+        return $this;
+    }
+
+    // Avis relationship methods
     public function getId(): ?int
     {
         return $this->id;
@@ -52,7 +63,7 @@ class Apprenant
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
+            // Set the owning side to null (unless already changed)
             if ($avi->getApprenant() === $this) {
                 $avi->setApprenant(null);
             }
