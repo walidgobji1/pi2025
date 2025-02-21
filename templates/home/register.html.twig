@@ -69,6 +69,21 @@
 							{# ✅ Show field errors #}
 						</div>
 
+						<div class="form-group">
+							{{ form_label(registrationForm.image, 'Image de profil (JPG, PNG)') }}
+							<small class="text-muted d-block mb-2">Formats acceptés: JPG, PNG (Max 1MB)</small>
+							{{ form_widget(registrationForm.image, {'attr': {'class': 'form-control', 'accept': 'image/png, image/jpeg'}}) }}
+							{{ form_errors(registrationForm.image) }}
+
+							{# ✅ Show uploaded profile image if available #}
+							{% if app.user and app.user.image %}
+								<p class="mt-2">
+									<strong>Image actuelle:</strong>
+								</p>
+								<img src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="Profile Image" class="img-thumbnail" width="100">
+							{% endif %}
+						</div>
+
 						<div class="btn_box text-center">
 							<button type="submit" class="btn btn-primary">S'inscrire</button>
 						</div>
