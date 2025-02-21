@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Promotion;
+use App\Entity\Apprenant;
 use App\Form\PromotionType;
 use App\Repository\PromotionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,9 +39,21 @@ final class PromotionController extends AbstractController
             $this->addFlash('success', 'Code promo ajouté avec succès.');
             return $this->redirectToRoute('admin_promotion_index');
         }
+        // Récupérer les apprenants ayant deux inscriptions payées
+        $eligibleApprenants = $entityManager->getRepository(Apprenant::class)
+        ->createQueryBuilder('a')
+        ->join('App\Entity\InscriptionCours', 'i', 'WITH', 'i.apprenant = a.id') // Jointure sur apprenant_id
+        ->andWhere('i.status = :status')
+        ->setParameter('status', 'payé')
+        ->groupBy('a.id')
+        ->having('COUNT(i.id) = 2') // Filtrer les apprenants ayant exactement deux inscriptions payées
+        ->getQuery()
+        ->getResult();
 
         return $this->render('promotion/create.html.twig', [
             'form' => $form->createView(),
+            'eligibleApprenants' => $eligibleApprenants,
+
         ]);
     }
 

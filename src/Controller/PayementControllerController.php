@@ -8,131 +8,137 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\PromotionRepository;
+use App\Repository\InscriptionCoursRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;  
 use App\Entity\InscriptionCours;  
-use App\Entity\Formation;  
+use App\Entity\Promotion;  
+use Stripe\Webhook;
+use Stripe\Event;
+use App\Entity\Inscription;
 
 final class PayementControllerController extends AbstractController
 {
+     
     #[Route('/create-payment-intent', name: 'create_payment_intent', methods: ['POST'])]
-public function createPaymentIntent(Request $request): JsonResponse
-{
-    Stripe::setApiKey($this->getParameter('stripe_secret_key'));
-
-    // Récupérer les données de la requête
-    $data = json_decode($request->getContent(), true);
-
-    // Vérifier que les données nécessaires sont présentes
-    if (!isset($data['inscriptionId']) || !isset($data['amount'])) {
-        return new JsonResponse(['error' => 'Inscription ID ou Montant manquants'], 400);
-    }
-
-    $inscriptionId = $data['inscriptionId'];
-    $amount = $data['amount'];
-
-    try {
-        // Créer l'intention de paiement
-        $paymentIntent = \Stripe\PaymentIntent::create([
-            'amount' => $amount,
-            'currency' => 'eur',  // Assurez-vous que la devise correspond à ce que vous souhaitez
-            'payment_method_types' => ['card'],
-            'metadata' => ['inscriptionId' => $inscriptionId], // Ajouter des informations utiles pour la gestion
-        ]);
-
-        // Renvoyer le clientSecret nécessaire pour le paiement
-        return new JsonResponse(['clientSecret' => $paymentIntent->client_secret]);
-
-    } catch (\Stripe\Exception\ApiErrorException $e) {
-        // Capturer les erreurs de l'API Stripe et les renvoyer
-        return new JsonResponse(['error' => 'Erreur Stripe : ' . $e->getMessage()], 500);
-    } catch (\Exception $e) {
-        // Capturer d'autres erreurs non liées à Stripe
-        return new JsonResponse(['error' => 'Erreur générale : ' . $e->getMessage()], 500);
-    }
-}
-
-
-    #[Route('/save-payment-data', name: 'save_payment_data', methods: ['POST'])]
-    public function savePaymentData(Request $request, EntityManagerInterface $entityManager): JsonResponse
-{
-    $data = json_decode($request->getContent(), true);
-
-    if (!isset($data['inscriptionId']) || !isset($data['amount'])) {
-        return new JsonResponse(['error' => 'Inscription ID ou Montant manquants'], 400);
-    }
-
-    try {
+    public function createPaymentIntent(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        Stripe::setApiKey($this->getParameter('stripe_secret_key'));
+        $data = json_decode($request->getContent(), true);
+        
+        if (!isset($data['inscriptionId'])) {
+            return new JsonResponse(['error' => 'Inscription ID manquant'], 400);
+        }
+    
         $inscription = $entityManager->getRepository(InscriptionCours::class)->find($data['inscriptionId']);
         if (!$inscription) {
             return new JsonResponse(['error' => 'Inscription non trouvée'], 404);
         }
-
-        // Mise à jour du statut dès que les données sont sauvegardées
-        $inscription->setMontant($data['amount']);
-        $inscription->setStatus('payé');
-        $entityManager->flush();
-
-        return new JsonResponse(['success' => true]);
-    } catch (\Exception $e) {
-        return new JsonResponse(['error' => 'Erreur lors de l\'enregistrement des données: ' . $e->getMessage()], 500);
+    
+        // Récupération du prix initial de la formation
+        $amount = $inscription->getMontant(); // 🔹 On récupère directement le montant mis à jour
+    
+        if (!$amount) {
+            // Si le montant n'est pas encore mis à jour, on prend le prix de la formation
+            $amount = $inscription->getFormation()->getPrix();
+        }
+    
+        try {
+            $paymentIntent = \Stripe\PaymentIntent::create([
+                'amount' => $amount * 100, // 🔹 Stripe attend le montant en centimes
+                'currency' => 'eur',
+                'payment_method_types' => ['card'],
+                'metadata' => ['inscriptionId' => $inscription->getId()]
+            ]);
+    
+            return new JsonResponse([
+                'clientSecret' => $paymentIntent->client_secret,
+                'montantFinal' => $amount // 🔹 On renvoie aussi le montant final au frontend
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Erreur : ' . $e->getMessage()], 500);
+        }
     }
- }
+    
 
-    #[Route('/payment/{id}', name: 'payment_page', methods: ['GET'])]
-  public function paymentPage($id, EntityManagerInterface $entityManager): Response
-  {
+    #[Route('/save-payment/{id}', name: 'save_payment', methods: ['POST'])]
+    public function savePayment($id, Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+    //  Récupère l'inscription
     $inscription = $entityManager->getRepository(InscriptionCours::class)->find($id);
-
     if (!$inscription) {
-        $this->addFlash('error', 'Inscription non trouvée');
-        return $this->redirectToRoute('app_inscription_cours_index');
+        return new JsonResponse(['error' => 'Inscription non trouvée'], 404);
     }
 
-    $formation = $inscription->getFormation();
-    $amount = $formation->getPrix(); // Convertir en centimes
+    //  Récupère les données du paiement
+    $data = json_decode($request->getContent(), true);
+    if (!isset($data['amount'])) {
+        return new JsonResponse(['error' => 'Montant non fourni'], 400);
+    }
 
-    return $this->render('payment/payment.html.twig', [
-        'stripe_public_key' => $this->getParameter('stripe_public_key'),
-        'amount' => $amount,
-        'inscription_id' => $inscription->getId(),
-        'inscription_cour' => $inscription, // Assurez-vous de passer l'inscription ici
+    //  Mise à jour du montant
+    $inscription->setMontant($data['amount']);
+
+    //  Mise à jour du statut en fonction du montant
+    if ($data['amount'] > 0) {
+        $inscription->setStatus('payé');
+    } else {
+        $inscription->setStatus('en attente');
+    }
+
+    //  Persiste et enregistre les changements
+    $entityManager->persist($inscription);
+    $entityManager->flush();
+
+    return new JsonResponse([
+        'message' => 'Paiement enregistré avec succès',
+        'montant' => $inscription->getMontant(),
+        'statut' => $inscription->getStatus()
     ]);
-   }
+}
 
 
-   #[Route('/success/{id}', name: 'payment_success')]
-   public function paymentSuccess($id, EntityManagerInterface $entityManager)
-   {
-       try {
-           // Récupérer l'inscription par son ID
-           $inscription = $entityManager->getRepository(InscriptionCours::class)->find($id);
-           
-           if (!$inscription) {
-               throw new \Exception("Inscription non trouvée.");
-           }
-   
-           // Mettre à jour le statut et le montant de l'inscription
-           $inscription->setStatus('paid'); // Modifie le statut en "paid"
-           $inscription->setMontant($inscription->getFormation()->getPrix()); // Le montant de l'inscription, tu peux le personnaliser
-           $entityManager->flush(); // Sauvegarder les modifications dans la base de données
-           $formation = $inscription->getFormation();
-           if (!$formation) {
-          return new JsonResponse(['error' => 'Formation non trouvée'], 500);
+
+#[Route('/success/{id}', name: 'payment_success')]
+public function paymentSuccess(int $id, EntityManagerInterface $entityManager): Response
+{
+    try {
+        // Récupérer l'inscription en base de données
+        $inscription = $entityManager->getRepository(InscriptionCours::class)->find($id);
+        if (!$inscription) {
+            return new JsonResponse(['error' => 'Inscription non trouvée.'], 404);
         }
 
-        return new JsonResponse([
-            'success' => true,
-            'redirectUrl' => $this->generateUrl('payment_success_page', ['formation' => $formation,
-            'inscription' => $inscription,'id' => $id])
-        ]);
+        // Vérifier si la formation associée existe
+        $formation = $inscription->getFormation();
+        if (!$formation) {
+            return new JsonResponse(['error' => 'Formation non trouvée.'], 404);
+        }
+
+        // Mise à jour du montant (si nécessaire)
+        if ($inscription->getMontant() == 0) {
+            $inscription->setMontant($formation->getPrix());
+        }
+
+        // Mise à jour du statut selon le montant
+        if ($inscription->getMontant() > 0) {
+            $inscription->setStatus('payé');
+        } else {
+            $inscription->setStatus('en attente');
+        }
+
+        // Persister les modifications
+        $entityManager->flush();
+
+        return $this->redirectToRoute('payment_success_page', ['id' => $id]);
+    } catch (\Exception $e) {
+        return new JsonResponse(['error' => 'Erreur : ' . $e->getMessage()], 500);
+    }
+}
 
 
-           } catch (\Exception $e) {
-           // Si une erreur se produit, renvoyer un message d'erreur
-           return new JsonResponse(['error' => 'Erreur lors du traitement du paiement : ' . $e->getMessage()], 500);
-       }
-   }
+
 
     #[Route('/cancel', name: 'payment_cancel')]
     public function cancel(): Response
@@ -142,8 +148,8 @@ public function createPaymentIntent(Request $request): JsonResponse
 
 
     #[Route('/payment/success-page/{id}', name: 'payment_success_page')]
-   public function paymentSuccessPage($id, EntityManagerInterface $entityManager): Response
-  {
+      public function paymentSuccessPage($id, EntityManagerInterface $entityManager): Response
+     {
     $inscription = $entityManager->getRepository(InscriptionCours::class)->find($id);
 
     if (!$inscription) {
@@ -153,6 +159,57 @@ public function createPaymentIntent(Request $request): JsonResponse
     return $this->render('payment/success.html.twig', [
         'inscription' => $inscription
     ]);
-   }
+}
 
+
+    #[Route('/check-promo', name: 'check_promo', methods: ['POST'])]
+    public function checkPromo(Request $request, PromotionRepository $promoRepo, InscriptionCoursRepository $inscriptionRepo, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $promoCodeValue = $data['promoCode'] ?? null;
+        $inscriptionId = $data['inscriptionId'] ?? null;
+
+        if (!$promoCodeValue || !$inscriptionId) {
+            return new JsonResponse(['error' => 'Code promo ou ID inscription manquant'], 400);
+        }
+
+        $promoCode = $promoRepo->findOneBy(['codePromo' => $promoCodeValue]);
+
+        if (!$promoCode || !$promoCode->isValid()) {
+            return new JsonResponse(['error' => 'Code promo invalide ou expiré'], 400);
+        }
+
+        $inscription = $inscriptionRepo->find($inscriptionId);
+        if (!$inscription) {
+            return new JsonResponse(['error' => 'Inscription non trouvée'], 400);
+        }
+
+        $reduction = $promoCode->getRemise();
+        $montantInitial = $inscription->getFormation()->getPrix();
+        $montantApresRemise = max(0, $montantInitial - ($montantInitial * ($reduction / 100)));
+
+        $inscription->setMontant($montantApresRemise);
+        $entityManager->persist($inscription);
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Code promo appliqué avec succès !', 'montantApresRemise' => $montantApresRemise]);
+    }
+
+    #[Route('/payment/{id}', name: 'payment_page', methods: ['GET'])]
+     public function paymentPage($id, EntityManagerInterface $entityManager): Response
+    {
+      $inscription = $entityManager->getRepository(InscriptionCours::class)->find($id);
+     if (!$inscription) {
+       $this->addFlash('error', 'Inscription non trouvée');
+      return $this->redirectToRoute('app_inscription_cours_index');
+    }
+      $formation = $inscription->getFormation();
+     $amount = $formation->getPrix(); // En euros
+     return $this->render('payment/payment.html.twig', [
+   'stripe_public_key' => $this->getParameter('stripe_public_key'),
+     'amount' => $amount,
+    'inscription_id' => $inscription->getId(),
+     'inscription_cour' => $inscription,
+     ]);
+      }
 }

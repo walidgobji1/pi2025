@@ -181,11 +181,30 @@
                 </div>
             </div>
 
-            <!-- Bouton de soumission -->
+            
+            <!-- Champ Apprenant -->
+         <div class="form-group">
+         {{ form_label(form.apprenant, 'Apprenant (ayant deux inscriptions payées)', {'label_attr': {'class': 'form-label'}}) }}
+         {{ form_widget(form.apprenant, {'attr': {'class': 'form-control'}}) }}
+         <div class="form-errors">
+        {{ form_errors(form.apprenant) }}
+       </div>
+      </div>
+
+     <!-- Liste des apprenants éligibles (facultatif) -->
+      {% if eligibleApprenants is defined and eligibleApprenants|length > 0 %}
+    <p>Les apprenants suivants ont déjà deux inscriptions payées :</p>
+    <ul>
+        {% for apprenant in eligibleApprenants %}
+            <li>ID : {{ apprenant.id }}</li>
+        {% endfor %}
+    </ul>
+      {% endif %}
+      <!-- Bouton de soumission -->
             <div class="text-center form-group">
                 <button type="submit" class="submit-button">Créer</button>
             </div>
-        </div>
+        
 
         {{ form_end(form) }}
     </div>

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Promotion;
+use App\Entity\Apprenant;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -41,6 +43,13 @@ class PromotionType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false, // Permet à la date d'être vide
                 'empty_data' => null, // Si aucun champ n'est rempli, la valeur sera `null`
+            ])
+            ->add('apprenant', EntityType::class, [
+                'class' => Apprenant::class,
+                'choice_label' => 'id', // Affiche l'ID de l'apprenant dans le select
+                'label' => 'Apprenant (ayant deux inscriptions payées)',
+                'required' => false,
+                'placeholder' => 'Sélectionnez un apprenant',
             ]);
 
     

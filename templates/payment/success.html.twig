@@ -106,7 +106,13 @@
             <div class="card-body">
                 <h1>Paiement réussi !</h1>
                 <p>Votre inscription à la formation "{{ inscription.formation.titre }}" a été confirmée.</p>
-                <p>Le montant de votre inscription est de {{ inscription.formation.prix }} €.</p>
+                <p>Le montant de votre inscription est de 
+           {% if inscription.montant != inscription.formation.prix %}
+              <strong style="color: green;">{{ inscription.montant }} € (après réduction)</strong>
+          {% else %}
+           <strong>{{ inscription.formation.prix }} DT</strong>
+         {% endif %}
+       </p>
 
                 <!-- Vous pouvez afficher des informations supplémentaires sur la formation -->
                 <p>Description : {{ inscription.formation.description }}</p>

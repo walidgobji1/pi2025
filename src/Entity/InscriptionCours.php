@@ -199,4 +199,26 @@ class InscriptionCours
 
         return $this;
     }
+
+    public function finaliserPaiement(): static
+    {
+        // Vérifier que la formation est bien définie et que le montant n'a pas été initialisé
+        if ($this->formation && $this->montant == 0) {
+            $this->montant = $this->formation->getPrix(); // Prend le prix de la formation
+        }
+
+        // Appliquer la réduction si un code promo est utilisé et valide
+        if ($this->promotion && $this->promotion->isValid()) {
+            $remise = $this->promotion->getRemise();
+            $nouveauMontant = $this->montant - ($this->montant * $remise / 100);
+
+            // S'assurer que le montant ne devient pas négatif
+            $this->montant = max(0, round($nouveauMontant, 2));
+        }
+
+        // Changer le statut en "payé"
+        $this->status = "payé";
+
+        return $this;
+    }
 }

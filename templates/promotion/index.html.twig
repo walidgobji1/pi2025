@@ -3,60 +3,59 @@
 {% block title %}Gestion des Inscriptions{% endblock %}
 
 {% block body %}
- 
-
-   
-
- <section class="section">
+<section class="section">
     <div class="container mt-4">
-        <h5 class="card-title text-center">Liste des Inscriptions</h5>
-       <div class="row">
-        <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold text-primary">Liste des Inscriptions</h4>
+            <a href="{{ path('admin_promotion_create') }}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Ajouter une promotion
+            </a>
+        </div>
 
-          <div class="card">
+        <div class="card shadow-lg">
             <div class="card-body">
-              <h5 class="card-title"></h5>
-                <!-- Table avec DataTables -->
-                <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Code Promo</th>
-                        <th>Description</th>
-                        <th>Remise</th>
-                        <th>Date d'expiration</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for promotion in promotions %}
+                <!-- Table stylisée avec Bootstrap -->
+                <table class="table table-hover table-striped align-middle">
+                    <thead class="table-dark text-center">
                         <tr>
-                            <td>{{ promotion.id }}</td>
-                            <td>{{ promotion.codePromo }}</td>
-                            <td>{{ promotion.description }}</td>
-                            <td>{{ promotion.remise }}%</td>
-                            <td>{{ promotion.dateExpiration|date('d/m/Y') }}</td>
-                            <td>
-                                <a href="{{ path('admin_promotion_edit', { id: promotion.id }) }}" class="btn btn-warning btn-sm">Modifier</a>
-                                
-                                <form action="{{ path('admin_promotion_delete', { id: promotion.id }) }}" method="post" style="display:inline;">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promotion.id) }}">
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?');">Supprimer</button>
-                                </form>
-                            </td>
+                            <th>ID</th>
+                            <th>Code Promo</th>
+                            <th>Description</th>
+                            <th>Remise</th>
+                            <th>Date d'expiration</th>
+                            <th>Actions</th>
                         </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="6" class="text-center">Aucune promotion trouvée.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-                <!-- Fin de la table -->
+                    </thead>
+                    <tbody class="text-center">
+                        {% for promotion in promotions %}
+                            <tr>
+                                <td>{{ promotion.id }}</td>
+                                <td><span class="badge bg-info text-dark">{{ promotion.codePromo }}</span></td>
+                                <td>{{ promotion.description }}</td>
+                                <td class="fw-bold text-success">{{ promotion.remise }}%</td>
+                                <td>{{ promotion.dateExpiration|date('d/m/Y') }}</td>
+                                <td class="d-flex justify-content-center gap-2">
+                                    <a href="{{ path('admin_promotion_edit', { id: promotion.id }) }}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Modifier
+                                    </a>
+                                    
+                                    <form action="{{ path('admin_promotion_delete', { id: promotion.id }) }}" method="post">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promotion.id) }}">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?');">
+                                            <i class="fas fa-trash"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Aucune promotion trouvée.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-
 </section>
-
 {% endblock %}

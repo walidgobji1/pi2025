@@ -42,7 +42,7 @@
 											<td>{{ inscription_cour.email }}</td>
 											<td>{{ inscription_cour.cin }}</td>
 											<td>
-												{% if inscription_cour.status == 'paid' %}
+												{% if inscription_cour.status == 'Payé' %}
 													<span class="badge bg-success">Payé</span>
 												{% else %}
 													<span class="badge bg-warning text-dark">En attente</span>
@@ -59,12 +59,12 @@
 													Détails
 												</a>
 												<!-- Bouton Modifier -->
-												<a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}" class="btn btn-warning btn-sm me-2">
+												<!--<a href="{{ path('app_inscription_cours_edit', {'id': inscription_cour.id}) }}" class="btn btn-warning btn-sm me-2">
 													<i class="fas fa-edit"></i>
 													Modifier
-												</a>
+												</a>-->
 
-												<!-- Bouton Supprimer -->
+												<!-- Bouton Supprimer 
 												<form method="post" action="{{ path('app_inscription_cours_delete', {'id': inscription_cour.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inscription ?');">
 													<input type="hidden" name="_method" value="DELETE">
 													<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription_cour.id) }}">
@@ -72,7 +72,7 @@
 														<i class="fas fa-trash-alt"></i>
 														Supprimer
 													</button>
-												</form>
+												</form>-->
 											</td>
 
 										</tr>
