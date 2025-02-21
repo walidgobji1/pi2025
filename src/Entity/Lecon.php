@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +42,7 @@ class Lecon
     #[ORM\ManyToOne(inversedBy: 'lecons')]
     private ?Formation $formation = null;
 
-
+    
     
 
 
@@ -106,11 +106,14 @@ class Lecon
         return $this;
     }
 
- 
-    
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
 
-   
-    
-
-   
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 }

@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+    .chat-box {
+        max-height: 400px;
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .chat-messages {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        max-height: 350px;
+    }
+
+    .message {
+        max-width: 75%;
+        padding: 10px 14px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+    }
+
+    .message.sent {
+        background: #007bff;
+        color: white;
+        align-self: flex-end;
+    }
+
+    .message.received {
+        background: #d1d1d1;
+        align-self: flex-start;
+    }
+
+    .chat-input {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background: white;
+        border-top: 1px solid #ddd;
+    }
+
+    .chat-input textarea {
+        flex: 1;
+        margin-right: 10px;
+        border-radius: 20px;
+        padding: 10px;
+        font-size: 14px;
+        resize: none;
+        border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+</style>
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <!-- Sidebar des discussions -->
+            <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+                <h5 class="font-weight-bold mb-3 text-center text-lg-start">Discussions</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            {% for discussion in discussions %}
+                                <li class="p-2 border-bottom bg-body-tertiary">
+                                    <a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none">
+                                        <div class="d-flex flex-row">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
+                                                 class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
+                                            <div class="pt-1">
+                                                <span>{{ discussion.id }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="list-group-item text-muted">Aucune discussion disponible.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbox principale -->
+            <div class="col-md-6 col-lg-7 col-xl-8">
+                <div class="chat-box p-3">
+                    <ul class="list-unstyled chat-messages">
+                        {% for message in messages %}
+                            <li class="d-flex {% if message.sender.id == 1 %}justify-content-end{% else %}justify-content-start{% endif %} mb-3">
+                                {% if message.sender.id != 1 %}
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                                         class="rounded-circle me-3 shadow-1-strong" width="50">
+                                {% endif %}
+                                <div class="card w-75 {% if message.sender.id == 1 %}message sent{% else %}message received{% endif %}">
+                                    <div class="card-header d-flex justify-content-between p-2">
+                                        <p class="fw-bold mb-0">{{ message.sender.id }}</p>
+                                        <p class="text-muted small mb-0">
+                                            <i class="far fa-clock"></i> {{ message.createdAt|date('d/m/Y H:i') }}
+                                        </p>
+                                    </div>
+                                    <div class="card-body p-2">
+                                        <p class="mb-0">{{ message.content }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="text-muted text-center">Commencez la discussion</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Formulaire d'envoi -->
+                <form action="{{ path('send_message') }}" method="POST" class="chat-input p-3" onsubmit="return validateForm()" novalidate>
+                    <input type="hidden" name="discussion_id" value="{{ discussion is defined and discussion ? discussion.id : '' }}">
+                    <input type="hidden" name="sender_id" value="1"> <!-- ID actuel (fixé à 1) -->
+                    <input type="number" name="receiver_id" class="form-control me-2" placeholder="ID Destinataire" style="width: 100px;">
+                    <textarea name="content" id="content" class="form-control" placeholder="Votre message..." required></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Scroll automatique vers le bas
+    document.addEventListener("DOMContentLoaded", function () {
+        var chatBox = document.querySelector(".chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+</script>
+
+{% endblock %}
