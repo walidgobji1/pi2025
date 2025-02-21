@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -43,12 +45,24 @@ class RegistrationFormType extends AbstractType
                 ],
                 'attr' => ['class' => 'form-control'],
             ])
-            
+
             ->add('date_de_naissance', DateType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Image de profil (JPG, PNG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPG, PNG).',
+                    ])
+                ],
             ]);
     }
 
