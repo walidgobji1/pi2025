@@ -103,49 +103,51 @@ public function sendMessage(Request $request, EntityManagerInterface $entityMana
 }
 
 #[Route('/discussion/new', name: 'create_discussion', methods: ['GET', 'POST'])]
-public function createDiscussion(Request $request, EntityManagerInterface $entityManager): Response
+public function createDiscussion(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response
 {
     // Obtenir tous les utilisateurs
     $utilisateurs = $entityManager->getRepository(Utilisateur::class)->findAll();
     
+    // Variable pour les erreurs
+    $errors = [];
+
     if ($request->isMethod('POST')) {
         $receiverId = $request->request->get('receiver_id');
         
+        // Valider si le champ 'receiver_id' est vide
         if (!$receiverId) {
-            return $this->json(['error' => 'ID du destinataire manquant.']);
+            $errors[] = 'Le destinataire est requis.';
         }
 
         // Rechercher le destinataire
-        $receiver = $entityManager->getRepository(Utilisateur::class)->find($receiverId);
+        $receiver = $entityManager->getRepository(Utilisateur::class)->find($receiverId);       
 
-        if (!$receiver) {
-            return $this->json(['error' => 'Utilisateur non trouvé.']);
-        }
+        // Créer la discussion si tout est correct
+        if (empty($errors)) {
+            $sender = $entityManager->getRepository(Utilisateur::class)->find(1); // Expéditeur avec ID 1
+            $discussion = new Discussion();
+            $discussion->setSender($sender);
+            $discussion->setReceiver($receiver);
 
-        // Créer la discussion
-        $sender = $entityManager->getRepository(Utilisateur::class)->find(1); // Expéditeur avec ID 1
-        $discussion = new Discussion();
-        $discussion->setSender($sender);
-        $discussion->setReceiver($receiver);
+            // Persister et enregistrer la discussion
+            try {
+                $entityManager->persist($discussion);
+                $entityManager->flush();
 
-        // Persister et enregistrer la discussion
-        try {
-            $entityManager->persist($discussion);
-            $entityManager->flush();
-
-            // Rediriger vers la page de la nouvelle discussion
-            return $this->redirectToRoute('view_discussion', ['id' => $discussion->getId()]);
-        } catch (\Exception $e) {
-            return $this->json(['error' => 'Erreur lors de la création de la discussion.']);
+                // Rediriger vers la page de la nouvelle discussion
+                return $this->redirectToRoute('view_discussion', ['id' => $discussion->getId()]);
+            } catch (\Exception $e) {
+                $errors[] = 'Erreur lors de la création de la discussion.';
+            }
         }
     }
 
     // Afficher tous les utilisateurs dans la vue
     return $this->render('message/create.html.twig', [
         'utilisateurs' => $utilisateurs,
+        'errors' => $errors,  // Passer les erreurs à Twig
     ]);
 }
-
 
     #[Route('/message/delete/{id}', name: 'delete_message', methods: ['POST'])]
     public function deleteMessage(int $id, EntityManagerInterface $entityManager): Response
