@@ -19,26 +19,52 @@ class Formation
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez saisir un titre')]
+    #[Assert\Length(
+        min: 5,
+        max: 100,
+        minMessage: "Le titre doit contenir au moins {{ limit }} caractères",
+        maxMessage: "Le titre ne doit pas dépasser {{ limit }} caractères"
+    )]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez introduire la description')]
+    #[Assert\Length(
+        min: 10,
+        max: 500,
+        minMessage: "La description doit contenir au moins {{ limit }} caractères",
+        maxMessage: "La description ne doit pas dépasser {{ limit }} caractères"
+    )]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez introduire la durée de la formation')]
+    #[Assert\Regex(
+        pattern: "/^\d+\s*(jours|semaines|mois|ans)$/i",
+        message: "La durée doit être un nombre suivi d'une unité (jours, semaines, mois, ans)"
+    )]
     private ?string $duree = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Veuillez introduire le niveau')]
+    #[Assert\Choice(
+        choices: ['Débutant', 'Intermédiaire', 'Avancé'],
+        message: "Veuillez choisir un niveau valide : Débutant, Intermédiaire ou Avancé"
+    )]
     private ?string $niveau = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'Veuillez introduire la date')]
+    #[Assert\NotBlank(message: 'Veuillez introduire la date svp')]
+    #[Assert\LessThanOrEqual(
+        value: "today",
+        message: "La date de création ne peut pas être dans le futur"
+    )]
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Veuillez introduire le prix')]
+    #[Assert\Positive(message: "Le prix doit être un nombre positif")]
+    #[Assert\GreaterThan(value: 10, message: "Le prix doit être supérieur à 10DT")]
     private ?float $prix = null;
 
     #[ORM\ManyToOne(inversedBy: 'formations')]
@@ -127,8 +153,6 @@ class Formation
         return $this;
     }
 
-
-
     public function getCategorie(): ?Categorie
     {
         return $this->categorie;
@@ -166,5 +190,4 @@ class Formation
         }
         return $this;
     }
-
 }

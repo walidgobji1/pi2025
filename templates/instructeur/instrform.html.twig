@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription Instructeur{% endblock %}
+
+{% block body %}
+    <div class="hero_area">
+        <section class="slider_section">
+            <div class="slider_bg_box">
+                <div class="bg_img_box">
+                    <img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="contact_section layout_padding">
+        <div class="container">
+            <div class="heading_container text-center">
+                <h2>Inscription Instructeur</h2>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        {{ form_start(Form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                        {% if Form.vars.errors|length > 0 %}
+                            <div class="alert alert-danger">
+                                {% for error in Form.vars.errors %}
+                                    <p>{{ error.message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            {{ form_label(instrForm.nom, 'Nom') }}
+                            {{ form_widget(instrForm.nom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(instrForm.nom) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.prenom, 'Prénom') }}
+                            {{ form_widget(Form.prenom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.prenom) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.email, 'Email') }}
+                            {{ form_widget(Form.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.email) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.password, 'Mot de passe') }}
+                            {{ form_widget(Form.password, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.password) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.date_de_naissance, 'Date de naissance') }}
+                            {{ form_widget(Form.date_de_naissance, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.date_de_naissance) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.cv, 'CV') }}
+                            {{ form_widget(Form.cv, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.cv) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(Form.image, 'Photo de profil') }}
+                            {{ form_widget(Form.image, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(Form.image) }}
+                        </div>
+
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
+
+                        {{ form_end(Form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -2,37 +2,29 @@
 
 namespace App\Entity;
 
-use App\Repository\InstructeurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: InstructeurRepository::class)]
-class Instructeur
+#[ORM\Entity]
+#[ORM\Table(name: "instructeurs")]
+class Instructeur extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(name: "nom_instructeur", type: "string", length: 100)]
+    private ?string $nom_instructeur = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $CV = null;
+    #[ORM\Column(name: "prenom_instructeur", type: "string", length: 100)]
+    private ?string $prenom_instructeur = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $niveau = null;
+    #[ORM\Column(name: "email_instructeur", type: "string", length: 255, unique: true)]
+    private ?string $email_instructeur = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $scoreEvaluation = null;
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $cv = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $scoreAvis = null;
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $image = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $status = null;
-
-    /**
-     * @var Collection<int, Avis>
-     */
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'instructeur')]
     private Collection $avis;
 
@@ -41,98 +33,84 @@ class Instructeur
         $this->avis = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    // ✅ Getters and Setters
+
+    public function getNomInstructeur(): ?string 
     {
-        return $this->id;
+        return $this->nom_instructeur;
     }
 
-    public function getCV(): ?string
+    public function setNomInstructeur(?string $nom_instructeur): self 
     {
-        return $this->CV;
-    }
-
-    public function setCV(?string $CV): static
-    {
-        $this->CV = $CV;
-
+        $this->nom_instructeur = $nom_instructeur;
         return $this;
     }
 
-    public function getNiveau(): ?string
+    public function getPrenomInstructeur(): ?string 
     {
-        return $this->niveau;
+        return $this->prenom_instructeur;
     }
 
-    public function setNiveau(?string $niveau): static
+    public function setPrenomInstructeur(?string $prenom_instructeur): self 
     {
-        $this->niveau = $niveau;
-
+        $this->prenom_instructeur = $prenom_instructeur;
         return $this;
     }
 
-    public function getScoreEvaluation(): ?float
+    public function getEmailInstructeur(): ?string 
     {
-        return $this->scoreEvaluation;
+        return $this->email_instructeur;
     }
 
-    public function setScoreEvaluation(?float $scoreEvaluation): static
+    public function setEmailInstructeur(?string $email_instructeur): self 
     {
-        $this->scoreEvaluation = $scoreEvaluation;
-
+        $this->email_instructeur = $email_instructeur;
         return $this;
     }
 
-    public function getScoreAvis(): ?float
+    public function getCv(): ?string 
     {
-        return $this->scoreAvis;
+        return $this->cv;
     }
 
-    public function setScoreAvis(?float $scoreAvis): static
+    public function setCv(?string $cv): self 
     {
-        $this->scoreAvis = $scoreAvis;
-
+        $this->cv = $cv;
         return $this;
     }
 
-    public function isStatus(): ?bool
+    public function getImage(): ?string 
     {
-        return $this->status;
+        return $this->image;
     }
 
-    public function setStatus(?bool $status): static
+    public function setImage(?string $image): self 
     {
-        $this->status = $status;
-
+        $this->image = $image;
         return $this;
     }
 
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
+    public function getAvis(): Collection 
     {
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): static
+    public function addAvis(Avis $avis): self 
     {
-        if (!$this->avis->contains($avi)) {
-            $this->avis->add($avi);
-            $avi->setInstructeur($this);
+        if (!$this->avis->contains($avis)) {
+            $this->avis->add($avis);
+            $avis->setInstructeur($this);
         }
-
         return $this;
     }
 
-    public function removeAvi(Avis $avi): static
+    public function removeAvis(Avis $avis): self 
     {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getInstructeur() === $this) {
-                $avi->setInstructeur(null);
+        if ($this->avis->removeElement($avis)) {
+            if ($avis->getInstructeur() === $this) {
+                $avis->setInstructeur(null);
             }
         }
-
         return $this;
     }
 }
