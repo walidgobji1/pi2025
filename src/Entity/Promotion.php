@@ -3,6 +3,7 @@
 // src/Entity/Promotion.php
 namespace App\Entity;
 
+
 use App\Repository\PromotionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
@@ -36,15 +37,19 @@ class Promotion
     #[Assert\Type("\DateTime", message: "La date d'expiration doit être valide.")]
     private ?\DateTimeInterface $dateExpiration = null;
 
+    #[ORM\ManyToOne(targetEntity: Apprenant::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Apprenant $apprenant = null;
     // Relation ManyToOne avec InscriptionCours
     #[ORM\ManyToOne(targetEntity: InscriptionCours::class, inversedBy: 'promotions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?InscriptionCours $inscriptionCours = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
+    
 
     public function getCodePromo(): ?string
     {
@@ -54,6 +59,18 @@ class Promotion
     public function setCodePromo(string $codePromo): static
     {
         $this->codePromo = $codePromo;
+        return $this;
+    }
+
+
+    public function getApprenant(): ?Apprenant
+    {
+        return $this->apprenant;
+    }
+
+    public function setApprenant(?Apprenant $apprenant): static
+    {
+        $this->apprenant = $apprenant;
         return $this;
     }
 
@@ -100,4 +117,9 @@ class Promotion
         $this->inscriptionCours = $inscriptionCours;
         return $this;
     }
+    public function isValid(): bool
+{
+    return $this->dateExpiration > new \DateTime();
+}
+
 }

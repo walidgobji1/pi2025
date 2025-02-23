@@ -21,54 +21,43 @@ class InscriptionCoursType extends AbstractType
         $formation = $options['formation'] ?? null;
 
         $builder
-            ->add('typePaiement', ChoiceType::class, [
-                'label' => "Type de paiement",
-                'choices' => [
-                    'Carte' => 'Carte',
-                    'Virement' => 'Virement',
-                    'PayPal' => 'Paypal',
-                ],
-            ])
-            ->add('nomApprenant', TextType::class, [
-                'label' => "Nom de l'apprenant",
-                'attr' => ['class' => 'form-control'],
-            ])
-            ->add('nomFormation', HiddenType::class, [
-                'data' => $formation ? $formation->getTitre() : '', // Assigner le titre de la formation par défaut
-                'mapped' => false, // Si ce champ n'est pas mappé à l'entité InscriptionCours
-
-            ])
-            // Ajouter d'autres champs si nécessaire
-            ->add('email', EmailType::class, [
-                'label' => "Email",
-                'attr' => ['placeholder' => 'Votre Email', 'class' => 'form-control'],
-            ])
-            ->add('cin', TextType::class, [
-                'label' => "CIN",
-                'attr' => ['placeholder' => 'Votre CIN', 'class' => 'form-control'],
-            ])
-            ->add('status', HiddenType::class, [
-                'data' => 'en attente', 
-                'empty_data' => 'en attente', 
-            ])
-            ->add('montant', HiddenType::class, [
-                'data' => 0.0, 
-                'mapped' => true, 
-                'empty_data' => '0', 
-            ])
-            ->add('dateInscreption', HiddenType::class, [
-                'data' => (new \DateTimeImmutable())->format('Y-m-d H:i:s'), // Date actuelle formatée
-                'mapped' => false, // Cela signifie que ce champ ne sera pas mappé à la base de données automatiquement
-            ])
-            ->add('apprenant', EntityType::class, [
-                'class' => Apprenant::class,
-                'choice_label' => 'id',
-                'label' => "Sélectionner un apprenant",
-            ])
-            ->add('formation', HiddenType::class, [
-                'data' => $options['formation'] ? $options['formation']->getId() : null, // Vérifier que formation est défini
-                'mapped' => false,  // Ne pas mapper ce champ à l'entité InscriptionCours
-            ]);
+        ->add('typePaiement', ChoiceType::class, [
+            'label' => "Type de paiement",
+            'choices' => [
+                'Choisir un type de paiement' => '',  
+                'Carte' => 'Carte',
+                'Virement' => 'Virement',
+                'PayPal' => 'Paypal',
+            ],
+            'placeholder' => 'Choisir un type de paiement',
+            'expanded' => false,
+            'multiple' => false,
+            'empty_data' => null,
+            'required' => false, // Suppression du required
+        ])
+        ->add('nomApprenant', TextType::class, [
+            'label' => "Nom de l'apprenant",
+            'attr' => ['class' => 'form-control'],
+            'required' => false, // Suppression du required
+        ])
+        ->add('email', EmailType::class, [
+            'label' => "Email",
+            'attr' => ['placeholder' => 'Votre Email', 'class' => 'form-control'],
+            'required' => false, // Suppression du required
+        ])
+        ->add('nomFormation', HiddenType::class, [
+            'label' => "Formation",
+            'mapped' => false,  // ✅ Ce champ ne sera pas enregistré directement
+            'data' => $formation ? $formation->getTitre() : '',  // ✅ Affiche le titre de la formation
+            'attr' => ['readonly' => true],  // ✅ Rendre le champ non modifiable
+        ])
+        ->add('cin', TextType::class, [
+            'label' => "CIN",
+            'attr' => ['placeholder' => 'Votre CIN', 'class' => 'form-control'],
+            'required' => false, // Suppression du required
+        
+        ]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

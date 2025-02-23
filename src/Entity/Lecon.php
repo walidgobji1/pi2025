@@ -44,7 +44,7 @@ class Lecon
 
     
     
-    private ?File $pdfFile = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pdfFileName = null;

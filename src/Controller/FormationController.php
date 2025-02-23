@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Repository\InscriptionCoursRepository;
+
 use Symfony\Component\Routing\Attribute\Route;
 use App\Service\FormationScoreService; // Import du service
 
@@ -62,14 +64,30 @@ final class FormationController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    //modification de les boutons dans la page showClient
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function showForClient(Formation $formation): Response
-    {
-        return $this->render('formation/showClient.html.twig', [
+    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository): Response
+   {
+    $user = $this->getUser();
+    $inscription = null;
+
+    if ($user) {
+        $inscription = $inscriptionCoursRepository->findOneBy([
             'formation' => $formation,
+            'apprenant' => $user
         ]);
     }
+
+    dump($inscription); // ✅ Vérifier ce que contient l'inscription
+    dump($inscription ? $inscription->getStatus() : 'Pas d\'inscription'); // ✅ Vérifier le statut
+
+    return $this->render('formation/showClient.html.twig', [
+        'formation' => $formation,
+        'inscription' => $inscription
+    ]);
+}
+
+
 
     #[Route('/ad/{id}', name: 'app_formation_show_admin', methods: ['GET'])]
     public function showAdmin(Formation $formation): Response

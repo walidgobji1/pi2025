@@ -14,21 +14,23 @@
                 <p class="text-gray-700 mt-2">{{ evenement.description }}</p>
                
                 {% if evenement.notification is null %}
-                <div>
-                    <form action="{{ path('app_notification_new', {'id': evenement.id}) }}" method="get">
-                        <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Informer les apprenants</button>
-                    </form>
-                     <form action="{{ path('app_evenement_edit', {'id': evenement.id}) }}" method="get">
-                    <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Modifier</button>
-                </form>
-                {{ include('evenement/_delete_form.html.twig') }}
+                    <div>
+                        <form action="{{ path('app_notification_new', {'id': evenement.id}) }}" method="get">
+                            <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Informer les apprenants</button>
+                        </form>
+                        <form action="{{ path('app_evenement_edit', {'id': evenement.id}) }}" method="get">
+                            <button type="submit" class="bg-blue-600 text-blue px-4 py-2 rounded">Modifier</button>
+                        </form>
                     </div>
-                </form>
                 {% else %}
                     <button class="bg-green-500 text-black px-4 py-2 rounded cursor-not-allowed opacity-50" disabled>
                         Notification déjà envoyée
                     </button>
                 {% endif %}
+                
+                <!-- Le bouton de suppression est toujours affiché -->
+                {{ include('evenement/_delete_form.html.twig') }}
+
             </div>
             <hr class="my-4">
         {% else %}

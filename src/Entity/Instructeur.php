@@ -2,35 +2,29 @@
 
 namespace App\Entity;
 
-use App\Repository\InstructeurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
+#[ORM\Table(name: "instructeurs")]
 class Instructeur extends User
 {
+    #[ORM\Column(name: "nom_instructeur", type: "string", length: 100)]
+    private ?string $nom_instructeur = null;
+
+    #[ORM\Column(name: "prenom_instructeur", type: "string", length: 100)]
+    private ?string $prenom_instructeur = null;
+
+    #[ORM\Column(name: "email_instructeur", type: "string", length: 255, unique: true)]
+    private ?string $email_instructeur = null;
+
     #[ORM\Column(type: "string", nullable: true)]
     private ?string $cv = null;
 
     #[ORM\Column(type: "string", nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $niveau = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?float $scoreEvaluation = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?float $scoreAvis = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $status = null;
-
-    /**
-     * @var Collection<int, Avis>
-     */
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'instructeur')]
     private Collection $avis;
 
@@ -39,106 +33,88 @@ class Instructeur extends User
         $this->avis = new ArrayCollection();
     }
 
+<<<<<<< HEAD
     
+=======
+    // ✅ Getters and Setters
 
-    // Getter and Setter for cv
-    public function getCv(): ?string
+    public function getNomInstructeur(): ?string 
+    {
+        return $this->nom_instructeur;
+    }
+>>>>>>> a693c1fbd416a819fca9aa7a260e68166b835604
+
+    public function setNomInstructeur(?string $nom_instructeur): self 
+    {
+        $this->nom_instructeur = $nom_instructeur;
+        return $this;
+    }
+
+    public function getPrenomInstructeur(): ?string 
+    {
+        return $this->prenom_instructeur;
+    }
+
+    public function setPrenomInstructeur(?string $prenom_instructeur): self 
+    {
+        $this->prenom_instructeur = $prenom_instructeur;
+        return $this;
+    }
+
+    public function getEmailInstructeur(): ?string 
+    {
+        return $this->email_instructeur;
+    }
+
+    public function setEmailInstructeur(?string $email_instructeur): self 
+    {
+        $this->email_instructeur = $email_instructeur;
+        return $this;
+    }
+
+    public function getCv(): ?string 
     {
         return $this->cv;
     }
 
-    public function setCv(?string $cv): self
+    public function setCv(?string $cv): self 
     {
         $this->cv = $cv;
         return $this;
     }
 
-    // Getter and Setter for image
-    public function getImage(): ?string
+    public function getImage(): ?string 
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(?string $image): self 
     {
         $this->image = $image;
         return $this;
     }
 
-    // Getter and Setter for niveau
-    public function getNiveau(): ?string
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(?string $niveau): self
-    {
-        $this->niveau = $niveau;
-        return $this;
-    }
-
-    // Getter and Setter for scoreEvaluation
-    public function getScoreEvaluation(): ?float
-    {
-        return $this->scoreEvaluation;
-    }
-
-    public function setScoreEvaluation(?float $scoreEvaluation): self
-    {
-        $this->scoreEvaluation = $scoreEvaluation;
-        return $this;
-    }
-
-    // Getter and Setter for scoreAvis
-    public function getScoreAvis(): ?float
-    {
-        return $this->scoreAvis;
-    }
-
-    public function setScoreAvis(?float $scoreAvis): self
-    {
-        $this->scoreAvis = $scoreAvis;
-        return $this;
-    }
-
-    // Getter and Setter for status
-    public function isStatus(): ?bool
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?bool $status): self
-    {
-        $this->status = $status;
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
+    public function getAvis(): Collection 
     {
         return $this->avis;
     }
 
-    public function addAvi(Avis $avi): self
+    public function addAvis(Avis $avis): self 
     {
-        if (!$this->avis->contains($avi)) {
-            $this->avis->add($avi);
-            $avi->setInstructeur($this);
+        if (!$this->avis->contains($avis)) {
+            $this->avis->add($avis);
+            $avis->setInstructeur($this);
         }
-
         return $this;
     }
 
-    public function removeAvi(Avis $avi): self
+    public function removeAvis(Avis $avis): self 
     {
-        if ($this->avis->removeElement($avi)) {
-            if ($avi->getInstructeur() === $this) {
-                $avi->setInstructeur(null);
+        if ($this->avis->removeElement($avis)) {
+            if ($avis->getInstructeur() === $this) {
+                $avis->setInstructeur(null);
             }
         }
-
         return $this;
     }
 }
