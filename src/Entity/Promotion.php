@@ -42,7 +42,7 @@ class Promotion
     private ?Apprenant $apprenant = null;
     // Relation ManyToOne avec InscriptionCours
     #[ORM\ManyToOne(targetEntity: InscriptionCours::class, inversedBy: 'promotions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?InscriptionCours $inscriptionCours = null;
 
     public function getId(): ?int
