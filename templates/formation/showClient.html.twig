@@ -20,12 +20,18 @@
                     <p><strong>Prix :</strong> {{ formation.prix }} DT</p>
                 </div>
             </div>
-            <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
+           {% if inscription is not null and inscription.status|trim|lower == 'payé' and inscription.formation.id == formation.id %}
+    <!-- Si l'utilisateur a payé cette formation -->
+    <div class="text-center mt-4">
+        <a href="{{ path('app_formation_lessons_c', {'id': formation.id}) }}" class="btn btn-danger">Accéder à la formation</a>
+    </div>
+{% else %}
+    <!-- Si l'utilisateur n'est pas inscrit ou n'a pas payé -->
+     <div class="text-center mt-4">
+    <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
+    </div>
+{% endif %}
 
-            <div class="text-center mt-4">
-            <a href="{{ path('app_formation_lessons_c', {'id': formation.id}) }}" class="btn btn-danger">Accéder à la formation</a>
-
-            </div>
         </div>
     </div>
 {% endblock %}
