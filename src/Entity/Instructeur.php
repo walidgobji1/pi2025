@@ -39,10 +39,7 @@ class Instructeur extends User
         $this->avis = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    
 
     // Getter and Setter for cv
     public function getCv(): ?string

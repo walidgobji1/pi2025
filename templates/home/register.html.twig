@@ -1,82 +1,93 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription
-{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-	<div class="hero_area">
-		<section class="slider_section">
-			<div class="slider_bg_box">
-				<div class="bg_img_box">
-					<img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
-				</div>
-			</div>
-		</section>
-	</div>
+    <div class="hero_area">
+        <section class="slider_section">
+            <div class="slider_bg_box">
+                <div class="bg_img_box">
+                    <img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
+                </div>
+            </div>
+        </section>
+    </div>
 
-	<section class="contact_section layout_padding">
-		<div class="container">
-			<div class="heading_container text-center">
-				<h2>Inscription</h2>
-			</div>
+    <section class="contact_section layout_padding" id="registration-form-section">
+        <div class="container">
+            <div class="heading_container text-center">
+                <h2>Inscription</h2>
+            </div>
 
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="form_container">
-						{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
 
-						{# ✅ Display Global Form Errors #}
-						{% if registrationForm.vars.errors|length > 0 %}
-							<div class="alert alert-danger">
-								{% for error in registrationForm.vars.errors %}
-									<p>{{ error.message }}</p>
-								{% endfor %}
-							</div>
-						{% endif %}
+                        {# ✅ Display Global Form Errors #}
+                        {% if registrationForm.vars.errors|length > 0 %}
+                            <div class="alert alert-danger">
+                                {% for error in registrationForm.vars.errors %}
+                                    <p>{{ error.message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
 
-						<div class="form-group">
-							{{ form_label(registrationForm.nom, 'Nom') }}
-							{{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
-							{{ form_errors(registrationForm.nom) }}
-							{# ✅ Show field errors #}
-						</div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.nom, 'Nom') }}
+                            {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.nom) }}
+                            {# ✅ Show field errors #}
+                        </div>
 
-						<div class="form-group">
-							{{ form_label(registrationForm.prenom, 'Prénom') }}
-							{{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
-							{{ form_errors(registrationForm.prenom) }}
-							{# ✅ Show field errors #}
-						</div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.prenom, 'Prénom') }}
+                            {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.prenom) }}
+                            {# ✅ Show field errors #}
+                        </div>
 
-						<div class="form-group">
-							{{ form_label(registrationForm.email, 'Email') }}
-							{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-							{{ form_errors(registrationForm.email) }}
-							{# ✅ Show field errors #}
-						</div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.email, 'Email') }}
+                            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.email) }}
+                            {# ✅ Show field errors #}
+                        </div>
 
-						<div class="form-group">
-							{{ form_label(registrationForm.password, 'Mot de passe') }}
-							{{ form_widget(registrationForm.password, {'attr': {'class': 'form-control'}}) }}
-							{{ form_errors(registrationForm.password) }}
-							{# ✅ Show validation errors #}
-						</div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.password, 'Mot de passe') }}
+                            {{ form_widget(registrationForm.password, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.password) }}
+                            {# ✅ Show validation errors #}
+                        </div>
 
-						<div class="form-group">
-							{{ form_label(registrationForm.date_de_naissance, 'Date de naissance') }}
-							{{ form_widget(registrationForm.date_de_naissance, {'attr': {'class': 'form-control'}}) }}
-							{{ form_errors(registrationForm.date_de_naissance) }}
-							{# ✅ Show field errors #}
-						</div>
+                        <div class="form-group">
+                            {{ form_label(registrationForm.date_de_naissance, 'Date de naissance') }}
+                            {{ form_widget(registrationForm.date_de_naissance, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.date_de_naissance) }}
+                            {# ✅ Show field errors #}
+                        </div>
 
-						<div class="btn_box text-center">
-							<button type="submit" class="btn btn-primary">S'inscrire</button>
-						</div>
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
 
-						{{ form_end(registrationForm) }}
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Attendre que la page soit complètement chargée
+        document.addEventListener("DOMContentLoaded", function() {
+            // Faire défiler la page jusqu'à la section du formulaire d'inscription
+            const registrationFormSection = document.getElementById('registration-form-section');
+            if (registrationFormSection) {
+                registrationFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
+
 {% endblock %}
