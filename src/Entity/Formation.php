@@ -54,7 +54,7 @@ class Formation
     private ?string $niveau = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'Veuillez introduire la date')]
+    #[Assert\NotBlank(message: 'Veuillez introduire la date svp')]
     #[Assert\LessThanOrEqual(
         value: "today",
         message: "La date de création ne peut pas être dans le futur"

@@ -1,0 +1,62 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Connexion Admin
+{% endblock %}
+
+{% block body %}
+	<div class="hero_area">
+		<section class="slider_section">
+			<div class="slider_bg_box">
+				<div class="bg_img_box">
+					<img src="{{ asset('frontOffice/images/slider-bg.jpg') }}" alt="">
+				</div>
+			</div>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="detail-box text-center">
+							<h1 class="text-white">Connexion Administrateur</h1>
+							<p class="text-white">Accédez à votre tableau de bord d'administration.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<section class="contact_section layout_padding">
+		<div class="container">
+
+
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="form_container">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+						<form method="post" action="{{ path('app_login_admin') }}">
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" name="_username" id="email" placeholder="Votre email" class="form-control" required>
+							</div>
+
+							<div class="form-group mt-3">
+								<label for="password">Mot de passe</label>
+								<input type="password" name="_password" id="password" placeholder="Votre mot de passe" class="form-control" required>
+							</div>
+
+							{# ✅ CSRF Token (IMPORTANT) #}
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+							<div class="btn_box text-center mt-4">
+								<button type="submit" class="btn btn-danger">Se connecter</button>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

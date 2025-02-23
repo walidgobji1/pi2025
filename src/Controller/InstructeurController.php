@@ -10,8 +10,8 @@ final class InstructeurController extends AbstractController{
     #[Route('/instructeur', name: 'app_instructeur')]
     public function index(): Response
     {
-        return $this->render('instructeur/instructeur.html.twig', [
+        return $this->render('instructeur/instrform.html.twig', [
             'controller_name' => 'InstructeurController',
         ]);
-    }
+    } 
 }

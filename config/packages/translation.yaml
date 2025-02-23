@@ -5,3 +5,9 @@ framework:
         fallbacks:
             - en
         providers:
+# framework:
+#     default_locale: fr  # Définir la locale par défaut sur 'fr'
+#     translator:
+#         default_path: '%kernel.project_dir%/translations'
+#         fallbacks:
+#   

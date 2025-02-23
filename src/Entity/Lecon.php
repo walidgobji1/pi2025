@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 use App\Repository\LeconRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,8 +40,17 @@ class Lecon
     private ?\DateTimeInterface $dateCreation = null;
 
     #[ORM\ManyToOne(inversedBy: 'lecons')]
-    #[Assert\NotNull(message: 'Veuillez associer la leçon à une formation')]
     private ?Formation $formation = null;
+
+    
+    
+
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pdfFileName = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -93,6 +103,17 @@ class Lecon
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }
