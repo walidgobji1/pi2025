@@ -12,6 +12,12 @@
       {{ form_widget(form.titre, {'attr': {'class': 'formbold-form-input'}}) }}
       {{ form_errors(form.titre, {'attr': {'class': 'text-red-500 text-sm'}}) }}
     </div>
+     <div class="formbold-mb-3">
+  {{ form_label(form.photo, 'Photo de l\'événement', {'label_attr': {'class': 'formbold-form-label'}}) }}
+  {{ form_widget(form.photo, {'attr': {'class': 'formbold-form-input'}}) }}
+  {{ form_errors(form.photo, {'attr': {'class': 'text-red-500 text-sm'}}) }}
+</div>
+
 
     <div class="formbold-mb-3">
       {{ form_label(form.date, 'Date de l\'événement', {'label_attr': {'class': 'formbold-form-label'}}) }}

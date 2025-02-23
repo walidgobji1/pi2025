@@ -100,7 +100,7 @@ final class NotificationController extends AbstractController
 
     // Afficher une notification pour le client
     #[Route('/notif/{id}', name: 'app_notification_show_cli', methods: ['GET'])]
-    public function showCli(Notification $notification): Response
+    public function showClient(Notification $notification): Response
     {
         return $this->render('notification/showClient.html.twig', [
             'notification' => $notification,
