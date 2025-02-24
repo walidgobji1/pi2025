@@ -8,9 +8,17 @@
         <div class="card shadow-lg p-4">
             <h1 class="text-center text-danger">{{ formation.titre }}</h1>
             <hr>
+            
+            <!-- Display the image if available -->
+            
+                <div class="text-center">
+                    <img src="{{ asset('uploads/images/' ~ formation.imageName) }}"  class="img-fluid mb-3" style="height: 150px;width: 70%;" />
+                </div>
+      
+  
+
             <div class="row">
                 <div class="col-md-6">
-           
                     <p><strong>Description :</strong> {{ formation.description }}</p>
                     <p><strong>Durée :</strong> {{ formation.duree }}</p>
                 </div>
@@ -20,17 +28,16 @@
                     <p><strong>Prix :</strong> {{ formation.prix }} DT</p>
                 </div>
             </div>
-           {% if inscription is not null and inscription.status|trim|lower == 'payé' and inscription.formation.id == formation.id %}
-    <!-- Si l'utilisateur a payé cette formation -->
-    <div class="text-center mt-4">
-        <a href="{{ path('app_formation_lessons_c', {'id': formation.id}) }}" class="btn btn-danger">Accéder à la formation</a>
-    </div>
-{% else %}
-    <!-- Si l'utilisateur n'est pas inscrit ou n'a pas payé -->
-     <div class="text-center mt-4">
-    <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
-    </div>
-{% endif %}
+           
+            {% if inscription is not null and inscription.formation.id == formation.id %}
+                <div class="text-center mt-4">
+                    <a href="{{ path('app_formation_lessons_c', {'id': formation.id}) }}" class="btn btn-danger">Accéder à la formation</a>
+                </div>
+           {% else %}
+                <div class="text-center mt-4">
+                    <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
+                </div>
+           {% endif %}
 
         </div>
     </div>
