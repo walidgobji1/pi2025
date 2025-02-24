@@ -73,8 +73,7 @@ class __TwigTemplate_2372ba3185deb4aa8debb39d268c8c11 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Connexion
-";
+        yield "Connexion";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -84,7 +83,7 @@ class __TwigTemplate_2372ba3185deb4aa8debb39d268c8c11 extends Template
         yield from [];
     }
 
-    // line 6
+    // line 5
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -97,99 +96,109 @@ class __TwigTemplate_2372ba3185deb4aa8debb39d268c8c11 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 7
-        yield "\t<div
-\t\tclass=\"hero_area\">
-\t\t<!-- Login Section -->
-\t\t<section class=\"slider_section\">
-\t\t\t<div class=\"slider_bg_box\">
-\t\t\t\t<div class=\"bg_img_box\">
-\t\t\t\t\t<img src=\"";
-        // line 13
+        // line 6
+        yield "    <div class=\"hero_area\">
+        <!-- Login Section -->
+        <section class=\"slider_section\">
+            <div class=\"slider_bg_box\">
+                <div class=\"bg_img_box\">
+                    <img src=\"";
+        // line 11
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/slider-bg.jpg"), "html", null, true);
         yield "\" alt=\"\">
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t\t<div class=\"container\">
-\t\t\t\t<div class=\"row justify-content-center\">
-\t\t\t\t\t<div class=\"col-md-8\">
-\t\t\t\t\t\t<div class=\"detail-box text-center\">
-\t\t\t\t\t\t\t<h1 class=\"text-white\">
-\t\t\t\t\t\t\t\tConnectez-vous à
-\t\t\t\t\t\t\t\t<br>
-\t\t\t\t\t\t\t\tFormini
-\t\t\t\t\t\t\t</h1>
-\t\t\t\t\t\t\t<p class=\"text-white\">
-\t\t\t\t\t\t\t\tAccédez à votre espace et continuez votre apprentissage en ligne.
-\t\t\t\t\t\t\t</p>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</section>
-\t</div>
+                </div>
+            </div>
+            <div class=\"container\">
+                <div class=\"row justify-content-center\">
+                    <div class=\"col-md-8\">
+                        <div class=\"detail-box text-center\">
+                            <h1 class=\"text-white\">
+                                Connectez-vous à
+                                <br>
+                                Formini
+                            </h1>
+                            <p class=\"text-white\">
+                                Accédez à votre espace et continuez votre apprentissage en ligne.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-\t<!-- Login Form Section -->
-\t<section class=\"contact_section layout_padding\">
-\t\t<div class=\"container\">
-\t\t\t<div class=\"heading_container text-center\">
-\t\t\t\t<h2>Connexion</h2>
-\t\t\t\t<p>Entrez vos identifiants pour accéder à votre compte.</p>
-\t\t\t</div>
+    <!-- Login Form Section -->
+    <section class=\"contact_section layout_padding\" id=\"login-form-section\">
+        <div class=\"container\">
+            <div class=\"heading_container text-center\">
+                <h2>Connexion</h2>
+                <p>Entrez vos identifiants pour accéder à votre compte.</p>
+            </div>
 
-\t\t\t<div class=\"row justify-content-center\">
-\t\t\t\t<div class=\"col-md-6\">
-\t\t\t\t\t<div class=\"form_container\">
-\t\t\t\t\t\t";
-        // line 46
-        if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 46, $this->source); })())) {
-            // line 47
-            yield "\t\t\t\t\t\t\t<div class=\"alert alert-danger\">";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(CoreExtension::getAttribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 47, $this->source); })()), "messageKey", [], "any", false, false, false, 47), CoreExtension::getAttribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 47, $this->source); })()), "messageData", [], "any", false, false, false, 47), "security"), "html", null, true);
+            <div class=\"row justify-content-center\">
+                <div class=\"col-md-6\">
+                    <div class=\"form_container\">
+                        ";
+        // line 44
+        if ((isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 44, $this->source); })())) {
+            // line 45
+            yield "                            <div class=\"alert alert-danger\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans(CoreExtension::getAttribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 45, $this->source); })()), "messageKey", [], "any", false, false, false, 45), CoreExtension::getAttribute($this->env, $this->source, (isset($context["error"]) || array_key_exists("error", $context) ? $context["error"] : (function () { throw new RuntimeError('Variable "error" does not exist.', 45, $this->source); })()), "messageData", [], "any", false, false, false, 45), "security"), "html", null, true);
             yield "</div>
-\t\t\t\t\t\t";
+                        ";
         }
-        // line 49
+        // line 47
         yield "
-\t\t\t\t\t\t<form method=\"post\">
-\t\t\t\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t\t\t\t<label for=\"email\">Email</label>
-\t\t\t\t\t\t\t\t<input type=\"email\" name=\"_username\" id=\"email\" placeholder=\"Votre email\" class=\"form-control\" required>
-\t\t\t\t\t\t\t</div>
+                        <form method=\"post\">
+                            <div class=\"form-group\">
+                                <label for=\"email\">Email</label>
+                                <input type=\"email\" name=\"_username\" id=\"email\" placeholder=\"Votre email\" class=\"form-control\" required>
+                            </div>
 
-\t\t\t\t\t\t\t<div class=\"form-group mt-3\">
-\t\t\t\t\t\t\t\t<label for=\"password\">Mot de passe</label>
-\t\t\t\t\t\t\t\t<input type=\"password\" name=\"_password\" id=\"password\" placeholder=\"Votre mot de passe\" class=\"form-control\" required>
-\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_csrf_token\" value=\"";
-        // line 60
+                            <div class=\"form-group mt-3\">
+                                <label for=\"password\">Mot de passe</label>
+                                <input type=\"password\" name=\"_password\" id=\"password\" placeholder=\"Votre mot de passe\" class=\"form-control\" required>
+                            </div>
+                            <input type=\"hidden\" name=\"_csrf_token\" value=\"";
+        // line 58
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("authenticate"), "html", null, true);
         yield "\">
 
-\t\t\t\t\t\t\t<div class=\"btn_box text-center mt-4\">
-\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Se connecter</button>
-\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t</form>
+                            <div class=\"btn_box text-center mt-4\">
+                                <button type=\"submit\" class=\"btn btn-primary\">Se connecter</button>
+                            </div>
+                        </form>
 
-\t\t\t\t\t\t<div class=\"text-center mt-3\">
-\t\t\t\t\t\t\t<p>Vous n'avez pas de compte ?</p>
-\t\t\t\t\t\t\t<p>
-\t\t\t\t\t\t\t\t<a href=\"";
-        // line 70
+                        <div class=\"text-center mt-3\">
+                            <p>Vous n'avez pas de compte ?</p>
+                            <p>
+                                <a href=\"";
+        // line 68
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
         yield "\" class=\"btn btn-primary btn-sm\">S'inscrire en tant qu'Apprenant</a>
-\t\t\t\t\t\t\t\t<a href=\"";
-        // line 71
+                                <a href=\"";
+        // line 69
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register_instructeur");
         yield "\" class=\"btn btn-secondary btn-sm\">S'inscrire en tant qu'Instructeur</a>
-\t\t\t\t\t\t\t</p>
-\t\t\t\t\t\t</div>
+                            </p>
+                        </div>
 
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</div>
-\t</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Attendre que la page soit complètement chargée
+        document.addEventListener(\"DOMContentLoaded\", function() {
+            // Faire défiler la page jusqu'à la section de formulaire de connexion
+            const loginFormSection = document.getElementById('login-form-section');
+            if (loginFormSection) {
+                loginFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
 
 ";
         
@@ -222,90 +231,99 @@ class __TwigTemplate_2372ba3185deb4aa8debb39d268c8c11 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  183 => 71,  179 => 70,  166 => 60,  153 => 49,  147 => 47,  145 => 46,  109 => 13,  101 => 7,  88 => 6,  64 => 3,  41 => 1,);
+        return array (  181 => 69,  177 => 68,  164 => 58,  151 => 47,  145 => 45,  143 => 44,  107 => 11,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Connexion
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-\t<div
-\t\tclass=\"hero_area\">
-\t\t<!-- Login Section -->
-\t\t<section class=\"slider_section\">
-\t\t\t<div class=\"slider_bg_box\">
-\t\t\t\t<div class=\"bg_img_box\">
-\t\t\t\t\t<img src=\"{{ asset('frontOffice/images/slider-bg.jpg') }}\" alt=\"\">
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t\t<div class=\"container\">
-\t\t\t\t<div class=\"row justify-content-center\">
-\t\t\t\t\t<div class=\"col-md-8\">
-\t\t\t\t\t\t<div class=\"detail-box text-center\">
-\t\t\t\t\t\t\t<h1 class=\"text-white\">
-\t\t\t\t\t\t\t\tConnectez-vous à
-\t\t\t\t\t\t\t\t<br>
-\t\t\t\t\t\t\t\tFormini
-\t\t\t\t\t\t\t</h1>
-\t\t\t\t\t\t\t<p class=\"text-white\">
-\t\t\t\t\t\t\t\tAccédez à votre espace et continuez votre apprentissage en ligne.
-\t\t\t\t\t\t\t</p>
-\t\t\t\t\t\t</div>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</section>
-\t</div>
+    <div class=\"hero_area\">
+        <!-- Login Section -->
+        <section class=\"slider_section\">
+            <div class=\"slider_bg_box\">
+                <div class=\"bg_img_box\">
+                    <img src=\"{{ asset('frontOffice/images/slider-bg.jpg') }}\" alt=\"\">
+                </div>
+            </div>
+            <div class=\"container\">
+                <div class=\"row justify-content-center\">
+                    <div class=\"col-md-8\">
+                        <div class=\"detail-box text-center\">
+                            <h1 class=\"text-white\">
+                                Connectez-vous à
+                                <br>
+                                Formini
+                            </h1>
+                            <p class=\"text-white\">
+                                Accédez à votre espace et continuez votre apprentissage en ligne.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-\t<!-- Login Form Section -->
-\t<section class=\"contact_section layout_padding\">
-\t\t<div class=\"container\">
-\t\t\t<div class=\"heading_container text-center\">
-\t\t\t\t<h2>Connexion</h2>
-\t\t\t\t<p>Entrez vos identifiants pour accéder à votre compte.</p>
-\t\t\t</div>
+    <!-- Login Form Section -->
+    <section class=\"contact_section layout_padding\" id=\"login-form-section\">
+        <div class=\"container\">
+            <div class=\"heading_container text-center\">
+                <h2>Connexion</h2>
+                <p>Entrez vos identifiants pour accéder à votre compte.</p>
+            </div>
 
-\t\t\t<div class=\"row justify-content-center\">
-\t\t\t\t<div class=\"col-md-6\">
-\t\t\t\t\t<div class=\"form_container\">
-\t\t\t\t\t\t{% if error %}
-\t\t\t\t\t\t\t<div class=\"alert alert-danger\">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-\t\t\t\t\t\t{% endif %}
+            <div class=\"row justify-content-center\">
+                <div class=\"col-md-6\">
+                    <div class=\"form_container\">
+                        {% if error %}
+                            <div class=\"alert alert-danger\">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
 
-\t\t\t\t\t\t<form method=\"post\">
-\t\t\t\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t\t\t\t<label for=\"email\">Email</label>
-\t\t\t\t\t\t\t\t<input type=\"email\" name=\"_username\" id=\"email\" placeholder=\"Votre email\" class=\"form-control\" required>
-\t\t\t\t\t\t\t</div>
+                        <form method=\"post\">
+                            <div class=\"form-group\">
+                                <label for=\"email\">Email</label>
+                                <input type=\"email\" name=\"_username\" id=\"email\" placeholder=\"Votre email\" class=\"form-control\" required>
+                            </div>
 
-\t\t\t\t\t\t\t<div class=\"form-group mt-3\">
-\t\t\t\t\t\t\t\t<label for=\"password\">Mot de passe</label>
-\t\t\t\t\t\t\t\t<input type=\"password\" name=\"_password\" id=\"password\" placeholder=\"Votre mot de passe\" class=\"form-control\" required>
-\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t<input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
+                            <div class=\"form-group mt-3\">
+                                <label for=\"password\">Mot de passe</label>
+                                <input type=\"password\" name=\"_password\" id=\"password\" placeholder=\"Votre mot de passe\" class=\"form-control\" required>
+                            </div>
+                            <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
 
-\t\t\t\t\t\t\t<div class=\"btn_box text-center mt-4\">
-\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Se connecter</button>
-\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t</form>
+                            <div class=\"btn_box text-center mt-4\">
+                                <button type=\"submit\" class=\"btn btn-primary\">Se connecter</button>
+                            </div>
+                        </form>
 
-\t\t\t\t\t\t<div class=\"text-center mt-3\">
-\t\t\t\t\t\t\t<p>Vous n'avez pas de compte ?</p>
-\t\t\t\t\t\t\t<p>
-\t\t\t\t\t\t\t\t<a href=\"{{ path('app_register') }}\" class=\"btn btn-primary btn-sm\">S'inscrire en tant qu'Apprenant</a>
-\t\t\t\t\t\t\t\t<a href=\"{{ path('app_register_instructeur') }}\" class=\"btn btn-secondary btn-sm\">S'inscrire en tant qu'Instructeur</a>
-\t\t\t\t\t\t\t</p>
-\t\t\t\t\t\t</div>
+                        <div class=\"text-center mt-3\">
+                            <p>Vous n'avez pas de compte ?</p>
+                            <p>
+                                <a href=\"{{ path('app_register') }}\" class=\"btn btn-primary btn-sm\">S'inscrire en tant qu'Apprenant</a>
+                                <a href=\"{{ path('app_register_instructeur') }}\" class=\"btn btn-secondary btn-sm\">S'inscrire en tant qu'Instructeur</a>
+                            </p>
+                        </div>
 
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</div>
-\t</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Attendre que la page soit complètement chargée
+        document.addEventListener(\"DOMContentLoaded\", function() {
+            // Faire défiler la page jusqu'à la section de formulaire de connexion
+            const loginFormSection = document.getElementById('login-form-section');
+            if (loginFormSection) {
+                loginFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
 
 {% endblock %}
 ", "home/login.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\home\\login.html.twig");

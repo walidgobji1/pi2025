@@ -110,7 +110,7 @@ class __TwigTemplate_2b1d4489c229838bd2a788fb35a18b29 extends Template
         </section>
     </div>
 
-    <section class=\"contact_section layout_padding\">
+    <section class=\"contact_section layout_padding\" id=\"instructor-registration-form-section\">
         <div class=\"container\">
             <div class=\"heading_container text-center\">
                 <h2>Inscription Instructeur</h2>
@@ -297,6 +297,18 @@ class __TwigTemplate_2b1d4489c229838bd2a788fb35a18b29 extends Template
             </div>
         </div>
     </section>
+
+    <script>
+        // Attendre que la page soit complètement chargée
+        document.addEventListener(\"DOMContentLoaded\", function() {
+            // Faire défiler la page jusqu'à la section du formulaire d'inscription instructeur
+            const instructorRegistrationFormSection = document.getElementById('instructor-registration-form-section');
+            if (instructorRegistrationFormSection) {
+                instructorRegistrationFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -348,7 +360,7 @@ class __TwigTemplate_2b1d4489c229838bd2a788fb35a18b29 extends Template
         </section>
     </div>
 
-    <section class=\"contact_section layout_padding\">
+    <section class=\"contact_section layout_padding\" id=\"instructor-registration-form-section\">
         <div class=\"container\">
             <div class=\"heading_container text-center\">
                 <h2>Inscription Instructeur</h2>
@@ -434,6 +446,18 @@ class __TwigTemplate_2b1d4489c229838bd2a788fb35a18b29 extends Template
             </div>
         </div>
     </section>
+
+    <script>
+        // Attendre que la page soit complètement chargée
+        document.addEventListener(\"DOMContentLoaded\", function() {
+            // Faire défiler la page jusqu'à la section du formulaire d'inscription instructeur
+            const instructorRegistrationFormSection = document.getElementById('instructor-registration-form-section');
+            if (instructorRegistrationFormSection) {
+                instructorRegistrationFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    </script>
+
 {% endblock %}
 ", "home/instructeur_register.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\home\\instructeur_register.html.twig");
     }

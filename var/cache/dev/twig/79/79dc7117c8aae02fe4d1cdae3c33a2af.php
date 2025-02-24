@@ -93,13 +93,15 @@ class __TwigTemplate_375ffb87ee4c192de546ba1ba0692396 extends Template
         foreach ($context['_seq'] as $context["_key"] => $context["utilisateur"]) {
             // line 13
             yield "                        ";
-            if ((CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 13) != 1)) {
+            if ((CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 13) != CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 13, $this->source); })()), "user", [], "any", false, false, false, 13), "id", [], "any", false, false, false, 13))) {
                 // line 14
                 yield "                            <option value=\"";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "id", [], "any", false, false, false, 14), "html", null, true);
                 yield "\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "username", [], "any", false, false, false, 14), "html", null, true);
-                yield "</option>
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "prenom", [], "any", false, false, false, 14), "html", null, true);
+                yield " ";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["utilisateur"], "nom", [], "any", false, false, false, 14), "html", null, true);
+                yield "  </option>
                         ";
             }
             // line 16
@@ -139,6 +141,11 @@ class __TwigTemplate_375ffb87ee4c192de546ba1ba0692396 extends Template
         yield "            </div>
 
             <button type=\"submit\" class=\"btn btn-primary mt-3\">Créer la discussion</button>
+            <a href=\"";
+        // line 30
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_message");
+        yield "\" class=\"btn btn-danger mt-3\">Annuler</a>
+
         </form>
     </div>
 ";
@@ -172,7 +179,7 @@ class __TwigTemplate_375ffb87ee4c192de546ba1ba0692396 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  139 => 27,  135 => 25,  126 => 23,  122 => 22,  119 => 21,  117 => 20,  112 => 17,  106 => 16,  98 => 14,  95 => 13,  91 => 12,  84 => 10,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  146 => 30,  141 => 27,  137 => 25,  128 => 23,  124 => 22,  121 => 21,  119 => 20,  114 => 17,  108 => 16,  98 => 14,  95 => 13,  91 => 12,  84 => 10,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -189,8 +196,8 @@ class __TwigTemplate_375ffb87ee4c192de546ba1ba0692396 extends Template
                 <select name=\"receiver_id\" id=\"receiver_id\" class=\"form-control {% if errors is not empty %}is-invalid{% endif %}\">
                     <option value=\"\">Sélectionnez un destinataire</option>
                     {% for utilisateur in utilisateurs %}
-                        {% if utilisateur.id != 1 %}
-                            <option value=\"{{ utilisateur.id }}\">{{ utilisateur.username }}</option>
+                        {% if utilisateur.id != app.user.id %}
+                            <option value=\"{{ utilisateur.id }}\">{{ utilisateur.prenom }} {{ utilisateur.nom }}  </option>
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -206,6 +213,8 @@ class __TwigTemplate_375ffb87ee4c192de546ba1ba0692396 extends Template
             </div>
 
             <button type=\"submit\" class=\"btn btn-primary mt-3\">Créer la discussion</button>
+            <a href=\"{{ path('app_message') }}\" class=\"btn btn-danger mt-3\">Annuler</a>
+
         </form>
     </div>
 {% endblock %}

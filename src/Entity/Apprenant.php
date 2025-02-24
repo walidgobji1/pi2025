@@ -22,8 +22,7 @@ class Apprenant extends User
     #[ORM\Column(type: "integer", nullable: true)]
     private ?int $niveau_etude = null;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $image = null;
+    
 
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'apprenant')]
     private Collection $avis;
@@ -45,8 +44,7 @@ class Apprenant extends User
     public function getNiveauEtude(): ?int { return $this->niveau_etude; }
     public function setNiveauEtude(?int $niveau_etude): self { $this->niveau_etude = $niveau_etude; return $this; }
 
-    public function getImage(): ?string { return $this->image; }
-    public function setImage(?string $image): self { $this->image = $image; return $this; }
+   
 
     public function getAvis(): Collection { return $this->avis; }
 

@@ -73,526 +73,429 @@ class __TwigTemplate_9395a01620ad7fc1c64775f14e76c66e extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
-        yield "<style>
-   /* Style global pour la boîte de chat */
-.chat-box {
-    max-height: 450px;
-    overflow-y: auto;
-    background: #f9f9f9;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-}
+        yield "\t<section>
+\t\t<div class=\"container mt-4\">
+\t\t\t<div class=\"border rounded p-3 shadow bg-white\">
 
-/* Liste des messages */
-.chat-messages {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    flex-grow: 1;
-}
-
-/* Message standard */
-.message {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    margin-bottom: 12px;
-    transition: all 0.3s ease;
-}
-
-/* Message envoyé */
-.message.sent {
-    background: #007bff;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Message reçu */
-.message.received {
-    background: #e0e0e0;
-    align-self: flex-start;
-    border-bottom-left-radius: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Formulaire d'entrée */
-.chat-input {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: #ffffff;
-    border-top: 2px solid #e1e1e1;
-    border-radius: 10px;
-}
-
-/* Zone de texte */
-.chat-input textarea {
-    flex: 1;
-    border-radius: 10px;
-    padding: 12px 15px;
-    font-size: 14px;
-    resize: none;
-    border: 1px solid #ccc;
-    height: 50px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-/* Effet de focus sur la zone de texte */
-.chat-input textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Bouton envoyer */
-.chat-input button {
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 14px;
-    background: #007bff;
-    color: white;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Effet de hover pour le bouton envoyer */
-.chat-input button:hover {
-    background: #0056b3;
-}
-
-/* Timestamps des messages */
-.timestamp {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-left: 10px;
-}
-
-/* Style de la liste des discussions */
-.scrollable-list {
-    max-height: 450px; 
-    overflow-y: auto;
-    margin-bottom: 20px;
-}
-
-/* Style de la discussion dans la liste */
-.list-unstyled li {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    justify-content: space-between;  
-    align-items: center;
-}
-
-/* Effet au survol des discussions */
-.list-unstyled li:hover {
-    background-color: #f0f0f0;
-}
-
-/* Avatar de l'utilisateur dans la discussion */
-.rounded-circle {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Formulaire de suppression de la discussion */
-.btn-danger {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-/* Effet hover pour le bouton supprimer */
-.btn-danger:hover {
-    background-color: #c0392b;
-    border-color: #c0392b;
-    text-align: center;
-}
-
-/* Formatage des boutons de suppression de message */
-.dropdown-menu li button {
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    color: #c0392b;
-}
-
-/* Ajouter un style au bouton modifier */
-.dropdown-item {
-    background-color: #f1f1f1;
-}
-
-/* Ajouter un fond pour la card contenant les discussions */
-.card-body {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-}
-
-/* Réduire la taille du dropdown */
-.dropdown-menu {
-    min-width: 150px;
-    font-size: 14px;  
-    padding: 8px 0;    
-    border-radius: 8px; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border: 1px solid #ddd;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-/* Effet de survol sur le menu dropdown */
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Style des éléments du dropdown */
-.dropdown-item {
-    padding: 10px 15px;
-    color: #333;
-    background-color: transparent;
-    border: none;
-    font-size: 14px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Effet de survol des éléments du dropdown */
-.dropdown-item:hover {
-    background-color: #f1f1f1;
-    color: #007bff;
-}
-
-/* Bouton du dropdown */
-.dropdown-toggle {
-    background-color: transparent;
-    border: none;
-    padding: 6px 12px;
-    font-size: 14px;
-    color: #555;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Effet de survol sur le bouton dropdown */
-.dropdown-toggle:hover {
-    background-color: #f0f0f0;
-    color: #007bff;
-}
-
-/* Ajout d'une icône sur le bouton dropdown */
-.dropdown-toggle::after {
-    content: ' ▼';
-    font-size: 10px;
-    margin-left: 5px;
-}
-
-/* Modifier le bouton supprimer */
-.dropdown-item.text-danger {
-    color: #e74c3c;
-}
-
-/* Effet de survol du bouton supprimer */
-.dropdown-item.text-danger:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-</style>
-
-<section>
-<div class=\"container mt-4\">
-    <div class=\"border rounded p-3 shadow bg-white\">
-
-    <div class=\"container py-5\">
-        <div class=\"row\">
-            <!-- Sidebar des discussions -->
-            <div class=\"col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0\">
-                <h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Discussions</h5>
-                <div class=\"card\">
-                    <div class=\"card-body\">
-                        <ul class=\"list-unstyled mb-0 scrollable-list\">
-    ";
-        // line 265
+\t\t\t\t<div class=\"container py-5\">
+\t\t\t\t\t<div
+\t\t\t\t\t\tclass=\"row\">
+\t\t\t\t\t\t<!-- Sidebar des discussions -->
+\t\t\t\t\t\t<div class=\"col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0\">
+\t\t\t\t\t\t\t<h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Discussions</h5>
+\t\t\t\t\t\t\t<div class=\"card\">
+\t\t\t\t\t\t\t\t<div class=\"card-body\">
+\t\t\t\t\t\t\t\t\t<ul class=\"list-unstyled mb-0 scrollable-list\">
+\t\t\t\t\t\t\t\t\t\t";
+        // line 17
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["discussions"]) || array_key_exists("discussions", $context) ? $context["discussions"] : (function () { throw new RuntimeError('Variable "discussions" does not exist.', 265, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["discussions"]) || array_key_exists("discussions", $context) ? $context["discussions"] : (function () { throw new RuntimeError('Variable "discussions" does not exist.', 17, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["discussion"]) {
-            // line 266
-            yield "        ";
-            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "sender", [], "any", false, false, false, 266), "id", [], "any", false, false, false, 266) == 1)) {
-                // line 267
-                yield "            <li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
-                <a href=\"";
-                // line 268
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("view_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 268)]), "html", null, true);
+            // line 18
+            yield "\t\t\t\t\t\t\t\t\t\t\t";
+            if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "receiver", [], "any", false, false, false, 18), "id", [], "any", false, false, false, 18) == CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 18, $this->source); })()), "user", [], "any", false, false, false, 18), "id", [], "any", false, false, false, 18))) {
+                // line 19
+                yield "\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"";
+                // line 20
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("view_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 20)]), "html", null, true);
                 yield "\" class=\"d-flex justify-content-between text-decoration-none w-100\">
-                    <div class=\"d-flex flex-row w-100\">
-                        <img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp\" alt=\"avatar\"
-                             class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
-                        <div class=\"pt-1\">
-                            <span>
-                                ";
-                // line 274
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "receiver", [], "any", false, false, false, 274), "username", [], "any", false, false, false, 274), "html", null, true);
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"d-flex flex-row w-100\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 22
+                if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 22, $this->source); })()), "user", [], "any", false, false, false, 22), "image", [], "any", false, false, false, 22)) {
+                    // line 23
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "sender", [], "any", false, false, false, 23), "image", [], "any", false, false, false, 23))), "html", null, true);
+                    yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                } else {
+                    // line 25
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/user.jpg"), "html", null, true);
+                    yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                }
+                // line 27
+                yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pt-1\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<span style=\"font-size:1.2rem;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 29
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "sender", [], "any", false, false, false, 29), "nom", [], "any", false, false, false, 29), "html", null, true);
                 yield "
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <form action=\"";
-                // line 279
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 279)]), "html", null, true);
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 30
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "sender", [], "any", false, false, false, 30), "prenom", [], "any", false, false, false, 30), "html", null, true);
+                yield "
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"";
+                // line 35
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 35)]), "html", null, true);
                 yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
-                    <button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
-                </form>
-            </li>
-        ";
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t";
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,             // line 39
+$context["discussion"], "sender", [], "any", false, false, false, 39), "id", [], "any", false, false, false, 39) == CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "user", [], "any", false, false, false, 39), "id", [], "any", false, false, false, 39))) {
+                // line 40
+                yield "\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"";
+                // line 41
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("view_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 41)]), "html", null, true);
+                yield "\" class=\"d-flex justify-content-between text-decoration-none w-100\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"d-flex flex-row w-100\">
+";
+                // line 43
+                if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 43, $this->source); })()), "user", [], "any", false, false, false, 43), "image", [], "any", false, false, false, 43)) {
+                    // line 44
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "receiver", [], "any", false, false, false, 44), "image", [], "any", false, false, false, 44))), "html", null, true);
+                    yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                } else {
+                    // line 46
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/user.jpg"), "html", null, true);
+                    yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                }
+                // line 47
+                yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pt-1\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<span style=\"font-size: 1.2rem;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 49
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "receiver", [], "any", false, false, false, 49), "nom", [], "any", false, false, false, 49), "html", null, true);
+                yield "
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 50
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "receiver", [], "any", false, false, false, 50), "prenom", [], "any", false, false, false, 50), "html", null, true);
+                yield "
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"";
+                // line 55
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["discussion"], "id", [], "any", false, false, false, 55)]), "html", null, true);
+                yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t";
             }
-            // line 284
-            yield "    ";
+            // line 60
+            yield "\t\t\t\t\t\t\t\t\t\t";
             $context['_iterated'] = true;
         }
-        // line 286
+        // line 62
         if (!$context['_iterated']) {
-            // line 285
-            yield "        <li class=\"list-group-item text-muted\">Aucune discussion disponible.</li>
-    ";
+            // line 61
+            yield "\t\t\t\t\t\t\t\t\t\t\t<li class=\"list-group-item text-muted\">Aucune discussion disponible.</li>
+\t\t\t\t\t\t\t\t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['discussion'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 287
-        yield "</ul>
+        // line 63
+        yield "\t\t\t\t\t\t\t\t\t</ul>
 
-                        <a href=\"";
-        // line 289
+
+\t\t\t\t\t\t\t\t\t<a href=\"";
+        // line 66
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("create_discussion");
         yield "\" class=\"btn btn-success mt-3\">Nouvelle discussion</a>
-                    </div>
-                </div>
-            </div>
+\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</div>
 
-            <!-- Chatbox principale -->
-            <div class=\"col-md-6 col-lg-7 col-xl-8\">
-                <h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Message</h5>
+\t\t\t\t\t\t<!-- Chatbox principale -->
+\t\t\t\t\t\t<div class=\"col-md-6 col-lg-7 col-xl-8\">
+\t\t\t\t\t\t\t<h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Message avec</h5>
 
-                ";
-        // line 298
-        if ((array_key_exists("discussion", $context) && (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 298, $this->source); })()))) {
-            // line 299
-            yield "                    <div class=\"chat-box p-3\">
-                        <ul class=\"list-unstyled chat-messages\" id=\"chat-messages\">
-                            ";
-            // line 301
+\t\t\t\t\t\t\t";
+        // line 75
+        if ((array_key_exists("discussion", $context) && (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 75, $this->source); })()))) {
+            // line 76
+            yield "\t\t\t\t\t\t\t\t<div class=\"chat-box p-3\">
+\t\t\t\t\t\t\t\t\t<ul class=\"list-unstyled chat-messages\" id=\"chat-messages\">
+\t\t\t\t\t\t\t\t\t\t";
+            // line 78
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["messages"]) || array_key_exists("messages", $context) ? $context["messages"] : (function () { throw new RuntimeError('Variable "messages" does not exist.', 301, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["messages"]) || array_key_exists("messages", $context) ? $context["messages"] : (function () { throw new RuntimeError('Variable "messages" does not exist.', 78, $this->source); })()));
             $context['_iterated'] = false;
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 302
-                yield "                                <li class=\"d-flex ";
-                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 302), "id", [], "any", false, false, false, 302) == 1)) {
+                // line 79
+                yield "\t\t\t\t\t\t\t\t\t\t\t<li class=\"d-flex ";
+                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 79), "id", [], "any", false, false, false, 79) == CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 79, $this->source); })()), "user", [], "any", false, false, false, 79), "id", [], "any", false, false, false, 79))) {
                     yield "justify-content-end";
                 } else {
                     yield "justify-content-start";
                 }
                 yield " mb-3 align-items-center\">
-                                    ";
-                // line 303
-                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 303), "id", [], "any", false, false, false, 303) != 1)) {
-                    // line 304
-                    yield "                                        <img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp\" alt=\"avatar\"
-                                             class=\"rounded-circle me-2 shadow-1-strong\" width=\"40\">
-                                    ";
+\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 80
+                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 80), "id", [], "any", false, false, false, 80) != CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 80, $this->source); })()), "user", [], "any", false, false, false, 80), "id", [], "any", false, false, false, 80))) {
+                    // line 81
+                    if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 81, $this->source); })()), "user", [], "any", false, false, false, 81), "image", [], "any", false, false, false, 81)) {
+                        // line 82
+                        yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 82), "image", [], "any", false, false, false, 82))), "html", null, true);
+                        yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                    } else {
+                        // line 84
+                        yield "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"";
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/user.jpg"), "html", null, true);
+                        yield "\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                    }
+                    // line 85
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t";
                 }
-                // line 307
-                yield "                                    <div class=\"dropdown\">
-                                        <button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton";
-                // line 308
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 308), "html", null, true);
-                yield "\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
-                                            ...
-                                        </button>
-                                        <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton";
-                // line 311
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 311), "html", null, true);
-                yield "\">
-                                            <li>
-                                                <form action=\"";
-                // line 313
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_message", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 313)]), "html", null, true);
-                yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
-                                                    <button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <a href=\"";
-                // line 318
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_message", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 318)]), "html", null, true);
-                yield "\" class=\"dropdown-item\">✏ Modifier</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class=\"message ";
-                // line 322
-                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 322), "id", [], "any", false, false, false, 322) == 1)) {
+                // line 86
+                yield "
+\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"message ";
+                // line 87
+                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 87), "id", [], "any", false, false, false, 87) == CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 87, $this->source); })()), "user", [], "any", false, false, false, 87), "id", [], "any", false, false, false, 87))) {
                     yield "sent";
                 } else {
                     yield "received";
                 }
                 yield "\">
-                                        <p class=\"mb-0\">";
-                // line 323
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "content", [], "any", false, false, false, 323), "html", null, true);
+\t\t\t\t\t\t\t\t\t\t\t\t\t<p class=\"mb-0\">";
+                // line 88
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "content", [], "any", false, false, false, 88), "html", null, true);
                 yield "</p>
-                                        <span class=\"timestamp\">";
-                // line 324
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "createdAt", [], "any", false, false, false, 324), "d/m/Y H:i"), "html", null, true);
+\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"timestamp\">";
+                // line 89
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "createdAt", [], "any", false, false, false, 89), "d/m/Y H:i"), "html", null, true);
                 yield "</span>
-                                    </div>
-                                </li>
-                            ";
+\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+
+\t\t\t\t\t\t\t\t\t\t\t\t";
+                // line 93
+                if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["message"], "sender", [], "any", false, false, false, 93), "id", [], "any", false, false, false, 93) == CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 93, $this->source); })()), "user", [], "any", false, false, false, 93), "id", [], "any", false, false, false, 93))) {
+                    // line 94
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"dropdown\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton";
+                    // line 95
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 95), "html", null, true);
+                    yield "\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t...
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton";
+                    // line 98
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 98), "html", null, true);
+                    yield "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"";
+                    // line 100
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_message", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 100)]), "html", null, true);
+                    yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"";
+                    // line 105
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("edit_message", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 105)]), "html", null, true);
+                    yield "\" class=\"dropdown-item\">✏ Modifier</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t";
+                } else {
+                    // line 110
+                    yield "\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"dropdown\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton";
+                    // line 111
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 111), "html", null, true);
+                    yield "\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t...
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton";
+                    // line 114
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 114), "html", null, true);
+                    yield "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"";
+                    // line 116
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_message", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["message"], "id", [], "any", false, false, false, 116)]), "html", null, true);
+                    yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t";
+                }
+                // line 124
+                yield "\t\t\t\t\t\t\t\t\t\t\t</li>
+
+\t\t\t\t\t\t\t\t\t\t";
                 $context['_iterated'] = true;
             }
-            // line 329
+            // line 128
             if (!$context['_iterated']) {
-                // line 328
-                yield "                                <li class=\"text-muted text-center\">Aucun message dans cette discussion.</li>
-                            ";
+                // line 127
+                yield "\t\t\t\t\t\t\t\t\t\t\t<li class=\"text-muted text-center\">Aucun message dans cette discussion.</li>
+\t\t\t\t\t\t\t\t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['message'], $context['_parent'], $context['_iterated']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 330
-            yield "                        </ul>
-                    </div>
+            // line 129
+            yield "\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t</div>
 
-                    <!-- Formulaire d'envoi -->
-                    <form action=\"";
-            // line 334
+\t\t\t\t\t\t\t\t<!-- Formulaire d'envoi -->
+\t\t\t\t\t\t\t\t<form action=\"";
+            // line 133
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("send_message");
             yield "\" method=\"POST\" class=\"chat-input p-3\" id=\"chat-form\">
-                        <input type=\"hidden\" name=\"discussion_id\" value=\"";
-            // line 335
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 335, $this->source); })()), "id", [], "any", false, false, false, 335), "html", null, true);
+\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"discussion_id\" value=\"";
+            // line 134
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 134, $this->source); })()), "id", [], "any", false, false, false, 134), "html", null, true);
             yield "\">
-                        <input type=\"hidden\" name=\"sender_id\" value=\"1\">
-                        <textarea name=\"content\" id=\"content\" class=\"form-control\" placeholder=\"Votre message...\"></textarea>
-                        <button type=\"submit\" class=\"btn btn-primary\">Envoyer</button>
-                    </form>
+\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"sender_id\" value=\"";
+            // line 135
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 135, $this->source); })()), "user", [], "any", false, false, false, 135), "id", [], "any", false, false, false, 135), "html", null, true);
+            yield "\">
+\t\t\t\t\t\t\t\t\t<textarea name=\"content\" id=\"content\" class=\"form-control\" placeholder=\"Votre message...\"></textarea>
+\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Envoyer</button>
+\t\t\t\t\t\t\t\t</form>
 
-                    <!-- Affichage des erreurs -->
-                    ";
-            // line 342
+\t\t\t\t\t\t\t\t<!-- Affichage des erreurs -->
+\t\t\t\t\t\t\t\t";
+            // line 141
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 342, $this->source); })()), "flashes", ["error"], "method", false, false, false, 342));
+            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 141, $this->source); })()), "flashes", ["error"], "method", false, false, false, 141));
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 343
-                yield "                        <p class=\"text-danger mt-1\" style=\"font-size: 14px;\">";
+                // line 142
+                yield "\t\t\t\t\t\t\t\t\t<p class=\"text-danger mt-1\" style=\"font-size: 14px;\">";
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($context["message"], "html", null, true);
                 yield "</p>
-                    ";
+\t\t\t\t\t\t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['message'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 345
-            yield "                    <!-- Bouton supprimer la discussion -->
-                    <form action=\"";
-            // line 346
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 346, $this->source); })()), "id", [], "any", false, false, false, 346)]), "html", null, true);
-            yield "\" method=\"POST\" class=\"mt-3\">
-                        <button type=\"submit\" class=\"btn btn-danger\">Supprimer cette discussion</button>
-                    </form>
+            // line 144
+            yield "\t\t\t\t\t\t\t\t<!-- Bouton supprimer la discussion -->
+\t\t\t\t\t\t\t\t<form action=\"";
+            // line 145
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("delete_discussion", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["discussion"]) || array_key_exists("discussion", $context) ? $context["discussion"] : (function () { throw new RuntimeError('Variable "discussion" does not exist.', 145, $this->source); })()), "id", [], "any", false, false, false, 145)]), "html", null, true);
+            yield "\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
+\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger\">Supprimer cette discussion</button>
+\t\t\t\t\t\t\t\t</form>
 
-                ";
+\t\t\t\t\t\t\t";
         } else {
-            // line 351
-            yield "                    <p class=\"text-center\">Sélectionnez une discussion pour commencer à discuter.</p>
-                ";
+            // line 150
+            yield "\t\t\t\t\t\t\t\t<p class=\"text-center\">Sélectionnez une discussion pour commencer à discuter.</p>
+\t\t\t\t\t\t\t";
         }
-        // line 353
-        yield "            </div>
-        </div>
-    </div>
-    </div>
-</section>
+        // line 152
+        yield "\t\t\t\t\t\t</div>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t</div>
+\t\t</section>
 
-<script>
-    // Scroll automatique vers le bas
-    document.addEventListener(\"DOMContentLoaded\", function () {
-        var chatMessages = document.getElementById(\"chat-messages\");
-        if (chatMessages) {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    });
+\t\t<script>
+\t\t\t// Scroll automatique vers le bas
+document.addEventListener(\"DOMContentLoaded\", function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+});
 
-    // Scroll après envoi du message
-    document.getElementById(\"chat-form\")?.addEventListener(\"submit\", function () {
-        setTimeout(function () {
-            var chatMessages = document.getElementById(\"chat-messages\");
-            if (chatMessages) {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        }, 100);
-    });
+// Scroll après envoi du message
+document.getElementById(\"chat-form\") ?. addEventListener(\"submit\", function () {
+setTimeout(function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+}, 100);
+});
 
-    // Réouverture du dropdown si nécessaire
-    document.addEventListener('click', function (event) {
-        var dropdowns = document.querySelectorAll('.dropdown-menu');
-        dropdowns.forEach(function (dropdown) {
-            if (!event.target.closest('.dropdown') && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener(\"DOMContentLoaded\", function () {
-        var dropdownElements = document.querySelectorAll('.dropdown-toggle');
-        dropdownElements.forEach(function (dropdown) {
-            dropdown.addEventListener('click', function (event) {
-                event.stopPropagation();
-                let menu = this.nextElementSibling;
-                document.querySelectorAll('.dropdown-menu').forEach(m => {
-                    if (m !== menu) m.classList.remove('show');
-                });
-                menu.classList.toggle('show');
-            });
-        });
+// Scroll automatique vers le bas
+function scrollToBottom() {
+window.scrollTo(0, document.body.scrollHeight);
+}
 
-        document.addEventListener('click', function () {
-            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
-        });
-    });
-</script>
+// Appel initial au chargement
+document.addEventListener(\"DOMContentLoaded\", scrollToBottom);
 
-<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css\" rel=\"stylesheet\" />
-<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"></script>
+// Exemple : appel après l’envoi d’un message
+document.getElementById(\"chat-form\").addEventListener(\"submit\", function () {
+setTimeout(scrollToBottom, 100); // Petit délai pour laisser le message s'afficher
+});
+// Scroll automatique vers le bas
+document.addEventListener(\"DOMContentLoaded\", function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+});
 
-";
+// Scroll après envoi du message
+document.getElementById(\"chat-form\") ?. addEventListener(\"submit\", function () {
+setTimeout(function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+}, 100);
+});
+
+// Réouverture du dropdown si nécessaire
+document.addEventListener('click', function (event) {
+var dropdowns = document.querySelectorAll('.dropdown-menu');
+dropdowns.forEach(function (dropdown) {
+if (! event.target.closest('.dropdown') && ! dropdown.contains(event.target)) {
+dropdown.classList.remove('show');
+}
+});
+});
+\t\t</script>
+\t\t<script>
+\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
+var dropdownElements = document.querySelectorAll('.dropdown-toggle');
+dropdownElements.forEach(function (dropdown) {
+dropdown.addEventListener('click', function (event) {
+event.stopPropagation();
+let menu = this.nextElementSibling;
+document.querySelectorAll('.dropdown-menu').forEach(m => {
+if (m !== menu) 
+m.classList.remove('show');
+
+
+
+});
+menu.classList.toggle('show');
+});
+});
+
+document.addEventListener('click', function () {
+document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+});
+});
+\t\t</script>
+
+\t\t<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>
+\t\t<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"></script>
+
+\t";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -623,7 +526,7 @@ class __TwigTemplate_9395a01620ad7fc1c64775f14e76c66e extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  537 => 353,  533 => 351,  525 => 346,  522 => 345,  513 => 343,  509 => 342,  499 => 335,  495 => 334,  489 => 330,  482 => 328,  480 => 329,  472 => 324,  468 => 323,  460 => 322,  453 => 318,  445 => 313,  440 => 311,  434 => 308,  431 => 307,  426 => 304,  424 => 303,  415 => 302,  410 => 301,  406 => 299,  404 => 298,  392 => 289,  388 => 287,  381 => 285,  379 => 286,  375 => 284,  367 => 279,  359 => 274,  350 => 268,  347 => 267,  344 => 266,  339 => 265,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  406 => 152,  402 => 150,  394 => 145,  391 => 144,  382 => 142,  378 => 141,  369 => 135,  365 => 134,  361 => 133,  355 => 129,  348 => 127,  346 => 128,  340 => 124,  329 => 116,  324 => 114,  318 => 111,  315 => 110,  307 => 105,  299 => 100,  294 => 98,  288 => 95,  285 => 94,  283 => 93,  276 => 89,  272 => 88,  264 => 87,  261 => 86,  258 => 85,  252 => 84,  246 => 82,  244 => 81,  242 => 80,  233 => 79,  228 => 78,  224 => 76,  222 => 75,  210 => 66,  205 => 63,  198 => 61,  196 => 62,  192 => 60,  184 => 55,  176 => 50,  172 => 49,  168 => 47,  162 => 46,  156 => 44,  154 => 43,  149 => 41,  146 => 40,  144 => 39,  137 => 35,  129 => 30,  125 => 29,  121 => 27,  115 => 25,  109 => 23,  107 => 22,  102 => 20,  99 => 19,  96 => 18,  91 => 17,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -631,414 +534,247 @@ class __TwigTemplate_9395a01620ad7fc1c64775f14e76c66e extends Template
         return new Source("{% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-   /* Style global pour la boîte de chat */
-.chat-box {
-    max-height: 450px;
-    overflow-y: auto;
-    background: #f9f9f9;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
+\t<section>
+\t\t<div class=\"container mt-4\">
+\t\t\t<div class=\"border rounded p-3 shadow bg-white\">
+
+\t\t\t\t<div class=\"container py-5\">
+\t\t\t\t\t<div
+\t\t\t\t\t\tclass=\"row\">
+\t\t\t\t\t\t<!-- Sidebar des discussions -->
+\t\t\t\t\t\t<div class=\"col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0\">
+\t\t\t\t\t\t\t<h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Discussions</h5>
+\t\t\t\t\t\t\t<div class=\"card\">
+\t\t\t\t\t\t\t\t<div class=\"card-body\">
+\t\t\t\t\t\t\t\t\t<ul class=\"list-unstyled mb-0 scrollable-list\">
+\t\t\t\t\t\t\t\t\t\t{% for discussion in discussions %}
+\t\t\t\t\t\t\t\t\t\t\t{% if discussion.receiver.id == app.user.id %}
+\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"{{ path('view_discussion', {id: discussion.id}) }}\" class=\"d-flex justify-content-between text-decoration-none w-100\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"d-flex flex-row w-100\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% if app.user.image %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('uploads/images/' ~ discussion.sender.image) }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('frontOffice/images/user.jpg') }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pt-1\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<span style=\"font-size:1.2rem;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{ discussion.sender.nom }}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{ discussion.sender.prenom }}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"{{ path('delete_discussion', {id: discussion.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t{% elseif discussion.sender.id == app.user.id %}
+\t\t\t\t\t\t\t\t\t\t\t\t<li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"{{ path('view_discussion', {id: discussion.id}) }}\" class=\"d-flex justify-content-between text-decoration-none w-100\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"d-flex flex-row w-100\">
+{% if app.user.image %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('uploads/images/' ~ discussion.receiver.image) }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('frontOffice/images/user.jpg') }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% endif %}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"pt-1\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<span style=\"font-size: 1.2rem;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{ discussion.receiver.nom }}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{{ discussion.receiver.prenom }}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</span>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"{{ path('delete_discussion', {id: discussion.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t<li class=\"list-group-item text-muted\">Aucune discussion disponible.</li>
+\t\t\t\t\t\t\t\t\t\t{% endfor %}
+\t\t\t\t\t\t\t\t\t</ul>
+
+
+\t\t\t\t\t\t\t\t\t<a href=\"{{ path('create_discussion') }}\" class=\"btn btn-success mt-3\">Nouvelle discussion</a>
+\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t<!-- Chatbox principale -->
+\t\t\t\t\t\t<div class=\"col-md-6 col-lg-7 col-xl-8\">
+\t\t\t\t\t\t\t<h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Message avec</h5>
+
+\t\t\t\t\t\t\t{% if discussion is defined and discussion %}
+\t\t\t\t\t\t\t\t<div class=\"chat-box p-3\">
+\t\t\t\t\t\t\t\t\t<ul class=\"list-unstyled chat-messages\" id=\"chat-messages\">
+\t\t\t\t\t\t\t\t\t\t{% for message in messages %}
+\t\t\t\t\t\t\t\t\t\t\t<li class=\"d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center\">
+\t\t\t\t\t\t\t\t\t\t\t\t{% if message.sender.id != app.user.id %}
+{% if app.user.image %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('uploads/images/' ~ message.sender.image) }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<img src=\"{{ asset('frontOffice/images/user.jpg') }}\" alt=\"avatar\" class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{% endif %}\t\t\t\t\t\t\t\t\t\t\t\t{% endif %}
+
+\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<p class=\"mb-0\">{{ message.content }}</p>
+\t\t\t\t\t\t\t\t\t\t\t\t\t<span class=\"timestamp\">{{ message.createdAt|date('d/m/Y H:i') }}</span>
+\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+
+\t\t\t\t\t\t\t\t\t\t\t\t{% if message.sender.id == app.user.id %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"dropdown\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton{{ message.id }}\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t...
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton{{ message.id }}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"{{ path('delete_message', {id: message.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"{{ path('edit_message', {id: message.id}) }}\" class=\"dropdown-item\">✏ Modifier</a>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"dropdown\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton{{ message.id }}\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t...
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton{{ message.id }}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<form action=\"{{ path('delete_message', {id: message.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t</li>
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t\t\t\t\t\t\t</li>
+
+\t\t\t\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t\t\t\t<li class=\"text-muted text-center\">Aucun message dans cette discussion.</li>
+\t\t\t\t\t\t\t\t\t\t{% endfor %}
+\t\t\t\t\t\t\t\t\t</ul>
+\t\t\t\t\t\t\t\t</div>
+
+\t\t\t\t\t\t\t\t<!-- Formulaire d'envoi -->
+\t\t\t\t\t\t\t\t<form action=\"{{ path('send_message') }}\" method=\"POST\" class=\"chat-input p-3\" id=\"chat-form\">
+\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"discussion_id\" value=\"{{ discussion.id }}\">
+\t\t\t\t\t\t\t\t\t<input type=\"hidden\" name=\"sender_id\" value=\"{{ app.user.id }}\">
+\t\t\t\t\t\t\t\t\t<textarea name=\"content\" id=\"content\" class=\"form-control\" placeholder=\"Votre message...\"></textarea>
+\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Envoyer</button>
+\t\t\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t\t<!-- Affichage des erreurs -->
+\t\t\t\t\t\t\t\t{% for message in app.flashes('error') %}
+\t\t\t\t\t\t\t\t\t<p class=\"text-danger mt-1\" style=\"font-size: 14px;\">{{ message }}</p>
+\t\t\t\t\t\t\t\t{% endfor %}
+\t\t\t\t\t\t\t\t<!-- Bouton supprimer la discussion -->
+\t\t\t\t\t\t\t\t<form action=\"{{ path('delete_discussion', {id: discussion.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
+\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-danger\">Supprimer cette discussion</button>
+\t\t\t\t\t\t\t\t</form>
+
+\t\t\t\t\t\t\t{% else %}
+\t\t\t\t\t\t\t\t<p class=\"text-center\">Sélectionnez une discussion pour commencer à discuter.</p>
+\t\t\t\t\t\t\t{% endif %}
+\t\t\t\t\t\t</div>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t</div>
+\t\t</section>
+
+\t\t<script>
+\t\t\t// Scroll automatique vers le bas
+document.addEventListener(\"DOMContentLoaded\", function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+});
+
+// Scroll après envoi du message
+document.getElementById(\"chat-form\") ?. addEventListener(\"submit\", function () {
+setTimeout(function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+}, 100);
+});
+
+// Scroll automatique vers le bas
+function scrollToBottom() {
+window.scrollTo(0, document.body.scrollHeight);
 }
 
-/* Liste des messages */
-.chat-messages {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    flex-grow: 1;
+// Appel initial au chargement
+document.addEventListener(\"DOMContentLoaded\", scrollToBottom);
+
+// Exemple : appel après l’envoi d’un message
+document.getElementById(\"chat-form\").addEventListener(\"submit\", function () {
+setTimeout(scrollToBottom, 100); // Petit délai pour laisser le message s'afficher
+});
+// Scroll automatique vers le bas
+document.addEventListener(\"DOMContentLoaded\", function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+});
 
-/* Message standard */
-.message {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    margin-bottom: 12px;
-    transition: all 0.3s ease;
+// Scroll après envoi du message
+document.getElementById(\"chat-form\") ?. addEventListener(\"submit\", function () {
+setTimeout(function () {
+var chatMessages = document.getElementById(\"chat-messages\");
+if (chatMessages) {
+chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+}, 100);
+});
 
-/* Message envoyé */
-.message.sent {
-    background: #007bff;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+// Réouverture du dropdown si nécessaire
+document.addEventListener('click', function (event) {
+var dropdowns = document.querySelectorAll('.dropdown-menu');
+dropdowns.forEach(function (dropdown) {
+if (! event.target.closest('.dropdown') && ! dropdown.contains(event.target)) {
+dropdown.classList.remove('show');
 }
+});
+});
+\t\t</script>
+\t\t<script>
+\t\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {
+var dropdownElements = document.querySelectorAll('.dropdown-toggle');
+dropdownElements.forEach(function (dropdown) {
+dropdown.addEventListener('click', function (event) {
+event.stopPropagation();
+let menu = this.nextElementSibling;
+document.querySelectorAll('.dropdown-menu').forEach(m => {
+if (m !== menu) 
+m.classList.remove('show');
 
-/* Message reçu */
-.message.received {
-    background: #e0e0e0;
-    align-self: flex-start;
-    border-bottom-left-radius: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-/* Formulaire d'entrée */
-.chat-input {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background: #ffffff;
-    border-top: 2px solid #e1e1e1;
-    border-radius: 10px;
-}
 
-/* Zone de texte */
-.chat-input textarea {
-    flex: 1;
-    border-radius: 10px;
-    padding: 12px 15px;
-    font-size: 14px;
-    resize: none;
-    border: 1px solid #ccc;
-    height: 50px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
+});
+menu.classList.toggle('show');
+});
+});
 
-/* Effet de focus sur la zone de texte */
-.chat-input textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
+document.addEventListener('click', function () {
+document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+});
+});
+\t\t</script>
 
-/* Bouton envoyer */
-.chat-input button {
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 14px;
-    background: #007bff;
-    color: white;
-    border: none;
-    margin-left: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+\t\t<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>
+\t\t<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"></script>
 
-/* Effet de hover pour le bouton envoyer */
-.chat-input button:hover {
-    background: #0056b3;
-}
-
-/* Timestamps des messages */
-.timestamp {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
-    margin-left: 10px;
-}
-
-/* Style de la liste des discussions */
-.scrollable-list {
-    max-height: 450px; 
-    overflow-y: auto;
-    margin-bottom: 20px;
-}
-
-/* Style de la discussion dans la liste */
-.list-unstyled li {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-    display: flex;
-    justify-content: space-between;  
-    align-items: center;
-}
-
-/* Effet au survol des discussions */
-.list-unstyled li:hover {
-    background-color: #f0f0f0;
-}
-
-/* Avatar de l'utilisateur dans la discussion */
-.rounded-circle {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Formulaire de suppression de la discussion */
-.btn-danger {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-}
-
-/* Effet hover pour le bouton supprimer */
-.btn-danger:hover {
-    background-color: #c0392b;
-    border-color: #c0392b;
-    text-align: center;
-}
-
-/* Formatage des boutons de suppression de message */
-.dropdown-menu li button {
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    color: #c0392b;
-}
-
-/* Ajouter un style au bouton modifier */
-.dropdown-item {
-    background-color: #f1f1f1;
-}
-
-/* Ajouter un fond pour la card contenant les discussions */
-.card-body {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-}
-
-/* Réduire la taille du dropdown */
-.dropdown-menu {
-    min-width: 150px;
-    font-size: 14px;  
-    padding: 8px 0;    
-    border-radius: 8px; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border: 1px solid #ddd;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-/* Effet de survol sur le menu dropdown */
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Style des éléments du dropdown */
-.dropdown-item {
-    padding: 10px 15px;
-    color: #333;
-    background-color: transparent;
-    border: none;
-    font-size: 14px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Effet de survol des éléments du dropdown */
-.dropdown-item:hover {
-    background-color: #f1f1f1;
-    color: #007bff;
-}
-
-/* Bouton du dropdown */
-.dropdown-toggle {
-    background-color: transparent;
-    border: none;
-    padding: 6px 12px;
-    font-size: 14px;
-    color: #555;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Effet de survol sur le bouton dropdown */
-.dropdown-toggle:hover {
-    background-color: #f0f0f0;
-    color: #007bff;
-}
-
-/* Ajout d'une icône sur le bouton dropdown */
-.dropdown-toggle::after {
-    content: ' ▼';
-    font-size: 10px;
-    margin-left: 5px;
-}
-
-/* Modifier le bouton supprimer */
-.dropdown-item.text-danger {
-    color: #e74c3c;
-}
-
-/* Effet de survol du bouton supprimer */
-.dropdown-item.text-danger:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-</style>
-
-<section>
-<div class=\"container mt-4\">
-    <div class=\"border rounded p-3 shadow bg-white\">
-
-    <div class=\"container py-5\">
-        <div class=\"row\">
-            <!-- Sidebar des discussions -->
-            <div class=\"col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0\">
-                <h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Discussions</h5>
-                <div class=\"card\">
-                    <div class=\"card-body\">
-                        <ul class=\"list-unstyled mb-0 scrollable-list\">
-    {% for discussion in discussions %}
-        {% if discussion.sender.id == 1 %}
-            <li class=\"p-2 border-bottom bg-body-tertiary d-flex justify-content-between\">
-                <a href=\"{{ path('view_discussion', {id: discussion.id}) }}\" class=\"d-flex justify-content-between text-decoration-none w-100\">
-                    <div class=\"d-flex flex-row w-100\">
-                        <img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp\" alt=\"avatar\"
-                             class=\"rounded-circle d-flex align-self-center me-3 shadow-1-strong\" width=\"50\">
-                        <div class=\"pt-1\">
-                            <span>
-                                {{ discussion.receiver.username }}
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <form action=\"{{ path('delete_discussion', {id: discussion.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer cette discussion ?');\">
-                    <button type=\"submit\" class=\"btn btn-danger btn-sm delete-btn\">🗑</button>
-                </form>
-            </li>
-        {% endif %}
-    {% else %}
-        <li class=\"list-group-item text-muted\">Aucune discussion disponible.</li>
-    {% endfor %}
-</ul>
-
-                        <a href=\"{{ path('create_discussion') }}\" class=\"btn btn-success mt-3\">Nouvelle discussion</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chatbox principale -->
-            <div class=\"col-md-6 col-lg-7 col-xl-8\">
-                <h5 class=\"font-weight-bold mb-3 text-center text-lg-start\">Message</h5>
-
-                {% if discussion is defined and discussion %}
-                    <div class=\"chat-box p-3\">
-                        <ul class=\"list-unstyled chat-messages\" id=\"chat-messages\">
-                            {% for message in messages %}
-                                <li class=\"d-flex {% if message.sender.id == 1 %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center\">
-                                    {% if message.sender.id != 1 %}
-                                        <img src=\"https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp\" alt=\"avatar\"
-                                             class=\"rounded-circle me-2 shadow-1-strong\" width=\"40\">
-                                    {% endif %}
-                                    <div class=\"dropdown\">
-                                        <button class=\"btn btn-light btn-sm dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton{{ message.id }}\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
-                                            ...
-                                        </button>
-                                        <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton{{ message.id }}\">
-                                            <li>
-                                                <form action=\"{{ path('delete_message', {id: message.id}) }}\" method=\"POST\" onsubmit=\"return confirm('Voulez-vous vraiment supprimer ce message ?');\">
-                                                    <button type=\"submit\" class=\"dropdown-item text-danger\">🗑 Supprimer</button>
-                                                </form>
-                                            </li>
-                                            <li>
-                                                <a href=\"{{ path('edit_message', {id: message.id}) }}\" class=\"dropdown-item\">✏ Modifier</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class=\"message {% if message.sender.id == 1 %}sent{% else %}received{% endif %}\">
-                                        <p class=\"mb-0\">{{ message.content }}</p>
-                                        <span class=\"timestamp\">{{ message.createdAt|date('d/m/Y H:i') }}</span>
-                                    </div>
-                                </li>
-                            {% else %}
-                                <li class=\"text-muted text-center\">Aucun message dans cette discussion.</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
-                    <!-- Formulaire d'envoi -->
-                    <form action=\"{{ path('send_message') }}\" method=\"POST\" class=\"chat-input p-3\" id=\"chat-form\">
-                        <input type=\"hidden\" name=\"discussion_id\" value=\"{{ discussion.id }}\">
-                        <input type=\"hidden\" name=\"sender_id\" value=\"1\">
-                        <textarea name=\"content\" id=\"content\" class=\"form-control\" placeholder=\"Votre message...\"></textarea>
-                        <button type=\"submit\" class=\"btn btn-primary\">Envoyer</button>
-                    </form>
-
-                    <!-- Affichage des erreurs -->
-                    {% for message in app.flashes('error') %}
-                        <p class=\"text-danger mt-1\" style=\"font-size: 14px;\">{{ message }}</p>
-                    {% endfor %}
-                    <!-- Bouton supprimer la discussion -->
-                    <form action=\"{{ path('delete_discussion', {id: discussion.id}) }}\" method=\"POST\" class=\"mt-3\">
-                        <button type=\"submit\" class=\"btn btn-danger\">Supprimer cette discussion</button>
-                    </form>
-
-                {% else %}
-                    <p class=\"text-center\">Sélectionnez une discussion pour commencer à discuter.</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    </div>
-</section>
-
-<script>
-    // Scroll automatique vers le bas
-    document.addEventListener(\"DOMContentLoaded\", function () {
-        var chatMessages = document.getElementById(\"chat-messages\");
-        if (chatMessages) {
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-    });
-
-    // Scroll après envoi du message
-    document.getElementById(\"chat-form\")?.addEventListener(\"submit\", function () {
-        setTimeout(function () {
-            var chatMessages = document.getElementById(\"chat-messages\");
-            if (chatMessages) {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-        }, 100);
-    });
-
-    // Réouverture du dropdown si nécessaire
-    document.addEventListener('click', function (event) {
-        var dropdowns = document.querySelectorAll('.dropdown-menu');
-        dropdowns.forEach(function (dropdown) {
-            if (!event.target.closest('.dropdown') && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener(\"DOMContentLoaded\", function () {
-        var dropdownElements = document.querySelectorAll('.dropdown-toggle');
-        dropdownElements.forEach(function (dropdown) {
-            dropdown.addEventListener('click', function (event) {
-                event.stopPropagation();
-                let menu = this.nextElementSibling;
-                document.querySelectorAll('.dropdown-menu').forEach(m => {
-                    if (m !== menu) m.classList.remove('show');
-                });
-                menu.classList.toggle('show');
-            });
-        });
-
-        document.addEventListener('click', function () {
-            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
-        });
-    });
-</script>
-
-<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css\" rel=\"stylesheet\" />
-<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"></script>
-
-{% endblock %}
+\t{% endblock %}
 ", "message/conversation.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\message\\conversation.html.twig");
     }
 }

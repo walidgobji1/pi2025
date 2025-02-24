@@ -32,8 +32,6 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
         $this->parent = false;
 
         $this->blocks = [
-            'title' => [$this, 'block_title'],
-            'stylesheets' => [$this, 'block_stylesheets'],
         ];
     }
 
@@ -50,47 +48,10 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
         yield "<!DOCTYPE html>
 <html lang=\"fr\">
 <head>
-
-        <meta charset=\"UTF-8\">
-        <title>
-            ";
-        // line 7
-        yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
-        // line 8
-        yield "        </title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
-        
-        <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">
-        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 13
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/css/bootstrap.css"), "html", null, true);
-        yield "\"/>
-        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\" rel=\"stylesheet\">
-        <link href=\"https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap\" rel=\"stylesheet\" />
-        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css\" integrity=\"sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=\" crossorigin=\"anonymous\"/>
-        <link href=\"";
-        // line 17
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/css/font-awesome.min.css"), "html", null, true);
-        yield "\" rel=\"stylesheet\"/>
-        <link href=\"";
-        // line 18
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/css/style.css"), "html", null, true);
-        yield "\" rel=\"stylesheet\"/>
-        <link href=\"";
-        // line 19
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/css/responsive.css"), "html", null, true);
-        yield "\" rel=\"stylesheet\"/>
-
-        ";
-        // line 21
-        yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 22
-        yield "
     <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
     <title>Leçon - ";
-        // line 24
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 24, $this->source); })()), "titre", [], "any", false, false, false, 24), "html", null, true);
+        // line 5
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 5, $this->source); })()), "titre", [], "any", false, false, false, 5), "html", null, true);
         yield "</title>
     <style>
         body {
@@ -147,41 +108,41 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
 </head>
 <body>
  <div class=\"container\">
-        <!-- Logo -->
+    
         <img src=\"";
-        // line 81
+        // line 62
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/formini.jpeg"), "html", null, true);
-        yield "\" alt=\"Formini Logo\" style=\"max-height: 70px;\">
+        yield "\" alt=\"Formini\" style=\"max-height: 70px;\">
         
-        <!-- Slogan -->
+       
         <div class=\"slogan\">\"Apprenez, progressez, réussissez !\"</div>
     <div class=\"container\">
         <h2>Leçon : ";
-        // line 86
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 86, $this->source); })()), "titre", [], "any", false, false, false, 86), "html", null, true);
+        // line 67
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 67, $this->source); })()), "titre", [], "any", false, false, false, 67), "html", null, true);
         yield "</h2>
 
         <div class=\"section\">
             <div class=\"section-title\">Titre</div>
             <div class=\"section-content\">";
-        // line 90
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 90, $this->source); })()), "titre", [], "any", false, false, false, 90), "html", null, true);
+        // line 71
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 71, $this->source); })()), "titre", [], "any", false, false, false, 71), "html", null, true);
         yield "</div>
         </div>
 
         <div class=\"section\">
             <div class=\"section-title\">Contenu</div>
             <div class=\"section-content\">";
-        // line 95
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 95, $this->source); })()), "contenu", [], "any", false, false, false, 95), "html", null, true);
+        // line 76
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 76, $this->source); })()), "contenu", [], "any", false, false, false, 76), "html", null, true);
         yield "</div>
         </div>
 
         <div class=\"section\">
             <div class=\"section-title\">Date de Création</div>
             <div class=\"section-content\">";
-        // line 100
-        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 100, $this->source); })()), "dateCreation", [], "any", false, false, false, 100)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 100, $this->source); })()), "dateCreation", [], "any", false, false, false, 100), "Y-m-d"), "html", null, true)) : ("N/A"));
+        // line 81
+        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 81, $this->source); })()), "dateCreation", [], "any", false, false, false, 81)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["lecon"]) || array_key_exists("lecon", $context) ? $context["lecon"] : (function () { throw new RuntimeError('Variable "lecon" does not exist.', 81, $this->source); })()), "dateCreation", [], "any", false, false, false, 81), "Y-m-d"), "html", null, true)) : ("N/A"));
         yield "</div>
         </div>
 
@@ -197,51 +158,6 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
 
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        yield from [];
-    }
-
-    // line 7
-    /**
-     * @return iterable<null|scalar|\Stringable>
-     */
-    public function block_title(array $context, array $blocks = []): iterable
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
-
-        yield "formini";
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
-
-        yield from [];
-    }
-
-    // line 21
-    /**
-     * @return iterable<null|scalar|\Stringable>
-     */
-    public function block_stylesheets(array $context, array $blocks = []): iterable
-    {
-        $macros = $this->macros;
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
-
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
-
-        
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
-
-        
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
         yield from [];
     }
@@ -267,7 +183,7 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  228 => 21,  205 => 7,  184 => 100,  176 => 95,  168 => 90,  161 => 86,  153 => 81,  93 => 24,  89 => 22,  87 => 21,  82 => 19,  78 => 18,  74 => 17,  67 => 13,  60 => 8,  58 => 7,  50 => 1,);
+        return array (  145 => 81,  137 => 76,  129 => 71,  122 => 67,  114 => 62,  54 => 5,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -275,25 +191,6 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
         return new Source("<!DOCTYPE html>
 <html lang=\"fr\">
 <head>
-
-        <meta charset=\"UTF-8\">
-        <title>
-            {% block title %}formini{% endblock %}
-        </title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
-        
-        <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css\">
-        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\">
-        <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('frontOffice/css/bootstrap.css') }}\"/>
-        <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css\" rel=\"stylesheet\">
-        <link href=\"https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap\" rel=\"stylesheet\" />
-        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css\" integrity=\"sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=\" crossorigin=\"anonymous\"/>
-        <link href=\"{{ asset('frontOffice/css/font-awesome.min.css') }}\" rel=\"stylesheet\"/>
-        <link href=\"{{ asset('frontOffice/css/style.css') }}\" rel=\"stylesheet\"/>
-        <link href=\"{{ asset('frontOffice/css/responsive.css') }}\" rel=\"stylesheet\"/>
-
-        {% block stylesheets %}{% endblock %}
-
     <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
     <title>Leçon - {{ lecon.titre }}</title>
     <style>
@@ -351,10 +248,10 @@ class __TwigTemplate_4daebdf880cda78e8f40a9daf73b9367 extends Template
 </head>
 <body>
  <div class=\"container\">
-        <!-- Logo -->
-        <img src=\"{{ asset('frontOffice/images/formini.jpeg') }}\" alt=\"Formini Logo\" style=\"max-height: 70px;\">
+    
+        <img src=\"{{ asset('frontOffice/images/formini.jpeg') }}\" alt=\"Formini\" style=\"max-height: 70px;\">
         
-        <!-- Slogan -->
+       
         <div class=\"slogan\">\"Apprenez, progressez, réussissez !\"</div>
     <div class=\"container\">
         <h2>Leçon : {{ lecon.titre }}</h2>

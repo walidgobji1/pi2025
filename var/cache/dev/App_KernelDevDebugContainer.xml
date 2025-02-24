@@ -86,6 +86,7 @@
     <parameter key="stripe_public_key">%env(STRIPE_PUBLIC_KEY)%</parameter>
     <parameter key="stripe_secret_key">%env(STRIPE_SECRET_KEY)%</parameter>
     <parameter key="photos_directory">C:\Users\walid\Desktop\Nouveau dossier\pi2025/public/uploads/photos</parameter>
+    <parameter key="profile_images_directory">C:\Users\walid\Desktop\Nouveau dossier\pi2025/public/uploads/images</parameter>
     <parameter key="event_dispatcher.event_aliases" type="collection">
       <parameter key="Symfony\Component\Console\Event\ConsoleCommandEvent">console.command</parameter>
       <parameter key="Symfony\Component\Console\Event\ConsoleErrorEvent">console.error</parameter>
@@ -661,7 +662,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.x7SLUTN"/>
+      <argument type="service" id=".service_locator.ipuVxm5"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3586,7 +3587,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.x7SLUTN"/>
+      <argument type="service" id=".service_locator.ipuVxm5"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -8613,10 +8614,11 @@
         <argument key="pdfService" type="service_closure" id="App\Service\PdfService"/>
       </argument>
     </service>
-    <service id=".service_locator.gxkSA7l" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.VXev_vu" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="security" type="service_closure" id="security.helper"/>
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
@@ -8696,7 +8698,7 @@
         <argument key="userProvider" type="service_closure" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
     </service>
-    <service id=".service_locator.x7SLUTN" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ipuVxm5" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminController::createAdmin" type="service_closure" id=".service_locator.ESgEUJd"/>
@@ -8742,12 +8744,12 @@
         <argument key="App\Controller\LeconController::show" type="service_closure" id=".service_locator.xUsTS7F"/>
         <argument key="App\Controller\LeconController::showLessons" type="service_closure" id=".service_locator.lnsowti"/>
         <argument key="App\Controller\LeconController::showLessonsC" type="service_closure" id=".service_locator.lnsowti"/>
-        <argument key="App\Controller\MessageController::createDiscussion" type="service_closure" id=".service_locator.gxkSA7l"/>
+        <argument key="App\Controller\MessageController::createDiscussion" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController::deleteDiscussion" type="service_closure" id=".service_locator.q2WLueh"/>
         <argument key="App\Controller\MessageController::deleteMessage" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\MessageController::editMessage" type="service_closure" id=".service_locator.r.PNVZh"/>
         <argument key="App\Controller\MessageController::listDiscussions" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\MessageController::sendMessage" type="service_closure" id=".service_locator.gxkSA7l"/>
+        <argument key="App\Controller\MessageController::sendMessage" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController::viewDiscussion" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\NotificationController::delete" type="service_closure" id=".service_locator.OqTO.nA"/>
         <argument key="App\Controller\NotificationController::edit" type="service_closure" id=".service_locator.OqTO.nA"/>
@@ -8816,12 +8818,12 @@
         <argument key="App\Controller\LeconController:show" type="service_closure" id=".service_locator.xUsTS7F"/>
         <argument key="App\Controller\LeconController:showLessons" type="service_closure" id=".service_locator.lnsowti"/>
         <argument key="App\Controller\LeconController:showLessonsC" type="service_closure" id=".service_locator.lnsowti"/>
-        <argument key="App\Controller\MessageController:createDiscussion" type="service_closure" id=".service_locator.gxkSA7l"/>
+        <argument key="App\Controller\MessageController:createDiscussion" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController:deleteDiscussion" type="service_closure" id=".service_locator.q2WLueh"/>
         <argument key="App\Controller\MessageController:deleteMessage" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\MessageController:editMessage" type="service_closure" id=".service_locator.r.PNVZh"/>
         <argument key="App\Controller\MessageController:listDiscussions" type="service_closure" id=".service_locator.CsMkqUa"/>
-        <argument key="App\Controller\MessageController:sendMessage" type="service_closure" id=".service_locator.gxkSA7l"/>
+        <argument key="App\Controller\MessageController:sendMessage" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController:viewDiscussion" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\NotificationController:delete" type="service_closure" id=".service_locator.OqTO.nA"/>
         <argument key="App\Controller\NotificationController:edit" type="service_closure" id=".service_locator.OqTO.nA"/>
@@ -11272,7 +11274,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.x7SLUTN"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.ipuVxm5"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -11303,13 +11305,14 @@
     <service id=".service_locator.nSR06_5" alias=".service_locator.AFZ7DOO"/>
     <service id=".service_locator.KBWFMuY" alias=".service_locator.zU2lRyp"/>
     <service id=".service_locator.vnK8t.3" alias=".service_locator.JmqEM1n"/>
+    <service id=".service_locator.xfUCJVI" alias=".service_locator.VXev_vu"/>
     <service id=".service_locator.SSQwoIj" alias=".service_locator.q2WLueh"/>
     <service id=".service_locator.yCVE6_F" alias=".service_locator.xTpWFF5"/>
     <service id=".service_locator.XMLWRE0" alias=".service_locator.OqTO.nA"/>
     <service id=".service_locator.lo.u8v0" alias=".service_locator.gKZxhjb"/>
     <service id=".service_locator.VQewRSb" alias=".service_locator.qawdDqK"/>
     <service id=".service_locator.SbL36wI" alias=".service_locator.gKSVznP"/>
-    <service id=".service_locator.FSOvKmz" alias=".service_locator.x7SLUTN"/>
+    <service id=".service_locator.HLAdXEB" alias=".service_locator.ipuVxm5"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.4xosipF" alias=".service_locator.g.ORoaf"/>
     <service id=".service_locator.HGCd7fI" alias=".service_locator.FIxxhQo"/>
@@ -11361,7 +11364,7 @@
     <service id=".service_locator.GBk3EpC" alias=".service_locator.xUsTS7F"/>
     <service id=".service_locator.sPhHnU8" alias=".service_locator.JmqEM1n"/>
     <service id=".service_locator.NrlGr85" alias=".service_locator.D8zEG0Q"/>
-    <service id=".service_locator.hCLIJ7E" alias=".service_locator.gxkSA7l"/>
+    <service id=".service_locator.ziLDYbw" alias=".service_locator.VXev_vu"/>
     <service id=".service_locator.F6vIRCZ" alias=".service_locator.q2WLueh"/>
     <service id=".service_locator.2Xapu2H" alias=".service_locator.r.PNVZh"/>
     <service id=".service_locator.Ti5lv3v" alias=".service_locator.eD04aH."/>
