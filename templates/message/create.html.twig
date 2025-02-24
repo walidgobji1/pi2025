@@ -11,7 +11,7 @@
                     <option value="">Sélectionnez un destinataire</option>
                     {% for utilisateur in utilisateurs %}
                         {% if utilisateur.id != app.user.id %}
-                            <option value="{{ utilisateur.id }}">{{ utilisateur.prenom }} {{ utilisateur.nom }}</option>
+                            <option value="{{ utilisateur.id }}">{{ utilisateur.prenom }} {{ utilisateur.nom }}  </option>
                         {% endif %}
                     {% endfor %}
                 </select>

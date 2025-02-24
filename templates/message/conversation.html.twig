@@ -19,7 +19,11 @@
 												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
 													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
 														<div class="d-flex flex-row w-100">
-															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% if app.user.image %}
+																<img src="{{ asset('uploads/images/' ~ discussion.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% else %}
+																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% endif %}
 															<div class="pt-1">
 																<span style="font-size:1.2rem;">
 																	{{ discussion.sender.nom }}
@@ -36,8 +40,11 @@
 												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
 													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
 														<div class="d-flex flex-row w-100">
-															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															<div class="pt-1">
+{% if app.user.image %}
+																<img src="{{ asset('uploads/images/' ~ discussion.receiver.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% else %}
+																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% endif %}															<div class="pt-1">
 																<span style="font-size: 1.2rem;">
 																	{{ discussion.receiver.nom }}
 																	{{ discussion.receiver.prenom }}
@@ -71,8 +78,11 @@
 										{% for message in messages %}
 											<li class="d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center">
 												{% if message.sender.id != app.user.id %}
-													<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-												{% endif %}
+{% if app.user.image %}
+																<img src="{{ asset('uploads/images/' ~ message.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% else %}
+																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% endif %}												{% endif %}
 
 												<div class="message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}">
 													<p class="mb-0">{{ message.content }}</p>
@@ -96,8 +106,8 @@
 															</li>
 														</ul>
 													</div>
-                                                    {% else %}
-                                                    <div class="dropdown">
+												{% else %}
+													<div class="dropdown">
 														<button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
 															...
 														</button>
@@ -106,7 +116,7 @@
 																<form action="{{ path('delete_message', {id: message.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
 																	<button type="submit" class="dropdown-item text-danger">🗑 Supprimer</button>
 																</form>
-														
+															</li>
 														</ul>
 													</div>
 
