@@ -195,14 +195,25 @@
         <div class="row justify-content-between align-items-center mb-4">
             <div class="col-auto">
                 <h1 class="mb-0">Avis</h1>
+                {# <p>User ID: {{ userId }}</p> #}
             </div>
             <div class="col-auto">
-                {% if formationId is defined and userId is defined %}
-                    <a href="{{ path('app_avis_add', {'formationId': formationId, 'userId': userId}) }}" class="btn btn-danger large-btn">Ajouter un avis</a>
-                {% else %}
-                    <p class="mt-4">Formation ou utilisateur non spécifié, impossible de créer un nouvel avis.</p>
-                {% endif %}
-            </div>
+    {% if formationId is defined %}
+        {% if app.user %}
+            {% if 'ROLE_APPRENANT' in app.user.roles %}
+                <a href="{{ path('app_avis_add', {'formationId': formationId}) }}" class="btn btn-danger large-btn">
+                    Ajouter un avis
+                </a>
+            {% else %}
+                <p class="mt-4">Seuls les apprenants peuvent ajouter un avis.</p>
+            {% endif %}
+        {% else %}
+            <p class="mt-4">Vous devez vous connecter pour ajouter un avis.</p>
+        {% endif %}
+    {% else %}
+        <p class="mt-4">Formation non spécifiée.</p>
+    {% endif %}
+</div>
         </div>
 
         <div class="row justify-content-center">
@@ -246,6 +257,18 @@
                                         Dernière mise à jour: {{ avi.updateDate|date('Y-m-d H:i:s') }}
                                     </p>
                                 {% endif %}
+                                {% if app.user and avi.apprenant and avi.apprenant.id == app.user.id %}
+        <div class="d-flex">
+                                        <a href="{{ path('app_avis_edit', {'id': avi.id}) }}" class="btn btn-warning btn-sm me-2">Modifier</a>
+                                        
+                                        <form method="post" action="{{ path('app_avis_delete', {'id': avi.id}) }}" style="display: inline;">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
+                                            <button type="submit" class="btn btn-danger btn-sm ms-2">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+    {% endif %}
 
                              
                             </div>
