@@ -111,122 +111,117 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
         <h2>Nos Formations</h2>
         <p>Découvrez nos formations pour enrichir vos compétences.</p>
       </div>
-       <div class=\"input-group\" style=\"width: 40%;\">
-                                <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\">
-                                <span class=\"input-group-append\">
-                                    <button class=\"btn btn-outline-secondary border-bottom-0 border rounded-pill py-2\" type=\"button\" id=\"searchButton\" style=\"font-size: 0.875rem;\">Search</button>
-                                </span>
-                            </div>
+
       <div class=\"course_container\">
         <div class=\"course_owl-carousel owl-carousel owl-theme\">
           ";
-        // line 25
+        // line 20
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 25, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 20, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["formation"]) {
-            // line 26
+            // line 21
             yield "            <div class=\"item\">
               <div class=\"box\">
                 <div class=\"img-box\">
                                  <div class=\"text-center\">
                     <img src=\"";
-            // line 30
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "imageName", [], "any", false, false, false, 30))), "html", null, true);
+            // line 25
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "imageName", [], "any", false, false, false, 25))), "html", null, true);
             yield "\"  class=\"img-fluid mb-3\" style=\"height: 150px;width: 100%;\" />
                 </div>
       
                 </div>
                 <div class=\"detail-box\">
                   <h4>";
-            // line 35
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "titre", [], "any", false, false, false, 35), "html", null, true);
+            // line 30
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "titre", [], "any", false, false, false, 30), "html", null, true);
             yield "</h4>
                   <p>";
-            // line 36
-            yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 36)) > 100)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 36), 0, 100) . "..."), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 36), "html", null, true)));
+            // line 31
+            yield (((Twig\Extension\CoreExtension::length($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 31)) > 100)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 31), 0, 100) . "..."), "html", null, true)) : ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 31), "html", null, true)));
             yield "</p>
                   
 
 <div class=\"score-section\">
     ";
-            // line 40
+            // line 35
             if (array_key_exists("formationScores", $context)) {
-                // line 41
+                // line 36
                 yield "        ";
                 $context["foundScore"] = false;
-                // line 42
+                // line 37
                 yield "        ";
                 $context['_parent'] = $context;
-                $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formationScores"]) || array_key_exists("formationScores", $context) ? $context["formationScores"] : (function () { throw new RuntimeError('Variable "formationScores" does not exist.', 42, $this->source); })()));
+                $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formationScores"]) || array_key_exists("formationScores", $context) ? $context["formationScores"] : (function () { throw new RuntimeError('Variable "formationScores" does not exist.', 37, $this->source); })()));
                 foreach ($context['_seq'] as $context["_key"] => $context["score"]) {
-                    // line 43
+                    // line 38
                     yield "            ";
-                    if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["score"], "formation", [], "any", false, false, false, 43), "id", [], "any", false, false, false, 43) == CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 43))) {
-                        // line 44
+                    if ((CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["score"], "formation", [], "any", false, false, false, 38), "id", [], "any", false, false, false, 38) == CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 38))) {
+                        // line 39
                         yield "                <div class=\"d-flex flex-column mt-2\">
                     <div class=\"d-flex align-items-center\">
                         <!-- Thumbs up icon with red color to match the template -->
                         <i class=\"fas fa-thumbs-up\" style=\"color: #FF4C4C; margin-right: 8px;\"></i>
                         <strong style=\"color: black;\">";
-                        // line 48
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["score"], "noteMoyenne", [], "any", false, false, false, 48), 1), "html", null, true);
+                        // line 43
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["score"], "noteMoyenne", [], "any", false, false, false, 43), 1), "html", null, true);
                         yield " / 5</strong>
                     </div>
                     <div class=\"d-flex align-items-center mt-1\">
                         <!-- Comment icon in gray to match the template -->
                         <i class=\"fas fa-comment-alt\" style=\"color: #A9A9A9; margin-right: 8px;\"></i>
                         <span style=\"color: black;\">";
-                        // line 53
-                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["score"], "nombreAvis", [], "any", false, false, false, 53), "html", null, true);
+                        // line 48
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["score"], "nombreAvis", [], "any", false, false, false, 48), "html", null, true);
                         yield " Avis</span>
                     </div>
                 </div>
                 ";
-                        // line 56
+                        // line 51
                         $context["foundScore"] = true;
-                        // line 57
+                        // line 52
                         yield "            ";
                     }
-                    // line 58
+                    // line 53
                     yield "        ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_key'], $context['score'], $context['_parent']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 59
+                // line 54
                 yield "        ";
-                if ( !(isset($context["foundScore"]) || array_key_exists("foundScore", $context) ? $context["foundScore"] : (function () { throw new RuntimeError('Variable "foundScore" does not exist.', 59, $this->source); })())) {
-                    // line 60
+                if ( !(isset($context["foundScore"]) || array_key_exists("foundScore", $context) ? $context["foundScore"] : (function () { throw new RuntimeError('Variable "foundScore" does not exist.', 54, $this->source); })())) {
+                    // line 55
                     yield "            <div class=\"d-flex align-items-center text-muted mt-2\">
                 <i class=\"fas fa-ban\" style=\"color: #A9A9A9; margin-right: 8px;\"></i>
                 <span style=\"color: #A9A9A9;\">Aucune note</span>
             </div>
         ";
                 }
-                // line 65
+                // line 60
                 yield "    ";
             } else {
-                // line 66
+                // line 61
                 yield "        <div class=\"d-flex align-items-center text-muted mt-2\">
             <i class=\"fas fa-ban\" style=\"color: #A9A9A9; margin-right: 8px;\"></i>
             <span style=\"color: #A9A9A9;\">Aucune note</span>
         </div>
     ";
             }
-            // line 71
+            // line 66
             yield "</div>
 
       
                   <a href=\"";
-            // line 74
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 74)]), "html", null, true);
+            // line 69
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 69)]), "html", null, true);
             yield "\">
                     Voir Détail
                   </a>
                   <a href=\"";
-            // line 77
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_avis_index", ["formationId" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 77)]), "html", null, true);
+            // line 72
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_avis_index", ["formationId" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 72)]), "html", null, true);
             yield "\" class=\"btn btn-info\">
                   Avis
                 </a>
@@ -237,9 +232,9 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
           ";
             $context['_iterated'] = true;
         }
-        // line 91
+        // line 86
         if (!$context['_iterated']) {
-            // line 85
+            // line 80
             yield "            <div class=\"col-12\">
               <div class=\"alert alert-warning text-center\">
                 Aucune formation disponible pour le moment.
@@ -251,39 +246,11 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['formation'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 92
+        // line 87
         yield "        </div>
       </div>
     </div>
   </section>
-   <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); // Get the search query
-
-        // Loop through each formation item and show/hide based on search query
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); // Get the title text
-            var description = \$(this).find('.detail-box p').text().toLowerCase(); // Get the description text
-
-            // Check if either title or description contains the search query
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); // Show item
-            } else {
-                \$(this).hide(); // Hide item
-            }
-        });
-
-        // If no items are visible, hide the carousel container (optional)
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
   <style>
   .score-section {
     font-size: 0.9rem;
@@ -325,7 +292,7 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  255 => 92,  243 => 85,  241 => 91,  229 => 77,  223 => 74,  218 => 71,  211 => 66,  208 => 65,  201 => 60,  198 => 59,  192 => 58,  189 => 57,  187 => 56,  181 => 53,  173 => 48,  167 => 44,  164 => 43,  159 => 42,  156 => 41,  154 => 40,  147 => 36,  143 => 35,  135 => 30,  129 => 26,  124 => 25,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  250 => 87,  238 => 80,  236 => 86,  224 => 72,  218 => 69,  213 => 66,  206 => 61,  203 => 60,  196 => 55,  193 => 54,  187 => 53,  184 => 52,  182 => 51,  176 => 48,  168 => 43,  162 => 39,  159 => 38,  154 => 37,  151 => 36,  149 => 35,  142 => 31,  138 => 30,  130 => 25,  124 => 21,  119 => 20,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -346,12 +313,7 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
         <h2>Nos Formations</h2>
         <p>Découvrez nos formations pour enrichir vos compétences.</p>
       </div>
-       <div class=\"input-group\" style=\"width: 40%;\">
-                                <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\">
-                                <span class=\"input-group-append\">
-                                    <button class=\"btn btn-outline-secondary border-bottom-0 border rounded-pill py-2\" type=\"button\" id=\"searchButton\" style=\"font-size: 0.875rem;\">Search</button>
-                                </span>
-                            </div>
+
       <div class=\"course_container\">
         <div class=\"course_owl-carousel owl-carousel owl-theme\">
           {% for formation in formations %}
@@ -425,34 +387,6 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
       </div>
     </div>
   </section>
-   <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); // Get the search query
-
-        // Loop through each formation item and show/hide based on search query
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); // Get the title text
-            var description = \$(this).find('.detail-box p').text().toLowerCase(); // Get the description text
-
-            // Check if either title or description contains the search query
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); // Show item
-            } else {
-                \$(this).hide(); // Hide item
-            }
-        });
-
-        // If no items are visible, hide the carousel container (optional)
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
   <style>
   .score-section {
     font-size: 0.9rem;
