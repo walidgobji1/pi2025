@@ -46,6 +46,9 @@ class Avis
     #[ORM\Column(nullable: true)]
     private ?bool $isFlagged = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $flaggedReason = null;
+
     #[ORM\PrePersist]
     public function setCreationDate(): void
     {
@@ -157,6 +160,18 @@ class Avis
     public function setIsFlagged(?bool $isFlagged): static
     {
         $this->isFlagged = $isFlagged;
+
+        return $this;
+    }
+
+    public function getFlaggedReason(): ?string
+    {
+        return $this->flaggedReason;
+    }
+
+    public function setFlaggedReason(?string $flaggedReason): static
+    {
+        $this->flaggedReason = $flaggedReason;
 
         return $this;
     }

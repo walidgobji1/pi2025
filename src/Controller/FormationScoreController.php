@@ -134,22 +134,44 @@ final class FormationScoreController extends AbstractController
                     $result = $response->toArray();
                     $this->logger->info('Réponse Sightengine pour "' . $commentaire . '"', ['result' => $result]);
 
-                    $insultScore = $result['moderation_classes']['insulting'] ?? 0;
-                    $toxicScore = $result['moderation_classes']['toxic'] ?? 0;
-                    $containsBadWords = ($insultScore >= 0.5 || $toxicScore >= 0.5);
+                    $reasons = [];
+                    $moderation = $result['moderation_classes'] ?? [];
+                    if (($moderation['insulting'] ?? 0) >= 0.5) $reasons[] = 'insult';
+                    if (($moderation['toxic'] ?? 0) >= 0.5) $reasons[] = 'toxic';
+                    if (($moderation['sexual'] ?? 0) >= 0.5) $reasons[] = 'sexual'; // Added sexual
+                    if (($moderation['profanity'] ?? 0) >= 0.5) $reasons[] = 'profanity'; // Added profanity
+
+                    $containsBadWords = !empty($reasons); // True if any reason applies
+                    $reason = $containsBadWords ? implode(', ', $reasons) : ''; // Combine reasons
+
+                    // Cache both the flag and the reason
+                    $cacheItem->set(['isFlagged' => $containsBadWords, 'reason' => $reason]);
+                    $cacheItem->expiresAfter(86400);
+                    $cache->save($cacheItem);
                 } catch (\Exception $e) {
                     $this->logger->error('Erreur API pour "' . $commentaire . '"', ['exception' => $e->getMessage()]);
                     $containsBadWords = false;
                 }
 
-                $cacheItem->set($containsBadWords);
-                $cacheItem->expiresAfter(86400);
-                $cache->save($cacheItem);
+               
             } else {
+                $cachedData = $cacheItem->get();
+                // Handle old boolean cache values
+                if (is_bool($cachedData)) {
+                    $cachedData = ['isFlagged' => $cachedData, 'reason' => $cachedData ? 'unknown' : ''];
+                }
                 $this->logger->info('Résultat en cache pour "' . $commentaire . '"', ['flagged' => $cacheItem->get()]);
             }
 
-            $avis->setIsFlagged($cacheItem->get());
+            // Get cached data and update avis
+            $cachedData = $cacheItem->get();
+            if (is_bool($cachedData)) {
+                $cachedData = ['isFlagged' => $cachedData, 'reason' => $cachedData ? 'unknown' : ''];
+            }
+            $avis->setIsFlagged($cachedData['isFlagged']); // Keep original logic
+            $avis->setFlaggedReason($cachedData['reason']); // Keep original logic
+
+            
         }
 
         try {

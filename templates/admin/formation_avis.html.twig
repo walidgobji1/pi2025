@@ -26,7 +26,10 @@
                                             {% endfor %}
                                         </div>
                                         {% if avis.isFlagged %}
-                                            <i class="fas fa-flag text-danger ms-2" title="Flagged"></i>
+                                            <div class="flag-container">
+                                <i class="fas fa-flag text-danger ms-2" title="Flagged"></i>
+                                <span class="flag-badge">{{ avis.flaggedReason|default('Unknown') }}</span>
+                            </div>
                                         {% endif %}
                                     </div>
                                     <p class="card-text text-muted">{{ avis.commentaire }}</p>
@@ -72,6 +75,22 @@
         .container-fluid {
             margin: 0;
             padding: 0;
+        }
+        .flag-container {
+            display: flex;
+            align-items: center;
+        }
+        .flag-badge {
+            background-color: #ffccd5; /* Soft red background */
+            color: #d6336c; /* Cute pinkish-red text */
+            font-size: 0.85em;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            box-shadow: 0 2px 4px rgba(214, 51, 108, 0.2);
+        }
+        .fas.fa-flag {
+            color: #ff6b81; /* Softer red for the flag */
         }
     </style>
 {% endblock %}
