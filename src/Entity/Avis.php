@@ -43,6 +43,9 @@ class Avis
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?Formation $formation = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isFlagged = false;
+
     #[ORM\PrePersist]
     public function setCreationDate(): void
     {
@@ -142,6 +145,18 @@ class Avis
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
+
+        return $this;
+    }
+
+    public function isFlagged(): ?bool
+    {
+        return $this->isFlagged;
+    }
+
+    public function setIsFlagged(?bool $isFlagged): static
+    {
+        $this->isFlagged = $isFlagged;
 
         return $this;
     }
