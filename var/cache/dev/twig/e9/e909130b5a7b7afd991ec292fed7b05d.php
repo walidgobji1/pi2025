@@ -124,7 +124,10 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
 \t\t\t<header id=\"header\" class=\"header fixed-top d-flex align-items-center\">
 
 \t\t\t\t<div class=\"d-flex align-items-center justify-content-between\">
-\t\t\t\t\t<a href=\"index.html\" class=\"logo d-flex align-items-center\">
+\t\t\t\t\t<a href=";
+        // line 546
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
+        yield " class=\"logo d-flex align-items-center\">
 \t\t\t\t\t\t<img src=\"";
         // line 547
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/formini.jpeg"), "html", null, true);
@@ -581,7 +584,7 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
 \t\t\t\t\t\t\t<i class=\"bi bi-bar-chart\"></i>
 \t\t\t\t\t\t\t<span>Feedback</span>
 \t\t\t\t\t\t</a>
-\t\t\t\t\t</li>>
+\t\t\t\t\t</li>
 \t\t\t\t\t<!-- End Formations Nav -->
 
 \t\t\t\t\t<li class=\"nav-item\">
@@ -908,7 +911,7 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  869 => 1057,  826 => 540,  802 => 514,  788 => 1085,  782 => 1082,  778 => 1081,  774 => 1080,  770 => 1079,  766 => 1078,  762 => 1077,  758 => 1076,  754 => 1075,  735 => 1058,  733 => 1057,  708 => 1035,  691 => 1021,  674 => 1007,  627 => 963,  617 => 956,  597 => 939,  579 => 924,  566 => 914,  557 => 908,  537 => 891,  518 => 875,  509 => 869,  491 => 854,  471 => 837,  461 => 830,  426 => 797,  417 => 791,  407 => 783,  398 => 777,  369 => 750,  365 => 748,  363 => 747,  360 => 746,  358 => 745,  355 => 744,  353 => 743,  348 => 741,  344 => 740,  341 => 739,  339 => 738,  330 => 732,  325 => 730,  298 => 706,  281 => 692,  264 => 678,  130 => 547,  122 => 541,  117 => 540,  111 => 537,  106 => 535,  102 => 534,  98 => 533,  94 => 532,  90 => 531,  86 => 530,  75 => 522,  70 => 520,  65 => 518,  61 => 516,  59 => 514,  52 => 509,);
+        return array (  872 => 1057,  829 => 540,  805 => 514,  791 => 1085,  785 => 1082,  781 => 1081,  777 => 1080,  773 => 1079,  769 => 1078,  765 => 1077,  761 => 1076,  757 => 1075,  738 => 1058,  736 => 1057,  711 => 1035,  694 => 1021,  677 => 1007,  630 => 963,  620 => 956,  600 => 939,  582 => 924,  569 => 914,  560 => 908,  540 => 891,  521 => 875,  512 => 869,  494 => 854,  474 => 837,  464 => 830,  429 => 797,  420 => 791,  410 => 783,  401 => 777,  372 => 750,  368 => 748,  366 => 747,  363 => 746,  361 => 745,  358 => 744,  356 => 743,  351 => 741,  347 => 740,  344 => 739,  342 => 738,  333 => 732,  328 => 730,  301 => 706,  284 => 692,  267 => 678,  133 => 547,  129 => 546,  122 => 541,  117 => 540,  111 => 537,  106 => 535,  102 => 534,  98 => 533,  94 => 532,  90 => 531,  86 => 530,  75 => 522,  70 => 520,  65 => 518,  61 => 516,  59 => 514,  52 => 509,);
     }
 
     public function getSourceContext(): Source
@@ -1458,7 +1461,7 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
 \t\t\t<header id=\"header\" class=\"header fixed-top d-flex align-items-center\">
 
 \t\t\t\t<div class=\"d-flex align-items-center justify-content-between\">
-\t\t\t\t\t<a href=\"index.html\" class=\"logo d-flex align-items-center\">
+\t\t\t\t\t<a href={{ path('app_home') }} class=\"logo d-flex align-items-center\">
 \t\t\t\t\t\t<img src=\"{{asset('backOffice/img/formini.jpeg')}}\" alt=\"\" style=\"max-height: 60px;\">
 \t\t\t\t\t\t<span class=\"d-none d-lg-block\">FORMINI</span>
 \t\t\t\t\t</a>
@@ -1840,7 +1843,7 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
 \t\t\t\t\t\t\t<i class=\"bi bi-bar-chart\"></i>
 \t\t\t\t\t\t\t<span>Feedback</span>
 \t\t\t\t\t\t</a>
-\t\t\t\t\t</li>>
+\t\t\t\t\t</li>
 \t\t\t\t\t<!-- End Formations Nav -->
 
 \t\t\t\t\t<li class=\"nav-item\">
