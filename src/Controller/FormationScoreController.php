@@ -15,17 +15,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-
+use Psr\Log\LoggerInterface;
 
 
 final class FormationScoreController extends AbstractController
+
 {
+    private $logger;
     private $formationScoreService;
 
+
     // Inject the FormationScoreService into the controller
-    public function __construct(FormationScoreService $formationScoreService)
+    public function __construct(FormationScoreService $formationScoreService, LoggerInterface $logger)
     {
         $this->formationScoreService = $formationScoreService;
+        $this->logger = $logger;
     }
     #[Route('/score', name: 'app_formation_score_list')]
     public function index(FormationRepository $formationRepository, FormationScoreRepository $formationScoreRepository): Response
@@ -90,63 +94,77 @@ final class FormationScoreController extends AbstractController
     #[Route("/admin/formation/{id}", name: "admin_formation_show")]
     public function showAvis(int $id, EntityManagerInterface $em)
     {
-        // Fetch the formation using the ID
         $formation = $em->getRepository(Formation::class)->find($id);
-
-        // Check if the formation exists
         if (!$formation) {
-            throw $this->createNotFoundException('Formation not found');
+            throw $this->createNotFoundException('Formation non trouvée');
         }
-        // Initialize HTTP client and cache
+
         $client = HttpClient::create();
         $cache = new FilesystemAdapter();
-        // $badWords = ['badword1', 'badword2', 'badword3'];
-        // Fetch the avis associated with the formation
+        // Clear the cache (temporary for testing)
+        $cache->clear();
+        $this->logger->info('Cache vidé avant traitement');
         $apiUser = '1126907624';
         $apiSecret = 'CL3tBwEJEJuRU9vZTaAre4KeVkVx5e6A';
+
         $avisList = $em->getRepository(Avis::class)->findBy(['formation' => $formation]);
+
         foreach ($avisList as $avis) {
-            $cacheKey = 'sightengine_moderation_' . md5($avis->getCommentaire());
+            $commentaire = $avis->getCommentaire();
+            if (empty($commentaire)) {
+                $this->logger->warning('Commentaire vide pour avis ID: ' . $avis->getId());
+                continue; // Skip empty comments
+            }
+
+            $cacheKey = 'sightengine_moderation_' . md5($commentaire);
             $cacheItem = $cache->getItem($cacheKey);
 
             if (!$cacheItem->isHit()) {
                 try {
                     $response = $client->request('GET', 'https://api.sightengine.com/1.0/text/check.json', [
                         'query' => [
-                            'text' => $avis->getCommentaire(),
-                            'lang' => 'en', // Change to 'fr' for French comments
-                            'mode' => 'ml,rules', // Options: standard, strict
+                            'text' => $commentaire,
+                            'lang' => 'en,fr',
+                            'mode' => 'ml,rules',
                             'api_user' => $apiUser,
                             'api_secret' => $apiSecret,
                         ],
                     ]);
 
                     $result = $response->toArray();
-                    
-                    
+                    $this->logger->info('Réponse Sightengine pour "' . $commentaire . '"', ['result' => $result]);
+
                     $insultScore = $result['moderation_classes']['insulting'] ?? 0;
                     $toxicScore = $result['moderation_classes']['toxic'] ?? 0;
-
-                    // Flag comment if insult or toxicity score exceeds threshold
-                    $containsBadWords = ($insultScore >= 0.7 || $toxicScore >= 0.7);
+                    $containsBadWords = ($insultScore >= 0.5 || $toxicScore >= 0.5);
                 } catch (\Exception $e) {
-                    $containsBadWords = false; // Fallback if API fails
+                    $this->logger->error('Erreur API pour "' . $commentaire . '"', ['exception' => $e->getMessage()]);
+                    $containsBadWords = false;
                 }
 
                 $cacheItem->set($containsBadWords);
-                $cacheItem->expiresAfter(86400); // Cache for 24 hours
+                $cacheItem->expiresAfter(86400);
                 $cache->save($cacheItem);
+            } else {
+                $this->logger->info('Résultat en cache pour "' . $commentaire . '"', ['flagged' => $cacheItem->get()]);
             }
 
             $avis->setIsFlagged($cacheItem->get());
-            $em->flush();
         }
-        // Pass the formation and avis to the template
+
+        try {
+            $em->flush();
+            $this->logger->info('Mise à jour de la base de données réussie');
+        } catch (\Exception $e) {
+            $this->logger->error('Erreur lors du flush', ['exception' => $e->getMessage()]);
+        }
+
         return $this->render('admin/formation_avis.html.twig', [
             'formation' => $formation,
             'avisList' => $avisList,
         ]);
     }
+
     #[Route('/admin/avis/{id}', name: 'admin_avis_delete', methods: ['POST'])]
     public function deleteAvis(Request $request, Avis $avi, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
     {
