@@ -140,12 +140,45 @@ final class FormationScoreController extends AbstractController
                     if (($moderation['toxic'] ?? 0) >= 0.5) $reasons[] = 'toxic';
                     if (($moderation['sexual'] ?? 0) >= 0.5) $reasons[] = 'sexual'; // Added sexual
                     if (($moderation['profanity'] ?? 0) >= 0.5) $reasons[] = 'profanity'; // Added profanity
+                    if (($moderation['discriminatory'] ?? 0) >= 0.5) $reasons[] = 'discriminatory'; 
+                    if (($moderation['violent'] ?? 0) >= 0.5) $reasons[] = 'violent'; 
+
+
 
                     $containsBadWords = !empty($reasons); // True if any reason applies
                     $reason = $containsBadWords ? implode(', ', $reasons) : ''; // Combine reasons
+                    // Extract flagged words with positions
+                $flaggedWords = [];
+                
+                $seenPositions = [];
+                foreach ($result['profanity']['matches'] ?? [] as $match) {
+                    $start = $match['start'];
+                    $end = $match['end'];
+                    // Extend end to next space or end of string
+                    $nextSpace = strpos($commentaire, ' ', $start) ?: strlen($commentaire);
+                    $actualWord = substr($commentaire, $start, $nextSpace - $start);
+                    $key = $start . '-' . $actualWord;
+                    if (!in_array($key, $seenPositions)) {
+                        $flaggedWords[] = [
+                            'word' => $actualWord,
+                            'start' => $start,
+                            'end' => $nextSpace
+                        ];
+                        $seenPositions[] = $key;
+                        if (!in_array($match['type'], $reasons)) {
+                            $reasons[] = $match['type']; // e.g., "sexual"
+                        }
+                    }
+                }
 
+                // Ensure "profanity" is included if matches exist, even if type is specific
+                if (!empty($flaggedWords) && !in_array('profanity', $reasons)) {
+                    $reasons[] = 'profanity';
+                }
+                $this->logger->info('Flagged words for "' . $commentaire . '"', ['flaggedWords' => $flaggedWords]);
+                
                     // Cache both the flag and the reason
-                    $cacheItem->set(['isFlagged' => $containsBadWords, 'reason' => $reason]);
+                    $cacheItem->set(['isFlagged' => $containsBadWords, 'reason' => $reason ,'flaggedWords' => $flaggedWords]);
                     $cacheItem->expiresAfter(86400);
                     $cache->save($cacheItem);
                 } catch (\Exception $e) {
@@ -158,7 +191,7 @@ final class FormationScoreController extends AbstractController
                 $cachedData = $cacheItem->get();
                 // Handle old boolean cache values
                 if (is_bool($cachedData)) {
-                    $cachedData = ['isFlagged' => $cachedData, 'reason' => $cachedData ? 'unknown' : ''];
+                    $cachedData = ['isFlagged' => $cachedData, 'reason' => $cachedData ? 'unknown' : '', 'flaggedWords' => []];
                 }
                 $this->logger->info('Résultat en cache pour "' . $commentaire . '"', ['flagged' => $cacheItem->get()]);
             }
@@ -168,8 +201,9 @@ final class FormationScoreController extends AbstractController
             if (is_bool($cachedData)) {
                 $cachedData = ['isFlagged' => $cachedData, 'reason' => $cachedData ? 'unknown' : ''];
             }
-            $avis->setIsFlagged($cachedData['isFlagged']); // Keep original logic
-            $avis->setFlaggedReason($cachedData['reason']); // Keep original logic
+            $avis->setIsFlagged($cachedData['isFlagged']); 
+            $avis->setFlaggedReason($cachedData['reason']); 
+            $avis->flaggedWords = $cachedData['flaggedWords']; // Transient property, not persisted
 
             
         }
