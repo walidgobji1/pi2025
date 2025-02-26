@@ -81,49 +81,83 @@ final class EvaluationController extends AbstractController
     }
 
     private function parseAffindaResponse(array $cvData): array
-    {
-        $data = $cvData['data'] ?? [];
+{
+    $data = $cvData['data'] ?? [];
 
-        return [
-            'education' => implode(', ', array_map(fn($edu) => $edu['degree'] ?? $edu['qualification'] ?? '', $data['education'] ?? [])),
-            'yearsOfExperience' => $this->calculateTotalExperience($data['workExperience'] ?? []),
-            'skills' => implode(', ', array_map(fn($skill) => is_array($skill) ? ($skill['name'] ?? '') : $skill, $data['skills'] ?? [])),
-            'certifications' => implode(', ', array_map(fn($cert) => $cert['name'] ?? '', $data['certifications'] ?? [])),
-        ];
-    }
-
-    private function calculateTotalExperience(array $workExperience): ?float
-    {
-        $totalMonths = 0;
-    
-        foreach ($workExperience as $job) {
-            try {
-                // Si startDate est vide, ignorer cet emploi
-                if (empty($job['startDate'])) {
-                    continue;
-                }
-    
-                // Parse la date de début avec gestion des formats multiples
-                $start = \DateTime::createFromFormat('!Y-m-d', $job['startDate']) ?: new \DateTime($job['startDate']);
-    
-                // Si endDate est vide,假设 emploi en cours (date actuelle)
-                if (empty($job['endDate'])) {
-                    $end = new \DateTime(); // Aujourd'hui
-                } else {
-                    $end = \DateTime::createFromFormat('!Y-m-d', $job['endDate']) ?: new \DateTime($job['endDate']);
-                }
-    
-                // Calculer la différence
-                $interval = $start->diff($end);
-                $totalMonths += $interval->y * 12 + $interval->m;
-    
-            } catch (\Exception $e) {
-                // Log l'erreur si nécessaire, mais continuer avec les autres entrées
-                continue;
+    // Combine workExperience and relevant sections
+    $workExperience = $data['workExperience'] ?? [];
+    foreach ($data['sections'] ?? [] as $section) {
+        if (in_array($section['sectionType'], ['WorkExperience', 'Projects'])) {
+            // Extract dates and details from section text
+            $experience = $this->extractExperienceFromSection($section['text']);
+            if ($experience) {
+                $workExperience[] = $experience;
             }
         }
-    
-        // Retourner les années en flottant (ex. 0.5 pour 6 mois) ou null si aucune expérience
-        return $totalMonths > 0 ? $totalMonths / 12 : null;
     }
+
+    return [
+        'education' => implode(', ', array_map(fn($edu) => $edu['degree'] ?? $edu['qualification'] ?? '', $data['education'] ?? [])),
+        'yearsOfExperience' => $this->calculateTotalExperience($workExperience),
+        'skills' => implode(', ', array_map(fn($skill) => is_array($skill) ? ($skill['name'] ?? '') : $skill, $data['skills'] ?? [])),
+        'certifications' => implode(', ', array_map(fn($cert) => $cert['name'] ?? '', $data['certifications'] ?? [])),
+    ];
+}
+
+// helper functions to extract years of experiences from projects 
+private function extractExperienceFromSection(string $text): ?array
+{
+    // Simple regex to find date ranges like "Mar 23 - Aug 23" or "Feb 24"
+    $pattern = '/(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{2}(?:\s*-\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s*\d{2})?/i';
+    if (preg_match($pattern, $text, $matches)) {
+        $dateRange = $matches[0];
+        $parts = explode(' - ', $dateRange);
+
+        $startDate = $this->normalizeDate($parts[0]);
+        $endDate = isset($parts[1]) ? $this->normalizeDate($parts[1]) : null;
+
+        return [
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'description' => $text,
+        ];
+    }
+    return null;
+}
+private function normalizeDate(string $dateStr): string
+{
+    // Convert "Mar 23" to "2023-03-01"
+    $date = \DateTime::createFromFormat('M y', trim($dateStr));
+    if ($date === false) {
+        return ''; // Invalid date, handle gracefully
+    }
+    // Assuming years like "23" are 2023, adjust if CV spans earlier decades
+    if ($date->format('Y') < 2000) {
+        $date->modify('+2000 years');
+    }
+    return $date->format('Y-m-01'); // Use first of month for simplicity
+}
+
+private function calculateTotalExperience(array $workExperience): ?float
+{
+    $totalMonths = 0;
+
+    foreach ($workExperience as $job) {
+        try {
+            if (empty($job['startDate'])) {
+                continue;
+            }
+
+            $start = new \DateTime($job['startDate']);
+            $end = empty($job['endDate']) ? new \DateTime() : new \DateTime($job['endDate']);
+
+            $interval = $start->diff($end);
+            $totalMonths += $interval->y * 12 + $interval->m;
+        } catch (\Exception $e) {
+            continue; // Skip invalid dates
+        }
+    }
+
+    return $totalMonths > 0 ? $totalMonths / 12 : null;
+}
 }
