@@ -10,3 +10,7 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/uploads/images'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
             inject_on_load: false    
+        formations_images:
+            uri_prefix: /uploads/images
+            upload_destination: '%kernel.project_dir%/public/uploads/images'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
