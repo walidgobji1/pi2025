@@ -1,0 +1,12 @@
+/assets/node_modules/
+/vendor/
+/composer.lock
+/drivers/
+/phpunit.xml
+/.phpunit.result.cache
+/tests/app/assets/vendor/
+/tests/app/public/assets/
+/tests/app/public/build/
+/tests/app/var/
+/vendor/
+node_modules/

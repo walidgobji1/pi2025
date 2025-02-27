@@ -21,7 +21,7 @@ class InstructeurType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('cv')
-            ->add('image')
+            ->add('image_ins')
         ;
     }
 

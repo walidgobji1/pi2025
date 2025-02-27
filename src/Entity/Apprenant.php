@@ -18,6 +18,13 @@ class Apprenant extends User
 
     #[ORM\Column(name: "email_apprenant", type: "string", length: 255, unique: true)]
     private ?string $email_apprenant = null;
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+private ?string $image_app = null;
+
+public function getImage(): ?string { return $this->image_app; }
+public function setImage(?string $image): self { $this->image_app = $image; return $this; }
+
+  
 
     #[ORM\Column(type: "integer", nullable: true)]
     private ?int $niveau_etude = null;
