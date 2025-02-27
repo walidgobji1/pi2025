@@ -11,14 +11,16 @@ class EvaluationService
 {
     private $httpClient;
     private $entityManager;
-    private $apiKey;
+    private $affindaapiKey;
+    private $flaskapikey;
     private $cvBasePath = 'C:/Users/LENOVO/Desktop/PIDEV/pi2025/public/uploads/cv/'; // Base path for CVs
 
-    public function __construct(HttpClientInterface $httpClient, EntityManagerInterface $entityManager, string $affindaApiKey)
+    public function __construct(HttpClientInterface $httpClient, EntityManagerInterface $entityManager, string $affindaApiKey , string $flaskApiKey )
     {
         $this->httpClient = $httpClient;
         $this->entityManager = $entityManager;
-        $this->apiKey = $affindaApiKey;
+        $this->affindaapiKey = $affindaApiKey;
+        $this->flaskapikey= $flaskApiKey;
     }
 
     public function createEvaluationFromCv(Instructeur $instructeur): void
@@ -38,7 +40,7 @@ class EvaluationService
         try {
             $response = $this->httpClient->request('POST', 'https://api.affinda.com/v1/resumes', [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->apiKey,
+                    'Authorization' => 'Bearer ' . $this->affindaapiKey,
                     'Content-Type' => 'multipart/form-data',
                 ],
                 'body' => [
@@ -66,6 +68,36 @@ class EvaluationService
         }
     }
 
+    // helper functions to extract data from data responce of the affinda api 
+
+    // Updated method to estimate education level from Affinda education data
+    private function estimateEducationLevel(?array $education): int
+    {
+        if (empty($education)) return 1; // Default to basic (1) if no education
+        foreach ($education as $edu) {
+            $level = $edu['accreditation']['educationLevel'] ?? '';
+            if (strpos($level, 'bachelors') !== false) {
+                return 2; // Intermediate (Bachelor’s)
+            } elseif (strpos($level, 'masters') !== false || strpos($level, 'phd') !== false) {
+                return 3; // Advanced (Master’s or PhD)
+            }
+        }
+        return 1; // Default to basic if no match
+    }
+
+    
+    // Updated method to count items, handling Affinda’s arrays directly
+    private function countItems($items): int
+    {
+        if (empty($items)) return 0;
+        if (is_array($items)) {
+            return count($items); // Count array elements for skills/certifications
+        }
+        $itemsArray = array_filter(explode(',', $items)); // Split by commas and remove empty entries
+        return count($itemsArray);
+    }
+
+    // Updated method to parse Affinda response for Flask API data
     private function parseAffindaResponse(array $cvData): array
     {
         $data = $cvData['data'] ?? [];
@@ -81,14 +113,16 @@ class EvaluationService
                 }
             }
         }
+        
 
         return [
-            'education' => implode(', ', array_map(fn($edu) => $edu['degree'] ?? $edu['qualification'] ?? '', $data['education'] ?? [])),
-            'yearsOfExperience' => $this->calculateTotalExperience($workExperience),
-            'skills' => implode(', ', array_map(fn($skill) => is_array($skill) ? ($skill['name'] ?? '') : $skill, $data['skills'] ?? [])),
-            'certifications' => implode(', ', array_map(fn($cert) => $cert['name'] ?? '', $data['certifications'] ?? [])),
+            'education' => implode(', ', array_map(fn($edu) => $edu['accreditation']['education'] ?? '', $data['education'] ?? [])),
+            'yearsOfExperience' => $this->calculateTotalExperience($workExperience) ?? $data['totalYearsExperience'], // Use Affinda’s totalYearsExperience as fallback
+            'skills' => $data['skills'] ?? [], // Return as array for counting
+            'certifications' => $data['certifications'] ?? [], // Return as array for counting
         ];
     }
+
 
     private function extractExperienceFromSection(string $text): ?array
     {

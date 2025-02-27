@@ -11,7 +11,7 @@ parameters:
     stripe_public_key: '%env(STRIPE_PUBLIC_KEY)%'
     stripe_secret_key: '%env(STRIPE_SECRET_KEY)%'
     affinda_api_key: '%env(AFFINDA_API_KEY)%'
-
+    flask_api_key: '%flask_api_key%'
 
 
 services:
@@ -37,6 +37,7 @@ services:
             $httpClient: '@http_client'
             $entityManager: '@doctrine.orm.entity_manager'
             $affindaApiKey: '%env(AFFINDA_API_KEY)%'
+            $flaskApiKey: '%env(flask_api_key)'
     App\EventListener\InstructeurListener:
         tags:
             - { name: doctrine.event_listener, event: postPersist }
