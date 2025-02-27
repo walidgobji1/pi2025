@@ -36,6 +36,22 @@ class Message
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdAt;
 
+    #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    private ?string $reaction = null;
+
+
+    public function getReaction(): ?string
+    {
+        return $this->reaction;
+    }
+
+    public function setReaction(?string $reaction): self
+    {
+        $this->reaction = $reaction;
+        return $this;
+    }
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime(); // ✅ Date par défaut

@@ -1,92 +1,432 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-	<section>
-		<div class="container mt-4">
-			<div class="border rounded p-3 shadow bg-white">
 
-				<div class="container py-5">
-					<div
-						class="row">
-						<!-- Sidebar des discussions -->
-						<div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
-							<h5 class="font-weight-bold mb-3 text-center text-lg-start">Discussions</h5>
-							<div class="card">
-								<div class="card-body">
-									<ul class="list-unstyled mb-0 scrollable-list">
-										{% for discussion in discussions %}
-											{% if discussion.receiver.id == app.user.id %}
-												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
-													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
-														<div class="d-flex flex-row w-100">
-															{% if app.user.image %}
-																<img src="{{ asset('uploads/images/' ~ discussion.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% else %}
-																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% endif %}
-															<div class="pt-1">
-																<span style="font-size:1.2rem;">
-																	{{ discussion.sender.nom }}
-																	{{ discussion.sender.prenom }}
-																</span>
-															</div>
+
+<style>
+		.chat-box {
+			max-height: 450px;
+			overflow-y: auto;
+			background: #f9f9f9;
+			border-radius: 15px;
+			padding: 20px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Liste des messages */
+		.chat-messages {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			overflow-y: auto;
+			flex-grow: 1;
+
+		}
+
+		/* Message standard */
+		.message {
+			max-width: 70%;
+			padding: 12px 16px;
+			border-radius: 18px;
+			font-size: 15px;
+			display: flex;
+			align-items: center;
+			word-wrap: break-word;
+			white-space: pre-wrap;
+			margin-bottom: 12px;
+			transition: all 0.3s ease;
+		}
+
+		/* Message envoyé */
+		.message.sent {
+			background: #007bff;
+			color: white;
+			align-self: flex-end;
+			border-bottom-right-radius: 0;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Message reçu */
+		.message.received {
+			background: #e0e0e0;
+			align-self: flex-start;
+			border-bottom-left-radius: 0;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Formulaire d'entrée */
+		.chat-input {
+			display: flex;
+			align-items: center;
+			padding: 15px;
+			background: #ffffff;
+			border-top: 2px solid #e1e1e1;
+			border-radius: 10px;
+		}
+
+		/* Zone de texte */
+		.chat-input textarea {
+			flex: 1;
+			border-radius: 10px;
+			padding: 12px 15px;
+			font-size: 14px;
+			resize: none;
+			border: 1px solid #ccc;
+			height: 50px;
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+		}
+
+		/* Effet de focus sur la zone de texte */
+		.chat-input textarea:focus {
+			border-color: #007bff;
+			outline: none;
+		}
+
+		/* Bouton envoyer */
+		.chat-input button {
+			padding: 10px 20px;
+			border-radius: 15px;
+			font-size: 14px;
+			background: #007bff;
+			color: white;
+			border: none;
+			margin-left: 10px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		/* Effet de hover pour le bouton envoyer */
+		.chat-input button:hover {
+			background: #0056b3;
+		}
+
+		/* Timestamps des messages */
+		.timestamp {
+			font-size: 12px;
+			color: rgba(0, 0, 0, 0.6);
+			margin-left: 10px;
+		}
+
+		/* Style de la liste des discussions */
+		.scrollable-list {
+			max-height: 450px;
+			overflow-y: auto;
+			margin-bottom: 20px;
+		}
+
+		/* Style de la discussion dans la liste */
+		.list-unstyled li {
+			padding: 12px;
+			border-bottom: 1px solid #ddd;
+			background-color: #f9f9f9;
+			border-radius: 10px;
+			margin-bottom: 10px;
+			transition: background-color 0.3s ease;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		/* Effet au survol des discussions */
+		.list-unstyled li:hover {
+			background-color: #f0f0f0;
+		}
+
+		/* Avatar de l'utilisateur dans la discussion */
+		.rounded-circle {
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		/* Formulaire de suppression de la discussion */
+		.btn-danger {
+			background-color: #e74c3c;
+			border-color: #e74c3c;
+			border-radius: 12px;
+			transition: all 0.3s ease;
+		}
+
+		/* Effet hover pour le bouton supprimer */
+		.btn-danger:hover {
+			background-color: #c0392b;
+			border-color: #c0392b;
+			text-align: center;
+		}
+
+		/* Formatage des boutons de suppression de message */
+		.dropdown-menu li button {
+			background: transparent;
+			border: none;
+			font-size: 14px;
+			color: #c0392b;
+		}
+
+		/* Ajouter un style au bouton modifier */
+		.dropdown-item {
+			background-color: #f1f1f1;
+		}
+
+		/* Ajouter un fond pour la card contenant les discussions */
+		.card-body {
+			padding: 20px;
+			background: #f9f9f9;
+			border-radius: 10px;
+		}
+
+		/* Réduire la taille du dropdown */
+		.dropdown-menu {
+			min-width: 150px;
+			font-size: 14px;
+			padding: 8px 0;
+			border-radius: 8px;
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+			background-color: #fff;
+			border: 1px solid #ddd;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: all 0.3s ease;
+		}
+
+		/* Effet de survol sur le menu dropdown */
+		.dropdown-menu.show {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		/* Style des éléments du dropdown */
+		.dropdown-item {
+			padding: 10px 15px;
+			color: #333;
+			background-color: transparent;
+			border: none;
+			font-size: 14px;
+			border-radius: 6px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* Effet de survol des éléments du dropdown */
+		.dropdown-item:hover {
+			background-color: #f1f1f1;
+			color: #007bff;
+		}
+
+		/* Bouton du dropdown */
+		.dropdown-toggle {
+			background-color: transparent;
+			border: none;
+			padding: 6px 12px;
+			font-size: 14px;
+			color: #555;
+			border-radius: 6px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		/* Effet de survol sur le bouton dropdown */
+		.dropdown-toggle:hover {
+			background-color: #f0f0f0;
+			color: #007bff;
+		}
+
+		/* Ajout d'une icône sur le bouton dropdown */
+		.dropdown-toggle::after {
+			content: ' ▼';
+			font-size: 10px;
+			margin-left: 5px;
+		}
+
+		/* Modifier le bouton supprimer */
+		.dropdown-item.text-danger {
+			color: #e74c3c;
+		}
+
+		/* Effet de survol du bouton supprimer */
+		.dropdown-item.text-danger:hover {
+			background-color: #e74c3c;
+			color: white;
+		}
+		/* Style de la liste des emojis dans le dropdown */
+		.emoji-list {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		/* Style des éléments de la liste des emojis */
+		.emoji-list li {
+			display: block; /* Assure l'affichage vertical */
+			margin-bottom: 10px; /* Espacement entre les emojis */
+		}
+
+		/* Style pour les boutons emoji dans le dropdown */
+		.emoji-list .emoji {
+			font-size: 20px;
+			padding: 8px 15px;
+			background-color: transparent;
+			border: none;
+			color: #555;
+			width: 100%;
+			text-align: left;
+			transition: background-color 0.3s ease, color 0.3s ease;
+			border-radius: 10px;
+		}
+
+		/* Effet de survol pour les boutons emoji */
+		.emoji-list .emoji:hover {
+			background-color: #f0f0f0;
+			color: #4c89f5;
+		}
+
+		/*# sourceMappingURL=style.css.map */
+	</style>
+<section>
+	<div class="container mt-4">
+		<div class="border rounded p-3 shadow bg-white">
+
+			<div class="container py-5">
+				<div
+					class="row">
+					<!-- Sidebar des discussions -->
+					<div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+						<h5 class="font-weight-bold mb-3 text-center text-lg-start">Discussions</h5>
+						<div class="card">
+							<div class="card-body">
+								<ul class="list-unstyled mb-0 scrollable-list">
+									{% for discussion in discussions %}
+										{% if discussion.receiver.id == app.user.id %}
+											<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
+												<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
+													<div class="d-flex flex-row w-100">
+														{% if app.user.image %}
+															<img src="{{ asset('uploads/images/' ~ discussion.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+														{% else %}
+															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+														{% endif %}
+														<div class="pt-1">
+															<span style="font-size:1.2rem;">
+																{{ discussion.sender.nom }}
+																{{ discussion.sender.prenom }}
+															</span>
 														</div>
-													</a>
-													<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
-														<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
-													</form>
-												</li>
-											{% elseif discussion.sender.id == app.user.id %}
-												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
-													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
-														<div class="d-flex flex-row w-100">
-{% if app.user.image %}
-																<img src="{{ asset('uploads/images/' ~ discussion.receiver.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% else %}
-																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% endif %}															<div class="pt-1">
-																<span style="font-size: 1.2rem;">
-																	{{ discussion.receiver.nom }}
-																	{{ discussion.receiver.prenom }}
-																</span>
-															</div>
+													</div>
+												</a>
+												<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+													<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
+												</form>
+											</li>
+										{% elseif discussion.sender.id == app.user.id %}
+											<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
+												<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
+													<div class="d-flex flex-row w-100">
+														{% if app.user.image %}
+															<img src="{{ asset('uploads/images/' ~ discussion.receiver.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+														{% else %}
+															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+														{% endif %}
+														<div class="pt-1">
+															<span style="font-size: 1.2rem;">
+																{{ discussion.receiver.nom }}
+																{{ discussion.receiver.prenom }}
+															</span>
 														</div>
-													</a>
-													<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
-														<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
-													</form>
-												</li>
-											{% endif %}
-										{% else %}
-											<li class="list-group-item text-muted">Aucune discussion disponible.</li>
-										{% endfor %}
-									</ul>
+													</div>
+												</a>
+												<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+													<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
+												</form>
+											</li>
+										{% endif %}
+									{% else %}
+										<li class="list-group-item text-muted">Aucune discussion disponible.</li>
+									{% endfor %}
+								</ul>
 
 
-									<a href="{{ path('create_discussion') }}" class="btn btn-success mt-3">Nouvelle discussion</a>
-								</div>
+								<a href="{{ path('create_discussion') }}" class="btn btn-success mt-3">Nouvelle discussion</a>
 							</div>
 						</div>
+					</div>
 
-						<!-- Chatbox principale -->
-						<div class="col-md-6 col-lg-7 col-xl-8">
-							<h5 class="font-weight-bold mb-3 text-center text-lg-start">Message avec</h5>
+					<!-- Chatbox principale -->
+					<div class="col-md-6 col-lg-7 col-xl-8">
+						<h5 class="font-weight-bold mb-3 text-center text-lg-start">Message avec</h5>
 
-							{% if discussion is defined and discussion %}
-								<div class="chat-box p-3">
-									<ul class="list-unstyled chat-messages" id="chat-messages">
-										{% for message in messages %}
-											<li class="d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center">
-												{% if message.sender.id != app.user.id %}
-{% if app.user.image %}
-																<img src="{{ asset('uploads/images/' ~ message.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% else %}
-																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-															{% endif %}												{% endif %}
+						{% if discussion is defined and discussion %}
+							<div class="chat-box p-3">
+								<ul class="list-unstyled chat-messages" id="chat-messages">
+									{% for message in messages %}
+										<li class="d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center">
+											{% if message.sender.id != app.user.id %}
+												{% if app.user.image %}
+													<img src="{{ asset('uploads/images/' ~ message.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+												{% else %}
+													<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+												{% endif %}
+											{% endif %}
 
-												<div class="message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}">
-													<p class="mb-0">{{ message.content }}</p>
-													<span class="timestamp">{{ message.createdAt|date('d/m/Y H:i') }}</span>
+											<div class="message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}">
+												<p class="mb-0">{{ message.content }}</p>
+												<span class="timestamp">{{ message.createdAt|date('d/m/Y H:i') }}</span>
+												{% if message.reaction %}
+													<span class="selected-reaction">{{ message.reaction }}</span>
+												{% endif %}
+											</div>
+											<div
+												class="reaction mt-1">
+
+												<!-- Bouton pour ouvrir la liste d'emojis -->
+												<div class="dropdown">
+													<button class="btn btn-light btn-sm reaction-button" type="button" id="reactionMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+														😊
+													</button>
+
+													<!-- Liste d'emojis -->
+													<ul class="dropdown-menu emoji-list" aria-labelledby="reactionMenuButton{{ message.id }}">
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="❤️">
+																<button type="submit" class="dropdown-item emoji">❤️</button>
+															</form>
+														</li>
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="😂">
+																<button type="submit" class="dropdown-item emoji">😂</button>
+															</form>
+														</li>
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="😮">
+																<button type="submit" class="dropdown-item emoji">😮</button>
+															</form>
+														</li>
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="😢">
+																<button type="submit" class="dropdown-item emoji">😢</button>
+															</form>
+														</li>
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="👍">
+																<button type="submit" class="dropdown-item emoji">👍</button>
+															</form>
+														</li>
+														<li>
+															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																<input type="hidden" name="reaction" value="👎">
+																<button type="submit" class="dropdown-item emoji">👎</button>
+															</form>
+														</li>
+													</ul>
 												</div>
 
 
@@ -153,92 +493,76 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</div>
+</section>
+<script>
 
-		<script>
-			// Scroll automatique vers le bas
 document.addEventListener("DOMContentLoaded", function () {
-var chatMessages = document.getElementById("chat-messages");
-if (chatMessages) {
-chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+    // ////////////////////////////////// SCROLL ///////////////////////////////////////////
+
+    function scrollToLastMessage() {
+        var chatMessages = document.getElementById("chat-messages");
+        if (chatMessages) {
+            let lastMessage = chatMessages.lastElementChild;
+            if (lastMessage) {
+                lastMessage.scrollIntoView({ block: "end" }); // Scroll direct vers le dernier message
+            }
+        }
+    }
+
+    function scrollToBottomPage() {
+        window.scrollTo(0, document.body.scrollHeight); // Scroll pour toute la page
+    }
+
+    // Scroll automatique à l'ouverture
+    scrollToLastMessage();
+    scrollToBottomPage();
+
+    // Scroll après l'envoi d'un message
+    document.getElementById("chat-form")?.addEventListener("submit", function () {
+        setTimeout(() => {
+            scrollToLastMessage();
+            scrollToBottomPage();
+        }, 100);
+    });
+
+    // ////////////////////////////////////////// DROPDOWN /////////////////////////////////////////////
+
+    function closeAllDropdowns() {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
+    }
+
+    // Gestion de l'ouverture des dropdowns
+    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
+        dropdown.addEventListener('click', function (event) {
+            event.stopPropagation();
+            let menu = this.nextElementSibling;
+
+            closeAllDropdowns(); // Ferme tous les autres menus avant d'afficher celui-ci
+            menu.classList.toggle('show');
+        });
+    });
+
+    // Ferme tous les dropdowns lorsqu'on clique ailleurs sur la page
+    document.addEventListener('click', closeAllDropdowns);
+
+    // ////////////////////////////////////////// EMOJIS /////////////////////////////////////////////
+
+    // Gestion de l'ouverture des réactions emoji
+    document.querySelectorAll('.reaction-button').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            let menu = this.nextElementSibling;
+
+            closeAllDropdowns(); // Ferme tous les autres menus avant d'afficher celui-ci
+            menu.classList.toggle('show');
+        });
+    });
 });
 
-// Scroll après envoi du message
-document.getElementById("chat-form") ?. addEventListener("submit", function () {
-setTimeout(function () {
-var chatMessages = document.getElementById("chat-messages");
-if (chatMessages) {
-chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-}, 100);
-});
-
-// Scroll automatique vers le bas
-function scrollToBottom() {
-window.scrollTo(0, document.body.scrollHeight);
-}
-
-// Appel initial au chargement
-document.addEventListener("DOMContentLoaded", scrollToBottom);
-
-// Exemple : appel après l’envoi d’un message
-document.getElementById("chat-form").addEventListener("submit", function () {
-setTimeout(scrollToBottom, 100); // Petit délai pour laisser le message s'afficher
-});
-// Scroll automatique vers le bas
-document.addEventListener("DOMContentLoaded", function () {
-var chatMessages = document.getElementById("chat-messages");
-if (chatMessages) {
-chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-});
-
-// Scroll après envoi du message
-document.getElementById("chat-form") ?. addEventListener("submit", function () {
-setTimeout(function () {
-var chatMessages = document.getElementById("chat-messages");
-if (chatMessages) {
-chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-}, 100);
-});
-
-// Réouverture du dropdown si nécessaire
-document.addEventListener('click', function (event) {
-var dropdowns = document.querySelectorAll('.dropdown-menu');
-dropdowns.forEach(function (dropdown) {
-if (! event.target.closest('.dropdown') && ! dropdown.contains(event.target)) {
-dropdown.classList.remove('show');
-}
-});
-});
-		</script>
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-var dropdownElements = document.querySelectorAll('.dropdown-toggle');
-dropdownElements.forEach(function (dropdown) {
-dropdown.addEventListener('click', function (event) {
-event.stopPropagation();
-let menu = this.nextElementSibling;
-document.querySelectorAll('.dropdown-menu').forEach(m => {
-if (m !== menu) 
-m.classList.remove('show');
+</script>
 
 
-
-});
-menu.classList.toggle('show');
-});
-});
-
-document.addEventListener('click', function () {
-document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
-});
-});
-		</script>
-
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-	{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

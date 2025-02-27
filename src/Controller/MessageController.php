@@ -15,6 +15,7 @@ use \Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MessageController extends AbstractController
@@ -266,4 +267,19 @@ public function createDiscussion(Request $request, EntityManagerInterface $entit
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/message/{id}/reaction', name: 'message_react', methods: ['POST'])]
+    public function react(Message $message, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $emoji = $request->request->get('reaction');
+    
+        if ($emoji) {
+            $message->setReaction($emoji);
+            $entityManager->flush();
+        }
+    
+        return $this->redirectToRoute('view_discussion', ['id' => $message->getDiscussion()->getId()]);
+    }
+    
 }
+
