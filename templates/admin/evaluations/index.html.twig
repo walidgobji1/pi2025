@@ -1,0 +1,39 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion des Formations{% endblock %}
+
+{% block body %}
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Score</th>
+                <th>Niveau</th>
+                <th>Statut</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evaluation in evaluations %}
+                <tr>
+                    
+                    <td>{{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</td>
+                    <td>{{ evaluation.instructor.email }}</td>
+                    <td>{{ evaluation.score }}</td>
+                    <td>{{ evaluation.niveau }}</td>
+                    <td>{{ evaluation.status }}</td>
+                    
+                    
+                    <td>
+                        <a href="{{ path('admin_evaluation_details', { id: evaluation.id }) }}" class="btn btn-sm btn-info">Détails</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if evaluations|length == 0 %}
+        <p>Aucune évaluation trouvée.</p>
+    {% endif %}
+{% endblock %}

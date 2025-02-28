@@ -1,0 +1,22 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Détails de l’Évaluation{% endblock %}
+
+{% block body %}
+<div class="evaluation-details card p-4 mb-4">
+        <p><strong>ID :</strong> {{ evaluation.id }}</p>
+        <p><strong>Nom de l’Instructeur :</strong> {{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</p>
+        <p><strong>Email :</strong> {{ evaluation.instructor.email }}</p>
+        <p><strong>Score :</strong> {{ evaluation.score }}</p>
+        <p><strong>Niveau :</strong> {{ evaluation.niveau }}</p>
+        <p><strong>Statut :</strong> {{ evaluation.score >= 70 ? 'Accepté' : 'Non Accepté' }}</p>
+        <p><strong>Éducation :</strong> {{ evaluation.education }}</p>
+        <p><strong>Années d’Expérience :</strong> {{ evaluation.yearsOfExperience }}</p>
+        <p><strong>Compétences :</strong> {{ evaluation.skills }}</p>
+        <p><strong>Certifications :</strong> {{ evaluation.certifications }}</p>
+        <p><strong>Date d’Évaluation :</strong> {{ evaluation.dateCreation|date('Y-m-d H:i:s') }}</p>
+        <p><strong>CV :</strong> {{ evaluation.instructor.cv ? evaluation.instructor.cv : 'Aucun CV' }}</p>
+        <a href="{{ path('admin_evaluations') }}" class="btn btn-secondary">Retour</a>
+    </div>
+    
+{% endblock %}

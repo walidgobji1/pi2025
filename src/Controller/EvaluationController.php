@@ -160,4 +160,39 @@ private function calculateTotalExperience(array $workExperience): ?float
 
     return $totalMonths > 0 ? $totalMonths / 12 : null;
 }
+
+  // function for the dashboard admin 
+
+    #[Route('/admin/evaluations', name: 'admin_evaluations')]
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
+        }
+
+        // Fetch all evaluations with their associated instructors using Doctrine
+        $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+
+        // Optionally, sort evaluations by dateCreation in descending order
+        usort($evaluations, function ($a, $b) {
+            return $b->getDateCreation() <=> $a->getDateCreation();
+        });
+
+        return $this->render('admin/evaluations/index.html.twig', [
+            'evaluations' => $evaluations,
+        ]);
+    }
+    #[Route('/admin/evaluation/{id}', name: 'admin_evaluation_details')]
+public function showDetails(int $id, EntityManagerInterface $entityManager): Response
+{
+    $evaluation = $entityManager->getRepository(Evaluation::class)->find($id);
+
+    if (!$evaluation) {
+        throw $this->createNotFoundException('Évaluation non trouvée.');
+    }
+
+    return $this->render('admin/evaluations/details.html.twig', [
+        'evaluation' => $evaluation,
+    ]);
+}
 }
