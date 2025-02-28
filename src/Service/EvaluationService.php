@@ -107,6 +107,21 @@ class EvaluationService
 
             // Update the evaluation with the ML score from Flask
             $evaluation->setScore($mlScore);
+            $status = $mlScore >= 70 ? true : false; // Accepted if score >= 70, not accepted otherwise
+            $this->logger->info('Evaluation Status: ' . ($status ? 'accepted' : 'not accepted'));
+
+            // Set niveau based on score (three levels)
+            if ($mlScore < 50) {
+                $niveau = 'Beginner';
+            } elseif ($mlScore < 80) {
+                $niveau = 'Intermediate';
+            } else {
+                $niveau = 'Advanced';
+            }
+            $evaluation->setNiveau($niveau);
+            $evaluation->setStatus($status);
+
+            $this->logger->info('Evaluation Niveau: ' . $niveau);
             $this->entityManager->persist($evaluation);
             $this->entityManager->flush();
         } catch (\Exception $e) {
