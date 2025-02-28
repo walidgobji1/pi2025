@@ -99,18 +99,18 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
         // line 6
         yield "
     <div class=\"container mt-5\">
-<form method=\"get\" action=\"";
-        // line 8
+        <!-- Dynamic Search Form -->
+        <form method=\"get\" action=\"";
+        // line 9
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_index");
         yield "\" class=\"input-group\" style=\"width: 40%;\">
-    <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"";
-        // line 9
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 9, $this->source); })()), "request", [], "any", false, false, false, 9), "query", [], "any", false, false, false, 9), "get", ["search"], "method", false, false, false, 9), "html", null, true);
-        yield "\">
-    <span class=\"input-group-append\">
-        <button class=\"btn btn-outline-secondary border-bottom-0 border rounded-pill py-2\" type=\"submit\" style=\"font-size: 0.875rem;\">Search</button>
-    </span>
-</form>
+            <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"";
+        // line 10
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 10, $this->source); })()), "request", [], "any", false, false, false, 10), "query", [], "any", false, false, false, 10), "get", ["search"], "method", false, false, false, 10), "html", null, true);
+        yield "\" oninput=\"this.form.submit()\">
+            <span class=\"input-group-append\">
+            </span>
+        </form>
 
         <div class=\"row\">
             ";
@@ -129,12 +129,12 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
             yield "</h5>
                         </div>
                         <div class=\"text-center\">
-                    <img src=\"";
+                            <img src=\"";
             // line 23
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "imageName", [], "any", false, false, false, 23))), "html", null, true);
-            yield "\"  class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
-                </div>
-      
+            yield "\" class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
+                        </div>
+
                         <div class=\"card-body\">
                             <p class=\"card-text\">";
             // line 27
@@ -198,32 +198,7 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
         // line 50
         yield "        </div>
     </div>
- <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); 
 
-       
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); 
-            var description = \$(this).find('.detail-box p').text().toLowerCase();
-
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); 
-            } else {
-                \$(this).hide();
-            }
-        });
-
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -255,7 +230,7 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  199 => 50,  188 => 44,  186 => 49,  177 => 39,  173 => 38,  169 => 37,  162 => 33,  158 => 32,  154 => 31,  150 => 30,  146 => 29,  141 => 27,  134 => 23,  128 => 20,  123 => 17,  118 => 16,  108 => 9,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  199 => 50,  188 => 44,  186 => 49,  177 => 39,  173 => 38,  169 => 37,  162 => 33,  158 => 32,  154 => 31,  150 => 30,  146 => 29,  141 => 27,  134 => 23,  128 => 20,  123 => 17,  118 => 16,  109 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -267,12 +242,12 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
 {% block body %}
 
     <div class=\"container mt-5\">
-<form method=\"get\" action=\"{{ path('app_formation_index') }}\" class=\"input-group\" style=\"width: 40%;\">
-    <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"{{ app.request.query.get('search') }}\">
-    <span class=\"input-group-append\">
-        <button class=\"btn btn-outline-secondary border-bottom-0 border rounded-pill py-2\" type=\"submit\" style=\"font-size: 0.875rem;\">Search</button>
-    </span>
-</form>
+        <!-- Dynamic Search Form -->
+        <form method=\"get\" action=\"{{ path('app_formation_index') }}\" class=\"input-group\" style=\"width: 40%;\">
+            <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"{{ app.request.query.get('search') }}\" oninput=\"this.form.submit()\">
+            <span class=\"input-group-append\">
+            </span>
+        </form>
 
         <div class=\"row\">
             {% for formation in formations %}
@@ -282,9 +257,9 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
                             <h5 class=\"card-title\">{{ formation.titre }}</h5>
                         </div>
                         <div class=\"text-center\">
-                    <img src=\"{{ asset('uploads/images/' ~ formation.imageName) }}\"  class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
-                </div>
-      
+                            <img src=\"{{ asset('uploads/images/' ~ formation.imageName) }}\" class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
+                        </div>
+
                         <div class=\"card-body\">
                             <p class=\"card-text\">{{ formation.description }}</p>
                             <ul class=\"list-unstyled\">
@@ -311,32 +286,7 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
             {% endfor %}
         </div>
     </div>
- <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); 
 
-       
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); 
-            var description = \$(this).find('.detail-box p').text().toLowerCase();
-
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); 
-            } else {
-                \$(this).hide();
-            }
-        });
-
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
 {% endblock %}
 ", "formation/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\index.html.twig");
     }

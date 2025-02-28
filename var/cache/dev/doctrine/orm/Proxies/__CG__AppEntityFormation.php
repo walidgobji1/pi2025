@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Formation extends \App\Entity\Formation implements \Doctrine\ORM\Proxy\InternalProxy
 {
-    use \Symfony\Component\VarExporter\LazyGhostTrait {
+     use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -46,7 +46,7 @@ class Formation extends \App\Entity\Formation implements \Doctrine\ORM\Proxy\Int
         'prix' => [parent::class, 'prix', null],
         'titre' => [parent::class, 'titre', null],
         'updatedAt' => [parent::class, 'updatedAt', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

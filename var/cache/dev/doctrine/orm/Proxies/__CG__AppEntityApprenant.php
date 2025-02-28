@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\InternalProxy
 {
-    use \Symfony\Component\VarExporter\LazyGhostTrait {
+     use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -25,12 +25,12 @@ class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\Int
         "\0".'*'."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'avis' => [parent::class, 'avis', null],
         "\0".parent::class."\0".'email_apprenant' => [parent::class, 'email_apprenant', null],
-        "\0".parent::class."\0".'image' => [parent::class, 'image', null],
         "\0".parent::class."\0".'niveau_etude' => [parent::class, 'niveau_etude', null],
         "\0".parent::class."\0".'nom_apprenant' => [parent::class, 'nom_apprenant', null],
         "\0".parent::class."\0".'prenom_apprenant' => [parent::class, 'prenom_apprenant', null],
         "\0".'App\\Entity\\User'."\0".'dateDeNaissance' => ['App\\Entity\\User', 'dateDeNaissance', null],
         "\0".'App\\Entity\\User'."\0".'email' => ['App\\Entity\\User', 'email', null],
+        "\0".'App\\Entity\\User'."\0".'image' => ['App\\Entity\\User', 'image', null],
         "\0".'App\\Entity\\User'."\0".'nom' => ['App\\Entity\\User', 'nom', null],
         "\0".'App\\Entity\\User'."\0".'password' => ['App\\Entity\\User', 'password', null],
         "\0".'App\\Entity\\User'."\0".'prenom' => ['App\\Entity\\User', 'prenom', null],
@@ -40,7 +40,7 @@ class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\Int
         'email' => ['App\\Entity\\User', 'email', null],
         'email_apprenant' => [parent::class, 'email_apprenant', null],
         'id' => [parent::class, 'id', null],
-        'image' => [parent::class, 'image', null],
+        'image' => ['App\\Entity\\User', 'image', null],
         'niveau_etude' => [parent::class, 'niveau_etude', null],
         'nom' => ['App\\Entity\\User', 'nom', null],
         'nom_apprenant' => [parent::class, 'nom_apprenant', null],
@@ -48,7 +48,7 @@ class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\Int
         'prenom' => ['App\\Entity\\User', 'prenom', null],
         'prenom_apprenant' => [parent::class, 'prenom_apprenant', null],
         'roles' => ['App\\Entity\\User', 'roles', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {
