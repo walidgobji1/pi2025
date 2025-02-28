@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Psr\Log\LoggerInterface;
 
 final class EvaluationController extends AbstractController
 {
@@ -163,25 +166,42 @@ private function calculateTotalExperience(array $workExperience): ?float
 
   // function for the dashboard admin 
 
+    // #[Route('/admin/evaluations', name: 'admin_evaluations')]
+    // public function index(EntityManagerInterface $entityManager): Response
+    // {
+    //     if (!$this->isGranted('ROLE_ADMIN')) {
+    //         throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
+    //     }
+
+    //     // Fetch all evaluations with their associated instructors using Doctrine
+    //     $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+
+    //     // Optionally, sort evaluations by dateCreation in descending order
+    //     usort($evaluations, function ($a, $b) {
+    //         return $b->getDateCreation() <=> $a->getDateCreation();
+    //     });
+
+    //     return $this->render('admin/evaluations/index.html.twig', [
+    //         'evaluations' => $evaluations,
+    //     ]);
+    // }
     #[Route('/admin/evaluations', name: 'admin_evaluations')]
-    public function index(EntityManagerInterface $entityManager): Response
-    {
-        if (!$this->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
-        }
+public function index(EntityManagerInterface $entityManager): Response
+{
+    $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+    usort($evaluations, function ($a, $b) {
+        return $b->getDateCreation() <=> $a->getDateCreation();
+    });
 
-        // Fetch all evaluations with their associated instructors using Doctrine
-        $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+    $response = $this->render('admin/evaluations/index.html.twig', [
+        'evaluations' => $evaluations,
+    ]);
+    $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    $response->headers->set('Pragma', 'no-cache');
+    $response->headers->set('Expires', '0');
 
-        // Optionally, sort evaluations by dateCreation in descending order
-        usort($evaluations, function ($a, $b) {
-            return $b->getDateCreation() <=> $a->getDateCreation();
-        });
-
-        return $this->render('admin/evaluations/index.html.twig', [
-            'evaluations' => $evaluations,
-        ]);
-    }
+    return $response;
+}
     #[Route('/admin/evaluation/{id}', name: 'admin_evaluation_details')]
 public function showDetails(int $id, EntityManagerInterface $entityManager): Response
 {
@@ -195,4 +215,42 @@ public function showDetails(int $id, EntityManagerInterface $entityManager): Res
         'evaluation' => $evaluation,
     ]);
 }
+#[Route('/admin/evaluation/{id}/update-status', name: 'admin_evaluation_update_status', methods: ['POST'])]
+    public function updateStatus(int $id, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): JsonResponse
+    {
+        $evaluation = $entityManager->getRepository(Evaluation::class)->find($id);
+
+        if (!$evaluation) {
+            return new JsonResponse(['error' => 'Évaluation non trouvée.'], 404);
+        }
+
+        $newStatus = $request->request->get('status');
+        if (!in_array($newStatus, ['accepted', 'not_accepted'])) {
+            return new JsonResponse(['error' => 'Statut invalide.'], 400);
+        }
+
+        // Convert string status to boolean for storage
+        $booleanStatus = $newStatus === 'accepted' ? true : false;
+
+        // Update the status in the database
+        $evaluation->setStatus($booleanStatus);
+        $entityManager->flush();
+
+        // Log the manual status change
+        $logger->info('Statut modifié manuellement pour l’évaluation {id} : {newStatus} (Score: {score}, Instructor: {instructor})', [
+            'id' => $evaluation->getId(),
+            'newStatus' => $newStatus,
+            'score' => $evaluation->getScore(),
+            'instructor' => $evaluation->getInstructor()->getEmail(),
+        ]);
+
+        // Return a detailed JSON response for advanced frontend handling
+        return new JsonResponse([
+            'success' => true,
+            'message' => 'Statut mis à jour avec succès.',
+            'newStatus' => $newStatus,
+            'evaluationId' => $evaluation->getId(),
+            'timestamp' => (new \DateTime())->format('Y-m-d H:i:s'),
+        ], 200);
+    }
 }
