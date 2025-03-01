@@ -13,6 +13,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 final class EvaluationController extends AbstractController
 {
@@ -161,13 +163,19 @@ final class EvaluationController extends AbstractController
         return $totalMonths > 0 ? $totalMonths / 12 : null;
     }
 
+    // admin functions
     #[Route('/admin/evaluations', name: 'admin_evaluations')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, PaginatorInterface $paginator,Request $request): Response
     {
-        $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
-        \usort($evaluations, function ($a, $b) {
-            return $b->getDateCreation() <=> $a->getDateCreation();
-        });
+        // Explicitly create and assign the QueryBuilder
+        $queryBuilder = $entityManager->getRepository(Evaluation::class)->createQueryBuilder('e')
+            ->orderBy('e.dateCreation', 'DESC'); // Sort by dateCreation descending
+        // Paginate the results
+    $evaluations = $paginator->paginate(
+        $queryBuilder, // Doctrine QueryBuilder, not results
+        $request->query->getInt('page', 1), // Current page number, default to 1
+        8 // Limit per page (e.g., 10 evaluations per page)
+    );
 
         $response = $this->render('admin/evaluations/index.html.twig', [
             'evaluations' => $evaluations,

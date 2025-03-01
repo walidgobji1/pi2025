@@ -1,4 +1,5 @@
 {% extends 'baseAdmin.html.twig' %}
+
 {% block title %}Liste des Évaluations{% endblock %}
 
 {% block body %}
@@ -9,6 +10,7 @@
                 <table class="table cute-table" id="evaluations-table">
                     <thead>
                         <tr>
+                            
                             <th>Nom</th>
                             <th>Email</th>
                             <th>Score</th>
@@ -21,6 +23,7 @@
                     <tbody>
                         {% for evaluation in evaluations %}
                             <tr class="evaluation-row">
+                                
                                 <td>{{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</td>
                                 <td>{{ evaluation.instructor.email }}</td>
                                 <td>
@@ -35,7 +38,7 @@
                                     <span class="status-dot {{ evaluation.status ? 'accepted' : 'not-accepted' }}"></span>
                                     {{ evaluation.status ? 'Accepté' : 'Non Accepté' }}
                                 </td>
-                                <td>{{ evaluation.dateCreation|date('d/m/Y') }}</td>
+                                <td>{{ evaluation.dateCreation|date('d/m/Y ') }}</td>
                                 <td>
                                     <a href="{{ path('admin_evaluation_details', { id: evaluation.id }) }}" class="btn btn-sm btn-cute">Détails</a>
                                 </td>
@@ -43,6 +46,10 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <!-- Simplified Pagination Controls (Default Bootstrap 5 Template) -->
+                <div class="pagination-container">
+                    {{ knp_pagination_render(evaluations) }}
+                </div>
             </div>
         {% else %}
             <div class="empty-state">
@@ -119,7 +126,12 @@
             font-weight: 500;
         }
 
-    
+        .niveau-text {
+            font-weight: 500;
+        }
+        .niveau-text.Beginner { color: #ffc107; } /* Bootstrap warning yellow */
+        .niveau-text.Intermediate { color: #17a2b8; } /* Bootstrap info teal */
+        .niveau-text.Advanced { color: #28a745; } /* Bootstrap success green */
 
         .status-dot {
             display: inline-block;
@@ -158,6 +170,40 @@
         .empty-state p {
             font-size: 1.2rem;
             color: #899bbd;
+        }
+        .pagination-container {
+            padding: 10px 0;
+            text-align: center;
+            background: #fff;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 2px 6px rgba(1, 41, 112, 0.1);
+        }
+        .pagination-container .pagination {
+            margin-bottom: 0;
+        }
+        .pagination-container .page-item .page-link {
+            color: #4154f1;
+            padding: 6px 12px;
+            margin: 0 2px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: #f1f5ff;
+            border: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .pagination-container .page-item.active .page-link {
+            background: #4154f1;
+            color: #fff;
+            font-weight: 600;
+        }
+        .pagination-container .page-item.disabled .page-link {
+            color: #899bbd;
+            background: #f1f5ff;
+            cursor: not-allowed;
+        }
+        .pagination-container .page-item .page-link:hover {
+            background: #e6e9f5;
+            transform: scale(1.05);
         }
     </style>
 {% endblock %}
