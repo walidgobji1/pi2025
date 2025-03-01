@@ -22,11 +22,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+
 
 
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
+    private $httpClient;
+    
+    public function __construct(HttpClientInterface $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        
+    }
+
     #[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
     public function index(int $formationId , AvisRepository $avisRepository, EntityManagerInterface $entityManager,Security $security): Response
     {
@@ -45,6 +56,32 @@ final class AvisController extends AbstractController
         ]);
     }
 
+    // NEW: Add this translation route
+    #[Route('/translate/{id}', name: 'app_avis_translate', methods: ['GET'])]
+    public function translate(Avis $avis): JsonResponse
+    {
+        $url = 'https://translate.googleapis.com/translate_a/single';
+        $params = [
+            'client' => 'gtx',
+            'sl' => 'fr', // French as source
+            'tl' => 'en', // English as target
+            'dt' => 't',
+            'q' => $avis->getCommentaire(), // The review text to translate
+        ];
+
+        try {
+            $response = $this->httpClient->request('GET', $url, [
+                'query' => $params,
+            ]);
+
+            $data = $response->toArray();
+            $translatedText = $data[0][0][0] ?? 'Translation unavailable';
+
+            return new JsonResponse(['translatedText' => $translatedText]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Translation failed'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
     #[Route('/add/{formationId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
     public function addAvis(int $formationId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
     {
@@ -94,6 +131,7 @@ final class AvisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $avi->getNote();
             $count = $formationScore->getNombreAvis();
             if ($count > 0) {
@@ -208,6 +246,7 @@ final class AvisController extends AbstractController
         return $this->redirectToRoute('app_avis_index', ['formationId' => $avi->getFormation()->getId()], Response::HTTP_SEE_OTHER);
 
     }
+    
 
 
 }

@@ -12,6 +12,7 @@ parameters:
     stripe_secret_key: '%env(STRIPE_SECRET_KEY)%'
     affinda_api_key: '%env(AFFINDA_API_KEY)%'
     flask_api_key: '%env(FLASK_API_KEY)%'
+    gemini_api_key: '%env(GEMINI_API_KEY)%'
 
 
 services:
@@ -42,3 +43,6 @@ services:
     App\EventListener\InstructeurListener:
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+    App\Controller\AvisController:
+        arguments:
+            $httpClient: '@http_client'

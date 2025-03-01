@@ -29,6 +29,9 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v6.6.1"
     },
+    "lexik/translation-bundle": {
+        "version": "v6.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
