@@ -31,7 +31,7 @@ final class EvaluationController extends AbstractController
 
         // Get CV path
         $cvPath = $instructor->getCv();
-        if (!$cvPath || !file_exists($cvPath)) {
+        if (!$cvPath || !\file_exists($cvPath)) {
             throw $this->createNotFoundException('CV non trouvé pour cet instructeur');
         }
 
@@ -46,7 +46,7 @@ final class EvaluationController extends AbstractController
                     'Content-Type' => 'multipart/form-data',
                 ],
                 'body' => [
-                    'file' => fopen($cvPath, 'r'),
+                    'file' => \fopen($cvPath, 'r'),
                 ],
             ]);
 
@@ -69,9 +69,6 @@ final class EvaluationController extends AbstractController
         $evaluation->setScore(1);
         $evaluation->setNiveau("test");
 
-
-
-
         // Persist to database
         $em->persist($evaluation);
         $em->flush();
@@ -84,138 +81,119 @@ final class EvaluationController extends AbstractController
     }
 
     private function parseAffindaResponse(array $cvData): array
-{
-    $data = $cvData['data'] ?? [];
+    {
+        $data = $cvData['data'] ?? [];
 
-    // Combine workExperience and relevant sections
-    $workExperience = $data['workExperience'] ?? [];
-    foreach ($data['sections'] ?? [] as $section) {
-        if (in_array($section['sectionType'], ['WorkExperience', 'Projects'])) {
-            // Extract dates and details from section text
-            $experience = $this->extractExperienceFromSection($section['text']);
-            if ($experience) {
-                $workExperience[] = $experience;
+        // Combine workExperience and relevant sections
+        $workExperience = $data['workExperience'] ?? [];
+        foreach ($data['sections'] ?? [] as $section) {
+            if (\in_array($section['sectionType'], ['WorkExperience', 'Projects'])) {
+                // Extract dates and details from section text
+                $experience = $this->extractExperienceFromSection($section['text']);
+                if ($experience) {
+                    $workExperience[] = $experience;
+                }
             }
         }
-    }
-
-    return [
-        'education' => implode(', ', array_map(fn($edu) => $edu['degree'] ?? $edu['qualification'] ?? '', $data['education'] ?? [])),
-        'yearsOfExperience' => $this->calculateTotalExperience($workExperience),
-        'skills' => implode(', ', array_map(fn($skill) => is_array($skill) ? ($skill['name'] ?? '') : $skill, $data['skills'] ?? [])),
-        'certifications' => implode(', ', array_map(fn($cert) => $cert['name'] ?? '', $data['certifications'] ?? [])),
-    ];
-}
-
-// helper functions to extract years of experiences from projects 
-private function extractExperienceFromSection(string $text): ?array
-{
-    // Simple regex to find date ranges like "Mar 23 - Aug 23" or "Feb 24"
-    $pattern = '/(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{2}(?:\s*-\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s*\d{2})?/i';
-    if (preg_match($pattern, $text, $matches)) {
-        $dateRange = $matches[0];
-        $parts = explode(' - ', $dateRange);
-
-        $startDate = $this->normalizeDate($parts[0]);
-        $endDate = isset($parts[1]) ? $this->normalizeDate($parts[1]) : null;
 
         return [
-            'startDate' => $startDate,
-            'endDate' => $endDate,
-            'description' => $text,
+            'education' => \implode(', ', \array_map(fn($edu) => $edu['degree'] ?? $edu['qualification'] ?? '', $data['education'] ?? [])),
+            'yearsOfExperience' => $this->calculateTotalExperience($workExperience),
+            'skills' => \implode(', ', \array_map(fn($skill) => \is_array($skill) ? ($skill['name'] ?? '') : $skill, $data['skills'] ?? [])),
+            'certifications' => \implode(', ', \array_map(fn($cert) => $cert['name'] ?? '', $data['certifications'] ?? [])),
         ];
     }
-    return null;
-}
-private function normalizeDate(string $dateStr): string
-{
-    // Convert "Mar 23" to "2023-03-01"
-    $date = \DateTime::createFromFormat('M y', trim($dateStr));
-    if ($date === false) {
-        return ''; // Invalid date, handle gracefully
-    }
-    // Assuming years like "23" are 2023, adjust if CV spans earlier decades
-    if ($date->format('Y') < 2000) {
-        $date->modify('+2000 years');
-    }
-    return $date->format('Y-m-01'); // Use first of month for simplicity
-}
 
-private function calculateTotalExperience(array $workExperience): ?float
-{
-    $totalMonths = 0;
+    private function extractExperienceFromSection(string $text): ?array
+    {
+        // Simple regex to find date ranges like "Mar 23 - Aug 23" or "Feb 24"
+        $pattern = '/(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{2}(?:\s*-\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s*\d{2})?/i';
+        if (\preg_match($pattern, $text, $matches)) {
+            $dateRange = $matches[0];
+            $parts = \explode(' - ', $dateRange);
 
-    foreach ($workExperience as $job) {
-        try {
-            if (empty($job['startDate'])) {
-                continue;
-            }
+            $startDate = $this->normalizeDate($parts[0]);
+            $endDate = isset($parts[1]) ? $this->normalizeDate($parts[1]) : null;
 
-            $start = new \DateTime($job['startDate']);
-            $end = empty($job['endDate']) ? new \DateTime() : new \DateTime($job['endDate']);
-
-            $interval = $start->diff($end);
-            $totalMonths += $interval->y * 12 + $interval->m;
-        } catch (\Exception $e) {
-            continue; // Skip invalid dates
+            return [
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'description' => $text,
+            ];
         }
+        return null;
     }
 
-    return $totalMonths > 0 ? $totalMonths / 12 : null;
-}
+    private function normalizeDate(string $dateStr): string
+    {
+        // Convert "Mar 23" to "2023-03-01"
+        $date = \DateTime::createFromFormat('M y', \trim($dateStr));
+        if ($date === false) {
+            return ''; // Invalid date, handle gracefully
+        }
+        // Assuming years like "23" are 2023, adjust if CV spans earlier decades
+        if ($date->format('Y') < 2000) {
+            $date->modify('+2000 years');
+        }
+        return $date->format('Y-m-01'); // Use first of month for simplicity
+    }
 
-  // function for the dashboard admin 
+    private function calculateTotalExperience(array $workExperience): ?float
+    {
+        $totalMonths = 0;
 
-    // #[Route('/admin/evaluations', name: 'admin_evaluations')]
-    // public function index(EntityManagerInterface $entityManager): Response
-    // {
-    //     if (!$this->isGranted('ROLE_ADMIN')) {
-    //         throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
-    //     }
+        foreach ($workExperience as $job) {
+            try {
+                if (empty($job['startDate'])) {
+                    continue;
+                }
 
-    //     // Fetch all evaluations with their associated instructors using Doctrine
-    //     $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+                $start = new \DateTime($job['startDate']);
+                $end = empty($job['endDate']) ? new \DateTime() : new \DateTime($job['endDate']);
 
-    //     // Optionally, sort evaluations by dateCreation in descending order
-    //     usort($evaluations, function ($a, $b) {
-    //         return $b->getDateCreation() <=> $a->getDateCreation();
-    //     });
+                $interval = $start->diff($end);
+                $totalMonths += $interval->y * 12 + $interval->m;
+            } catch (\Exception $e) {
+                continue; // Skip invalid dates
+            }
+        }
 
-    //     return $this->render('admin/evaluations/index.html.twig', [
-    //         'evaluations' => $evaluations,
-    //     ]);
-    // }
+        return $totalMonths > 0 ? $totalMonths / 12 : null;
+    }
+
     #[Route('/admin/evaluations', name: 'admin_evaluations')]
-public function index(EntityManagerInterface $entityManager): Response
-{
-    $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
-    usort($evaluations, function ($a, $b) {
-        return $b->getDateCreation() <=> $a->getDateCreation();
-    });
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        $evaluations = $entityManager->getRepository(Evaluation::class)->findAll();
+        \usort($evaluations, function ($a, $b) {
+            return $b->getDateCreation() <=> $a->getDateCreation();
+        });
 
-    $response = $this->render('admin/evaluations/index.html.twig', [
-        'evaluations' => $evaluations,
-    ]);
-    $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    $response->headers->set('Pragma', 'no-cache');
-    $response->headers->set('Expires', '0');
+        $response = $this->render('admin/evaluations/index.html.twig', [
+            'evaluations' => $evaluations,
+        ]);
+        $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', '0');
 
-    return $response;
-}
-    #[Route('/admin/evaluation/{id}', name: 'admin_evaluation_details')]
-public function showDetails(int $id, EntityManagerInterface $entityManager): Response
-{
-    $evaluation = $entityManager->getRepository(Evaluation::class)->find($id);
-
-    if (!$evaluation) {
-        throw $this->createNotFoundException('Évaluation non trouvée.');
+        return $response;
     }
 
-    return $this->render('admin/evaluations/details.html.twig', [
-        'evaluation' => $evaluation,
-    ]);
-}
-#[Route('/admin/evaluation/{id}/update-status', name: 'admin_evaluation_update_status', methods: ['POST'])]
+    #[Route('/admin/evaluation/{id}', name: 'admin_evaluation_details')]
+    public function showDetails(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $evaluation = $entityManager->getRepository(Evaluation::class)->find($id);
+
+        if (!$evaluation) {
+            throw $this->createNotFoundException('Évaluation non trouvée.');
+        }
+
+        return $this->render('admin/evaluations/details.html.twig', [
+            'evaluation' => $evaluation,
+        ]);
+    }
+
+    #[Route('/admin/evaluation/{id}/update-status', name: 'admin_evaluation_update_status', methods: ['POST'])]
     public function updateStatus(int $id, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): JsonResponse
     {
         $evaluation = $entityManager->getRepository(Evaluation::class)->find($id);
@@ -225,7 +203,7 @@ public function showDetails(int $id, EntityManagerInterface $entityManager): Res
         }
 
         $newStatus = $request->request->get('status');
-        if (!in_array($newStatus, ['accepted', 'not_accepted'])) {
+        if (!\in_array($newStatus, ['accepted', 'not_accepted'])) {
             return new JsonResponse(['error' => 'Statut invalide.'], 400);
         }
 

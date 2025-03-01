@@ -1,43 +1,168 @@
 {% extends 'baseAdmin.html.twig' %}
-
 {% block title %}Liste des Évaluations{% endblock %}
 
 {% block body %}
-    <h2>Évaluations des Instructeurs</h2>
-    <table class="table table-responsive" id="evaluations-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Score</th>
-                <th>Niveau</th>
-                <th>Statut</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for evaluation in evaluations %}
-                <tr>
-                    <td>{{ evaluation.id }}</td>
-                    <td>{{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</td>
-                    <td>{{ evaluation.instructor.email }}</td>
-                    <td>{{ evaluation.score }}</td>
-                    <td>{{ evaluation.niveau }}</td>
-                    <td>{{ evaluation.status ? 'Accepté' : 'Non Accepté' }}</td>
-                    <td>{{ evaluation.dateCreation|date('Y-m-d H:i:s') }}</td>
-                    <td>
-                        <a href="{{ path('admin_evaluation_details', { id: evaluation.id }) }}" class="btn btn-sm btn-info">Détails</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% if evaluations|length == 0 %}
-        <p>Aucune évaluation trouvée.</p>
-    {% endif %}
+    <div class="container mt-4">
+        <h2 class="cute-title">Évaluations des Instructeurs</h2>
+        {% if evaluations|length > 0 %}
+            <div class="table-wrapper">
+                <table class="table cute-table" id="evaluations-table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Score</th>
+                            <th>Niveau</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evaluation in evaluations %}
+                            <tr class="evaluation-row">
+                                <td>{{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</td>
+                                <td>{{ evaluation.instructor.email }}</td>
+                                <td>
+                                    <span class="score-badge">{{ evaluation.score }}</span>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 500; color: {% if evaluation.niveau == 'Beginner' %}#ffc107{% elseif evaluation.niveau == 'Intermediate' %}#17a2b8{% else %}#28a745{% endif %}">
+                                        {{ evaluation.niveau }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-dot {{ evaluation.status ? 'accepted' : 'not-accepted' }}"></span>
+                                    {{ evaluation.status ? 'Accepté' : 'Non Accepté' }}
+                                </td>
+                                <td>{{ evaluation.dateCreation|date('d/m/Y') }}</td>
+                                <td>
+                                    <a href="{{ path('admin_evaluation_details', { id: evaluation.id }) }}" class="btn btn-sm btn-cute">Détails</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Aucune évaluation trouvée. 😿</p>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Styling aligned with baseAdmin.html.twig */
+        .cute-title {
+            font-family: 'Nunito', sans-serif;
+            color: #012970;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .cute-title::after {
+            content: '✨';
+            position: absolute;
+            right: -25px;
+            top: 5px;
+            font-size: 1.2rem;
+            color: #4154f1;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+            overflow: hidden;
+        }
+
+        .cute-table {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .cute-table thead th {
+            background: #f6f9ff;
+            color: #4154f1;
+            font-weight: 600;
+            padding: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e6e9ff;
+        }
+
+        .evaluation-row td {
+            padding: 12px 15px;
+            vertical-align: middle;
+            font-size: 0.95rem;
+            color: #444444;
+            border-bottom: 1px solid #f0f4fb;
+            transition: background 0.2s ease;
+        }
+
+        .evaluation-row:hover {
+            background: #f6f9ff;
+        }
+
+        .score-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #e6e9ff;
+            color: #4154f1;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+    
+
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .status-dot.accepted { background: #28a745; }
+        .status-dot.not-accepted { background: #dc3545; }
+
+        .btn-cute {
+            background: #4154f1;
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-cute:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(65, 84, 241, 0.3);
+            background: #3644d9;
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+            margin-top: 20px;
+        }
+        .empty-state p {
+            font-size: 1.2rem;
+            color: #899bbd;
+        }
+    </style>
+{% endblock %}
+
+
 
 {% block javascripts %}
     {{ parent() }}

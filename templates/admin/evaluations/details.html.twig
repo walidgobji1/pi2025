@@ -3,33 +3,53 @@
 {% block title %}Détails de l’Évaluation{% endblock %}
 
 {% block body %}
-    <h2>Détails de l’Évaluation</h2>
-    <div class="evaluation-details card p-4 mb-4">
-        <p><strong>ID :</strong> {{ evaluation.id }}</p>
-        <p><strong>Nom de l’Instructeur :</strong> {{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</p>
-        <p><strong>Email :</strong> {{ evaluation.instructor.email }}</p>
-        <p><strong>Score :</strong> {{ evaluation.score }}</p>
-        <p><strong>Niveau :</strong> {{ evaluation.niveau }}</p>
-        <p><strong>Statut Actuel :</strong> <span id="currentStatus">{{ evaluation.status ? 'Accepté' : 'Non Accepté' }}</span></p>
-        <p><strong>Éducation :</strong> {{ evaluation.education }}</p>
-        <p><strong>Années d’Expérience :</strong> {{ evaluation.yearsOfExperience }}</p>
-        <p><strong>Compétences :</strong> {{ evaluation.skills }}</p>
-        <p><strong>Certifications :</strong> {{ evaluation.certifications }}</p>
-        <p><strong>Date d’Évaluation :</strong> {{ evaluation.dateCreation|date('Y-m-d H:i:s') }}</p>
-
-        <h3>Modifier le Statut</h3>
-        <form id="statusForm" class="mb-3">
-            <div class="input-group" style="width: 300px;">
-                <select name="status" class="form-select">
-                    <option value="accepted" {% if evaluation.status %}selected{% endif %}>Accepté</option>
-                    <option value="not_accepted" {% if not evaluation.status %}selected{% endif %}>Non Accepté</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Mettre à Jour</button>
+    <div class="container mt-5">
+        <div class="card shadow-sm p-4 mb-4 rounded">
+            <h2 class="mb-4">Détails de l’Évaluation</h2>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    
+                    <p><strong>Nom de l’Instructeur :</strong> {{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</p>
+                    <p><strong>Email :</strong> {{ evaluation.instructor.email }}</p>
+                    <p><strong>Score :</strong> {{ evaluation.score }}</p>
+                    <p><strong>Niveau :</strong> {{ evaluation.niveau }}</p>
+                    <p><strong>Statut Actuel :</strong> 
+                        <span class="fw-bold {% if evaluation.status %}text-success{% else %}text-danger{% endif %}">
+                            {{ evaluation.status ? 'Accepté' : 'Non Accepté' }}
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Éducation :</strong> {{ evaluation.education }}</p>
+                    <p><strong>Années d’Expérience :</strong> {{ evaluation.yearsOfExperience }}</p>
+                    <p><strong>Compétences :</strong> {{ evaluation.skills }}</p>
+                    <p><strong>Certifications :</strong> {{ evaluation.certifications }}</p>
+                    <p><strong>Date d’Évaluation :</strong> {{ evaluation.dateCreation|date('Y-m-d H:i:s') }}</p>
+                </div>
             </div>
-            <div id="statusFeedback" class="mt-2"></div>
-        </form>
 
-        <a href="{{ path('admin_evaluations') }}" class="btn btn-secondary">Retour</a>
+            <hr>
+
+            <h3 class="mb-3">Modifier le Statut</h3>
+            <form id="statusForm">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Choisir le statut :</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="accepted" {% if evaluation.status %}selected{% endif %}>Accepté</option>
+                            <option value="not_accepted" {% if not evaluation.status %}selected{% endif %}>Non Accepté</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 align-self-end">
+                        <button type="submit" class="btn btn-primary w-100">Mettre à Jour</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="statusFeedback" class="mb-3"></div>
+
+            <a href="{{ path('admin_evaluations') }}" class="btn btn-secondary">Retour</a>
+        </div>
     </div>
 
     {% block javascripts %}
@@ -39,7 +59,6 @@
                 e.preventDefault();
                 const formData = new FormData(this);
                 const feedback = document.getElementById('statusFeedback');
-                const evaluationId = '{{ evaluation.id }}'; // Store the evaluation ID for updates
 
                 try {
                     feedback.innerHTML = '<span class="text-info">Mise à jour en cours...</span>';
@@ -52,55 +71,24 @@
                         body: new URLSearchParams(formData).toString()
                     });
 
-                    if (!response.ok) {
-                        throw new Error('Erreur réseau');
-                    }
+                    if (!response.ok) throw new Error('Erreur réseau');
 
                     const data = await response.json();
                     if (data.success) {
                         feedback.innerHTML = '<span class="text-success">Statut mis à jour avec succès.</span>';
-                        // Update the details view dynamically
-                        const currentStatus = document.getElementById('currentStatus');
+                        
+                        const currentStatus = document.querySelector('.fw-bold');
                         if (currentStatus) {
                             currentStatus.textContent = data.newStatus === 'accepted' ? 'Accepté' : 'Non Accepté';
+                            currentStatus.className = 'fw-bold ' + (data.newStatus === 'accepted' ? 'text-success' : 'text-danger');
                         }
-                        // Update the evaluations list dynamically via AJAX without refresh
-                        fetch('{{ path('admin_evaluations') }}')
-                            .then(resp => resp.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-                                const newTable = doc.querySelector('table#evaluations-table');
-                                if (newTable) {
-                                    const currentTable = document.querySelector('table#evaluations-table');
-                                    if (currentTable) {
-                                        currentTable.innerHTML = newTable.innerHTML;
-                                        // Reattach event listeners to "Détails" buttons after dynamic update
-                                        document.querySelectorAll('table#evaluations-table a.btn-info').forEach(button => {
-                                            button.addEventListener('click', function(e) {
-                                                e.preventDefault();
-                                                window.location.href = this.href;
-                                            });
-                                        });
-                                    } else {
-                                        console.warn('Evaluations table not found on this page');
-                                    }
-                                } else {
-                                    console.warn('New table not found in response');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Erreur lors de la mise à jour de la liste :', error);
-                                feedback.innerHTML = '<span class="text-danger">Erreur lors de la mise à jour de la liste : ' + error.message + '</span>';
-                            });
-                        // Fade out feedback after 3 seconds
+
                         setTimeout(() => feedback.innerHTML = '', 3000);
                     } else {
                         feedback.innerHTML = '<span class="text-danger">Erreur : ' + data.error + '</span>';
                     }
                 } catch (error) {
                     feedback.innerHTML = '<span class="text-danger">Erreur lors de la mise à jour : ' + error.message + '</span>';
-                    console.error('Erreur AJAX :', error);
                 }
             });
         </script>
