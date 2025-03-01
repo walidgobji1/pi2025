@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Formation;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
+use App\Repository\ProgressionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,19 +75,36 @@ final class FormationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository): Response
-    {
-        $user = $this->getUser();
-        $inscription = $user ? $inscriptionCoursRepository->findOneBy([
-            'formation' => $formation,
-            'apprenant' => $user
-        ]) : null;
+    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository, ProgressionRepository $progressionRepository): Response
+{
+    $user = $this->getUser();
 
-        return $this->render('formation/showClient.html.twig', [
-            'formation' => $formation,
-            'inscription' => $inscription
+    // Get the inscription of the user to the formation (using the custom repository method)
+    $inscription = $user ? $inscriptionCoursRepository->findByFormationAndUser($formation, $user) : null;
+
+    // Get the user's progression for the formation
+    $progression = null;
+    if ($user) {
+        $progression = $progressionRepository->findOneBy([
+            'apprenant' => $user,
+            'formation' => $formation
         ]);
     }
+
+    // Get total number of lessons in the formation
+    $totalLecons = count($formation->getLecons());
+
+    // Get the number of completed lessons (if progression exists)
+    $completedLeconsCount = $progression ? count($progression->getLeconsTerminees()) : 0;
+
+    return $this->render('formation/showClient.html.twig', [
+        'formation' => $formation,
+        'inscription' => $inscription,
+        'progression' => $completedLeconsCount, // Number of lessons completed
+        'total_lecons' => $totalLecons // Total number of lessons
+    ]);
+}
+
 
     #[Route('/ad/{id}', name: 'app_formation_show_admin', methods: ['GET'])]
     public function showAdmin(Formation $formation): Response

@@ -28,6 +28,7 @@ class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\Int
         "\0".parent::class."\0".'niveau_etude' => [parent::class, 'niveau_etude', null],
         "\0".parent::class."\0".'nom_apprenant' => [parent::class, 'nom_apprenant', null],
         "\0".parent::class."\0".'prenom_apprenant' => [parent::class, 'prenom_apprenant', null],
+        "\0".parent::class."\0".'progressions' => [parent::class, 'progressions', null],
         "\0".'App\\Entity\\User'."\0".'dateDeNaissance' => ['App\\Entity\\User', 'dateDeNaissance', null],
         "\0".'App\\Entity\\User'."\0".'email' => ['App\\Entity\\User', 'email', null],
         "\0".'App\\Entity\\User'."\0".'image' => ['App\\Entity\\User', 'image', null],
@@ -47,6 +48,7 @@ class Apprenant extends \App\Entity\Apprenant implements \Doctrine\ORM\Proxy\Int
         'password' => ['App\\Entity\\User', 'password', null],
         'prenom' => ['App\\Entity\\User', 'prenom', null],
         'prenom_apprenant' => [parent::class, 'prenom_apprenant', null],
+        'progressions' => [parent::class, 'progressions', null],
         'roles' => ['App\\Entity\\User', 'roles', null],
     ];
 

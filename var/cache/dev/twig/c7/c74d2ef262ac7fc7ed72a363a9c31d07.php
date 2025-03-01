@@ -163,9 +163,23 @@ class __TwigTemplate_f1938f3aa3831a6786c287953ce64539 extends Template
             yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_inscription_cours_new", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["formation"]) || array_key_exists("formation", $context) ? $context["formation"] : (function () { throw new RuntimeError('Variable "formation" does not exist.', 38, $this->source); })()), "id", [], "any", false, false, false, 38)]), "html", null, true);
             yield "\" class=\"btn btn-success\">S'inscrire</a>
                 </div>
+                ";
+            // line 40
+            if (((isset($context["progression"]) || array_key_exists("progression", $context) ? $context["progression"] : (function () { throw new RuntimeError('Variable "progression" does not exist.', 40, $this->source); })()) == (isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 40, $this->source); })()))) {
+                // line 41
+                yield "    <div class=\"text-center mt-4\">
+        <a href=\"";
+                // line 42
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_examen", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["formation"]) || array_key_exists("formation", $context) ? $context["formation"] : (function () { throw new RuntimeError('Variable "formation" does not exist.', 42, $this->source); })()), "id", [], "any", false, false, false, 42)]), "html", null, true);
+                yield "\" class=\"btn btn-danger\">Passer l'examen</a>
+    </div>
+";
+            }
+            // line 45
+            yield "
            ";
         }
-        // line 41
+        // line 47
         yield "
         </div>
     </div>
@@ -200,7 +214,7 @@ class __TwigTemplate_f1938f3aa3831a6786c287953ce64539 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  169 => 41,  163 => 38,  160 => 37,  154 => 34,  151 => 33,  149 => 32,  142 => 28,  138 => 27,  134 => 26,  128 => 23,  124 => 22,  114 => 15,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  183 => 47,  179 => 45,  173 => 42,  170 => 41,  168 => 40,  163 => 38,  160 => 37,  154 => 34,  151 => 33,  149 => 32,  142 => 28,  138 => 27,  134 => 26,  128 => 23,  124 => 22,  114 => 15,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -244,6 +258,12 @@ class __TwigTemplate_f1938f3aa3831a6786c287953ce64539 extends Template
                 <div class=\"text-center mt-4\">
                     <a href=\"{{ path('app_inscription_cours_new', {'id': formation.id}) }}\" class=\"btn btn-success\">S'inscrire</a>
                 </div>
+                {% if progression == total_lecons %}
+    <div class=\"text-center mt-4\">
+        <a href=\"{{ path('app_examen', {'id': formation.id}) }}\" class=\"btn btn-danger\">Passer l'examen</a>
+    </div>
+{% endif %}
+
            {% endif %}
 
         </div>

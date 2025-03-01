@@ -623,6 +623,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\ProgressionRepository" class="App\Repository\ProgressionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\PromotionRepository" class="App\Repository\PromotionRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -662,7 +666,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.ipuVxm5"/>
+      <argument type="service" id=".service_locator.CKNSAHA"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3587,7 +3591,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.ipuVxm5"/>
+      <argument type="service" id=".service_locator.CKNSAHA"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -5400,7 +5404,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.014u16b"/>
+      <argument type="service" id=".service_locator.AVF7Bec"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -8014,6 +8018,8 @@
     <service id=".abstract.instanceof.App\Repository\NotificationRepository" class="App\Repository\NotificationRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PanierRepository" class="App\Repository\PanierRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PanierRepository" class="App\Repository\PanierRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ProgressionRepository" class="App\Repository\ProgressionRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ProgressionRepository" class="App\Repository\ProgressionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PromotionRepository" class="App\Repository\PromotionRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PromotionRepository" class="App\Repository\PromotionRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UtilisateurRepository" class="App\Repository\UtilisateurRepository" autowire="true" abstract="true"/>
@@ -8520,11 +8526,12 @@
         <argument key="formationRepository" type="service_closure" id="App\Repository\FormationRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.JbpNamu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.lol15oH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="formation" type="service_closure" id=".errored..service_locator.JbpNamu.App\Entity\Formation"/>
+        <argument key="formation" type="service_closure" id=".errored..service_locator.lol15oH.App\Entity\Formation"/>
         <argument key="inscriptionCoursRepository" type="service_closure" id="App\Repository\InscriptionCoursRepository"/>
+        <argument key="progressionRepository" type="service_closure" id="App\Repository\ProgressionRepository"/>
       </argument>
     </service>
     <service id=".service_locator.dy6wSj2" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8592,6 +8599,22 @@
       <argument type="collection">
         <argument key="formation" type="service_closure" id=".errored..service_locator.lnsowti.App\Entity\Formation"/>
         <argument key="leconRepository" type="service_closure" id="App\Repository\LeconRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xTH6ER1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="lecon" type="service_closure" id=".errored..service_locator.xTH6ER1.App\Entity\Lecon"/>
+        <argument key="security" type="service_closure" id="security.helper"/>
+      </argument>
+    </service>
+    <service id=".service_locator.xEtsAU1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="formationRepository" type="service_closure" id="App\Repository\FormationRepository"/>
+        <argument key="lecon" type="service_closure" id=".errored..service_locator.xEtsAU1.App\Entity\Lecon"/>
+        <argument key="progressionRepository" type="service_closure" id="App\Repository\ProgressionRepository"/>
       </argument>
     </service>
     <service id=".service_locator.xUsTS7F" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -8698,7 +8721,7 @@
         <argument key="userProvider" type="service_closure" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
     </service>
-    <service id=".service_locator.ipuVxm5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.CKNSAHA" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminController::createAdmin" type="service_closure" id=".service_locator.ESgEUJd"/>
@@ -8725,7 +8748,7 @@
         <argument key="App\Controller\FormationController::indextemp" type="service_closure" id=".service_locator.SdimP0A"/>
         <argument key="App\Controller\FormationController::new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\FormationController::showAdmin" type="service_closure" id=".service_locator.dy6wSj2"/>
-        <argument key="App\Controller\FormationController::showForClient" type="service_closure" id=".service_locator.JbpNamu"/>
+        <argument key="App\Controller\FormationController::showForClient" type="service_closure" id=".service_locator.lol15oH"/>
         <argument key="App\Controller\FormationScoreController::deleteAvis" type="service_closure" id=".service_locator.tZAAnCT"/>
         <argument key="App\Controller\FormationScoreController::fetchAll" type="service_closure" id=".service_locator.xGBMrMw"/>
         <argument key="App\Controller\FormationScoreController::index" type="service_closure" id=".service_locator.rPk59qI"/>
@@ -8740,10 +8763,11 @@
         <argument key="App\Controller\LeconController::edit" type="service_closure" id=".service_locator.JmqEM1n"/>
         <argument key="App\Controller\LeconController::generatePdfPersonne" type="service_closure" id=".service_locator.D8zEG0Q"/>
         <argument key="App\Controller\LeconController::index" type="service_closure" id=".service_locator.NzhlhZp"/>
+        <argument key="App\Controller\LeconController::marquerTerminee" type="service_closure" id=".service_locator.xTH6ER1"/>
         <argument key="App\Controller\LeconController::new" type="service_closure" id=".service_locator.k.bttT5"/>
         <argument key="App\Controller\LeconController::show" type="service_closure" id=".service_locator.xUsTS7F"/>
+        <argument key="App\Controller\LeconController::showLecon" type="service_closure" id=".service_locator.xEtsAU1"/>
         <argument key="App\Controller\LeconController::showLessons" type="service_closure" id=".service_locator.lnsowti"/>
-        <argument key="App\Controller\LeconController::showLessonsC" type="service_closure" id=".service_locator.lnsowti"/>
         <argument key="App\Controller\MessageController::createDiscussion" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController::deleteDiscussion" type="service_closure" id=".service_locator.q2WLueh"/>
         <argument key="App\Controller\MessageController::deleteMessage" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -8799,7 +8823,7 @@
         <argument key="App\Controller\FormationController:indextemp" type="service_closure" id=".service_locator.SdimP0A"/>
         <argument key="App\Controller\FormationController:new" type="service_closure" id=".service_locator.CsMkqUa"/>
         <argument key="App\Controller\FormationController:showAdmin" type="service_closure" id=".service_locator.dy6wSj2"/>
-        <argument key="App\Controller\FormationController:showForClient" type="service_closure" id=".service_locator.JbpNamu"/>
+        <argument key="App\Controller\FormationController:showForClient" type="service_closure" id=".service_locator.lol15oH"/>
         <argument key="App\Controller\FormationScoreController:deleteAvis" type="service_closure" id=".service_locator.tZAAnCT"/>
         <argument key="App\Controller\FormationScoreController:fetchAll" type="service_closure" id=".service_locator.xGBMrMw"/>
         <argument key="App\Controller\FormationScoreController:index" type="service_closure" id=".service_locator.rPk59qI"/>
@@ -8814,10 +8838,11 @@
         <argument key="App\Controller\LeconController:edit" type="service_closure" id=".service_locator.JmqEM1n"/>
         <argument key="App\Controller\LeconController:generatePdfPersonne" type="service_closure" id=".service_locator.D8zEG0Q"/>
         <argument key="App\Controller\LeconController:index" type="service_closure" id=".service_locator.NzhlhZp"/>
+        <argument key="App\Controller\LeconController:marquerTerminee" type="service_closure" id=".service_locator.xTH6ER1"/>
         <argument key="App\Controller\LeconController:new" type="service_closure" id=".service_locator.k.bttT5"/>
         <argument key="App\Controller\LeconController:show" type="service_closure" id=".service_locator.xUsTS7F"/>
+        <argument key="App\Controller\LeconController:showLecon" type="service_closure" id=".service_locator.xEtsAU1"/>
         <argument key="App\Controller\LeconController:showLessons" type="service_closure" id=".service_locator.lnsowti"/>
-        <argument key="App\Controller\LeconController:showLessonsC" type="service_closure" id=".service_locator.lnsowti"/>
         <argument key="App\Controller\MessageController:createDiscussion" type="service_closure" id=".service_locator.VXev_vu"/>
         <argument key="App\Controller\MessageController:deleteDiscussion" type="service_closure" id=".service_locator.q2WLueh"/>
         <argument key="App\Controller\MessageController:deleteMessage" type="service_closure" id=".service_locator.CsMkqUa"/>
@@ -9153,7 +9178,7 @@
         <argument key="vich_uploader.listener.upload.formations_images" type="service_closure" id="vich_uploader.listener.upload.formations_images"/>
       </argument>
     </service>
-    <service id=".service_locator.014u16b" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.AVF7Bec" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AdministrateurRepository" type="service_closure" id="App\Repository\AdministrateurRepository"/>
@@ -9171,6 +9196,7 @@
         <argument key="App\Repository\MessageRepository" type="service_closure" id="App\Repository\MessageRepository"/>
         <argument key="App\Repository\NotificationRepository" type="service_closure" id="App\Repository\NotificationRepository"/>
         <argument key="App\Repository\PanierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
+        <argument key="App\Repository\ProgressionRepository" type="service_closure" id="App\Repository\ProgressionRepository"/>
         <argument key="App\Repository\PromotionRepository" type="service_closure" id="App\Repository\PromotionRepository"/>
         <argument key="App\Repository\UtilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
@@ -10026,8 +10052,8 @@
     <service id=".errored..service_locator.td4zu.o.App\Entity\Evenement" class="App\Entity\Evenement">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.td4zu.o&quot;: it needs an instance of &quot;App\Entity\Evenement&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
-    <service id=".errored..service_locator.JbpNamu.App\Entity\Formation" class="App\Entity\Formation">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.JbpNamu&quot;: it needs an instance of &quot;App\Entity\Formation&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    <service id=".errored..service_locator.lol15oH.App\Entity\Formation" class="App\Entity\Formation">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.lol15oH&quot;: it needs an instance of &quot;App\Entity\Formation&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.dy6wSj2.App\Entity\Formation" class="App\Entity\Formation">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.dy6wSj2&quot;: it needs an instance of &quot;App\Entity\Formation&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -10043,6 +10069,12 @@
     </service>
     <service id=".errored..service_locator.lnsowti.App\Entity\Formation" class="App\Entity\Formation">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.lnsowti&quot;: it needs an instance of &quot;App\Entity\Formation&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.xTH6ER1.App\Entity\Lecon" class="App\Entity\Lecon">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.xTH6ER1&quot;: it needs an instance of &quot;App\Entity\Lecon&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.xEtsAU1.App\Entity\Lecon" class="App\Entity\Lecon">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.xEtsAU1&quot;: it needs an instance of &quot;App\Entity\Lecon&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.xUsTS7F.App\Entity\Lecon" class="App\Entity\Lecon">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.xUsTS7F&quot;: it needs an instance of &quot;App\Entity\Lecon&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -11274,7 +11306,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ipuVxm5"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.CKNSAHA"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -11304,6 +11336,8 @@
     <service id=".service_locator.OaRVqSE" alias=".service_locator.xGBMrMw"/>
     <service id=".service_locator.nSR06_5" alias=".service_locator.AFZ7DOO"/>
     <service id=".service_locator.KBWFMuY" alias=".service_locator.zU2lRyp"/>
+    <service id=".service_locator.WOjqXXU" alias=".service_locator.xTH6ER1"/>
+    <service id=".service_locator.L__oWKS" alias=".service_locator.xEtsAU1"/>
     <service id=".service_locator.vnK8t.3" alias=".service_locator.JmqEM1n"/>
     <service id=".service_locator.xfUCJVI" alias=".service_locator.VXev_vu"/>
     <service id=".service_locator.SSQwoIj" alias=".service_locator.q2WLueh"/>
@@ -11312,7 +11346,7 @@
     <service id=".service_locator.lo.u8v0" alias=".service_locator.gKZxhjb"/>
     <service id=".service_locator.VQewRSb" alias=".service_locator.qawdDqK"/>
     <service id=".service_locator.SbL36wI" alias=".service_locator.gKSVznP"/>
-    <service id=".service_locator.HLAdXEB" alias=".service_locator.ipuVxm5"/>
+    <service id=".service_locator.Twx_.k2" alias=".service_locator.CKNSAHA"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.4xosipF" alias=".service_locator.g.ORoaf"/>
     <service id=".service_locator.HGCd7fI" alias=".service_locator.FIxxhQo"/>
@@ -11350,7 +11384,7 @@
     <service id=".service_locator.AUCwrUD" alias=".service_locator.JFCU_Ej"/>
     <service id=".service_locator.cHidRdS" alias=".service_locator.td4zu.o"/>
     <service id=".service_locator.lIKxIcQ" alias=".service_locator.SdimP0A"/>
-    <service id=".service_locator.hmzGF.." alias=".service_locator.JbpNamu"/>
+    <service id=".service_locator.JaAPWaB" alias=".service_locator.lol15oH"/>
     <service id=".service_locator.EJVP5fv" alias=".service_locator.dy6wSj2"/>
     <service id=".service_locator.aIFLvxy" alias=".service_locator.k.bttT5"/>
     <service id=".service_locator.xWqh7il" alias=".service_locator.rPk59qI"/>
@@ -11361,6 +11395,8 @@
     <service id=".service_locator..noNMKC" alias=".service_locator.zU2lRyp"/>
     <service id=".service_locator.Hfdf4pW" alias=".service_locator.NzhlhZp"/>
     <service id=".service_locator.y9XSIa7" alias=".service_locator.lnsowti"/>
+    <service id=".service_locator.zfypN28" alias=".service_locator.xTH6ER1"/>
+    <service id=".service_locator.dkp0HaN" alias=".service_locator.xEtsAU1"/>
     <service id=".service_locator.GBk3EpC" alias=".service_locator.xUsTS7F"/>
     <service id=".service_locator.sPhHnU8" alias=".service_locator.JmqEM1n"/>
     <service id=".service_locator.NrlGr85" alias=".service_locator.D8zEG0Q"/>

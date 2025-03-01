@@ -138,18 +138,28 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
                 if (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "first", [], "any", false, false, false, 15)) {
                     yield "active";
                 }
-                yield "\" id=\"tab";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 15), "html", null, true);
-                yield "\" data-bs-toggle=\"tab\" data-bs-target=\"#content";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 15), "html", null, true);
-                yield "\" type=\"button\" role=\"tab\" aria-controls=\"content";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 15), "html", null, true);
-                yield "\" aria-selected=\"";
-                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "first", [], "any", false, false, false, 15)) ? ("true") : ("false"));
+                yield "\" 
+                                id=\"tab";
+                // line 16
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 16), "html", null, true);
+                yield "\" 
+                                data-bs-toggle=\"tab\" 
+                                data-bs-target=\"#content";
+                // line 18
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 18), "html", null, true);
+                yield "\" 
+                                type=\"button\" role=\"tab\" 
+                                aria-controls=\"content";
+                // line 20
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 20), "html", null, true);
+                yield "\" 
+                                aria-selected=\"";
+                // line 21
+                yield ((CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "first", [], "any", false, false, false, 21)) ? ("true") : ("false"));
                 yield "\">
                             ";
-                // line 16
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "titre", [], "any", false, false, false, 16), "html", null, true);
+                // line 22
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "titre", [], "any", false, false, false, 22), "html", null, true);
                 yield "
                         </button>
                     </li>
@@ -166,14 +176,14 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['lecon'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 20
+            // line 26
             yield "            </ul>
 
             <div class=\"tab-content mt-3\" id=\"lessonTabsContent\">
                 ";
-            // line 23
+            // line 29
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["lessons"]) || array_key_exists("lessons", $context) ? $context["lessons"] : (function () { throw new RuntimeError('Variable "lessons" does not exist.', 23, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["lessons"]) || array_key_exists("lessons", $context) ? $context["lessons"] : (function () { throw new RuntimeError('Variable "lessons" does not exist.', 29, $this->source); })()));
             $context['loop'] = [
               'parent' => $context['_parent'],
               'index0' => 0,
@@ -188,38 +198,48 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
                 $context['loop']['last'] = 1 === $length;
             }
             foreach ($context['_seq'] as $context["_key"] => $context["lecon"]) {
-                // line 24
+                // line 30
                 yield "                    <div class=\"tab-pane fade ";
-                if (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "first", [], "any", false, false, false, 24)) {
+                if (CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "first", [], "any", false, false, false, 30)) {
                     yield "show active";
                 }
-                yield "\" id=\"content";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 24), "html", null, true);
-                yield "\" role=\"tabpanel\" aria-labelledby=\"tab";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 24), "html", null, true);
+                yield "\" 
+                         id=\"content";
+                // line 31
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 31), "html", null, true);
+                yield "\" role=\"tabpanel\" 
+                         aria-labelledby=\"tab";
+                // line 32
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 32), "html", null, true);
                 yield "\">
                         <div class=\"card\">
                             <div class=\"card-body\">
                                 <h5 class=\"card-title\">";
-                // line 27
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "titre", [], "any", false, false, false, 27), "html", null, true);
+                // line 35
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "titre", [], "any", false, false, false, 35), "html", null, true);
                 yield "</h5>
                                 <p class=\"card-text\">";
-                // line 28
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "contenu", [], "any", false, false, false, 28), "html", null, true);
+                // line 36
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "contenu", [], "any", false, false, false, 36), "html", null, true);
                 yield "</p>
                                 <p class=\"text-muted\">Créé le ";
-                // line 29
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "dateCreation", [], "any", false, false, false, 29), "d/m/Y"), "html", null, true);
+                // line 37
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "dateCreation", [], "any", false, false, false, 37), "d/m/Y"), "html", null, true);
                 yield "</p>
 
-                              <form action=\"";
-                // line 31
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lecon.pdf", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 31)]), "html", null, true);
+                                <!-- Bouton de téléchargement -->
+                                <form action=\"";
+                // line 40
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("lecon.pdf", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 40)]), "html", null, true);
                 yield "\" method=\"get\" style=\"display: inline;\">
-    <button type=\"submit\" class=\"btn btn-primary\">Télécharger le cours</button>
-</form>
+                                    <button type=\"submit\" class=\"btn btn-primary\">Télécharger le cours</button>
+                                </form>
 
+                                <!-- Bouton \"Marquer comme terminé\" -->
+                                <button class=\"btn btn-success markCompleted mt-2\" data-lecon-id=\"";
+                // line 45
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["lecon"], "id", [], "any", false, false, false, 45), "html", null, true);
+                yield "\">Marquer comme terminé</button>
                             </div>
                         </div>
                     </div>
@@ -236,21 +256,66 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['lecon'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 39
+            // line 50
             yield "            </div>
+
+            <!-- Barre de progression -->
+            <div class=\"progress mt-3\">
+                <div id=\"progressBar\" class=\"progress-bar bg-success\" role=\"progressbar\" 
+                     style=\"width: ";
+            // line 55
+            yield ((((isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 55, $this->source); })()) > 0)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((((isset($context["progression"]) || array_key_exists("progression", $context) ? $context["progression"] : (function () { throw new RuntimeError('Variable "progression" does not exist.', 55, $this->source); })()) / (isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 55, $this->source); })())) * 100), "html", null, true)) : (0));
+            yield "%;\" 
+                     aria-valuenow=\"";
+            // line 56
+            yield ((((isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 56, $this->source); })()) > 0)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((((isset($context["progression"]) || array_key_exists("progression", $context) ? $context["progression"] : (function () { throw new RuntimeError('Variable "progression" does not exist.', 56, $this->source); })()) / (isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 56, $this->source); })())) * 100), "html", null, true)) : (0));
+            yield "\" 
+                     aria-valuemin=\"0\" aria-valuemax=\"100\">
+                </div>
+            </div>
+            <p>";
+            // line 60
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["progression"]) || array_key_exists("progression", $context) ? $context["progression"] : (function () { throw new RuntimeError('Variable "progression" does not exist.', 60, $this->source); })()), "html", null, true);
+            yield " / ";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["total_lecons"]) || array_key_exists("total_lecons", $context) ? $context["total_lecons"] : (function () { throw new RuntimeError('Variable "total_lecons" does not exist.', 60, $this->source); })()), "html", null, true);
+            yield " leçons terminées</p>
+
         ";
         }
-        // line 41
+        // line 63
         yield "
+        <!-- Bouton retour -->
         <a href=\"";
-        // line 42
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["formation"]) || array_key_exists("formation", $context) ? $context["formation"] : (function () { throw new RuntimeError('Variable "formation" does not exist.', 42, $this->source); })()), "id", [], "any", false, false, false, 42)]), "html", null, true);
+        // line 65
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["formation"]) || array_key_exists("formation", $context) ? $context["formation"] : (function () { throw new RuntimeError('Variable "formation" does not exist.', 65, $this->source); })()), "id", [], "any", false, false, false, 65)]), "html", null, true);
         yield "\" class=\"btn btn-secondary mt-3\">Retour à la formation</a>
     </div>
 
-    ";
-        // line 46
-        yield "    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
+    <!-- Script pour marquer la leçon comme terminée -->
+    <script>
+        document.querySelectorAll('.markCompleted').forEach(button => {
+            button.addEventListener('click', function() {
+                let leconId = this.dataset.leconId;
+
+                fetch('/lecon/marquer-termine/' + leconId, { 
+                    method: 'POST', 
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Une erreur est survenue.');
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS for Tabs -->
+    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -282,7 +347,7 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  253 => 46,  247 => 42,  244 => 41,  240 => 39,  218 => 31,  213 => 29,  209 => 28,  205 => 27,  192 => 24,  175 => 23,  170 => 20,  152 => 16,  138 => 15,  135 => 14,  118 => 13,  115 => 12,  111 => 10,  109 => 9,  104 => 7,  101 => 6,  88 => 5,  64 => 3,  41 => 1,);
+        return array (  290 => 65,  286 => 63,  278 => 60,  271 => 56,  267 => 55,  260 => 50,  241 => 45,  233 => 40,  227 => 37,  223 => 36,  219 => 35,  213 => 32,  209 => 31,  202 => 30,  185 => 29,  180 => 26,  162 => 22,  158 => 21,  154 => 20,  149 => 18,  144 => 16,  138 => 15,  135 => 14,  118 => 13,  115 => 12,  111 => 10,  109 => 9,  104 => 7,  101 => 6,  88 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -301,7 +366,13 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
             <ul class=\"nav nav-tabs\" id=\"lessonTabs\" role=\"tablist\">
                 {% for lecon in lessons %}
                     <li class=\"nav-item\" role=\"presentation\">
-                        <button class=\"nav-link {% if loop.first %}active{% endif %}\" id=\"tab{{ lecon.id }}\" data-bs-toggle=\"tab\" data-bs-target=\"#content{{ lecon.id }}\" type=\"button\" role=\"tab\" aria-controls=\"content{{ lecon.id }}\" aria-selected=\"{{ loop.first ? 'true' : 'false' }}\">
+                        <button class=\"nav-link {% if loop.first %}active{% endif %}\" 
+                                id=\"tab{{ lecon.id }}\" 
+                                data-bs-toggle=\"tab\" 
+                                data-bs-target=\"#content{{ lecon.id }}\" 
+                                type=\"button\" role=\"tab\" 
+                                aria-controls=\"content{{ lecon.id }}\" 
+                                aria-selected=\"{{ loop.first ? 'true' : 'false' }}\">
                             {{ lecon.titre }}
                         </button>
                     </li>
@@ -310,28 +381,68 @@ class __TwigTemplate_279742ea0e2d23e5158fd3ac1e304643 extends Template
 
             <div class=\"tab-content mt-3\" id=\"lessonTabsContent\">
                 {% for lecon in lessons %}
-                    <div class=\"tab-pane fade {% if loop.first %}show active{% endif %}\" id=\"content{{ lecon.id }}\" role=\"tabpanel\" aria-labelledby=\"tab{{ lecon.id }}\">
+                    <div class=\"tab-pane fade {% if loop.first %}show active{% endif %}\" 
+                         id=\"content{{ lecon.id }}\" role=\"tabpanel\" 
+                         aria-labelledby=\"tab{{ lecon.id }}\">
                         <div class=\"card\">
                             <div class=\"card-body\">
                                 <h5 class=\"card-title\">{{ lecon.titre }}</h5>
                                 <p class=\"card-text\">{{ lecon.contenu }}</p>
                                 <p class=\"text-muted\">Créé le {{ lecon.dateCreation|date('d/m/Y') }}</p>
 
-                              <form action=\"{{ path('lecon.pdf', {'id': lecon.id}) }}\" method=\"get\" style=\"display: inline;\">
-    <button type=\"submit\" class=\"btn btn-primary\">Télécharger le cours</button>
-</form>
+                                <!-- Bouton de téléchargement -->
+                                <form action=\"{{ path('lecon.pdf', {'id': lecon.id}) }}\" method=\"get\" style=\"display: inline;\">
+                                    <button type=\"submit\" class=\"btn btn-primary\">Télécharger le cours</button>
+                                </form>
 
+                                <!-- Bouton \"Marquer comme terminé\" -->
+                                <button class=\"btn btn-success markCompleted mt-2\" data-lecon-id=\"{{ lecon.id }}\">Marquer comme terminé</button>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+
+            <!-- Barre de progression -->
+            <div class=\"progress mt-3\">
+                <div id=\"progressBar\" class=\"progress-bar bg-success\" role=\"progressbar\" 
+                     style=\"width: {{ total_lecons > 0 ? (progression / total_lecons) * 100 : 0 }}%;\" 
+                     aria-valuenow=\"{{ total_lecons > 0 ? (progression / total_lecons) * 100 : 0 }}\" 
+                     aria-valuemin=\"0\" aria-valuemax=\"100\">
+                </div>
+            </div>
+            <p>{{ progression }} / {{ total_lecons }} leçons terminées</p>
+
         {% endif %}
 
+        <!-- Bouton retour -->
         <a href=\"{{ path('app_formation_show', {'id': formation.id}) }}\" class=\"btn btn-secondary mt-3\">Retour à la formation</a>
     </div>
 
-    {# Bootstrap JS for tabs functionality #}
+    <!-- Script pour marquer la leçon comme terminée -->
+    <script>
+        document.querySelectorAll('.markCompleted').forEach(button => {
+            button.addEventListener('click', function() {
+                let leconId = this.dataset.leconId;
+
+                fetch('/lecon/marquer-termine/' + leconId, { 
+                    method: 'POST', 
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Une erreur est survenue.');
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS for Tabs -->
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 {% endblock %}
 ", "lecon/showClient.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\lecon\\showClient.html.twig");

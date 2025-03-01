@@ -14,7 +14,7 @@ use Twig\Source;
 use Twig\Template;
 use Twig\TemplateWrapper;
 
-/* /formation/formations.html.twig */
+/* formation/formations.html.twig */
 class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
 {
     private Source $source;
@@ -45,12 +45,12 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "/formation/formations.html.twig"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "formation/formations.html.twig"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "/formation/formations.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "formation/formations.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "/formation/formations.html.twig", 1);
+        $this->parent = $this->loadTemplate("base.html.twig", "formation/formations.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -276,7 +276,7 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
      */
     public function getTemplateName(): string
     {
-        return "/formation/formations.html.twig";
+        return "formation/formations.html.twig";
     }
 
     /**
@@ -397,6 +397,6 @@ class __TwigTemplate_1095cfb24a61ec8d3fd5b46148067ff7 extends Template
 }
 
   </style>
-{% endblock %}", "/formation/formations.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\formations.html.twig");
+{% endblock %}", "formation/formations.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\formations.html.twig");
     }
 }

@@ -37,6 +37,12 @@
                 <div class="text-center mt-4">
                     <a href="{{ path('app_inscription_cours_new', {'id': formation.id}) }}" class="btn btn-success">S'inscrire</a>
                 </div>
+                {% if progression == total_lecons %}
+    <div class="text-center mt-4">
+        <a href="{{ path('app_examen', {'id': formation.id}) }}" class="btn btn-danger">Passer l'examen</a>
+    </div>
+{% endif %}
+
            {% endif %}
 
         </div>
