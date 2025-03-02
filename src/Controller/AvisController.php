@@ -55,6 +55,43 @@ final class AvisController extends AbstractController
             // 'userId' => $userId,
         ]);
     }
+    #[Route('/spellcheck', name: 'app_avis_spellcheck', methods: ['POST'])]
+    public function spellcheck(Request $request): JsonResponse
+    {
+        $text = $request->request->get('text');
+        if (!$text) {
+            return new JsonResponse(['error' => 'No text provided'], 400);
+        }
+
+        try {
+            $url = 'https://api.languagetool.org/v2/check';
+            $body = http_build_query([
+                'text' => $text,
+                'language' => 'fr',
+            ]);
+            $response = $this->httpClient->request('POST', $url, [
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ],
+                'body' => $body,
+            ]);
+            $data = $response->toArray();
+
+            $correctedText = $text;
+            foreach ($data['matches'] as $match) {
+                $offset = $match['offset'];
+                $length = $match['length'];
+                $replacement = $match['replacements'][0]['value'] ?? null;
+                if ($replacement) {
+                    $correctedText = substr_replace($correctedText, $replacement, $offset, $length);
+                }
+            }
+
+            return new JsonResponse(['corrected' => $correctedText]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Spellcheck failed: ' . $e->getMessage()], 500);
+        }
+    }
 
     // NEW: Add this translation route
     #[Route('/translate/{id}', name: 'app_avis_translate', methods: ['GET'])]
@@ -246,7 +283,7 @@ final class AvisController extends AbstractController
         return $this->redirectToRoute('app_avis_index', ['formationId' => $avi->getFormation()->getId()], Response::HTTP_SEE_OTHER);
 
     }
-    
+  
 
 
 }

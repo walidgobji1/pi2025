@@ -82,9 +82,8 @@ $(document).ready(function() {
 
         <div class="mb-3">
             <label class="form-label">Note</label>
-            
             <div class="rating">
-                {{ form_widget(form.note) }}  <!-- Render the star rating from the form directly -->
+                {{ form_widget(form.note) }}
                 <div class="form-errors">
                     {% if form.note.vars.errors|length > 0 %}
                         <div class="error-icon">⚠️</div>
@@ -96,7 +95,7 @@ $(document).ready(function() {
 
         <div class="mb-3">
             {{ form_label(form.commentaire, 'Votre commentaire', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(form.commentaire, {'attr': {'id': 'commentaire', 'class': 'form-control' ,'placeholder': 'Écrivez votre avis...', 'rows': 4}}) }}
+            {{ form_widget(form.commentaire, {'id': 'commentaire', 'attr': {'id': 'commentaire', 'class': 'form-control', 'placeholder': 'Écrivez votre avis...', 'rows': 4}}) }}
             <div class="form-errors">
                 {% if form.commentaire.vars.errors|length > 0 %}
                     <div class="error-icon">⚠️</div>
@@ -105,19 +104,17 @@ $(document).ready(function() {
             </div>
         </div>
 
-  
-<div class="d-flex flex-column align-items-center">
-    <button type="submit" class="btn custom-red w-50 py-2 mb-3">Envoyer</button>
-<a href="{{ path('app_avis_index', {'formationId': formationId}) }}" class="btn btn-secondary w-50">
-    Liste Avis
-</a>
-</div>
-
-
+        <div class="d-flex flex-column align-items-center">
+            <button type="submit" class="btn custom-red w-50 py-2 mb-3">Envoyer</button>
+            <a href="{{ path('app_avis_index', {'formationId': formationId}) }}" class="btn btn-secondary w-50">
+                Liste Avis
+            </a>
+        </div>
 
         {{ form_end(form) }}
     </div>
 </div>
+{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -195,19 +192,79 @@ $(document).ready(function() {
 
         /* Add margin to the top of the card */
         .container {
-            margin-top: 60px;  /* Adjust the top margin of the form container */
+            margin-top: 60px;
         }
 
-        /* Adjust margins for other sections if needed */
         .mb-3 {
-            margin-bottom: 10px;  /* Adjust the bottom margin of each form group */
+            margin-bottom: 10px;
         }
     </style>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log('Autocorrect script loaded');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('commentaire'); // Match the intended ID
+            if (!input) {
+                console.error('Commentaire input not found');
+                // Log all textareas to debug
+                document.querySelectorAll('textarea').forEach(el => console.log('Found textarea:', el.id));
+                return;
+            }
+            console.log('Input element found:', input);
+
+            // Debounce to limit API calls
+            function debounce(func, wait) {
+                let timeout;
+                return function(...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            // Fetch autocorrect from server
+            async function autocorrectText(text) {
+                try {
+                    const response = await fetch('/avis/spellcheck', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: 'text=' + encodeURIComponent(text)
+                    });
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`HTTP error: ${response.status} - ${errorText}`);
+                    }
+                    const data = await response.json();
+                    console.log('API response:', data);
+                    return data.corrected || text;
+                } catch (error) {
+                    console.error('Autocorrect failed:', error);
+                    return text;
+                }
+            }
+
+            // Debounced autocorrect handler
+            const handleInput = debounce(async (e) => {
+                console.log('Input event fired:', e.target.value);
+                const originalText = e.target.value;
+                const correctedText = await autocorrectText(originalText);
+                console.log('Original:', originalText, 'Corrected:', correctedText);
+                if (correctedText !== originalText) {
+                    console.log('Updating input to:', correctedText);
+                    const start = e.target.selectionStart;
+                    const end = e.target.selectionEnd;
+                    e.target.value = correctedText;
+                    e.target.setSelectionRange(start, end);
+                }
+            }, 500);
+
+            input.addEventListener('input', handleInput);
+        });
+    </script>
 {% endblock %}
-
-
-
-
-

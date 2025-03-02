@@ -88,12 +88,6 @@ Le module automatise l’évaluation des CV des instructeurs pour évaluer leurs
     - La base de données reflète score (par exemple, 100.0), niveau (par exemple, « Avancé ») et les autres champs  dans la table evaluation.
     
 ## ✅ Dépendances
-- **Bundles Symfony** :
-  - `symfony/framework-bundle`
-  - `doctrine/doctrine-bundle`
-  - `symfony/messenger`
-  - `symfony/mailer`
-  - `symfony/monolog-bundle` (pour les journaux).
 - **API Externes** :
   - API Affinda (clé configurée dans `.env`, non divulguée ici).
   - API Flask (disponible dans [cv-score-model](https://github.com/amenibenabdallah/cv-score-model), locale à `http://localhost:5000`, authentifiée avec une clé configurée dans `.env`).
