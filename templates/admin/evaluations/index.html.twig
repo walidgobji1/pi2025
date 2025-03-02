@@ -235,77 +235,45 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        // Function to fetch and update the evaluations list
-        async function updateEvaluationsList() {
-            // Ensure DOM is ready
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => updateEvaluationsList());
-                return;
-            }
+        async function updateEvaluationsList(url) {
+            const response = await fetch(url, {
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'same-origin'
+            });
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('.table-wrapper');
 
-            const currentTable = document.querySelector('table#evaluations-table');
-            if (!currentTable) {
-                console.warn('Evaluations table not found on this page. Current URL:', window.location.pathname);
-                alert('Erreur : La liste des évaluations n’est pas disponible sur cette page. Rafraîchissez ou naviguez vers /admin/evaluations.');
-                return;
-            }
-
-            try {
-                console.log('Attempting to fetch evaluations list. URL:', '{{ path('admin_evaluations') }}');
-                const response = await fetch('{{ path('admin_evaluations') }}', {
-                    headers: {
-                        'Cache-Control': 'no-cache', // Prevent browser caching
-                        'X-Requested-With': 'XMLHttpRequest' // Indicate AJAX request
-                    },
-                    credentials: 'same-origin' // Ensure cookies/credentials are included
-                });
-                if (!response.ok) {
-                    throw new Error(`Erreur réseau : ${response.status} - ${response.statusText}`);
-                }
-                const html = await response.text();
-                console.log('AJAX response received, parsing HTML...');
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const newTable = doc.querySelector('table#evaluations-table');
-
-                if (newTable) {
-                    console.log('Updating table with new content...');
-                    currentTable.innerHTML = newTable.outerHTML; // Simplified for speed
-                    // Reattach event listeners to "Détails" buttons after dynamic update
-                    document.querySelectorAll('table#evaluations-table a.btn-info').forEach(button => {
-                        button.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            window.location.href = this.href;
-                        });
-                    });
-                } else {
-                    console.warn('New table not found in response. Response HTML:', html.substring(0, 200) + '...');
-                    alert('Erreur : Impossible de mettre à jour la liste des évaluations. Rafraîchissez la page manuellement.');
-                }
-            } catch (error) {
-                console.error('Erreur lors de la mise à jour de la liste :', error);
-                alert('Erreur lors de la mise à jour de la liste : ' + error.message);
+            if (newContent) {
+                const currentContent = document.querySelector('.table-wrapper');
+                currentContent.parentNode.replaceChild(newContent, currentContent);
+                attachPaginationListeners(); // Reattach listeners to new pagination links
             }
         }
 
-        // Ensure DOM is ready before adding event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            // Listen for the popstate event (triggered by back/forward navigation)
-            window.addEventListener('popstate', () => {
-                console.log('Back button detected, updating evaluations list. Current URL:', window.location.pathname);
-                updateEvaluationsList();
+        function attachPaginationListeners() {
+            document.querySelectorAll('.pagination .page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        window.history.pushState({ path: href }, '', href);
+                        updateEvaluationsList(href);
+                    }
+                });
             });
+        }
 
-            // Initial update on page load to ensure fresh data
-            console.log('Page loaded, updating evaluations list. Current URL:', window.location.pathname);
-            updateEvaluationsList();
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEvaluationsList(window.location.href);
+            attachPaginationListeners();
 
-            // Optional: Re-run update when the page is visible after being hidden (e.g., tab switch)
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'visible') {
-                    console.log('Page visible, updating evaluations list. Current URL:', window.location.pathname);
-                    updateEvaluationsList();
-                }
+            window.addEventListener('popstate', (event) => {
+                const url = event.state ? event.state.path : window.location.href;
+                updateEvaluationsList(url);
             });
         });
     </script>
