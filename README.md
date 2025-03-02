@@ -110,3 +110,114 @@ Le module automatise l’évaluation des CV des instructeurs pour évaluer leurs
 
 ## 📧 Contact
 Pour toute question ou problème, contactez l’équipe de développement à [benabdallah2ameni@gmail.com](mailto:benabdallah2ameni@gmail.com), responsable du module d’évaluation, ou consultez le dépôt Git pour plus de détails.
+
+# 📘 Documentation du Module de Gestion d'avis (Avis)
+
+## 🌟 Vue d’ensemble
+Le module `Gestion d'Avis` dans cette application Symfony est conçu pour gérer les avis des utilisateurs sur des formations, permettant aux apprenants authentifiés (rôle `ROLE_APPRENANT`) de noter les formations avec un système d’étoiles sur 5. Il calcule un score moyen pour chaque formation basé sur la somme des notes des avis divisée par leur nombre. Le module s’intègre avec des APIs externes (LanguageTool pour l’autocorrection, Google Translate pour la traduction, et Sightengine pour la modération) pour offrir une expérience robuste et automatisée.
+
+## 🎯 Objectif
+Le module automatise la gestion des avis utilisateurs, attribue des notes sur 5 via un système d’étoiles, et calcule un score moyen pour chaque formation. Il crée une entité `FormationScore` au premier avis et met à jour ce score lors de l’ajout, la modification ou la suppression d’avis, facilitant l’évaluation des formations dans l’application. Seuls les utilisateurs authentifiés avec le rôle `ROLE_APPRENANT` peuvent ajouter des avis, garantissant une restriction d’accès.
+
+## 🚀 Fonctionnalités Clés
+- **Gestion des Avis avec Notation par Étoiles** :
+  - Les apprenants authentifiés (`ROLE_APPRENANT`) soumettent des avis avec une note sur 5 (étoiles) via un formulaire sécurisé.
+  - Les avis sont liés à une formation spécifique et stockés dans l’entité `Avis`.
+
+- **Calcul du Score de Formation** :
+  - Crée une table `FormationScore` au premier avis pour une formation avec `noteMoyenne` (moyenne des notes) et `nombreAvis`.
+  - **Ajout** : `noteMoyenne = (noteMoyenne * nombreAvis + nouvelleNote) / (nombreAvis + 1)`.
+  - **Modification** : `noteMoyenne = ((noteMoyenne * nombreAvis) - ancienneNote + nouvelleNote) / nombreAvis`.
+  - **Suppression** : `noteMoyenne = ((noteMoyenne * nombreAvis) - noteSupprimée) / (nombreAvis - 1)`; `0` si aucun avis restant.
+  - Stocke et met à jour `noteMoyenne`, `nombreAvis`, et `classement` dans `FormationScore`.
+
+- **Autocorrection avec l’API LanguageTool** :
+  - Corrige en temps réel les fautes d’orthographe dans les commentaires via l’API LanguageTool (ex. "parceque" → "parce que").
+  - Appelée via la route `/avis/spellcheck`.
+
+- **Traduction avec l’API Google Translate** :
+  - Traduit les commentaires des avis du français vers l’anglais via une API non officielle (ex. "Je suis fatigué" → "I am tired").
+  - Accessible via `/avis/translate/{id}`.
+
+- **Modération avec l’API Sightengine** :
+  - Analyse les avis en backoffice pour détecter les contenus inappropriés (insultes, grossièretés, etc.), avec mise en cache des résultats.
+  - Met à jour les champs `isFlagged` et `flaggedReason` dans `Avis`.
+  - L'admin peut supprimer les avis flaggees 
+
+## 🛠 Détails d’Implémentation
+
+### Contrôleurs
+- **Classe** : `App\Controller\AvisController`
+  - Gère les routes front-end pour les avis et les fonctionnalités d’autocorrection/traduction.
+- **Classe** : `App\Controller\FormationScoreController`
+  - Gère les routes back-office et la modération des avis.
+
+### Entités
+- **Classe** : `App\Entity\Avis`
+  - Champs : `id`, `note` (1-5), `commentaire`, `dateCreation`, `formation`, `apprenant`, `formationScore`, `isFlagged`, `flaggedReason`.
+  - Relation : `ManyToOne` avec `Formation` et `FormationScore`.
+- **Classe** : `App\Entity\FormationScore`
+  - Champs : `id`, `noteMoyenne`, `nombreAvis`, `classement`, `formation`.
+  - Relation : `OneToMany` avec `Avis`.
+
+### Intégration des APIs
+- **LanguageTool** : `https://api.languagetool.org/v2/check` (autocorrection).
+- **Google Translate** : `https://translate.googleapis.com/translate_a/single` (traduction).
+- **Sightengine** : `https://api.sightengine.com/1.0/text/check.json` (modération, nécessite clés API dans `.env`).
+
+### Configuration
+- Nécessite des clés API Sightengine dans `.env` :
+  - **SIGHTENGINE_API_USER**
+  - **SIGHTENGINE_API_SECRET**
+## Les Templates Twig
+Les templates Twig (`new.html.twig`, `index.html.twig`, etc.) pour le frontoffice sont situés dans le dossier `templates/avis/`.Aussi `AvisEtScore.html.twig` et `formation_avis.html.twig` pour le backoffice sont situés dans le dossier `templates/admin/`
+
+- Accédez à la page d’ajout d’avis pour une formation spécifique via l’interface utilisateur (par exemple, "Ajouter un avis" depuis la liste des formations).
+- Connectez-vous en tant qu’apprenant authentifié avec le rôle `ROLE_APPRENANT`.
+- Attribuez une note en utilisant le système d’étoiles (1 à 5), rédigez votre commentaire (ex. "Je suis tres fatigé"), et observez l’autocorrection en "Je suis très fatiguée" après une courte pause.
+- Le score moyen de la formation est automatiquement créé ou mis à jour dans la base de données.
+
+### Lister les Avis
+- Consultez la liste des avis d’une formation depuis la page dédiée dans l’application pour voir les commentaires des utilisateurs et le score moyen.
+
+### Traduire un Avis
+- Utilisez la fonctionnalité de traduction intégrée dans l’interface pour convertir un commentaire en anglais (par exemple, en cliquant sur "Traduire" pour un avis spécifique).
+
+### Modérer un Avis
+- En tant qu’administrateur, accédez à la section de feedback dans le back-office pour examiner supprimer les avis inappropriés.
+## ✅ Dépendances
+- **PHP** : 8.x
+- **Symfony** : 6.4+
+- **Doctrine ORM** : Pour la gestion de la base de données.
+- **Symfony HttpClient** : Pour les appels API.
+- **APIs Externes** :
+  - LanguageTool (gratuit).
+  - Google Translate (non officiel).
+  - Sightengine (clé API requise).
+
+## 🧪 Tests
+
+### ✨ Autocorrection Magique
+- **Entrée** : "Je suis tres fatigé aprés une longue journé de travaille."
+- **Résultat attendu** : "Je suis très fatigué après une longue journée de travail."
+- **Comment tester** : Connectez-vous comme apprenant, ouvrez le formulaire d’ajout d’avis, tapez la phrase et regardez la magie opérer après 500ms—votre texte sera corrigé automatiquement !
+
+### 🌟 Score des Formations
+- **Scénario** :
+  1. Ajoutez un premier avis avec une note de 4 étoiles → Le score devient 4/5, avec 1 avis.
+  2. Ajoutez un second avis avec 3 étoiles → Le score passe à 3.5/5, avec 2 avis.
+  3. Supprimez le premier avis → Le score revient à 3/5, avec 1 avis.
+- **Comment tester** : Utilisez l’interface pour ajouter et supprimer des avis, puis vérifiez le score mis à jour dans la liste des formations.
+### 🌍 Traduction Instantanée
+- **Entrée** : Un avis avec le commentaire "C’est une excellente formation !"
+- **Résultat attendu** : "This is an excellent training!"
+- **Comment tester** : Ajoutez un avis via le formulaire, puis utilisez la fonction de traduction dans l’interface (ou via un appel API si intégré dans l’UI) pour voir le commentaire traduit en anglais—un petit voyage linguistique en un clic !
+
+## ℹ Remarques
+- Seuls les utilisateurs authentifiés avec `ROLE_APPRENANT` peuvent ajouter des avis, vérifié dans `AvisController::addAvis`.
+- Le score est recalculé dynamiquement lors des opérations CRUD sur les avis.
+- LanguageTool est limité à ~20 requêtes/minute (niveau gratuit)—surveillez ou hébergez localement pour un usage intensif.
+- Les notes sont saisies via un système d’étoiles dans `AvisType`, mappé à l’entité `Avis`.
+
+## 📧 Contact
+Pour toute question ou problème, contactez l’équipe de développement à [benabdallah2ameni@gmail.com](mailto:benabdallah2ameni@gmail.com), responsable de Gestion d'avis , ou consultez le dépôt Git pour plus de détails.
