@@ -399,6 +399,6 @@ class __TwigTemplate_ec035a619c964d40daa5b7015f8fcc18 extends Template
         
     </style>
 {% endblock %}
-", "admin/AvisEtScore.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\admin\\AvisEtScore.html.twig");
+", "admin/AvisEtScore.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\AvisEtScore.html.twig");
     }
 }

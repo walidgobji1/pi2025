@@ -159,6 +159,6 @@ class __TwigTemplate_d0e8197842da075f5087a16035f8eec7 extends Template
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}
-", "categorie/edit.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\categorie\\edit.html.twig");
+", "categorie/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\edit.html.twig");
     }
 }

@@ -361,6 +361,6 @@ class __TwigTemplate_745cbdbeb2a38d68c6c45d110e0623f4 extends Template
 \t\t\t<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 \t\t</body>
 \t</html>
-", "base_admin.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\base_admin.html.twig");
+", "base_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\base_admin.html.twig");
     }
 }

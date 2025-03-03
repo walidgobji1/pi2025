@@ -195,6 +195,6 @@ class __TwigTemplate_5068ed0e72bfff686ace7efaa4f22d30 extends Template
     <a href=\"{{ path('app_inscription_cours_index') }}\">Retour à la liste des inscriptions</a>
 
 {% endblock %}
-", "inscription_cours/edit.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\inscription_cours\\edit.html.twig");
+", "inscription_cours/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\edit.html.twig");
     }
 }

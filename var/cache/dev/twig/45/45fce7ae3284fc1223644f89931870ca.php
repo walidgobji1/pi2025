@@ -185,6 +185,6 @@ class __TwigTemplate_0b6557cd724a736c93a1380b850e8c88 extends Template
         <a href=\"{{ path('app_message') }}\" class=\"btn btn-secondary mt-2\">Annuler</a>
     </div>
 {% endblock %}
-", "message/edit.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\message\\edit.html.twig");
+", "message/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\message\\edit.html.twig");
     }
 }

@@ -774,6 +774,6 @@ document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('sho
 \t\t<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"></script>
 
 \t{% endblock %}
-", "message/conversation.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\message\\conversation.html.twig");
+", "message/conversation.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\message\\conversation.html.twig");
     }
 }

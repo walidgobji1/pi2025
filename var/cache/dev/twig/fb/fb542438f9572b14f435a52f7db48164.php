@@ -372,6 +372,6 @@ class __TwigTemplate_a2c05a422281ba5b904d502fe6b069a1 extends Template
     </style>
 {% endblock %}
 {% endblock %}
-", "admin/formation_avis.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\admin\\formation_avis.html.twig");
+", "admin/formation_avis.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\formation_avis.html.twig");
     }
 }

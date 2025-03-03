@@ -323,6 +323,6 @@ class __TwigTemplate_5c4b1ab9b2fd028de75b13acc75dba2a extends Template
 </section>
 <!-- end info_section -->
 {% endblock %}
-", "About/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\About\\index.html.twig");
+", "About/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\About\\index.html.twig");
     }
 }

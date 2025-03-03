@@ -190,6 +190,6 @@ class __TwigTemplate_9f7b84009ae4efb44ba482c3d5a69a53 extends Template
     {{ include('inscription_cours/_form.html.twig') }}
 
 {% endblock %}
-", "inscription_cours/new.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\inscription_cours\\new.html.twig");
+", "inscription_cours/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\new.html.twig");
     }
 }

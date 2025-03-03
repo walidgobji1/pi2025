@@ -150,6 +150,6 @@ class __TwigTemplate_ba213f0117c49247dd1c312c04198add extends Template
 
   
 {% endblock %}
-", "lecon/edit.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\edit.html.twig");
+", "lecon/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\edit.html.twig");
     }
 }

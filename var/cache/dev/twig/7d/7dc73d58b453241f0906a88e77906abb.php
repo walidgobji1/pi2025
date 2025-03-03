@@ -242,6 +242,6 @@ class __TwigTemplate_57113550199bf239b84112d371056c0c extends Template
 
     <a href=\"{{ path('app_lecon_new') }}\">Create new</a>
 {% endblock %}
-", "lecon/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\index.html.twig");
+", "lecon/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\index.html.twig");
     }
 }

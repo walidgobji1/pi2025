@@ -94,6 +94,6 @@ class __TwigTemplate_16f200c0032436c1d017840ec819631e extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ notification.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-", "notification/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\notification\\_delete_form.html.twig");
+", "notification/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\notification\\_delete_form.html.twig");
     }
 }

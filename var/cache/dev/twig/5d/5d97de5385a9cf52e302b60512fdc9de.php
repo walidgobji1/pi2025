@@ -369,6 +369,6 @@ class __TwigTemplate_035207703871cb98bf581cc997fa06c4 extends Template
 \t\t\t</section>
 
 \t\t{% endblock %}
-", "inscription_cours/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\inscription_cours\\index.html.twig");
+", "inscription_cours/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\index.html.twig");
     }
 }

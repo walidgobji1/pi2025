@@ -1296,6 +1296,6 @@ class __TwigTemplate_83c68c375b56a64f830724d6a2e50a4a extends Template
 
 </html>
 {% endblock %}
-", "home/home.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\home\\home.html.twig");
+", "home/home.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\home\\home.html.twig");
     }
 }

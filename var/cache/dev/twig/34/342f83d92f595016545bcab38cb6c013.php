@@ -218,6 +218,6 @@ class __TwigTemplate_35c6edf8b8d249e9bda031580c16dc92 extends Template
         </form>
     </div>
 {% endblock %}
-", "message/create.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\message\\create.html.twig");
+", "message/create.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\message\\create.html.twig");
     }
 }

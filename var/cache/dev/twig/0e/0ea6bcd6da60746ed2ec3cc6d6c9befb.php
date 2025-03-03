@@ -149,6 +149,6 @@ class __TwigTemplate_266efb12a6585314f0613639816f1625 extends Template
 <a href=\"{{ path('app_home') }}\">Retour à l'accueil</a>
 {% endblock %}
 
-", "payment/cancel.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\payment\\cancel.html.twig");
+", "payment/cancel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\payment\\cancel.html.twig");
     }
 }

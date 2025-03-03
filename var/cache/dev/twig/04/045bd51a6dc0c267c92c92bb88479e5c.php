@@ -339,6 +339,6 @@ class __TwigTemplate_74766c85ed0567d49033284f579b153a extends Template
     {# Bootstrap JS for tabs functionality #}
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 {% endblock %}
-", "lecon/lecons.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\lecons.html.twig");
+", "lecon/lecons.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\lecons.html.twig");
     }
 }

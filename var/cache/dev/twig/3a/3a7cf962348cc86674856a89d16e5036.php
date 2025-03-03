@@ -560,6 +560,6 @@ document.addEventListener(\"DOMContentLoaded\", function() {
 </html>
 
 
-", "inscription_cours/_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\inscription_cours\\_form.html.twig");
+", "inscription_cours/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\_form.html.twig");
     }
 }

@@ -266,6 +266,6 @@ class __TwigTemplate_2b58303a23e60914d4c522af3383687e extends Template
 \t\t</div>
 \t</section>
 {% endblock %}
-", "home/login_admin.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\home\\login_admin.html.twig");
+", "home/login_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\home\\login_admin.html.twig");
     }
 }

@@ -94,6 +94,6 @@ class __TwigTemplate_7ea88cef33fd2297fe9019f4c67e2154 extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ lecon.id) }}\">
     <button class=\"btn btn-danger\">Delete</button>
 </form>
-", "lecon/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\_delete_form.html.twig");
+", "lecon/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\_delete_form.html.twig");
     }
 }

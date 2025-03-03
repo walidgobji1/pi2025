@@ -152,6 +152,6 @@ class __TwigTemplate_910df02457be6645cd41f139454003c1 extends Template
 
   
 {% endblock %}
-", "evenement/new.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\evenement\\new.html.twig");
+", "evenement/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\evenement\\new.html.twig");
     }
 }

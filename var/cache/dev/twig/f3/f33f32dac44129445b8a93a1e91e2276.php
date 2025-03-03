@@ -1407,6 +1407,6 @@ class __TwigTemplate_427c24be2a66616df9939661ad6b0dbf extends Template
       </div>
     </section>
 {% endblock %}
-", "admin/dashboard.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\admin\\dashboard.html.twig");
+", "admin/dashboard.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\dashboard.html.twig");
     }
 }

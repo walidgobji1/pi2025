@@ -127,6 +127,6 @@ class __TwigTemplate_e7bfd45b468d44951c283b6de0734e5a extends Template
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 </script>
-", "categorie/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\categorie\\_delete_form.html.twig");
+", "categorie/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\_delete_form.html.twig");
     }
 }

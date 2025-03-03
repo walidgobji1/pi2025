@@ -180,6 +180,6 @@ class __TwigTemplate_4bb63e991697c8e1e05946b6166ab992 extends Template
     {% endfor %}
     </tbody>
 </table>
-", "avis/_avis_list.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\avis\\_avis_list.html.twig");
+", "avis/_avis_list.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\avis\\_avis_list.html.twig");
     }
 }

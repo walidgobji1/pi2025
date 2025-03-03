@@ -403,6 +403,6 @@ class __TwigTemplate_504d33df98678ce90346f7740262134d extends Template
 
 \t</div>
 {% endblock %}
-", "inscription_cours/show.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\inscription_cours\\show.html.twig");
+", "inscription_cours/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\show.html.twig");
     }
 }

@@ -216,6 +216,6 @@ class __TwigTemplate_70e16f192db4a7f2a9725d4f2decb2a8 extends Template
 
     {{ include('lecon/_delete_form.html.twig') }}
 {% endblock %}
-", "lecon/show.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\show.html.twig");
+", "lecon/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\show.html.twig");
     }
 }

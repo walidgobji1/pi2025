@@ -292,6 +292,6 @@ class __TwigTemplate_9e630302ee1eb091f1cb9a06f75b157f extends Template
     </div>
 </section>
 {% endblock %}
-", "promotion/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\promotion\\index.html.twig");
+", "promotion/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\promotion\\index.html.twig");
     }
 }

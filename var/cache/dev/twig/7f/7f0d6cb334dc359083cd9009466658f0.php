@@ -170,6 +170,6 @@ class __TwigTemplate_0313008d3b68de1e853c28cd3a7c9166 extends Template
     </ul>
 </div>
 {% endblock %}
-", "formation_score/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\formation_score\\index.html.twig");
+", "formation_score/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\formation_score\\index.html.twig");
     }
 }

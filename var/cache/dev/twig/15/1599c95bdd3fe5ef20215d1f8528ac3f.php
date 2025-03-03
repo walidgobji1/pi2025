@@ -145,6 +145,6 @@ class __TwigTemplate_c3a3754e0ee0643ad5bc109de9871090 extends Template
     {{ include('categorie/_form.html.twig') }}
 
 {% endblock %}
-", "categorie/new.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\categorie\\new.html.twig");
+", "categorie/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\new.html.twig");
     }
 }

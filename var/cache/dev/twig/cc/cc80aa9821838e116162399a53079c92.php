@@ -115,6 +115,6 @@ class __TwigTemplate_bc93f795bffb11c2ed17a1922bdfd9d4 extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ formation.id) }}\">
     <button class=\"btn btn-danger\">Supprimer</button>
 </form>
-", "formation/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\formation\\_delete_form.html.twig");
+", "formation/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\formation\\_delete_form.html.twig");
     }
 }

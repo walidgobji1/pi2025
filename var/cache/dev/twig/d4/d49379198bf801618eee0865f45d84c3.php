@@ -445,6 +445,6 @@ class __TwigTemplate_3b71c4bd20be9a657ac9559db77bc0ab extends Template
     <!-- Bootstrap JS for Tabs -->
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 {% endblock %}
-", "lecon/showClient.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\lecon\\showClient.html.twig");
+", "lecon/showClient.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\showClient.html.twig");
     }
 }

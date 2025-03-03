@@ -523,6 +523,6 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\base.html.twig");
     }
 }

@@ -227,6 +227,6 @@ class __TwigTemplate_d7707716a45aa2dd30a7b6ebf3f3ab06 extends Template
 
     {{ include('avis/_delete_form.html.twig') }}
 {% endblock %}
-", "avis/show.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\avis\\show.html.twig");
+", "avis/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\avis\\show.html.twig");
     }
 }

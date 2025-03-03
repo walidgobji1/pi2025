@@ -177,6 +177,6 @@ class __TwigTemplate_b6d2622fe7982a5f44c4b128373015e0 extends Template
         }
     </style>
 {% endblock %}
-", "notification/edit.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\notification\\edit.html.twig");
+", "notification/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\notification\\edit.html.twig");
     }
 }

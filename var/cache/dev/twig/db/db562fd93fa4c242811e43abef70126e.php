@@ -453,6 +453,6 @@ class __TwigTemplate_96fb20000a9386e9cc77d1e1abe3ed4d extends Template
   </section>
   <!-- end info_section -->
 {% endblock %}
-", "instructeur/instructeur.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\instructeur\\instructeur.html.twig");
+", "instructeur/instructeur.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\instructeur\\instructeur.html.twig");
     }
 }
