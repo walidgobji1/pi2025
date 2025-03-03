@@ -13,6 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class FormationType extends AbstractType
 {
@@ -106,8 +110,15 @@ class FormationType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'constraints' => [
                     new Assert\NotNull(['message' => 'La catégorie est obligatoire.']),
-                ],
+                ],    
+            
+            ])
+         
+            ->add('imageFile', VichFileType::class, [
+                'label' => 'Image de la formation',
+                'attr' => ['class' => 'form_label mt-4'],
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

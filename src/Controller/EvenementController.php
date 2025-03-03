@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/evenement')]
 final class EvenementController extends AbstractController
@@ -26,14 +27,22 @@ final class EvenementController extends AbstractController
     }
 
     #[Route('/events', name: 'app_evenement_front', methods: ['GET'])]
-    public function index_front(EvenementRepository $evenementRepository): Response
-    {
+public function index_front(Request $request, EvenementRepository $evenementRepository): Response
+{
+    $searchTerm = $request->query->get('search');
+    if ($searchTerm) {
+        $evenements = $evenementRepository->findByTitle($searchTerm);
+    } else {
         $evenements = $evenementRepository->findAll();
-        return $this->render('evenement/events.html.twig', [
-            'evenements' => $evenements,
-        ]);
     }
 
+    return $this->render('evenement/events.html.twig', [
+        'evenements' => $evenements,
+        'searchTerm' => $searchTerm,
+    ]);
+}
+    
+    
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
