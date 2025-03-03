@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\InternalProxy
 {
-    use \Symfony\Component\VarExporter\LazyGhostTrait {
+     use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as private;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -26,13 +26,15 @@ class Evenement extends \App\Entity\Evenement implements \Doctrine\ORM\Proxy\Int
         "\0".parent::class."\0".'description' => [parent::class, 'description', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'notification' => [parent::class, 'notification', null],
+        "\0".parent::class."\0".'photo' => [parent::class, 'photo', null],
         "\0".parent::class."\0".'titre' => [parent::class, 'titre', null],
         'date' => [parent::class, 'date', null],
         'description' => [parent::class, 'description', null],
         'id' => [parent::class, 'id', null],
         'notification' => [parent::class, 'notification', null],
+        'photo' => [parent::class, 'photo', null],
         'titre' => [parent::class, 'titre', null],
-    ];
+    ];
 
     public function __isInitialized(): bool
     {

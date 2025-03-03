@@ -24,7 +24,6 @@
             <td>{{ notification.titre }}</td>
             <td>{{ notification.contenu }}</td>
             <td>
-                {# Check if the notification has an associated event, then display the event title #}
                 {% if notification.evenement %}
                     <span class="event-title">{{ notification.evenement.titre }}</span>
                 {% else %}
@@ -46,7 +45,6 @@
 </table>
 
 <style>
-    /* Customize the appearance of each notification row */
     .notification-row {
         background-color: #f9f9f9;
         transition: background-color 0.3s ease;
@@ -65,5 +63,45 @@
         margin: 0 5px;
     }
 </style>
+
+{% block javascripts %}
+<script>
+document.getElementById("notificationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let titre = document.getElementById("titre").value;
+    let contenu = document.getElementById("contenu").value;
+
+    fetch("/notification/new/1", { // Replace 1 with the actual event ID
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ titre: titre, contenu: contenu })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        // Add the new notification to the list
+        let notificationList = document.getElementById("notificationList");
+        let newNotif = document.createElement("div");
+        newNotif.classList.add("notification-item");
+        newNotif.innerHTML = `<strong>${data.titre}</strong>
+                              <p>${data.contenu}</p>
+                              <small>${data.sentAt}</small>`;
+        notificationList.prepend(newNotif); // Add to the beginning of the list
+
+        // Clear the form fields
+        document.getElementById("titre").value = "";
+        document.getElementById("contenu").value = "";
+    })
+    .catch(error => console.error("Erreur :", error));
+});
+</script>
+{% endblock %}
 
 {% endblock %}

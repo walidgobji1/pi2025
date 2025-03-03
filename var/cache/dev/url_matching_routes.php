@@ -206,7 +206,7 @@ return [
         965 => [[['_route' => 'edit_message', '_controller' => 'App\\Controller\\MessageController::editMessage'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         1003 => [[['_route' => 'app_notification_new', '_controller' => 'App\\Controller\\NotificationController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         1020 => [[['_route' => 'app_notification_show', '_controller' => 'App\\Controller\\NotificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1043 => [[['_route' => 'app_notification_show_cli', '_controller' => 'App\\Controller\\NotificationController::showClient'], ['id'], ['GET' => 0], null, false, true, null]],
+        1043 => [[['_route' => 'app_notification_show_cli', '_controller' => 'App\\Controller\\NotificationController::showCli'], ['id'], ['GET' => 0], null, false, true, null]],
         1068 => [[['_route' => 'app_notification_edit', '_controller' => 'App\\Controller\\NotificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         1077 => [[['_route' => 'app_notification_delete', '_controller' => 'App\\Controller\\NotificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         1114 => [[['_route' => 'save_payment', '_controller' => 'App\\Controller\\PayementControllerController::savePayment'], ['id'], ['POST' => 0], null, false, true, null]],

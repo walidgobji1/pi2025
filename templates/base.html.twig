@@ -51,14 +51,102 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_evenement_front') }}">Evenements</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-bell"></i> Notifications
-                                    </a>
-                                    <div class="dropdown-menu scrollable-dropdown" aria-labelledby="navbarDropdown" id="notificationDropdown">
-                                        <!-- Notifications will be injected here dynamically -->
-                                    </div>
                                 </li>
+                              </li>
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-bell"></i> Notifications
+                                </a>
+                                <div class="dropdown-menu scrollable-dropdown" aria-labelledby="navbarDropdown" id="notificationDropdown">
+                                  <!-- Notifications will be injected here dynamically -->
+                                </div>
+                              </li>
+                              
+                              <style>
+                                .scrollable-dropdown {
+                                    max-height: 300px; /* Limit height */
+                                    overflow-y: auto; /* Enable scrolling */
+                                    width: 350px; /* Adjust width */
+                                }
+                              
+                                .notification-item {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 10px;
+                                    border-bottom: 1px solid #e0e0e0;
+                                }
+                              
+                                .notification-item img {
+                                    width: 40px; /* Small profile image */
+                                    height: 40px;
+                                    border-radius: 50%;
+                                    margin-right: 10px;
+                                }
+                              
+                                .notification-text {
+                                    flex-grow: 1;
+                                }
+                              
+                                .notification-text strong {
+                                    display: block;
+                                    font-size: 14px;
+                                }
+                              
+                                .notification-text small {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+                              
+                                .notification-text span {
+                                    font-size: 13px;
+                                    display: block;
+                                    color: #333;
+                                }
+                              </style>
+                              
+                              <script>
+                                // Fetch notifications when the page loads
+                                window.onload = function () {
+                                    loadNotifications();
+                                    // Set interval to load notifications every 5 seconds
+                                    setInterval(loadNotifications, 5000);
+                                };
+                            
+                                function loadNotifications() {
+                                    fetch("{{ path('app_notifications') }}")  // Fetch notifications from Symfony route
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            let notificationDropdown = document.getElementById("notificationDropdown");
+                                            notificationDropdown.innerHTML = '';  // Clear previous notifications
+                            
+                                            if (data.length === 0) {
+                                                notificationDropdown.innerHTML = '<a class="dropdown-item text-muted" href="#">Aucune notification</a>';
+                                            } else {
+                                                data.forEach(notification => {
+                                                    let notificationItem = document.createElement("a");
+                                                    notificationItem.classList.add("dropdown-item", "notification-item");
+                                                    notificationItem.href = "{{ path('app_notification_show_cli', {'id': 'id_placeholder'}) }}".replace('id_placeholder', notification.id);
+                            
+                                                    // Sender image placeholder (replace with dynamic sender image if available)
+                                                    let senderImage = notification.senderImage ? notification.senderImage : "{{ asset('frontOffice/images/formini.jpeg') }}";
+                            
+                                                    notificationItem.innerHTML = `
+                                                        <img src="${senderImage}" alt="Sender">
+                                                        <div class="notification-text">
+                                                            <strong>${notification.titre}</strong>
+                                                            <small>${notification.sentAt}</small>
+                                                            <span>${notification.contenu.slice(0, 50)}...</span>
+                                                        </div>
+                                                    `;
+                            
+                                                    notificationDropdown.appendChild(notificationItem);
+                                                });
+                                            }
+                                        })
+                                        .catch(error => console.log("Error fetching notifications:", error));
+                                }
+                            </script>
+                            
 
                                 {% if app.user %}
                                     <li class="nav-item dropdown">
