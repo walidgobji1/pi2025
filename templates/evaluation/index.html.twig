@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Évaluation de {{ instructor.nomInstructeur }} {{ instructor.prenomInstructeur }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">Évaluation de {{ instructor.nomInstructeur }} {{ instructor.prenomInstructeur }}</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Éducation:</strong> {{ evaluation.education|default('Non spécifié') }}</p>
+                <p><strong>Années d’expérience:</strong> {{ evaluation.yearsOfExperience|default('Non spécifié') }}</p>
+                <p><strong>Compétences:</strong> {{ evaluation.skills|default('Non spécifié') }}</p>
+                <p><strong>Certifications:</strong> {{ evaluation.certifications|default('Non spécifié') }}</p>
+                <p><strong>Statut:</strong> {{ evaluation.status ? 'Finalisé' : 'En cours' }}</p>
+                <p><strong>Date de création:</strong> {{ evaluation.dateCreation|date('d/m/Y H:i') }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

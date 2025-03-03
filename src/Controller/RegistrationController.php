@@ -51,6 +51,7 @@ class RegistrationController extends AbstractController
                 $user->setNomInstructeur($form->get('nom')->getData());
                 $user->setPrenomInstructeur($form->get('prenom')->getData());
                 $user->setEmailInstructeur($form->get('email')->getData());
+                $user->setCv('C:\\Users\\LENOVO\\Desktop\\PIDEV\\pi2025\\public\\uploads\\cv\\test_cv.pdf');
             }
 
             // ✅ Handle Image Upload
