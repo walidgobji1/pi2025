@@ -3,7 +3,11 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
+        'reference' => '7e2d1a24fcc3260dae42f28a8721629be24f9ed1',
+=======
         'reference' => '97a783b1b970209b9c112ce2f5dc619c3b3f2262',
+>>>>>>> 87bde6548b1c045d127d74edc2874fe42ed14cfd
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +17,11 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
+            'reference' => '7e2d1a24fcc3260dae42f28a8721629be24f9ed1',
+=======
             'reference' => '97a783b1b970209b9c112ce2f5dc619c3b3f2262',
+>>>>>>> 87bde6548b1c045d127d74edc2874fe42ed14cfd
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -998,6 +1006,8 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
+=======
         'symfony/mercure-bundle' => array(
             'pretty_version' => 'v0.3.9',
             'version' => '0.3.9.0',
@@ -1007,6 +1017,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+>>>>>>> 87bde6548b1c045d127d74edc2874fe42ed14cfd
         'symfony/messenger' => array(
             'pretty_version' => 'v6.4.19',
             'version' => '6.4.19.0',

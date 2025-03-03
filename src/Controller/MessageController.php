@@ -15,6 +15,7 @@ use \Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MessageController extends AbstractController
@@ -57,75 +58,78 @@ class MessageController extends AbstractController
     }
 
     #[Route('/message/send', name: 'send_message', methods: ['POST'])]
-    public function sendMessage(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator, Security $security): Response
+    public function sendMessage(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator, Security $security): JsonResponse
     {
-        // Récupérer l'ID de la discussion depuis le formulaire
         $discussionId = (int) $request->request->get('discussion_id');
-        
-        // Récupérer le contenu du message
         $content = trim($request->request->get('content'));
-
-        // Récupérer la discussion depuis la base de données
+    
         $discussion = $entityManager->getRepository(Discussion::class)->find($discussionId);
-
-        // Vérifier si la discussion existe
         if (!$discussion) {
-            return new Response("Discussion introuvable.", 400);
+            return new JsonResponse(["error" => "Discussion introuvable"], 400);
         }
-
-        // Récupérer l'utilisateur connecté
-        $sender = $security->getUser(); // Utilisateur connecté (vérifie qu'il est authentifié)
-
-        // Vérifier que l'utilisateur est authentifié et est une instance de User
+    
+        $sender = $security->getUser();
         if (!$sender instanceof User) {
-            return new Response("Utilisateur non authentifié.", 401);
+            return new JsonResponse(["error" => "Utilisateur non authentifié"], 401);
         }
-
-        // Le destinataire est celui qui est dans la discussion (c'est l'autre utilisateur)
+    
         $receiver = ($discussion->getSender()->getId() === $sender->getId()) ? $discussion->getReceiver() : $discussion->getSender();
-
-        // Créer un nouveau message
+    
         $message = new Message();
         $message->setContent($content);
         $message->setDiscussion($discussion);
         $message->setSender($sender);
         $message->setReceiver($receiver);
-
-        // Validation de l'entité
+    
         $errors = $validator->validate($message);
         if (count($errors) > 0) {
-            foreach ($errors as $error) {
-                $this->addFlash('error', $error->getMessage());
-            }
-            return $this->redirectToRoute('view_discussion', ['id' => $discussionId]);
+            return new JsonResponse(["error" => "Erreur de validation"], 400);
         }
-
-        // Sauvegarder le message
+    
         $entityManager->persist($message);
         $entityManager->flush();
-
-        // Rediriger vers la page de la discussion
-        return $this->redirectToRoute('view_discussion', ['id' => $discussionId]);
+    
+        return new JsonResponse([
+            "id" => $message->getId(),
+            "content" => $message->getContent(),
+            "sender" => $sender->getNom(),
+            "createdAt" => $message->getCreatedAt()->format('Y-m-d H:i:s'),
+        ]);
     }
-
+    #[Route('/messages/fetch/{discussion_id}', name: 'fetch_messages', methods: ['GET'])]
+    public function fetchMessages(int $discussion_id, MessageRepository $messageRepository): JsonResponse
+    {
+        $messages = $messageRepository->findBy(
+            ['discussion' => $discussion_id],
+            ['createdAt' => 'ASC']
+        );
+    
+        $data = [];
+        foreach ($messages as $message) {
+            $data[] = [
+                'id' => $message->getId(),
+                'content' => $message->getContent(),
+                'createdAt' => $message->getCreatedAt()->format('d/m/Y H:i'),
+                'sender_id' => $message->getSender()->getId(),
+                'sender_image' => $message->getSender()->getImage(),
+                'reaction' => $message->getReaction(),
+            ];
+        }
+    
+        return new JsonResponse($data);
+    }
+    
    #[Route('/discussion/new', name: 'create_discussion', methods: ['GET', 'POST'])]
 public function createDiscussion(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator, Security $security): Response
 {
-    // Variable pour les erreurs
     $errors = [];
 
-    // Récupérer l'utilisateur connecté
     $sender = $security->getUser(); // Utilisateur connecté
 
-    // Vérifier si l'utilisateur est connecté
-    if (!$sender || !$sender instanceof User) {
-        $errors[] = 'Vous devez être connecté pour créer une discussion.';
-    }
-
+    
     // Obtenir tous les utilisateurs
     $utilisateurs = $entityManager->getRepository(User::class)->findAll();
 
-    // Filtrer les utilisateurs qui ont déjà une discussion avec l'utilisateur connecté
     $excludeUsers = [];
     $discussions = $entityManager->getRepository(Discussion::class)->findBy([
         'sender' => $sender
@@ -139,7 +143,6 @@ public function createDiscussion(Request $request, EntityManagerInterface $entit
         $excludeUsers[] = $discussion->getReceiver()->getId();
     }
 
-    // Filtrer la liste des utilisateurs pour exclure l'utilisateur connecté et ceux déjà dans une discussion
     $utilisateurs = array_filter($utilisateurs, function ($utilisateur) use ($sender, $excludeUsers) {
         return $utilisateur instanceof User && $utilisateur->getId() != $sender->getId() && !in_array($utilisateur->getId(), $excludeUsers);
     });
@@ -147,7 +150,6 @@ public function createDiscussion(Request $request, EntityManagerInterface $entit
     if ($request->isMethod('POST')) {
         $receiverId = $request->request->get('receiver_id');
 
-        // Valider si le champ 'receiver_id' est vide
         if (!$receiverId) {
             $errors[] = 'Le destinataire est requis.';
         }
@@ -266,4 +268,68 @@ public function createDiscussion(Request $request, EntityManagerInterface $entit
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/message/{id}/reaction', name: 'message_react', methods: ['POST'])]
+    public function react(Message $message, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $emoji = $request->request->get('reaction');
+    
+        if ($emoji) {
+            $message->setReaction($emoji);
+            $entityManager->flush();
+        }
+    
+        return $this->redirectToRoute('view_discussion', ['id' => $message->getDiscussion()->getId()]);
+    }
+
+
+
+
+
+    #[Route('/rechercher-discussion', name: 'rechercher_discussion', methods: ['GET'])]
+    public function rechercherDiscussion(Request $request, DiscussionRepository $discussionRepository)
+    {
+        $query = $request->query->get('query');
+
+        if (!$query) {
+            return new JsonResponse([]);
+        }
+
+        // Recherche dans les discussions
+        $discussions = $discussionRepository->createQueryBuilder('d')
+        ->leftJoin('d.sender', 'sender')
+        ->leftJoin('d.receiver', 'receiver')
+        ->where('LOWER(sender.nom) LIKE LOWER(:query) OR LOWER(sender.prenom) LIKE LOWER(:query)')
+        ->orWhere('LOWER(receiver.nom) LIKE LOWER(:query) OR LOWER(receiver.prenom) LIKE LOWER(:query)')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+
+        $result = [];
+
+        foreach ($discussions as $discussion) {
+            // S'assurer que les informations nécessaires sont envoyées
+            $result[] = [
+                'id' => $discussion->getId(),
+                'sender' => [
+                    'id' => $discussion->getSender()->getId(),
+                    'nom' => $discussion->getSender()->getNom(),
+                    'prenom' => $discussion->getSender()->getPrenom(),
+                    'image' => $discussion->getSender()->getImage() // Assurez-vous d'envoyer l'image aussi
+                ],
+                'receiver' => [
+                    'id' => $discussion->getReceiver()->getId(),
+                    'nom' => $discussion->getReceiver()->getNom(),
+                    'prenom' => $discussion->getReceiver()->getPrenom(),
+                    'image' => $discussion->getReceiver()->getImage()
+                ]
+            ];
+        }
+    
+
+        return new JsonResponse($result);
+    }
 }
+    
+
+
