@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\InscriptionCours;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Apprenant;
 
 /**
  * @extends ServiceEntityRepository<InscriptionCours>
@@ -40,4 +41,24 @@ class InscriptionCoursRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findInscriptionsByApprenant(Apprenant $apprenant): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.apprenant = :apprenant')
+            ->setParameter('apprenant', $apprenant)
+            ->orderBy('i.dateInscreption', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function searchByFormationTitle(string $query): array
+{
+    return $this->createQueryBuilder('i')
+        ->join('i.formation', 'f') // Assure-toi que la relation existe
+        ->where('f.titre LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
 }

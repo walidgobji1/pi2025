@@ -52,6 +52,7 @@ class PromotionType extends AbstractType
             ])
             ->add('apprenant', EntityType::class, [
                 'class' => Apprenant::class,
+                'choices' => $options['eligible_apprenants'], // ✅ Seuls les apprenants éligibles sont listés
                 'choice_label' => function (Apprenant $apprenant) {
                     return $apprenant->getNom() . ' ' . $apprenant->getPrenom();
                 },
@@ -67,7 +68,9 @@ class PromotionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Promotion::class,
+            'data_class' => Promotion::class, 
+            'eligible_apprenants' => [], // ✅ Définit une valeur par défaut pour éviter l'erreur
+
         ]);
     }
 }
