@@ -26,10 +26,32 @@
                                             {% endfor %}
                                         </div>
                                         {% if avis.isFlagged %}
-                                            <i class="fas fa-flag text-danger ms-2" title="Flagged"></i>
+                                            <div class="flag-container">
+                                <i class="fas fa-flag text-danger ms-2" title="Flagged"></i>
+                                <span class="flag-badge">{{ avis.flaggedReason|default('Unknown') }}</span>
+                            </div>
                                         {% endif %}
                                     </div>
-                                    <p class="card-text text-muted">{{ avis.commentaire }}</p>
+                                    {# <p class="card-text text-muted">{{ avis.commentaire }}</p> #}
+                                    <p class="card-text text-muted">
+    {% if avis.isFlagged and avis.flaggedWords is defined and avis.flaggedWords|length > 0 %}
+                                {% set parts = [] %}
+                                {% set lastEnd = 0 %}
+                                {% for flagged in avis.flaggedWords|sort((a, b) => a.start <=> b.start) %}
+                                    {% if flagged.start > lastEnd %}
+                                        {% set parts = parts|merge([avis.commentaire[lastEnd:flagged.start - lastEnd]]) %}
+                                    {% endif %}
+                                    {% set parts = parts|merge(['<span class="bad-word">' ~ flagged.word ~ '</span>']) %}
+                                    {% set lastEnd = flagged.end %}
+                                {% endfor %}
+                                {% if lastEnd < avis.commentaire|length %}
+                                    {% set parts = parts|merge([avis.commentaire[lastEnd:]]) %}
+                                {% endif %}
+                                {{ parts|join|raw }}
+                            {% else %}
+                                {{ avis.commentaire }}
+                            {% endif %}
+</p>
                                     <small class="text-secondary">
                                         Submitted on {{ avis.dateCreation|date('d M Y') }}
                                     </small>
@@ -72,6 +94,29 @@
         .container-fluid {
             margin: 0;
             padding: 0;
+        }
+        .flag-container {
+            display: flex;
+            align-items: center;
+        }
+        .flag-badge {
+            background-color: #ffccd5; /* Soft red background */
+            color: #d6336c; /* Cute pinkish-red text */
+            font-size: 0.85em;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            box-shadow: 0 2px 4px rgba(214, 51, 108, 0.2);
+        }
+        .fas.fa-flag {
+            color: #ff6b81; /* Softer red for the flag */
+        }
+        .bad-word {
+            background-color: #ffccd5;
+            color: #d6336c;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: bold;
         }
     </style>
 {% endblock %}

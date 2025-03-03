@@ -4,11 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "1e3c11cd7aa105b802bbf8ab30357928",
-=======
+
+    "content-hash": "5f98bfd45b6f62cbdfa94d2dca2f2bfc",
+
+    
+
     "content-hash": "fd270a70655b79bd92da086bc51d7480",
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
     "packages": [
         {
             "name": "composer/semver",
@@ -1644,7 +1646,7 @@
             "time": "2023-02-15T13:44:18+00:00"
         },
         {
-<<<<<<< HEAD
+
             "name": "knplabs/knp-components",
             "version": "v5.1.0",
             "source": {
@@ -1690,7 +1692,7 @@
                 "solarium/solarium": "to allow usage pagination with Solarium Client",
                 "symfony/http-foundation": "to retrieve arguments from Request",
                 "symfony/property-access": "to allow sorting arrays"
-=======
+
             "name": "lcobucci/clock",
             "version": "2.3.0",
             "source": {
@@ -1786,30 +1788,26 @@
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/php-invoker": "^3.1",
                 "phpunit/phpunit": "^9.4"
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
+
                     "dev-master": "5.x-dev"
-=======
-                    "dev-master": "4.0-dev"
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
                 }
             },
             "autoload": {
                 "psr-4": {
-<<<<<<< HEAD
+
                     "Knp\\Component\\": "src/Knp/Component"
-=======
-                    "Lcobucci\\JWT\\": "src"
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-<<<<<<< HEAD
+
                 "MIT"
             ],
             "authors": [
@@ -1910,7 +1908,48 @@
                 "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.6.1"
             },
             "time": "2024-10-07T16:11:50+00:00"
-=======
+
+        },
+        {
+            "name": "lexik/translation-bundle",
+            "version": "v6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikTranslationBundle.git",
+                "reference": "3042cdf01ea4728be5a7606acda9f558e270abed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikTranslationBundle/zipball/3042cdf01ea4728be5a7606acda9f558e270abed",
+                "reference": "3042cdf01ea4728be5a7606acda9f558e270abed",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0",
+                "symfony/framework-bundle": "~5.2|~6.0"
+            },
+            "require-dev": {
+                "doctrine/data-fixtures": "~1.1",
+                "doctrine/doctrine-bundle": "^2.2",
+                "doctrine/mongodb-odm": "^2.1",
+                "doctrine/mongodb-odm-bundle": "~4.2",
+                "doctrine/orm": ">=2.4",
+                "ext-mongodb": "*",
+                "ext-pdo": "*",
+                "mikey179/vfsstream": "^1.6",
+                "mongodb/mongodb": "^1.8",
+                "phpunit/phpunit": "^9.5",
+                "propel/propel": "2.0.0-alpha12|dev-master",
+                "symfony/symfony": "~5.0|~6.0"
+            },
+            "suggest": {
+                "doctrine/orm": ">=2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x.x-dev"
+
                 "BSD-3-Clause"
             ],
             "authors": [
@@ -1940,7 +1979,7 @@
                 }
             ],
             "time": "2021-09-28T19:18:28+00:00"
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
         },
         {
             "name": "masterminds/html5",
@@ -1967,11 +2006,16 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.7-dev"
+
                 }
             },
             "autoload": {
                 "psr-4": {
+
+                    "Lexik\\Bundle\\TranslationBundle\\": ""
+
                     "Masterminds\\": "src"
+
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1980,6 +2024,29 @@
             ],
             "authors": [
                 {
+
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                }
+            ],
+            "description": "This bundle allows to import translation files content into the database and provide a GUI to edit translations.",
+            "homepage": "https://github.com/lexik/LexikTranslationBundle",
+            "keywords": [
+                "bundle",
+                "i18n",
+                "symfony",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/lexik/LexikTranslationBundle/issues",
+                "source": "https://github.com/lexik/LexikTranslationBundle/tree/v6.0"
+            },
+            "time": "2022-06-12T08:02:35+00:00"
+
                     "name": "Matt Butcher",
                     "email": "technosophos@gmail.com"
                 },
@@ -2008,6 +2075,7 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
             "time": "2024-03-31T07:05:07+00:00"
+
         },
         {
             "name": "monolog/monolog",
@@ -2288,7 +2356,7 @@
             "time": "2024-11-09T15:12:26+00:00"
         },
         {
-<<<<<<< HEAD
+
             "name": "phpstan/phpdoc-parser",
             "version": "2.1.0",
             "source": {
@@ -2298,7 +2366,7 @@
             },
             "dist": {
                 "type": "zip",
-=======
+
             "name": "phpmailer/phpmailer",
             "version": "v6.9.3",
             "source": {
@@ -2389,7 +2457,7 @@
             },
             "dist": {
                 "type": "zip",
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+
                 "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
                 "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
                 "shasum": ""

@@ -9,7 +9,18 @@ parameters:
    photos_directory: '%kernel.project_dir%/public/uploads/photos'
    profile_images_directory: '%kernel.project_dir%/public/uploads/images'
 
-   
+
+    cv_directory: '%kernel.project_dir%/public/uploads/cv'
+    profile_images_directory: '%kernel.project_dir%/public/uploads/images'
+
+    stripe_public_key: '%env(STRIPE_PUBLIC_KEY)%'
+    stripe_secret_key: '%env(STRIPE_SECRET_KEY)%'
+    affinda_api_key: '%env(AFFINDA_API_KEY)%'
+    flask_api_key: '%env(FLASK_API_KEY)%'
+    gemini_api_key: '%env(GEMINI_API_KEY)%'
+
+
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -28,3 +39,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\EvaluationService:
+        arguments:
+            $httpClient: '@http_client'
+            $entityManager: '@doctrine.orm.entity_manager'
+            $affindaApiKey: '%env(AFFINDA_API_KEY)%'
+            $flaskApiKey: '%env(FLASK_API_KEY)%'
+            $logger: '@logger'
+    App\EventListener\InstructeurListener:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+    App\Controller\AvisController:
+        arguments:
+            $httpClient: '@http_client'
