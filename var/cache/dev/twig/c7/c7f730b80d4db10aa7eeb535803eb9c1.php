@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Profiler/toolbar_item.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/c7/c7f730b80d4db10aa7eeb535803eb9c1.php
 class __TwigTemplate_d9e646adc057875813ae495a9a10f3cf extends Template
-========
-class __TwigTemplate_6b8d3ac4a9b63321455b05e810b0f1d5 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/da/da6daf0bb35123eb226be532f7f56f6d.php
 {
     private Source $source;
     /**
@@ -121,10 +117,6 @@ class __TwigTemplate_6b8d3ac4a9b63321455b05e810b0f1d5 extends Template
     {% if link|default(false) %}</a>{% endif %}
         <div class=\"sf-toolbar-info\">{{ text|default('') }}</div>
 </div>
-<<<<<<<< HEAD:var/cache/dev/twig/c7/c7f730b80d4db10aa7eeb535803eb9c1.php
-", "@WebProfiler/Profiler/toolbar_item.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\toolbar_item.html.twig");
-========
-", "@WebProfiler/Profiler/toolbar_item.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\toolbar_item.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/da/da6daf0bb35123eb226be532f7f56f6d.php
+", "@WebProfiler/Profiler/toolbar_item.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\toolbar_item.html.twig");
     }
 }

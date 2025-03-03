@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/messenger.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/80/807a7ed7b0a6832203a003637836e58c.php
 class __TwigTemplate_a5f745f5cd7dbb9204c6f451e727d096 extends Template
-========
-class __TwigTemplate_2816be82f4eb56c06b106aa95539fe98 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/81/819cb2f63ee25a6e440db63fba84a88e.php
 {
     private Source $source;
     /**
@@ -902,10 +898,6 @@ class __TwigTemplate_2816be82f4eb56c06b106aa95539fe98 extends Template
     </table>
     {% endfor %}
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/80/807a7ed7b0a6832203a003637836e58c.php
-", "@WebProfiler/Collector/messenger.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\messenger.html.twig");
-========
-", "@WebProfiler/Collector/messenger.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\messenger.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/81/819cb2f63ee25a6e440db63fba84a88e.php
+", "@WebProfiler/Collector/messenger.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\messenger.html.twig");
     }
 }

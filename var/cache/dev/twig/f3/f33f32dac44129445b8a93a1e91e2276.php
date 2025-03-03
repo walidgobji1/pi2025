@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* admin/dashboard.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f3/f33f32dac44129445b8a93a1e91e2276.php
 class __TwigTemplate_427c24be2a66616df9939661ad6b0dbf extends Template
-========
-class __TwigTemplate_c76c72805ea23b05a7efc89bb62a6b30 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/2e/2eedcb07d41d3854d1698450b58e0f99.php
 {
     private Source $source;
     /**
@@ -1411,10 +1407,6 @@ class __TwigTemplate_c76c72805ea23b05a7efc89bb62a6b30 extends Template
       </div>
     </section>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/f3/f33f32dac44129445b8a93a1e91e2276.php
-", "admin/dashboard.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\dashboard.html.twig");
-========
-", "admin/dashboard.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\admin\\dashboard.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/2e/2eedcb07d41d3854d1698450b58e0f99.php
+", "admin/dashboard.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\admin\\dashboard.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Router/panel.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/cd/cdc81cd671cb6aa4b0953966be7f0123.php
 class __TwigTemplate_f13fbfbf07bc627fd5d1becb757f7d9d extends Template
-========
-class __TwigTemplate_8308294b44b7f65ad50d86ce1d9bf245 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/3f/3fff3265eaaeb16e2040d736610776a0.php
 {
     private Source $source;
     /**
@@ -317,10 +313,6 @@ $context["trace"], "level", [], "any", false, false, false, 57) == 2)) {
     Note: These matching logs are based on the current router configuration,
     which might differ from the configuration used when profiling this request.
 </p>
-<<<<<<<< HEAD:var/cache/dev/twig/cd/cdc81cd671cb6aa4b0953966be7f0123.php
-", "@WebProfiler/Router/panel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Router\\panel.html.twig");
-========
-", "@WebProfiler/Router/panel.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Router\\panel.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/3f/3fff3265eaaeb16e2040d736610776a0.php
+", "@WebProfiler/Router/panel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Router\\panel.html.twig");
     }
 }

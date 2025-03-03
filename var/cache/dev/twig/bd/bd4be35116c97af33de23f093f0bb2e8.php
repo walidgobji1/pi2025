@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* tailwind_2_layout.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/bd/bd4be35116c97af33de23f093f0bb2e8.php
 class __TwigTemplate_871c5b25a83a0783193a20bb314d77a0 extends Template
-========
-class __TwigTemplate_e7ba3cf9efdfc45f70d5b9053fbe68ce extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/38/38b06a093040488056bef8ff9822ef8d.php
 {
     private Source $source;
     /**
@@ -486,10 +482,6 @@ class __TwigTemplate_e7ba3cf9efdfc45f70d5b9053fbe68ce extends Template
     {%- set widget_class = widget_class|default('mr-2') -%}
     {{- parent() -}}
 {%- endblock radio_widget -%}
-<<<<<<<< HEAD:var/cache/dev/twig/bd/bd4be35116c97af33de23f093f0bb2e8.php
-", "tailwind_2_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\tailwind_2_layout.html.twig");
-========
-", "tailwind_2_layout.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\tailwind_2_layout.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/38/38b06a093040488056bef8ff9822ef8d.php
+", "tailwind_2_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\tailwind_2_layout.html.twig");
     }
 }

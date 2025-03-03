@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @Doctrine/Collector/db.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/92/92ae819e6fe5bf43f3da2eae1c8988ca.php
 class __TwigTemplate_01646ddbe1e9cee377e54d98da058051 extends Template
-========
-class __TwigTemplate_8ee2797fe944be8cc8c99717dbf58012 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/15/159ed2ba029bee927e6e79968aca4707.php
 {
     private Source $source;
     /**
@@ -1870,10 +1866,6 @@ class __TwigTemplate_8ee2797fe944be8cc8c99717dbf58012 extends Template
         </tbody>
     </table>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/92/92ae819e6fe5bf43f3da2eae1c8988ca.php
-", "@Doctrine/Collector/db.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\db.html.twig");
-========
-", "@Doctrine/Collector/db.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\db.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/15/159ed2ba029bee927e6e79968aca4707.php
+", "@Doctrine/Collector/db.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\db.html.twig");
     }
 }

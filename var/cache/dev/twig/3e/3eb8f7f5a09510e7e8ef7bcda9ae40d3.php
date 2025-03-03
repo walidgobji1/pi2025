@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* evenement/events.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/3e/3eb8f7f5a09510e7e8ef7bcda9ae40d3.php
 class __TwigTemplate_9139e4a30115089d74a12cdd438eea9d extends Template
-========
-class __TwigTemplate_09e5652b8f951fe7ad80674699f1b413 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7d/7d93ec6f6ff3fa50dfb020a5a7e646d6.php
 {
     private Source $source;
     /**
@@ -150,11 +146,7 @@ class __TwigTemplate_09e5652b8f951fe7ad80674699f1b413 extends Template
         ";
             $context['_iterated'] = true;
         }
-<<<<<<<< HEAD:var/cache/dev/twig/3e/3eb8f7f5a09510e7e8ef7bcda9ae40d3.php
-        // line 21
-========
         // line 31
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7d/7d93ec6f6ff3fa50dfb020a5a7e646d6.php
         if (!$context['_iterated']) {
             // line 32
             yield "            <p class=\"text-center text-gray-600 w-full\">Aucun événement trouvé.</p>
@@ -214,11 +206,7 @@ class __TwigTemplate_09e5652b8f951fe7ad80674699f1b413 extends Template
      */
     public function getDebugInfo(): array
     {
-<<<<<<<< HEAD:var/cache/dev/twig/3e/3eb8f7f5a09510e7e8ef7bcda9ae40d3.php
-        return array (  149 => 24,  142 => 22,  140 => 21,  131 => 17,  127 => 16,  123 => 15,  119 => 14,  114 => 12,  110 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
-========
         return array (  159 => 34,  152 => 32,  150 => 31,  139 => 25,  135 => 24,  131 => 23,  127 => 22,  121 => 19,  117 => 17,  112 => 16,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7d/7d93ec6f6ff3fa50dfb020a5a7e646d6.php
     }
 
     public function getSourceContext(): Source
@@ -276,10 +264,6 @@ class __TwigTemplate_09e5652b8f951fe7ad80674699f1b413 extends Template
 </script>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/3e/3eb8f7f5a09510e7e8ef7bcda9ae40d3.php
-", "evenement/events.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\evenement\\events.html.twig");
-========
-", "evenement/events.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\evenement\\events.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7d/7d93ec6f6ff3fa50dfb020a5a7e646d6.php
+", "evenement/events.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\evenement\\events.html.twig");
     }
 }

@@ -144,34 +144,131 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evenement_front");
         yield "\">Evenements</a>
                                 </li>
-                                <li class=\"nav-item dropdown\">
-                                    <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fa fa-bell\"></i> Notifications
-                                    </a>
-                                    <div class=\"dropdown-menu scrollable-dropdown\" aria-labelledby=\"navbarDropdown\" id=\"notificationDropdown\">
-                                        <!-- Notifications will be injected here dynamically -->
-                                    </div>
                                 </li>
+                              </li>
+                              <li class=\"nav-item dropdown\">
+                                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                  <i class=\"fa fa-bell\"></i> Notifications
+                                </a>
+                                <div class=\"dropdown-menu scrollable-dropdown\" aria-labelledby=\"navbarDropdown\" id=\"notificationDropdown\">
+                                  <!-- Notifications will be injected here dynamically -->
+                                </div>
+                              </li>
+                              
+                              <style>
+                                .scrollable-dropdown {
+                                    max-height: 300px; /* Limit height */
+                                    overflow-y: auto; /* Enable scrolling */
+                                    width: 350px; /* Adjust width */
+                                }
+                              
+                                .notification-item {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 10px;
+                                    border-bottom: 1px solid #e0e0e0;
+                                }
+                              
+                                .notification-item img {
+                                    width: 40px; /* Small profile image */
+                                    height: 40px;
+                                    border-radius: 50%;
+                                    margin-right: 10px;
+                                }
+                              
+                                .notification-text {
+                                    flex-grow: 1;
+                                }
+                              
+                                .notification-text strong {
+                                    display: block;
+                                    font-size: 14px;
+                                }
+                              
+                                .notification-text small {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+                              
+                                .notification-text span {
+                                    font-size: 13px;
+                                    display: block;
+                                    color: #333;
+                                }
+                              </style>
+                              
+                              <script>
+                                // Fetch notifications when the page loads
+                                window.onload = function () {
+                                    loadNotifications();
+                                    // Set interval to load notifications every 5 seconds
+                                    setInterval(loadNotifications, 5000);
+                                };
+                            
+                                function loadNotifications() {
+                                    fetch(\"";
+        // line 116
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_notifications");
+        yield "\")  // Fetch notifications from Symfony route
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            let notificationDropdown = document.getElementById(\"notificationDropdown\");
+                                            notificationDropdown.innerHTML = '';  // Clear previous notifications
+                            
+                                            if (data.length === 0) {
+                                                notificationDropdown.innerHTML = '<a class=\"dropdown-item text-muted\" href=\"#\">Aucune notification</a>';
+                                            } else {
+                                                data.forEach(notification => {
+                                                    let notificationItem = document.createElement(\"a\");
+                                                    notificationItem.classList.add(\"dropdown-item\", \"notification-item\");
+                                                    notificationItem.href = \"";
+        // line 128
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_notification_show_cli", ["id" => "id_placeholder"]);
+        yield "\".replace('id_placeholder', notification.id);
+                            
+                                                    // Sender image placeholder (replace with dynamic sender image if available)
+                                                    let senderImage = notification.senderImage ? notification.senderImage : \"";
+        // line 131
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/images/formini.jpeg"), "html", null, true);
+        yield "\";
+                            
+                                                    notificationItem.innerHTML = `
+                                                        <img src=\"\${senderImage}\" alt=\"Sender\">
+                                                        <div class=\"notification-text\">
+                                                            <strong>\${notification.titre}</strong>
+                                                            <small>\${notification.sentAt}</small>
+                                                            <span>\${notification.contenu.slice(0, 50)}...</span>
+                                                        </div>
+                                                    `;
+                            
+                                                    notificationDropdown.appendChild(notificationItem);
+                                                });
+                                            }
+                                        })
+                                        .catch(error => console.log(\"Error fetching notifications:\", error));
+                                }
+                            </script>
+                            
 
                                 ";
-        // line 63
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 63, $this->source); })()), "user", [], "any", false, false, false, 63)) {
-            // line 64
+        // line 151
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 151, $this->source); })()), "user", [], "any", false, false, false, 151)) {
+            // line 152
             yield "                                    <li class=\"nav-item dropdown\">
                                         <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                             <i class=\"bi bi-person-circle\"></i> ";
-            // line 66
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 66, $this->source); })()), "user", [], "any", false, false, false, 66), "nom", [], "any", false, false, false, 66), "html", null, true);
+            // line 154
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 154, $this->source); })()), "user", [], "any", false, false, false, 154), "nom", [], "any", false, false, false, 154), "html", null, true);
             yield "
                                         </a>
                                         <ul class=\"dropdown-menu\" aria-labelledby=\"userDropdown\">
                                             ";
-            // line 69
-            if (CoreExtension::inFilter("ROLE_ADMIN", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 69, $this->source); })()), "user", [], "any", false, false, false, 69), "roles", [], "any", false, false, false, 69))) {
-                // line 70
+            // line 157
+            if (CoreExtension::inFilter("ROLE_ADMIN", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 157, $this->source); })()), "user", [], "any", false, false, false, 157), "roles", [], "any", false, false, false, 157))) {
+                // line 158
                 yield "                                                <li>
                                                     <a class=\"dropdown-item\" href=\"";
-                // line 71
+                // line 159
                 yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard");
                 yield "\">
                                                         <i class=\"bi bi-speedometer2\"></i> Dashboard
@@ -179,10 +276,10 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                                 </li>
                                             ";
             }
-            // line 76
+            // line 164
             yield "                                            <li>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 77
+            // line 165
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             yield "\">
                                                     <i class=\"bi bi-box-arrow-right\"></i> Déconnexion
@@ -192,7 +289,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                     </li>
                                 ";
         } else {
-            // line 84
+            // line 172
             yield "                                    <li class=\"nav-item dropdown\">
                                         <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"registerDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">
                                             <i class=\"bi bi-person\"></i> S'inscrire
@@ -200,7 +297,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                         <ul class=\"dropdown-menu\" aria-labelledby=\"registerDropdown\">
                                             <li>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 90
+            // line 178
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register", ["role" => "apprenant"]);
             yield "\">
                                                     <i class=\"bi bi-person\"></i> Apprenant
@@ -208,7 +305,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                             </li>
                                             <li>
                                                 <a class=\"dropdown-item\" href=\"";
-            // line 95
+            // line 183
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register_instructeur", ["role" => "instructeur"]);
             yield "\">
                                                     <i class=\"bi bi-mortarboard\"></i> Instructeur
@@ -218,7 +315,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                     </li>
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link\" href=\"";
-            // line 102
+            // line 190
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
             yield "\">
                                             <i class=\"bi bi-box-arrow-in-right\"></i> S'authentifier
@@ -226,7 +323,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                     </li>
                                 ";
         }
-        // line 107
+        // line 195
         yield "                            </ul>
                         </div>
                     </div>
@@ -235,9 +332,9 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         </header>
 
         ";
-        // line 114
+        // line 202
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 115
+        // line 203
         yield "
         <footer class=\"footer_section\">
             <div class=\"container\">
@@ -246,25 +343,25 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         </footer>
 
         <script src=\"";
-        // line 122
+        // line 210
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/js/jquery-3.4.1.min.js"), "html", null, true);
         yield "\"></script>
         <script src=\"";
-        // line 123
+        // line 211
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/js/bootstrap.js"), "html", null, true);
         yield "\"></script>
         <script src=\"https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js\"></script>
         <script src=\"";
-        // line 125
+        // line 213
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("frontOffice/js/custom.js"), "html", null, true);
         yield "\"></script>
         <script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap\"></script>
         <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 
         ";
-        // line 129
+        // line 217
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 130
+        // line 218
         yield "    </body>
 </html>
 ";
@@ -313,6 +410,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
+        yield " ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -322,7 +420,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         yield from [];
     }
 
-    // line 114
+    // line 202
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -344,7 +442,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         yield from [];
     }
 
-    // line 129
+    // line 217
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -387,7 +485,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  348 => 129,  326 => 114,  304 => 20,  281 => 6,  268 => 130,  266 => 129,  259 => 125,  254 => 123,  250 => 122,  241 => 115,  239 => 114,  230 => 107,  222 => 102,  212 => 95,  204 => 90,  196 => 84,  186 => 77,  183 => 76,  175 => 71,  172 => 70,  170 => 69,  164 => 66,  160 => 64,  158 => 63,  144 => 52,  138 => 49,  132 => 46,  126 => 43,  120 => 40,  114 => 37,  101 => 27,  97 => 26,  90 => 21,  88 => 20,  83 => 18,  79 => 17,  75 => 16,  68 => 12,  61 => 7,  59 => 6,  52 => 1,);
+        return array (  446 => 217,  424 => 202,  401 => 20,  378 => 6,  365 => 218,  363 => 217,  356 => 213,  351 => 211,  347 => 210,  338 => 203,  336 => 202,  327 => 195,  319 => 190,  309 => 183,  301 => 178,  293 => 172,  283 => 165,  280 => 164,  272 => 159,  269 => 158,  267 => 157,  261 => 154,  257 => 152,  255 => 151,  232 => 131,  226 => 128,  211 => 116,  144 => 52,  138 => 49,  132 => 46,  126 => 43,  120 => 40,  114 => 37,  101 => 27,  97 => 26,  90 => 21,  88 => 20,  83 => 18,  79 => 17,  75 => 16,  68 => 12,  61 => 7,  59 => 6,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -411,7 +509,7 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         <link href=\"{{ asset('frontOffice/css/style.css') }}\" rel=\"stylesheet\"/>
         <link href=\"{{ asset('frontOffice/css/responsive.css') }}\" rel=\"stylesheet\"/>
 
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %} {% endblock %}
     </head>
     <body>
         <header class=\"header_section\">
@@ -445,14 +543,102 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
                                 <li class=\"nav-item\">
                                     <a class=\"nav-link\" href=\"{{ path('app_evenement_front') }}\">Evenements</a>
                                 </li>
-                                <li class=\"nav-item dropdown\">
-                                    <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                        <i class=\"fa fa-bell\"></i> Notifications
-                                    </a>
-                                    <div class=\"dropdown-menu scrollable-dropdown\" aria-labelledby=\"navbarDropdown\" id=\"notificationDropdown\">
-                                        <!-- Notifications will be injected here dynamically -->
-                                    </div>
                                 </li>
+                              </li>
+                              <li class=\"nav-item dropdown\">
+                                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                  <i class=\"fa fa-bell\"></i> Notifications
+                                </a>
+                                <div class=\"dropdown-menu scrollable-dropdown\" aria-labelledby=\"navbarDropdown\" id=\"notificationDropdown\">
+                                  <!-- Notifications will be injected here dynamically -->
+                                </div>
+                              </li>
+                              
+                              <style>
+                                .scrollable-dropdown {
+                                    max-height: 300px; /* Limit height */
+                                    overflow-y: auto; /* Enable scrolling */
+                                    width: 350px; /* Adjust width */
+                                }
+                              
+                                .notification-item {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: 10px;
+                                    border-bottom: 1px solid #e0e0e0;
+                                }
+                              
+                                .notification-item img {
+                                    width: 40px; /* Small profile image */
+                                    height: 40px;
+                                    border-radius: 50%;
+                                    margin-right: 10px;
+                                }
+                              
+                                .notification-text {
+                                    flex-grow: 1;
+                                }
+                              
+                                .notification-text strong {
+                                    display: block;
+                                    font-size: 14px;
+                                }
+                              
+                                .notification-text small {
+                                    font-size: 12px;
+                                    color: gray;
+                                }
+                              
+                                .notification-text span {
+                                    font-size: 13px;
+                                    display: block;
+                                    color: #333;
+                                }
+                              </style>
+                              
+                              <script>
+                                // Fetch notifications when the page loads
+                                window.onload = function () {
+                                    loadNotifications();
+                                    // Set interval to load notifications every 5 seconds
+                                    setInterval(loadNotifications, 5000);
+                                };
+                            
+                                function loadNotifications() {
+                                    fetch(\"{{ path('app_notifications') }}\")  // Fetch notifications from Symfony route
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            let notificationDropdown = document.getElementById(\"notificationDropdown\");
+                                            notificationDropdown.innerHTML = '';  // Clear previous notifications
+                            
+                                            if (data.length === 0) {
+                                                notificationDropdown.innerHTML = '<a class=\"dropdown-item text-muted\" href=\"#\">Aucune notification</a>';
+                                            } else {
+                                                data.forEach(notification => {
+                                                    let notificationItem = document.createElement(\"a\");
+                                                    notificationItem.classList.add(\"dropdown-item\", \"notification-item\");
+                                                    notificationItem.href = \"{{ path('app_notification_show_cli', {'id': 'id_placeholder'}) }}\".replace('id_placeholder', notification.id);
+                            
+                                                    // Sender image placeholder (replace with dynamic sender image if available)
+                                                    let senderImage = notification.senderImage ? notification.senderImage : \"{{ asset('frontOffice/images/formini.jpeg') }}\";
+                            
+                                                    notificationItem.innerHTML = `
+                                                        <img src=\"\${senderImage}\" alt=\"Sender\">
+                                                        <div class=\"notification-text\">
+                                                            <strong>\${notification.titre}</strong>
+                                                            <small>\${notification.sentAt}</small>
+                                                            <span>\${notification.contenu.slice(0, 50)}...</span>
+                                                        </div>
+                                                    `;
+                            
+                                                    notificationDropdown.appendChild(notificationItem);
+                                                });
+                                            }
+                                        })
+                                        .catch(error => console.log(\"Error fetching notifications:\", error));
+                                }
+                            </script>
+                            
 
                                 {% if app.user %}
                                     <li class=\"nav-item dropdown\">
@@ -523,6 +709,6 @@ class __TwigTemplate_d8cb905d9c063eb804fe557a8ec8a97f extends Template
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\base.html.twig");
     }
 }

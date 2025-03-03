@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* message/edit.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/45/45fce7ae3284fc1223644f89931870ca.php
 class __TwigTemplate_0b6557cd724a736c93a1380b850e8c88 extends Template
-========
-class __TwigTemplate_482bdf588a17469a5a20408c1c67d657 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/ee/eec381562d0981cdb134edf93b63c556.php
 {
     private Source $source;
     /**
@@ -189,10 +185,6 @@ class __TwigTemplate_482bdf588a17469a5a20408c1c67d657 extends Template
         <a href=\"{{ path('app_message') }}\" class=\"btn btn-secondary mt-2\">Annuler</a>
     </div>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/45/45fce7ae3284fc1223644f89931870ca.php
-", "message/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\message\\edit.html.twig");
-========
-", "message/edit.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\message\\edit.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/ee/eec381562d0981cdb134edf93b63c556.php
+", "message/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\message\\edit.html.twig");
     }
 }

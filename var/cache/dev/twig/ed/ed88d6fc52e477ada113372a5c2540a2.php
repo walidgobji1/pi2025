@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/serializer.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/ed/ed88d6fc52e477ada113372a5c2540a2.php
 class __TwigTemplate_36744e34faec034d582a30346ee179a0 extends Template
-========
-class __TwigTemplate_47106e45519588b626e633c3e896135f extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/1b/1b8d1409468507587af5aaf0f2e1e719.php
 {
     private Source $source;
     /**
@@ -1601,10 +1597,6 @@ class __TwigTemplate_47106e45519588b626e633c3e896135f extends Template
 {% macro render_time_cell(item) %}
     <span class=\"nowrap\">{{ '%.2f'|format(item.time * 1000) }} ms</span>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/ed/ed88d6fc52e477ada113372a5c2540a2.php
-", "@WebProfiler/Collector/serializer.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\serializer.html.twig");
-========
-", "@WebProfiler/Collector/serializer.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\serializer.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/1b/1b8d1409468507587af5aaf0f2e1e719.php
+", "@WebProfiler/Collector/serializer.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\serializer.html.twig");
     }
 }

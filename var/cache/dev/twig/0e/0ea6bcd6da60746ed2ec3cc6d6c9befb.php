@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* payment/cancel.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/0e/0ea6bcd6da60746ed2ec3cc6d6c9befb.php
 class __TwigTemplate_266efb12a6585314f0613639816f1625 extends Template
-========
-class __TwigTemplate_9a457419536b47c062bf7598f7370035 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fa/faba346ca4041fd1961d84efae648d89.php
 {
     private Source $source;
     /**
@@ -153,10 +149,6 @@ class __TwigTemplate_9a457419536b47c062bf7598f7370035 extends Template
 <a href=\"{{ path('app_home') }}\">Retour à l'accueil</a>
 {% endblock %}
 
-<<<<<<<< HEAD:var/cache/dev/twig/0e/0ea6bcd6da60746ed2ec3cc6d6c9befb.php
-", "payment/cancel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\payment\\cancel.html.twig");
-========
-", "payment/cancel.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\payment\\cancel.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fa/faba346ca4041fd1961d84efae648d89.php
+", "payment/cancel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\payment\\cancel.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* formation/formations.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f2/f239b406f4d5a6f7d4e98e474b0bc447.php
 class __TwigTemplate_15d6e1ca88e53db27219b62184791766 extends Template
-========
-class __TwigTemplate_a9d8f6c43bb71b04d3e5ed1dd01d97cb extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/48/48a38a979222d6b5d6dddd6710d61139.php
 {
     private Source $source;
     /**
@@ -401,10 +397,6 @@ class __TwigTemplate_a9d8f6c43bb71b04d3e5ed1dd01d97cb extends Template
 }
 
   </style>
-<<<<<<<< HEAD:var/cache/dev/twig/f2/f239b406f4d5a6f7d4e98e474b0bc447.php
-{% endblock %}", "formation/formations.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\formation\\formations.html.twig");
-========
-{% endblock %}", "formation/formations.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\formation\\formations.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/48/48a38a979222d6b5d6dddd6710d61139.php
+{% endblock %}", "formation/formations.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\formation\\formations.html.twig");
     }
 }

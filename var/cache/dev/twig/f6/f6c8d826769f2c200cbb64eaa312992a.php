@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Profiler/info.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f6/f6c8d826769f2c200cbb64eaa312992a.php
 class __TwigTemplate_29deee99b780af19db633e44ce89f8a0 extends Template
-========
-class __TwigTemplate_568adedd95ee03919b5de338da0be6ae extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5321be4e984144da7eebb1d5ef36e893.php
 {
     private Source $source;
     /**
@@ -182,10 +178,6 @@ array_key_exists("token", $context)) ? (Twig\Extension\CoreExtension::default((i
     <h2>{{ messages[about].title }}</h2>
     <p>{{ messages[about].message }}</p>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/f6/f6c8d826769f2c200cbb64eaa312992a.php
-", "@WebProfiler/Profiler/info.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\info.html.twig");
-========
-", "@WebProfiler/Profiler/info.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\info.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5321be4e984144da7eebb1d5ef36e893.php
+", "@WebProfiler/Profiler/info.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\info.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/translation.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/a1/a175618341d43b3d2477dde8370ef320.php
 class __TwigTemplate_38335fb46bee4795c6b9b1a8f7b30ba9 extends Template
-========
-class __TwigTemplate_48806f85c698ebd61089baa58b9b2a39 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/20/206c53860235469eb373b702e64d5e98.php
 {
     private Source $source;
     /**
@@ -931,10 +927,6 @@ class __TwigTemplate_48806f85c698ebd61089baa58b9b2a39 extends Template
         </tbody>
     </table>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/a1/a175618341d43b3d2477dde8370ef320.php
-", "@WebProfiler/Collector/translation.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\translation.html.twig");
-========
-", "@WebProfiler/Collector/translation.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\translation.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/20/206c53860235469eb373b702e64d5e98.php
+", "@WebProfiler/Collector/translation.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\translation.html.twig");
     }
 }

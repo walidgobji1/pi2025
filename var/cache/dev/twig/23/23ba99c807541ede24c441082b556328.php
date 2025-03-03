@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* avis/_delete_form.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/23/23ba99c807541ede24c441082b556328.php
 class __TwigTemplate_24329333b0c0e8b9654f8aaa01289422 extends Template
-========
-class __TwigTemplate_a0d1890d60df6a1ba64301993e4e64f3 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/6f/6fcf732d792eb8797b4c6383dc08a1c6.php
 {
     private Source $source;
     /**
@@ -98,10 +94,6 @@ class __TwigTemplate_a0d1890d60df6a1ba64301993e4e64f3 extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ avi.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-<<<<<<<< HEAD:var/cache/dev/twig/23/23ba99c807541ede24c441082b556328.php
-", "avis/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\avis\\_delete_form.html.twig");
-========
-", "avis/_delete_form.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\avis\\_delete_form.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/6f/6fcf732d792eb8797b4c6383dc08a1c6.php
+", "avis/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\avis\\_delete_form.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/events.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/40/40bb0fb8913bb63d5d73e88ff95d5025.php
 class __TwigTemplate_a041df79912d2c96507de55c300808ec extends Template
-========
-class __TwigTemplate_097b7192c6d01c51dc93de0242e1312b extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/83/8393af4b6634f8b6fd5e7ce4476ee696.php
 {
     private Source $source;
     /**
@@ -532,10 +528,6 @@ class __TwigTemplate_097b7192c6d01c51dc93de0242e1312b extends Template
         {% endfor %}
     </table>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/40/40bb0fb8913bb63d5d73e88ff95d5025.php
-", "@WebProfiler/Collector/events.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
-========
-", "@WebProfiler/Collector/events.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/83/8393af4b6634f8b6fd5e7ce4476ee696.php
+", "@WebProfiler/Collector/events.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
     }
 }

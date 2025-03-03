@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* categorie/_delete_form.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/d0/d06fc9f65522dfc2b2ed6264a17975cb.php
 class __TwigTemplate_e7bfd45b468d44951c283b6de0734e5a extends Template
-========
-class __TwigTemplate_56c73d4e9f0cb0bf4aa3e9d4ecffac15 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fe/fe88c9603e839f2ecc183c46e0a9c840.php
 {
     private Source $source;
     /**
@@ -131,10 +127,6 @@ class __TwigTemplate_56c73d4e9f0cb0bf4aa3e9d4ecffac15 extends Template
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 </script>
-<<<<<<<< HEAD:var/cache/dev/twig/d0/d06fc9f65522dfc2b2ed6264a17975cb.php
-", "categorie/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\_delete_form.html.twig");
-========
-", "categorie/_delete_form.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\categorie\\_delete_form.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fe/fe88c9603e839f2ecc183c46e0a9c840.php
+", "categorie/_delete_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\categorie\\_delete_form.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* home/login_admin.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/09/095f2ada63a2ccf5412e95df8587b4b6.php
 class __TwigTemplate_2b58303a23e60914d4c522af3383687e extends Template
-========
-class __TwigTemplate_305e703e099f6d0f11b97af68cf29fe4 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/96/9640708ff7acb161281aaeac628edb67.php
 {
     private Source $source;
     /**
@@ -270,10 +266,6 @@ class __TwigTemplate_305e703e099f6d0f11b97af68cf29fe4 extends Template
 \t\t</div>
 \t</section>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/09/095f2ada63a2ccf5412e95df8587b4b6.php
-", "home/login_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\home\\login_admin.html.twig");
-========
-", "home/login_admin.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\home\\login_admin.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/96/9640708ff7acb161281aaeac628edb67.php
+", "home/login_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\home\\login_admin.html.twig");
     }
 }

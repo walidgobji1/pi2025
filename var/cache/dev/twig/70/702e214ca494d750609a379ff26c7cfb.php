@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @Doctrine/Collector/explain.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/70/702e214ca494d750609a379ff26c7cfb.php
 class __TwigTemplate_36bb1f20914c703b960cd1175f972c62 extends Template
-========
-class __TwigTemplate_df48a43bca9412786aff12be1b86f9ca extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/00/009c7a22f549232d0b053fec1c320d86.php
 {
     private Source $source;
     /**
@@ -190,10 +186,6 @@ class __TwigTemplate_df48a43bca9412786aff12be1b86f9ca extends Template
         {%- endfor -%}
     </pre>
 {% endif %}
-<<<<<<<< HEAD:var/cache/dev/twig/70/702e214ca494d750609a379ff26c7cfb.php
-", "@Doctrine/Collector/explain.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\explain.html.twig");
-========
-", "@Doctrine/Collector/explain.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\explain.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/00/009c7a22f549232d0b053fec1c320d86.php
+", "@Doctrine/Collector/explain.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\doctrine\\doctrine-bundle\\templates\\Collector\\explain.html.twig");
     }
 }

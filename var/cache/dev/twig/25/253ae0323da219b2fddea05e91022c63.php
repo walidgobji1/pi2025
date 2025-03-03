@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* home/instructeur_register.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/25/253ae0323da219b2fddea05e91022c63.php
 class __TwigTemplate_0829a5b2a3d26c9f57b7ce59422c0561 extends Template
-========
-class __TwigTemplate_1dee7f9a3f51304043bf0fe1d483362d extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/70/70e2170ba49e2eb02a02f90b38127dea.php
 {
     private Source $source;
     /**
@@ -463,10 +459,6 @@ class __TwigTemplate_1dee7f9a3f51304043bf0fe1d483362d extends Template
     </script>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/25/253ae0323da219b2fddea05e91022c63.php
-", "home/instructeur_register.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\home\\instructeur_register.html.twig");
-========
-", "home/instructeur_register.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\home\\instructeur_register.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/70/70e2170ba49e2eb02a02f90b38127dea.php
+", "home/instructeur_register.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\home\\instructeur_register.html.twig");
     }
 }

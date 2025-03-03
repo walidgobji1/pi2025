@@ -147,17 +147,15 @@ class ComposerStaticInitb76d746e8f5d87589bc33c9f1ed3683c
             'Metadata\\' => 9,
             'Masterminds\\' => 12,
         ),
-<<<<<<< HEAD
-        'K' => 
-        array (
-            'Knp\\Component\\' => 14,
-            'Knp\\Bundle\\PaginatorBundle\\' => 27,
-=======
         'L' => 
         array (
             'Lcobucci\\JWT\\' => 13,
             'Lcobucci\\Clock\\' => 15,
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+        ),
+        'K' => 
+        array (
+            'Knp\\Component\\' => 14,
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
         ),
         'F' => 
         array (
@@ -580,15 +578,6 @@ class ComposerStaticInitb76d746e8f5d87589bc33c9f1ed3683c
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-<<<<<<< HEAD
-        'Knp\\Component\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
-        ),
-        'Knp\\Bundle\\PaginatorBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
-=======
         'Lcobucci\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
@@ -596,7 +585,14 @@ class ComposerStaticInitb76d746e8f5d87589bc33c9f1ed3683c
         'Lcobucci\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/lcobucci/clock/src',
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+        ),
+        'Knp\\Component\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
+        ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
         ),
         'FontLib\\' => 
         array (
