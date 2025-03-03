@@ -36,6 +36,7 @@ return [
         '/discussions' => [[['_route' => 'app_message', '_controller' => 'App\\Controller\\MessageController::listDiscussions'], null, null, null, false, false, null]],
         '/message/send' => [[['_route' => 'send_message', '_controller' => 'App\\Controller\\MessageController::sendMessage'], null, ['POST' => 0], null, false, false, null]],
         '/discussion/new' => [[['_route' => 'create_discussion', '_controller' => 'App\\Controller\\MessageController::createDiscussion'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/rechercher-discussion' => [[['_route' => 'rechercher_discussion', '_controller' => 'App\\Controller\\MessageController::rechercherDiscussion'], null, ['GET' => 0], null, false, false, null]],
         '/notification' => [[['_route' => 'app_notification_index', '_controller' => 'App\\Controller\\NotificationController::index'], null, ['GET' => 0], null, false, false, null]],
         '/notification/notifications' => [[['_route' => 'app_notifications', '_controller' => 'App\\Controller\\NotificationController::getNotifications'], null, null, null, false, false, null]],
         '/create-payment-intent' => [[['_route' => 'create_payment_intent', '_controller' => 'App\\Controller\\PayementControllerController::createPaymentIntent'], null, ['POST' => 0], null, false, false, null]],
@@ -136,26 +137,30 @@ return [
                     .')'
                     .'|pdf/([^/]++)(*:908)'
                 .')'
-                .'|/message/(?'
-                    .'|delete/([^/]++)(*:944)'
-                    .'|edit/([^/]++)(*:965)'
+                .'|/message(?'
+                    .'|s/fetch/([^/]++)(*:944)'
+                    .'|/(?'
+                        .'|delete/([^/]++)(*:971)'
+                        .'|edit/([^/]++)(*:992)'
+                        .'|([^/]++)/reaction(*:1017)'
+                    .')'
                 .')'
                 .'|/notification/(?'
-                    .'|new/([^/]++)(*:1003)'
-                    .'|([^/]++)(*:1020)'
-                    .'|notif/([^/]++)(*:1043)'
+                    .'|new/([^/]++)(*:1057)'
+                    .'|([^/]++)(*:1074)'
+                    .'|notif/([^/]++)(*:1097)'
                     .'|([^/]++)(?'
-                        .'|/edit(*:1068)'
-                        .'|(*:1077)'
+                        .'|/edit(*:1122)'
+                        .'|(*:1131)'
                     .')'
                 .')'
                 .'|/s(?'
-                    .'|ave\\-payment/([^/]++)(*:1114)'
-                    .'|uccess/([^/]++)(*:1138)'
+                    .'|ave\\-payment/([^/]++)(*:1168)'
+                    .'|uccess/([^/]++)(*:1192)'
                 .')'
                 .'|/payment/(?'
-                    .'|success\\-page/([^/]++)(*:1182)'
-                    .'|([^/]++)(*:1199)'
+                    .'|success\\-page/([^/]++)(*:1236)'
+                    .'|([^/]++)(*:1253)'
                 .')'
             .')/?$}sDu',
     ],
@@ -202,17 +207,19 @@ return [
         879 => [[['_route' => 'app_lecon_edit', '_controller' => 'App\\Controller\\LeconController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         887 => [[['_route' => 'app_lecon_delete', '_controller' => 'App\\Controller\\LeconController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         908 => [[['_route' => 'lecon.pdf', '_controller' => 'App\\Controller\\LeconController::generatePdfPersonne'], ['id'], ['GET' => 0], null, false, true, null]],
-        944 => [[['_route' => 'delete_message', '_controller' => 'App\\Controller\\MessageController::deleteMessage'], ['id'], ['POST' => 0], null, false, true, null]],
-        965 => [[['_route' => 'edit_message', '_controller' => 'App\\Controller\\MessageController::editMessage'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1003 => [[['_route' => 'app_notification_new', '_controller' => 'App\\Controller\\NotificationController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        1020 => [[['_route' => 'app_notification_show', '_controller' => 'App\\Controller\\NotificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        1043 => [[['_route' => 'app_notification_show_cli', '_controller' => 'App\\Controller\\NotificationController::showClient'], ['id'], ['GET' => 0], null, false, true, null]],
-        1068 => [[['_route' => 'app_notification_edit', '_controller' => 'App\\Controller\\NotificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        1077 => [[['_route' => 'app_notification_delete', '_controller' => 'App\\Controller\\NotificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        1114 => [[['_route' => 'save_payment', '_controller' => 'App\\Controller\\PayementControllerController::savePayment'], ['id'], ['POST' => 0], null, false, true, null]],
-        1138 => [[['_route' => 'payment_success', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccess'], ['id'], null, null, false, true, null]],
-        1182 => [[['_route' => 'payment_success_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccessPage'], ['id'], null, null, false, true, null]],
-        1199 => [
+        944 => [[['_route' => 'fetch_messages', '_controller' => 'App\\Controller\\MessageController::fetchMessages'], ['discussion_id'], ['GET' => 0], null, false, true, null]],
+        971 => [[['_route' => 'delete_message', '_controller' => 'App\\Controller\\MessageController::deleteMessage'], ['id'], ['POST' => 0], null, false, true, null]],
+        992 => [[['_route' => 'edit_message', '_controller' => 'App\\Controller\\MessageController::editMessage'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1017 => [[['_route' => 'message_react', '_controller' => 'App\\Controller\\MessageController::react'], ['id'], ['POST' => 0], null, false, false, null]],
+        1057 => [[['_route' => 'app_notification_new', '_controller' => 'App\\Controller\\NotificationController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1074 => [[['_route' => 'app_notification_show', '_controller' => 'App\\Controller\\NotificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1097 => [[['_route' => 'app_notification_show_cli', '_controller' => 'App\\Controller\\NotificationController::showClient'], ['id'], ['GET' => 0], null, false, true, null]],
+        1122 => [[['_route' => 'app_notification_edit', '_controller' => 'App\\Controller\\NotificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1131 => [[['_route' => 'app_notification_delete', '_controller' => 'App\\Controller\\NotificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        1168 => [[['_route' => 'save_payment', '_controller' => 'App\\Controller\\PayementControllerController::savePayment'], ['id'], ['POST' => 0], null, false, true, null]],
+        1192 => [[['_route' => 'payment_success', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccess'], ['id'], null, null, false, true, null]],
+        1236 => [[['_route' => 'payment_success_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccessPage'], ['id'], null, null, false, true, null]],
+        1253 => [
             [['_route' => 'payment_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentPage'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

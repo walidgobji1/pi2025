@@ -4,7 +4,7 @@
 {% block body %}
 
 
-<style>
+	<style>
 		.chat-box {
 			max-height: 450px;
 			overflow-y: auto;
@@ -287,282 +287,550 @@
 
 		/*# sourceMappingURL=style.css.map */
 	</style>
-<section>
-	<div class="container mt-4">
-		<div class="border rounded p-3 shadow bg-white">
+	<section>
+		<div class="container mt-4">
+			<div class="border rounded p-3 shadow bg-white">
 
-			<div class="container py-5">
-				<div
-					class="row">
-					<!-- Sidebar des discussions -->
-					<div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
-						<h5 class="font-weight-bold mb-3 text-center text-lg-start">Discussions</h5>
-						<div class="card">
-							<div class="card-body">
-								<ul class="list-unstyled mb-0 scrollable-list">
-									{% for discussion in discussions %}
-										{% if discussion.receiver.id == app.user.id %}
-											<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
-												<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
-													<div class="d-flex flex-row w-100">
-														{% if app.user.image %}
-															<img src="{{ asset('uploads/images/' ~ discussion.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-														{% else %}
-															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-														{% endif %}
-														<div class="pt-1">
-															<span style="font-size:1.2rem;">
-																{{ discussion.sender.nom }}
-																{{ discussion.sender.prenom }}
-															</span>
+				<div class="container py-5">
+					<div
+						class="row">
+						<!-- Sidebar des discussions -->
+						<div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+							<h5 class="font-weight-bold mb-3 text-center text-lg-start">Discussions</h5>
+							<div class="card">
+								<div
+									class="card-body">
+									<!-- Champ de recherche -->
+									<div class="input-group mb-3">
+										<input type="text" id="searchDiscussion" class="form-control" placeholder="Rechercher une discussion...">
+										<button id="searchButton" class="btn btn-primary">Rechercher</button>
+									</div>
+
+									<!-- Liste des discussions -->
+									<ul class="list-unstyled mb-0 scrollable-list" id="discussionList">
+										{% for discussion in discussions %}
+											{% if discussion.receiver.id == app.user.id %}
+												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
+													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
+														<div class="d-flex flex-row w-100">
+															{% if app.user.image %}
+																<img src="{{ asset('uploads/images/' ~ discussion.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% else %}
+																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% endif %}
+															<div class="pt-1">
+																<span style="font-size:1.2rem;">
+																	{{ discussion.sender.nom }}
+																	{{ discussion.sender.prenom }}
+																</span>
+															</div>
 														</div>
-													</div>
-												</a>
-												<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
-													<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
-												</form>
-											</li>
-										{% elseif discussion.sender.id == app.user.id %}
-											<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
-												<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
-													<div class="d-flex flex-row w-100">
-														{% if app.user.image %}
-															<img src="{{ asset('uploads/images/' ~ discussion.receiver.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-														{% else %}
-															<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-														{% endif %}
-														<div class="pt-1">
-															<span style="font-size: 1.2rem;">
-																{{ discussion.receiver.nom }}
-																{{ discussion.receiver.prenom }}
-															</span>
+													</a>
+													<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+														<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
+													</form>
+												</li>
+											{% elseif discussion.sender.id == app.user.id %}
+												<li class="p-2 border-bottom bg-body-tertiary d-flex justify-content-between">
+													<a href="{{ path('view_discussion', {id: discussion.id}) }}" class="d-flex justify-content-between text-decoration-none w-100">
+														<div class="d-flex flex-row w-100">
+															{% if app.user.image %}
+																<img src="{{ asset('uploads/images/' ~ discussion.receiver.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% else %}
+																<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+															{% endif %}
+															<div class="pt-1">
+																<span style="font-size: 1.2rem;">
+																	{{ discussion.receiver.nom }}
+																	{{ discussion.receiver.prenom }}
+																</span>
+															</div>
 														</div>
-													</div>
-												</a>
-												<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
-													<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
-												</form>
-											</li>
-										{% endif %}
-									{% else %}
-										<li class="list-group-item text-muted">Aucune discussion disponible.</li>
-									{% endfor %}
-								</ul>
-
-
-								<a href="{{ path('create_discussion') }}" class="btn btn-success mt-3">Nouvelle discussion</a>
-							</div>
-						</div>
-					</div>
-
-					<!-- Chatbox principale -->
-					<div class="col-md-6 col-lg-7 col-xl-8">
-						<h5 class="font-weight-bold mb-3 text-center text-lg-start">Message avec</h5>
-
-						{% if discussion is defined and discussion %}
-							<div class="chat-box p-3">
-								<ul class="list-unstyled chat-messages" id="chat-messages">
-									{% for message in messages %}
-										<li class="d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center">
-											{% if message.sender.id != app.user.id %}
-												{% if app.user.image %}
-													<img src="{{ asset('uploads/images/' ~ message.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-												{% else %}
-													<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
-												{% endif %}
+													</a>
+													<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+														<button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
+													</form>
+												</li>
 											{% endif %}
-
-											<div class="message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}">
-												<p class="mb-0">{{ message.content }}</p>
-												<span class="timestamp">{{ message.createdAt|date('d/m/Y H:i') }}</span>
-												{% if message.reaction %}
-													<span class="selected-reaction">{{ message.reaction }}</span>
-												{% endif %}
-											</div>
-											<div
-												class="reaction mt-1">
-
-												<!-- Bouton pour ouvrir la liste d'emojis -->
-												<div class="dropdown">
-													<button class="btn btn-light btn-sm reaction-button" type="button" id="reactionMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-														😊
-													</button>
-
-													<!-- Liste d'emojis -->
-													<ul class="dropdown-menu emoji-list" aria-labelledby="reactionMenuButton{{ message.id }}">
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="❤️">
-																<button type="submit" class="dropdown-item emoji">❤️</button>
-															</form>
-														</li>
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="😂">
-																<button type="submit" class="dropdown-item emoji">😂</button>
-															</form>
-														</li>
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="😮">
-																<button type="submit" class="dropdown-item emoji">😮</button>
-															</form>
-														</li>
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="😢">
-																<button type="submit" class="dropdown-item emoji">😢</button>
-															</form>
-														</li>
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="👍">
-																<button type="submit" class="dropdown-item emoji">👍</button>
-															</form>
-														</li>
-														<li>
-															<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
-																<input type="hidden" name="reaction" value="👎">
-																<button type="submit" class="dropdown-item emoji">👎</button>
-															</form>
-														</li>
-													</ul>
-												</div>
-
-
-												{% if message.sender.id == app.user.id %}
-													<div class="dropdown">
-														<button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-															...
-														</button>
-														<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ message.id }}">
-															<li>
-																<form action="{{ path('delete_message', {id: message.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
-																	<button type="submit" class="dropdown-item text-danger">🗑 Supprimer</button>
-																</form>
-															</li>
-															<li>
-																<a href="{{ path('edit_message', {id: message.id}) }}" class="dropdown-item">✏ Modifier</a>
-															</li>
-														</ul>
-													</div>
-												{% else %}
-													<div class="dropdown">
-														<button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-															...
-														</button>
-														<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ message.id }}">
-															<li>
-																<form action="{{ path('delete_message', {id: message.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
-																	<button type="submit" class="dropdown-item text-danger">🗑 Supprimer</button>
-																</form>
-															</li>
-														</ul>
-													</div>
-
-												{% endif %}
-											</li>
-
 										{% else %}
-											<li class="text-muted text-center">Aucun message dans cette discussion.</li>
+											<li class="list-group-item text-muted">Aucune discussion disponible.</li>
 										{% endfor %}
 									</ul>
+
+									<!-- Bouton nouvelle discussion -->
+									<a href="{{ path('create_discussion') }}" class="btn btn-success mt-3">Nouvelle discussion</a>
 								</div>
+							</div>
+						</div>
 
-								<!-- Formulaire d'envoi -->
-								<form action="{{ path('send_message') }}" method="POST" class="chat-input p-3" id="chat-form">
-									<input type="hidden" name="discussion_id" value="{{ discussion.id }}">
-									<input type="hidden" name="sender_id" value="{{ app.user.id }}">
-									<textarea name="content" id="content" class="form-control" placeholder="Votre message..."></textarea>
-									<button type="submit" class="btn btn-primary">Envoyer</button>
-								</form>
 
-								<!-- Affichage des erreurs -->
-								{% for message in app.flashes('error') %}
-									<p class="text-danger mt-1" style="font-size: 14px;">{{ message }}</p>
-								{% endfor %}
-								<!-- Bouton supprimer la discussion -->
-								<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
-									<button type="submit" class="btn btn-danger">Supprimer cette discussion</button>
-								</form>
+						<!-- Chatbox principale -->
+						<div class="col-md-6 col-lg-7 col-xl-8">
+							<h5 class="font-weight-bold mb-3 text-center text-lg-start">{% if discussion is defined and discussion %} Message avec  {% if discussion.receiver.id == app.user.id %} {{ discussion.sender.nom }}	{{ discussion.sender.prenom }} 
+							                                                                         {% elseif discussion.sender.id == app.user.id %}{{ discussion.receiver.nom }}
+																	{{ discussion.receiver.prenom }} {% else %} Vos Messages  {% endif %} {% endif %}
+ </h5>
 
-							{% else %}
-								<p class="text-center">Sélectionnez une discussion pour commencer à discuter.</p>
-							{% endif %}
+							{% if discussion is defined and discussion %}
+								<div class="chat-box p-3">
+									<ul class="list-unstyled chat-messages" id="chat-messages">
+										{% for message in messages %}
+											<li class="d-flex {% if message.sender.id == app.user.id %}justify-content-end{% else %}justify-content-start{% endif %} mb-3 align-items-center">
+												{% if message.sender.id != app.user.id %}
+													{% if app.user.image %}
+														<img src="{{ asset('uploads/images/' ~ message.sender.image) }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+													{% else %}
+														<img src="{{ asset('frontOffice/images/user.jpg') }}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+													{% endif %}
+												{% endif %}
+
+												<div class="message {% if message.sender.id == app.user.id %}sent{% else %}received{% endif %}">
+													<p class="mb-0">{{ message.content }}</p>
+													<span class="timestamp">{{ message.createdAt|date('d/m/Y H:i') }}</span>
+													{% if message.reaction %}
+														<span class="selected-reaction">{{ message.reaction }}</span>
+													{% endif %}
+												</div>
+												<div
+													class="reaction mt-1">
+
+													<!-- Bouton pour ouvrir la liste d'emojis -->
+													<div class="dropdown">
+														<button class="btn btn-light btn-sm reaction-button" type="button" id="reactionMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+															😊
+														</button>
+
+														<!-- Liste d'emojis -->
+														<ul class="dropdown-menu emoji-list" aria-labelledby="reactionMenuButton{{ message.id }}">
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="❤️">
+																	<button type="submit" class="dropdown-item emoji">❤️</button>
+																</form>
+															</li>
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="😂">
+																	<button type="submit" class="dropdown-item emoji">😂</button>
+																</form>
+															</li>
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="😮">
+																	<button type="submit" class="dropdown-item emoji">😮</button>
+																</form>
+															</li>
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="😢">
+																	<button type="submit" class="dropdown-item emoji">😢</button>
+																</form>
+															</li>
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="👍">
+																	<button type="submit" class="dropdown-item emoji">👍</button>
+																</form>
+															</li>
+															<li>
+																<form action="{{ path('message_react', {id: message.id}) }}" method="POST">
+																	<input type="hidden" name="reaction" value="👎">
+																	<button type="submit" class="dropdown-item emoji">👎</button>
+																</form>
+															</li>
+														</ul>
+													</div>
+
+
+													{% if message.sender.id == app.user.id %}
+														<div class="dropdown">
+															<button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+																...
+															</button>
+															<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ message.id }}">
+																<li>
+																	<form action="{{ path('delete_message', {id: message.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
+																		<button type="submit" class="dropdown-item text-danger">🗑 Supprimer</button>
+																	</form>
+																</li>
+																<li>
+																	<a href="{{ path('edit_message', {id: message.id}) }}" class="dropdown-item">✏ Modifier</a>
+																</li>
+															</ul>
+														</div>
+													{% else %}
+														<div class="dropdown">
+															<button class="btn btn-light btn-sm dropdown-toggle" type="button" id="dropdownMenuButton{{ message.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+																...
+															</button>
+															<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ message.id }}">
+																<li>
+																	<form action="{{ path('delete_message', {id: message.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
+																		<button type="submit" class="dropdown-item text-danger">🗑 Supprimer</button>
+																	</form>
+																</li>
+															</ul>
+														</div>
+
+													{% endif %}
+												</li>
+
+											{% else %}
+												<li class="text-muted text-center">Aucun message dans cette discussion.</li>
+											{% endfor %}
+										</ul>
+									</div>
+
+									<!-- Formulaire d'envoi -->
+									<form action="{{ path('send_message') }}" method="POST" class="chat-input p-3" id="chat-form">
+										<input type="hidden" name="discussion_id" value="{{ discussion.id }}">
+										<input type="hidden" name="sender_id" value="{{ app.user.id }}">
+										<textarea name="content" id="content" class="form-control" placeholder="Votre message..."></textarea>
+										<button type="submit" class="btn btn-primary">Envoyer</button>
+									</form>
+
+									
+
+									<!-- Affichage des erreurs -->
+									{% for message in app.flashes('error') %}
+										<p class="text-danger mt-1" style="font-size: 14px;">{{ message }}</p>
+									{% endfor %}
+									<!-- Bouton supprimer la discussion -->
+									<form action="{{ path('delete_discussion', {id: discussion.id}) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+										<button type="submit" class="btn btn-danger">Supprimer cette discussion</button>
+									</form>
+
+								{% else %}
+									<p class="text-center">Sélectionnez une discussion pour commencer à discuter.</p>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<script>
+	</section>
+	<script>
 
-document.addEventListener("DOMContentLoaded", function () {
-    // ////////////////////////////////// SCROLL ///////////////////////////////////////////
+		document.addEventListener("DOMContentLoaded", function () { // ////////////////////////////////// SCROLL ///////////////////////////////////////////
 
-    function scrollToLastMessage() {
-        var chatMessages = document.getElementById("chat-messages");
-        if (chatMessages) {
-            let lastMessage = chatMessages.lastElementChild;
-            if (lastMessage) {
-                lastMessage.scrollIntoView({ block: "end" }); // Scroll direct vers le dernier message
-            }
-        }
-    }
+function scrollToLastMessage() {
+var chatMessages = document.getElementById("chat-messages");
+if (chatMessages) {
+let lastMessage = chatMessages.lastElementChild;
+if (lastMessage) {
+lastMessage.scrollIntoView({block: "end"}); // Scroll direct vers le dernier message
+}
+}
+}
 
-    function scrollToBottomPage() {
-        window.scrollTo(0, document.body.scrollHeight); // Scroll pour toute la page
-    }
+function scrollToBottomPage() {
+window.scrollTo(0, document.body.scrollHeight); // Scroll pour toute la page
+}
 
-    // Scroll automatique à l'ouverture
-    scrollToLastMessage();
-    scrollToBottomPage();
+// Scroll automatique à l'ouverture
+scrollToLastMessage();
+scrollToBottomPage();
 
-    // Scroll après l'envoi d'un message
-    document.getElementById("chat-form")?.addEventListener("submit", function () {
-        setTimeout(() => {
-            scrollToLastMessage();
-            scrollToBottomPage();
-        }, 100);
-    });
-
-    // ////////////////////////////////////////// DROPDOWN /////////////////////////////////////////////
-
-    function closeAllDropdowns() {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
-    }
-
-    // Gestion de l'ouverture des dropdowns
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function (event) {
-            event.stopPropagation();
-            let menu = this.nextElementSibling;
-
-            closeAllDropdowns(); // Ferme tous les autres menus avant d'afficher celui-ci
-            menu.classList.toggle('show');
-        });
-    });
-
-    // Ferme tous les dropdowns lorsqu'on clique ailleurs sur la page
-    document.addEventListener('click', closeAllDropdowns);
-
-    // ////////////////////////////////////////// EMOJIS /////////////////////////////////////////////
-
-    // Gestion de l'ouverture des réactions emoji
-    document.querySelectorAll('.reaction-button').forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            event.stopPropagation();
-            let menu = this.nextElementSibling;
-
-            closeAllDropdowns(); // Ferme tous les autres menus avant d'afficher celui-ci
-            menu.classList.toggle('show');
-        });
-    });
+// Scroll après l'envoi d'un message
+document.getElementById("chat-form") ?. addEventListener("submit", function () {
+setTimeout(() => {
+scrollToLastMessage();
+scrollToBottomPage();
+}, 100);
 });
+
+// ////////////////////////////////////////// DROPDOWN /////////////////////////////////////////////
+
+
+
+// ////////////////////////////////////////// EMOJIS /////////////////////////////////////////////
+
+// Gestion de l'ouverture des réactions emoji
+document.querySelectorAll('.reaction-button').forEach(function (button) {
+button.addEventListener('click', function (event) {
+event.stopPropagation();
+let menu = this.nextElementSibling;
+
+closeAllDropdowns(); // Ferme tous les autres menus avant d'afficher celui-ci
+menu.classList.toggle('show');
+});
+});
+});
+document.addEventListener('DOMContentLoaded', function () {
+const searchButton = document.getElementById('searchButton');
+const searchInput = document.getElementById('searchDiscussion');
+const discussionList = document.getElementById('discussionList');
+
+searchButton.addEventListener('click', function () {
+const query = searchInput.value;
+
+if (query.length > 0) {
+fetch (`/rechercher-discussion?query=${query}`, {method: 'GET'}).then(response => response.json()).then(data => { // Vider la liste des discussions existantes
+discussionList.innerHTML = '';
+
+if (data.length === 0) {
+discussionList.innerHTML = '<li class="list-group-item text-muted">Aucune discussion trouvée.</li>';
+} else { // Remplir la liste avec les discussions trouvées
+data.forEach(discussion => {
+const listItem = document.createElement('li');
+listItem.classList.add('p-2', 'border-bottom', 'bg-body-tertiary', 'd-flex', 'justify-content-between');
+
+let discussionHTML = '';
+
+// Ajouter les conditions comme dans le Twig
+
+if (discussion.receiver.id == {{ app.user.id }}) {
+discussionHTML = `
+                                <a href="/discussion/${
+discussion.id
+}" class="d-flex justify-content-between text-decoration-none w-100">
+                                    <div class="d-flex flex-row w-100">
+                                        <img src="/uploads/images/${
+discussion.sender.image
+}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+                                        <div class="pt-1">
+                                            <span style="font-size: 1.2rem;">
+                                                ${
+discussion.sender.nom
+} ${
+discussion.sender.prenom
+}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+} else if (discussion.sender.id == {{ app.user.id }}) {
+discussionHTML = `
+                                <a href="/discussion/${
+discussion.id
+}" class="d-flex justify-content-between text-decoration-none w-100">
+                                    <div class="d-flex flex-row w-100">
+                                        <img src="/uploads/images/${
+discussion.receiver.image
+}" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+                                        <div class="pt-1">
+                                            <span style="font-size: 1.2rem;">
+                                                ${
+discussion.receiver.nom
+} ${
+discussion.receiver.prenom
+}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+}
+
+listItem.innerHTML = discussionHTML;
+
+// Ajouter le bouton de suppression de discussion
+listItem.innerHTML += `
+                            <form action="/discussion/delete/${
+discussion.id
+}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette discussion ?');">
+                                <button type="submit" class="btn btn-danger btn-sm delete-btn">🗑</button>
+                            </form>
+                        `;
+
+discussionList.appendChild(listItem);
+});
+}
+});
+}
+});
+});
+const dropdownElements = document.querySelectorAll('.dropdown-toggle');
+dropdownElements.forEach(dropdown => {
+    new bootstrap.Dropdown(dropdown); // Initialiser Bootstrap dropdown pour chaque bouton
+});
+	</script>
+	
+<script>
+ document.getElementById("chat-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+    let content = document.getElementById("content").value.trim();
+    if (content === "") return;
+
+    fetch("{{ path('send_message') }}", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        document.getElementById("content").value = "";
+        // Laisse fetchMessages() gérer l'affichage
+    })
+    .catch(error => console.error("Erreur:", error));
+});
+</script>
+<script>
+let lastMessageId = 0; // ID du dernier message chargé
+
+function fetchMessages() {
+    fetch("{{ path('fetch_messages', {discussion_id: discussion.id}) }}")
+        .then(response => response.json())
+        .then(data => {
+            const chatMessages = document.getElementById("chat-messages");
+            let newMessages = "";
+
+            data.forEach(message => {
+                if (message.id > lastMessageId) { // Si c'est un nouveau message
+                    lastMessageId = message.id;
+
+                    const isSender = message.sender_id === {{ app.user.id }};
+                    newMessages += `
+                        <li class="d-flex ${isSender ? "justify-content-end" : "justify-content-start"} mb-3 align-items-center">
+                            ${!isSender ? `
+                                <img src="${message.sender_image ? "{{ asset('uploads/images/') }}" + message.sender_image : "{{ asset('frontOffice/images/user.jpg') }}"}" 
+                                     alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="50">
+                            ` : ""}
+                            
+                            <div class="message ${isSender ? "sent" : "received"}">
+                                <p class="mb-0">${message.content}</p>
+                                <span class="timestamp">${message.createdAt}</span>
+                                ${message.reaction ? `<span class="selected-reaction">${message.reaction}</span>` : ""}
+                            </div>
+
+                            <!-- Dropdown des réactions (Affiché uniquement en cliquant sur un bouton) -->
+                            <div class="reaction mt-1">
+                                <div class="dropdown">
+                                    <button class="btn btn-light btn-sm reaction-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        😊
+                                    </button>
+                                    <ul class="dropdown-menu emoji-list">
+                                        ${["❤️", "😂", "😮", "😢", "👍", "👎"].map(emoji => `
+                                            <li>
+                                                <button class="dropdown-item emoji react-button" data-message-id="${message.id}" data-emoji="${emoji}">
+                                                    ${emoji}
+                                                </button>
+                                            </li>
+                                        `).join("")}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Options du message (modifier/supprimer) -->
+                            <div class="dropdown">
+                                <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ...
+                                </button>
+                                <ul class="dropdown-menu">
+                                    ${isSender ? `
+                                        <li>
+                                            <button class="dropdown-item text-danger delete-button" data-message-id="${message.id}">🗑 Supprimer</button>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('edit_message', {id: 'MESSAGE_ID'}) }}".replace('MESSAGE_ID', message.id)" class="dropdown-item">✏ Modifier</a>
+                                        </li>
+                                    ` : `
+                                        <li>
+                                            <button class="dropdown-item text-danger delete-button" data-message-id="${message.id}">🗑 Supprimer</button>
+                                        </li>
+                                    `}
+                                </ul>
+                            </div>
+                        </li>
+                    `;
+                }
+            });
+
+   if (newMessages !== "") {
+    chatMessages.innerHTML += newMessages;
+    chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automatique vers le bas
+    attachEventListeners();
+
+    // Vérifier si les dropdowns existent
+    console.log("Dropdowns détectés :", document.querySelectorAll('.dropdown-toggle'));
+
+    // Initialisation manuelle des dropdowns
+    document.querySelectorAll('.dropdown-toggle').forEach(dropdown => {
+        let dropdownInstance = new bootstrap.Dropdown(dropdown);
+        dropdown.addEventListener("click", function () {
+            dropdownInstance.show();
+        });
+    });
+}
+
+
+            setTimeout(fetchMessages, 1000); // Rafraîchissement toutes les 1 seconde
+        })
+		
+
+		
+        .catch(error => console.error("Erreur de chargement des messages:", error));
+}
+
+// Attacher les événements pour les réactions et la suppression
+function attachEventListeners() {
+    document.querySelectorAll(".react-button").forEach(button => {
+        button.addEventListener("click", function() {
+            const messageId = this.getAttribute("data-message-id");
+            const emoji = this.getAttribute("data-emoji");
+            reactToMessage(messageId, emoji);
+        });
+    });
+
+    document.querySelectorAll(".delete-button").forEach(button => {
+        button.addEventListener("click", function() {
+            const messageId = this.getAttribute("data-message-id");
+            if (confirm("Voulez-vous vraiment supprimer ce message ?")) {
+                deleteMessage(messageId);
+            }
+        });
+    });
+}
+
+// Fonction pour ajouter une réaction à un message
+function reactToMessage(messageId, emoji) {
+    fetch("{{ path('message_react', {id: 'MESSAGE_ID'}) }}".replace('MESSAGE_ID', messageId), {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `reaction=${emoji}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        fetchMessages(); // Recharger les messages après ajout de réaction
+    })
+    .catch(error => console.error("Erreur d'ajout de réaction:", error));
+}
+
+// Fonction pour supprimer un message
+function deleteMessage(messageId) {
+    fetch("{{ path('delete_message', {id: 'MESSAGE_ID'}) }}".replace('MESSAGE_ID', messageId), {
+        method: "POST"
+    })
+    .then(response => response.json())
+    .then(data => {
+        fetchMessages(); // Recharger les messages après suppression
+    })
+    .catch(error => console.error("Erreur de suppression:", error));
+}
+
+
+// Lancer la fonction au chargement de la page
+fetchMessages();
+
+
 
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+
 {% endblock %}

@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a693c1fbd416a819fca9aa7a260e68166b835604',
+        'reference' => '7e2d1a24fcc3260dae42f28a8721629be24f9ed1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a693c1fbd416a819fca9aa7a260e68166b835604',
+            'reference' => '7e2d1a24fcc3260dae42f28a8721629be24f9ed1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -925,6 +925,15 @@
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'symfony/mercure' => array(
+            'pretty_version' => 'v0.6.5',
+            'version' => '0.6.5.0',
+            'reference' => '304cf84609ef645d63adc65fc6250292909a461b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/mercure',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/messenger' => array(
             'pretty_version' => 'v6.4.16',

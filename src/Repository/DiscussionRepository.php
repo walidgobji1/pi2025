@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\User;
 use App\Entity\Discussion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,6 +15,20 @@ class DiscussionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Discussion::class);
     }
+
+    public function findBySearchQueryAndUser(string $query, User $user)
+{
+    $qb = $this->createQueryBuilder('d')
+        ->leftJoin('d.receiver', 'r')
+        ->leftJoin('d.sender', 's')
+        ->where('r.id = :userId OR s.id = :userId')
+        ->andWhere('r.nom LIKE :query OR s.nom LIKE :query OR r.prenom LIKE :query OR s.prenom LIKE :query')
+        ->setParameter('userId', $user->getId())
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery();
+
+    return $qb->getResult();
+}
 
 //    /**
 //     * @return Discussion[] Returns an array of Discussion objects
