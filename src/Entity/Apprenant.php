@@ -22,15 +22,16 @@ class Apprenant extends User
     #[ORM\Column(type: "integer", nullable: true)]
     private ?int $niveau_etude = null;
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
-    private ?string $image = null;
-
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'apprenant')]
     private Collection $avis;
+
+    #[ORM\OneToMany(targetEntity: Progression::class, mappedBy: "apprenant", cascade: ["persist", "remove"])]
+    private Collection $progressions;
 
     public function __construct()
     {
         $this->avis = new ArrayCollection();
+        $this->progressions = new ArrayCollection();
     }
 
     public function getNomApprenant(): ?string { return $this->nom_apprenant; }
@@ -44,9 +45,6 @@ class Apprenant extends User
 
     public function getNiveauEtude(): ?int { return $this->niveau_etude; }
     public function setNiveauEtude(?int $niveau_etude): self { $this->niveau_etude = $niveau_etude; return $this; }
-
-    public function getImage(): ?string { return $this->image; }
-    public function setImage(?string $image): self { $this->image = $image; return $this; }
 
     public function getAvis(): Collection { return $this->avis; }
 
@@ -64,6 +62,27 @@ class Apprenant extends User
         if ($this->avis->removeElement($avis)) {
             if ($avis->getApprenant() === $this) {
                 $avis->setApprenant(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getProgressions(): Collection { return $this->progressions; }
+
+    public function addProgression(Progression $progression): self
+    {
+        if (!$this->progressions->contains($progression)) {
+            $this->progressions->add($progression);
+            $progression->setApprenant($this);
+        }
+        return $this;
+    }
+
+    public function removeProgression(Progression $progression): self
+    {
+        if ($this->progressions->removeElement($progression)) {
+            if ($progression->getApprenant() === $this) {
+                $progression->setApprenant(null);
             }
         }
         return $this;

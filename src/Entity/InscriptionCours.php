@@ -6,6 +6,7 @@ use App\Repository\InscriptionCoursRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Apprenant;
 
 #[ORM\Entity(repositoryClass: InscriptionCoursRepository::class)]
 class InscriptionCours
@@ -49,13 +50,13 @@ class InscriptionCours
     #[Assert\NotBlank(message: "Le nom de la formation est requis.")]
     private ?string $nomFormation = null;
 
-    #[ORM\Column(length: 8, unique: true)]
+    #[ORM\Column(length: 8)]
     #[Assert\NotBlank(message: "Le CIN est obligatoire.")]
     #[Assert\Length(min: 8, max: 8, exactMessage: "Le CIN doit contenir exactement 8 chiffres.")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Le CIN doit contenir uniquement des chiffres.")]
     private ?string $cin = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "L'email est obligatoire.")]
     #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     private ?string $email = null;
@@ -68,6 +69,9 @@ class InscriptionCours
         $this->dateInscreption = new \DateTimeImmutable(); // Date actuelle
         $this->montant = 0; // Par défaut 0
         $this->status = "en attente"; // Par défaut "en attente"
+
+
+
     }
 
     // Getters et Setters
@@ -201,24 +205,27 @@ class InscriptionCours
     }
 
     public function finaliserPaiement(): static
-    {
-        // Vérifier que la formation est bien définie et que le montant n'a pas été initialisé
-        if ($this->formation && $this->montant == 0) {
-            $this->montant = $this->formation->getPrix(); // Prend le prix de la formation
-        }
-
-        // Appliquer la réduction si un code promo est utilisé et valide
-        if ($this->promotion && $this->promotion->isValid()) {
-            $remise = $this->promotion->getRemise();
-            $nouveauMontant = $this->montant - ($this->montant * $remise / 100);
-
-            // S'assurer que le montant ne devient pas négatif
-            $this->montant = max(0, round($nouveauMontant, 2));
-        }
-
-        // Changer le statut en "payé"
-        $this->status = "payé";
-
-        return $this;
+{
+    if ($this->formation && $this->montant == 0) {
+        $this->montant = $this->formation->getPrix();
     }
+
+    if ($this->promotion && $this->promotion->isValid()) {
+        $remise = $this->promotion->getRemise();
+        $nouveauMontant = $this->montant - ($this->montant * $remise / 100);
+        $this->montant = max(0, round($nouveauMontant, 2));
+
+        // Enregistrer l'inscription dans la promotion
+        $this->promotion->setInscriptionCours($this);
+    }
+
+    $this->status = "payé";
+
+    return $this;
+}
+
+
+
+
+
 }

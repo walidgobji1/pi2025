@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\InscriptionCours;
 use App\Entity\Formation;
+use App\Entity\Apprenant;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\ApprenantRepository;
+
 use App\Form\InscriptionCoursType;
 use App\Repository\InscriptionCoursRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,12 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/dashboard/inscription/cours')]
-final class InscriptionCoursController extends AbstractController
-{
-    #[Route(name: 'app_inscription_cours_index', methods: ['GET'])]
-public function index(InscriptionCoursRepository $inscriptionCoursRepository, EntityManagerInterface $entityManager): Response
-{
+#[Route('/inscription')]
+   final class InscriptionCoursController extends AbstractController
+    {
+    #[Route('/',name: 'app_inscription_cours_index', methods: ['GET'])]
+    public function index(InscriptionCoursRepository $inscriptionCoursRepository, EntityManagerInterface $entityManager): Response
+ {
     $inscriptions = $inscriptionCoursRepository->findAll();
 
     // Vérifier et mettre à jour le statut en fonction du montant
@@ -38,49 +42,47 @@ public function index(InscriptionCoursRepository $inscriptionCoursRepository, En
 
 
     // InscriptionCoursController.php
-
     #[Route('/new/{id}', name: 'app_inscription_cours_new', methods: ['GET', 'POST'])]
     public function new($id, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Récupérer la formation
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException("Vous devez être connecté pour vous inscrire.");
+        }
+    
+        if (!in_array('ROLE_APPRENANT', $user->getRoles())) {
+            throw $this->createAccessDeniedException("Seuls les apprenants peuvent s'inscrire.");
+        }
+    
         $formation = $entityManager->getRepository(Formation::class)->find($id);
-
         if (!$formation) {
             $this->addFlash('error', 'Formation non trouvée');
             return $this->redirectToRoute('app_formation_index');
         }
-
-        // Créer une nouvelle inscription
+    
         $inscriptionCour = new InscriptionCours();
-        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour, [
-            'formation' => $formation,
-        ]);
-
-        // Assigner la formation à l'inscription
         $inscriptionCour->setFormation($formation);
         $inscriptionCour->setNomFormation($formation->getTitre());
-        $inscriptionCour->setStatus('en attente'); // Assigner 'en attente'
+        $inscriptionCour->setStatus('en attente');
         $inscriptionCour->setMontant(0.0);
-
-        // Traitement du formulaire
+        $inscriptionCour->setApprenant($user); // ✅ L'utilisateur connecté est enregistré automatiquement
+    
+        $form = $this->createForm(InscriptionCoursType::class, $inscriptionCour);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            // Enregistrer l'inscription
             $entityManager->persist($inscriptionCour);
             $entityManager->flush();
-
-            // Rediriger vers la page de paiement avec l'ID de l'inscription
+    
             return $this->redirectToRoute('payment_page', ['id' => $inscriptionCour->getId()]);
         }
-
+    
         return $this->render('inscription_cours/new.html.twig', [
             'form' => $form->createView(),
             'formation' => $formation,
         ]);
     }
-
-
+    
 
     #[Route('/{id}', name: 'app_inscription_cours_show', methods: ['GET'])]
     public function show(InscriptionCours $inscriptionCour): Response
@@ -118,4 +120,55 @@ public function index(InscriptionCoursRepository $inscriptionCoursRepository, En
 
         return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/mes-inscriptions/{id}', name: 'app_mes_inscriptions', methods: ['GET'])]
+   public function mesInscriptions(int $id, InscriptionCoursRepository $inscriptionCoursRepository, ApprenantRepository $apprenantRepository): Response
+   {
+    // Récupérer l'apprenant via son ID
+    $apprenant = $apprenantRepository->find($id);
+
+    // Vérifier si l'apprenant existe
+    if (!$apprenant) {
+        throw $this->createNotFoundException("Apprenant non trouvé.");
+    }
+
+    // Récupérer les inscriptions de cet apprenant
+    $inscriptions = $inscriptionCoursRepository->findBy(['apprenant' => $apprenant]);
+
+    return $this->render('inscription_cours/mes_inscriptions.html.twig', [
+        'inscriptions' => $inscriptions,
+    ]);
 }
+
+
+#[Route('/search', name: 'app_inscription_cours_search', methods: ['GET'])]
+public function search(Request $request, InscriptionCoursRepository $inscriptionCoursRepository): JsonResponse
+{
+    $query = $request->query->get('q', '');
+
+    // Recherche par titre de formation
+    $inscriptions = $inscriptionCoursRepository->searchByFormationTitle($query);
+
+    $data = array_map(fn($inscription) => [
+        'id' => $inscription->getId(),
+        'apprenant' => $inscription->getNomApprenant(),
+        'formation' => $inscription->getFormation()->getTitre(), // Récupère le titre de la formation
+        'email' => $inscription->getEmail(),
+        'cin' => $inscription->getCin(),
+        'status' => $inscription->getStatus(),
+        'montant' => $inscription->getMontant(),
+        'dateInscription' => $inscription->getDateInscreption()?->format('Y-m-d'),
+    ], $inscriptions);
+
+    return $this->json($data);
+}
+
+    
+}
+
+
+    
+
+
+

@@ -167,12 +167,7 @@
             <div class="error-message">{{ form_errors(form.typePaiement) }}</div>
         </div>
 
-        <!-- Apprenant -->
-        <div class="form-group">
-            <label class="form-label">{{ form_label(form.apprenant, "Sélectionner un apprenant") }}</label>
-            {{ form_widget(form.apprenant, {'attr': {'class': 'form-select'}}) }}
-            <div class="error-message">{{ form_errors(form.apprenant) }}</div>
-        </div>
+       
 
         <!-- Bouton de soumission -->
         <button type="submit" class="submit-button">

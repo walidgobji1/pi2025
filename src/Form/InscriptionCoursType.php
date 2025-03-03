@@ -44,6 +44,7 @@ class InscriptionCoursType extends AbstractType
             'label' => "Email",
             'attr' => ['placeholder' => 'Votre Email', 'class' => 'form-control'],
             'required' => false, // Suppression du required
+            
         ])
         ->add('nomFormation', HiddenType::class, [
             'label' => "Formation",
@@ -55,12 +56,7 @@ class InscriptionCoursType extends AbstractType
             'label' => "CIN",
             'attr' => ['placeholder' => 'Votre CIN', 'class' => 'form-control'],
             'required' => false, // Suppression du required
-        ])
-        ->add('apprenant', EntityType::class, [
-            'class' => Apprenant::class,
-            'choice_label' => 'id',
-            'label' => "Sélectionner un apprenant",
-            'required' => false, // Suppression du required
+        
         ]);
         
     }
@@ -70,6 +66,7 @@ class InscriptionCoursType extends AbstractType
         $resolver->setDefaults([
             'data_class' => InscriptionCours::class,
             'formation' => null,
+
         ]);
     }
 }

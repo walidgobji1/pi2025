@@ -89,7 +89,7 @@ class SecurityController extends AbstractController
         }
 
         if (in_array('ROLE_INSTRUCTEUR', $user->getRoles()) || in_array('ROLE_APPRENANT', $user->getRoles())) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         return $this->redirectToRoute('app_home');

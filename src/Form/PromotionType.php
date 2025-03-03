@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\InscriptionCours;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -34,10 +35,15 @@ class PromotionType extends AbstractType
             ])
             ->add('inscriptionCours', EntityType::class, [
                 'class' => InscriptionCours::class,
-                'choice_label' => 'id', // Remplace par le champ à afficher
+                'choice_label' => function (InscriptionCours $inscription) {
+                    return 'Inscription ID: ' . $inscription->getId();
+                },
+                'label' => 'Inscription liée',
+                'required' => false,
                 'placeholder' => 'Sélectionnez une inscription',
-                'required' => false, // Mettre false si facultatif
+                'attr' => ['class' => 'd-none'], 
             ])
+            
             ->add('dateExpiration', DateTimeType::class, [
                 'label' => 'Date d’expiration',
                 'widget' => 'single_text',
@@ -46,11 +52,15 @@ class PromotionType extends AbstractType
             ])
             ->add('apprenant', EntityType::class, [
                 'class' => Apprenant::class,
-                'choice_label' => 'id', // Affiche l'ID de l'apprenant dans le select
+                'choices' => $options['eligible_apprenants'], // ✅ Seuls les apprenants éligibles sont listés
+                'choice_label' => function (Apprenant $apprenant) {
+                    return $apprenant->getNom() . ' ' . $apprenant->getPrenom();
+                },
                 'label' => 'Apprenant (ayant deux inscriptions payées)',
                 'required' => false,
                 'placeholder' => 'Sélectionnez un apprenant',
             ]);
+            
 
     
     }
@@ -58,7 +68,9 @@ class PromotionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Promotion::class,
+            'data_class' => Promotion::class, 
+            'eligible_apprenants' => [], // ✅ Définit une valeur par défaut pour éviter l'erreur
+
         ]);
     }
 }

@@ -30,7 +30,8 @@ security:
                 invalidate_session: true  
 
     access_control:
-        - { path: ^/dashboard, roles: ROLE_ADMIN }
+       
+        - { path: ^/dashboard, roles: [ROLE_INSTRUCTEUR, ROLE_ADMIN] }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/apprenant, roles: ROLE_APPRENANT }
         - { path: ^/instructeur, roles: ROLE_INSTRUCTEUR }

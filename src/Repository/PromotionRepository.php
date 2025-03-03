@@ -40,4 +40,22 @@ class PromotionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
+public function searchByApprenantName(?string $name): array
+{
+    $qb = $this->createQueryBuilder('p')
+        ->leftJoin('p.apprenant', 'a') // Utilisation de LEFT JOIN pour éviter les erreurs si apprenant est NULL
+        ->addSelect('a');
+
+    if (!empty($name)) {
+        $qb->where('a.nom LIKE :name OR a.prenom LIKE :name')
+           ->setParameter('name', '%' . $name . '%');
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
+
+
 }
