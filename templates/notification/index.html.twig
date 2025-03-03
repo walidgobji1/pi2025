@@ -1,0 +1,69 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Notification index{% endblock %}
+
+{% block body %}
+
+<h2 class="text-center mb-4">Liste des Notifications</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Contenu</th>
+            <th>Événement Associé</th>
+            <th>SentAt</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for notification in notifications %}
+        <tr class="notification-row">
+            <td>{{ notification.id }}</td>
+            <td>{{ notification.titre }}</td>
+            <td>{{ notification.contenu }}</td>
+            <td>
+                {# Check if the notification has an associated event, then display the event title #}
+                {% if notification.evenement %}
+                    <span class="event-title">{{ notification.evenement.titre }}</span>
+                {% else %}
+                    <span class="text-muted">Aucun événement</span>
+                {% endif %}
+            </td>
+            <td>{{ notification.sentAt ? notification.sentAt|date('Y-m-d H:i:s') : 'Non défini' }}</td>
+            <td>
+                <a href="{{ path('app_notification_show', {'id': notification.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                <a href="{{ path('app_notification_edit', {'id': notification.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6" class="text-center">Aucune notification trouvée</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<style>
+    /* Customize the appearance of each notification row */
+    .notification-row {
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease;
+    }
+
+    .notification-row:hover {
+        background-color: #f1f1f1;
+    }
+
+    .event-title {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .btn-sm {
+        margin: 0 5px;
+    }
+</style>
+
+{% endblock %}

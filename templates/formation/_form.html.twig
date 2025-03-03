@@ -1,0 +1,133 @@
+{% block body %}
+<div class="form-container">
+    <h2 class="form-title">📂 {{ button_label|default('Ajouter') }} une formation</h2>
+
+    <div class="form-card">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <!-- Gestion des erreurs globales -->
+        {% if form.vars.errors|length > 0 %}
+            <div class="form-errors">
+                <ul>
+                    {% for error in form.vars.errors %}
+                        <li>⚠️ {{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Ajout des autres champs (avant l'image) -->
+        {% for field in form %}
+            {% if field is not same as(form.imageFile) %}
+                {{ form_row(field) }}
+            {% endif %}
+        {% endfor %}
+
+        <!-- Ajout du champ image en dernier -->
+        {{ form_row(form.imageFile) }}
+
+        <!-- Bouton de soumission à la fin -->
+        <button type="submit" class="submit-button">💾 {{ button_label|default('Enregistrer') }}</button>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+<!-- Ajout du style -->
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #f4f7fa;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .form-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .form-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control, .form-textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+        background: #fafafa;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus, .form-textarea:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    .form-textarea {
+        height: 80px;
+        resize: none;
+    }
+
+    .submit-button {
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #2980b9, #6c5ce7);
+        border: none;
+        border-radius: 6px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+        background: linear-gradient(135deg, #1f78a4, #5e3bb3);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .form-errors ul {
+        color: red;
+        font-size: 12px;
+        padding-left: 15px;
+    }
+
+    .form-errors li {
+        list-style-type: disc;
+    }
+</style>
+{% endblock %}

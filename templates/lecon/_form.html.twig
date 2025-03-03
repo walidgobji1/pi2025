@@ -1,0 +1,161 @@
+{% block body %}
+<div class="form-container">
+    <h2 class="form-title">📂 {{ button_label|default('Ajouter') }} une Leçon</h2>
+
+    <div class="form-card">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <!-- Gestion des erreurs globales -->
+        {% if form.vars.errors|length > 0 %}
+            <div class="form-errors">
+                <ul>
+                    {% for error in form.vars.errors %}
+                        <li>⚠️ {{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Champ Titre -->
+        <div class="form-group">
+            {{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre de la leçon'}}) }}
+            {% for error in form.titre.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Contenu -->
+        <div class="form-group">
+            {{ form_label(form.contenu, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.contenu, {'attr': {'class': 'form-control form-textarea', 'placeholder': 'Contenu de la leçon'}}) }}
+            {% for error in form.contenu.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Date de Création -->
+        <div class="form-group">
+            {{ form_label(form.dateCreation, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control', 'placeholder': 'AAAA/MM/JJ'}}) }}
+            {% for error in form.dateCreation.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+    
+        <!-- Bouton de soumission -->
+        <button type="submit" class="submit-button">💾 {{ button_label|default('Enregistrer') }}</button>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+
+<!-- Ajout du style -->
+<style>
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 20px 20px 20px; /* Added more space at the top */
+        background-color: #f4f7fa;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .form-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .form-card {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control, .form-textarea {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        background: #fafafa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus, .form-textarea:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    .form-textarea {
+        height: 120px;
+        resize: none;
+    }
+
+    .submit-button {
+        padding: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #2980b9, #6c5ce7);
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+        background: linear-gradient(135deg, #1f78a4, #5e3bb3);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 6px;
+    }
+
+    .form-errors ul {
+        color: red;
+        font-size: 14px;
+        padding-left: 20px;
+    }
+
+    .form-errors li {
+        list-style-type: disc;
+    }
+    .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 20px 20px; /* Reduced top padding */
+    background-color: #f4f7fa;
+    height: auto; /* Let the height adjust based on content */
+    justify-content: flex-start; /* Align to the top */
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion des Formations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <h1 class="mb-4 text-primary font-weight-bold">Liste des Formations</h1>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-bordered rounded shadow-sm">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Score Moyenne</th>
+                        <th>Nombre d'Avis</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in formationData %}
+                        <tr class="align-middle">
+                            <td class="font-weight-bold">{{ data.formation.titre }}</td>
+                            <td>{{ data.score is not null ? data.score|number_format(1) ~ ' / 5' : 'Aucune note' }}</td>
+                            <td>{{ data.avis|length }}</td>
+                            <td>
+                                <a href="{{ path('admin_formation_show', { 'id': data.formation.id }) }}" class="btn btn-custom btn-sm rounded-pill px-3 py-2">
+                                    <i class="fas fa-comments"></i> Avis
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Aucune formation disponible.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Remove any margin or padding from body, html, container, etc. */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .container-fluid {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Reset margin/padding from Bootstrap */
+        .container, .row, .col, .table-responsive, table {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Custom Button Color (same as title color) */
+        .btn-custom {
+            background-color: #007bff; /* Primary color (same as title) */
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Hover Effect for Button */
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Hover Effect for Rows */
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Table Styling */
+        table {
+            border-collapse: separate;
+            border-spacing: 0 10px; /* Adds space between rows */
+        }
+
+        th, td {
+            vertical-align: middle;
+        }
+
+        th {
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 1rem;
+        }
+
+        td {
+            padding: 0.8rem;
+        }
+
+        /* Shadow Effect for the Table */
+        .table-responsive {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the Table Header */
+        .table thead {
+            border-radius: 8px;
+        }
+        
+    </style>
+{% endblock %}
