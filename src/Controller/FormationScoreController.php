@@ -34,7 +34,6 @@ public function index(FormationRepository $formationRepository, FormationScoreRe
     $formationScores = $this->formationScoreService->getAllScores();
     
     // Debugging output for formationScores
-    dd($formationScores); // Check if the formationScores are returned here
 
     return $this->render('formation/formations.html.twig', [
         'formations' => $formations,
