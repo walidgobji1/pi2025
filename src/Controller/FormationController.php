@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+
+use App\Entity\User;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
+use App\Repository\ProgressionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\InscriptionCoursRepository;
 use App\Service\FormationScoreService;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Knp\Component\Pager\PaginatorInterface;
 #[Route('/formation')]
 final class FormationController extends AbstractController
 {
@@ -36,8 +41,13 @@ final class FormationController extends AbstractController
     }
 
     #[Route(name: 'app_formation_index', methods: ['GET'])]
-    public function index(Request $request, FormationRepository $formationRepository): Response
+    public function index(PaginatorInterface $paginator, Request $request, FormationRepository $formationRepository): Response
     {
+        $pagination = $paginator->paginate(
+            $formationRepository->findAll(),
+            $request->query->getInt('page', 1), // Get the page number from the request
+            3 // Number of items per page
+        );
         // Get the search query from the request (if any)
         $searchQuery = $request->query->get('search', ''); // Default to empty if not set
 
@@ -49,44 +59,74 @@ final class FormationController extends AbstractController
         }
 
         return $this->render('formation/index.html.twig', [
-            'formations' => $formations,
+            'formations' => $pagination,
         ]);
     }
 
     #[Route('/new', name: 'app_formation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($formation);
             $entityManager->flush();
-
+            
+            // ✅ Envoyer l'email à l'utilisateur
+            $emailMessage = (new Email())
+                ->from('gobjiwalid1@gmail.com') // Expéditeur générique
+                ->to('ahmedallaya@gmail.com') // Email du user connecté
+                ->subject('Nouvelle formation ajoutée')
+                ->text("Bonjour, une nouvelle formation vient d'être ajoutée sur la plateforme.")
+                ->html("<p>Une nouvelle formation a été ajoutée sur notre plateforme. Connectez-vous pour la découvrir !</p>");
+    
+            $mailer->send($emailMessage);
+    
+            // ✅ Ajouter un message flash
+          
+    
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
             'form' => $form,
         ]);
     }
-
+    
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository): Response
-    {
-        $user = $this->getUser();
-        $inscription = $user ? $inscriptionCoursRepository->findOneBy([
-            'formation' => $formation,
-            'apprenant' => $user
-        ]) : null;
+    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository, ProgressionRepository $progressionRepository): Response
+{
+    $user = $this->getUser();
 
-        return $this->render('formation/showClient.html.twig', [
-            'formation' => $formation,
-            'inscription' => $inscription
+    // Get the inscription of the user to the formation (using the custom repository method)
+    $inscription = $user ? $inscriptionCoursRepository->findByFormationAndUser($formation, $user) : null;
+
+    // Get the user's progression for the formation
+    $progression = null;
+    if ($user) {
+        $progression = $progressionRepository->findOneBy([
+            'apprenant' => $user,
+            'formation' => $formation
         ]);
     }
+
+    // Get total number of lessons in the formation
+    $totalLecons = count($formation->getLecons());
+
+    // Get the number of completed lessons (if progression exists)
+    $completedLeconsCount = $progression ? count($progression->getLeconsTerminees()) : 0;
+
+    return $this->render('formation/showClient.html.twig', [
+        'formation' => $formation,
+        'inscription' => $inscription,
+        'progression' => $completedLeconsCount, // Number of lessons completed
+        'total_lecons' => $totalLecons // Total number of lessons
+    ]);
+}
+
 
     #[Route('/ad/{id}', name: 'app_formation_show_admin', methods: ['GET'])]
     public function showAdmin(Formation $formation): Response

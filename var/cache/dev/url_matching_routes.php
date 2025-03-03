@@ -128,34 +128,35 @@ return [
                         .'|([^/]++)/lessons(*:800)'
                         .'|c/([^/]++)/lessons(*:826)'
                     .')'
-                    .'|new/([^/]++)(*:847)'
+                    .'|marquer\\-termine/([^/]++)(*:860)'
+                    .'|new/([^/]++)(*:880)'
                     .'|([^/]++)(?'
-                        .'|(*:866)'
-                        .'|/edit(*:879)'
-                        .'|(*:887)'
+                        .'|(*:899)'
+                        .'|/edit(*:912)'
+                        .'|(*:920)'
                     .')'
-                    .'|pdf/([^/]++)(*:908)'
+                    .'|pdf/([^/]++)(*:941)'
                 .')'
                 .'|/message/(?'
-                    .'|delete/([^/]++)(*:944)'
-                    .'|edit/([^/]++)(*:965)'
+                    .'|delete/([^/]++)(*:977)'
+                    .'|edit/([^/]++)(*:998)'
                 .')'
                 .'|/notification/(?'
-                    .'|new/([^/]++)(*:1003)'
-                    .'|([^/]++)(*:1020)'
-                    .'|notif/([^/]++)(*:1043)'
+                    .'|new/([^/]++)(*:1036)'
+                    .'|([^/]++)(*:1053)'
+                    .'|notif/([^/]++)(*:1076)'
                     .'|([^/]++)(?'
-                        .'|/edit(*:1068)'
-                        .'|(*:1077)'
+                        .'|/edit(*:1101)'
+                        .'|(*:1110)'
                     .')'
                 .')'
                 .'|/s(?'
-                    .'|ave\\-payment/([^/]++)(*:1114)'
-                    .'|uccess/([^/]++)(*:1138)'
+                    .'|ave\\-payment/([^/]++)(*:1147)'
+                    .'|uccess/([^/]++)(*:1171)'
                 .')'
                 .'|/payment/(?'
-                    .'|success\\-page/([^/]++)(*:1182)'
-                    .'|([^/]++)(*:1199)'
+                    .'|success\\-page/([^/]++)(*:1215)'
+                    .'|([^/]++)(*:1232)'
                 .')'
             .')/?$}sDu',
     ],
@@ -196,6 +197,26 @@ return [
         743 => [[['_route' => 'app_inscription_cours_edit', '_controller' => 'App\\Controller\\InscriptionCoursController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         751 => [[['_route' => 'app_inscription_cours_delete', '_controller' => 'App\\Controller\\InscriptionCoursController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         800 => [[['_route' => 'app_formation_lessons', '_controller' => 'App\\Controller\\LeconController::showLessons'], ['id'], ['GET' => 0], null, false, false, null]],
+<<<<<<< HEAD
+        826 => [[['_route' => 'app_formation_lessons_c', '_controller' => 'App\\Controller\\LeconController::showLecon'], ['id'], ['GET' => 0], null, false, false, null]],
+        860 => [[['_route' => 'marquer_lecon_terminee', '_controller' => 'App\\Controller\\LeconController::marquerTerminee'], ['id'], ['POST' => 0], null, false, true, null]],
+        880 => [[['_route' => 'app_lecon_new', '_controller' => 'App\\Controller\\LeconController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        899 => [[['_route' => 'app_lecon_show', '_controller' => 'App\\Controller\\LeconController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        912 => [[['_route' => 'app_lecon_edit', '_controller' => 'App\\Controller\\LeconController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        920 => [[['_route' => 'app_lecon_delete', '_controller' => 'App\\Controller\\LeconController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        941 => [[['_route' => 'lecon.pdf', '_controller' => 'App\\Controller\\LeconController::generatePdfPersonne'], ['id'], ['GET' => 0], null, false, true, null]],
+        977 => [[['_route' => 'delete_message', '_controller' => 'App\\Controller\\MessageController::deleteMessage'], ['id'], ['POST' => 0], null, false, true, null]],
+        998 => [[['_route' => 'edit_message', '_controller' => 'App\\Controller\\MessageController::editMessage'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1036 => [[['_route' => 'app_notification_new', '_controller' => 'App\\Controller\\NotificationController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        1053 => [[['_route' => 'app_notification_show', '_controller' => 'App\\Controller\\NotificationController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        1076 => [[['_route' => 'app_notification_show_cli', '_controller' => 'App\\Controller\\NotificationController::showClient'], ['id'], ['GET' => 0], null, false, true, null]],
+        1101 => [[['_route' => 'app_notification_edit', '_controller' => 'App\\Controller\\NotificationController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        1110 => [[['_route' => 'app_notification_delete', '_controller' => 'App\\Controller\\NotificationController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        1147 => [[['_route' => 'save_payment', '_controller' => 'App\\Controller\\PayementControllerController::savePayment'], ['id'], ['POST' => 0], null, false, true, null]],
+        1171 => [[['_route' => 'payment_success', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccess'], ['id'], null, null, false, true, null]],
+        1215 => [[['_route' => 'payment_success_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccessPage'], ['id'], null, null, false, true, null]],
+        1232 => [
+=======
         826 => [[['_route' => 'app_formation_lessons_c', '_controller' => 'App\\Controller\\LeconController::showLessonsC'], ['id'], ['GET' => 0], null, false, false, null]],
         847 => [[['_route' => 'app_lecon_new', '_controller' => 'App\\Controller\\LeconController::new'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
         866 => [[['_route' => 'app_lecon_show', '_controller' => 'App\\Controller\\LeconController::show'], ['id'], ['GET' => 0], null, false, true, null]],
@@ -213,6 +234,7 @@ return [
         1138 => [[['_route' => 'payment_success', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccess'], ['id'], null, null, false, true, null]],
         1182 => [[['_route' => 'payment_success_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentSuccessPage'], ['id'], null, null, false, true, null]],
         1199 => [
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
             [['_route' => 'payment_page', '_controller' => 'App\\Controller\\PayementControllerController::paymentPage'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -1,4 +1,8 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+<<<<<<< HEAD
+        message_bus: false
+=======
         
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
