@@ -16,12 +16,24 @@
         <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
         <server name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
 
+<<<<<<< HEAD
         <!-- ###+ google/recaptcha ### -->
         <!-- To use Google Recaptcha, you must register a site on Recaptcha's admin panel: -->
         <!-- https://www.google.com/recaptcha/admin -->
         <env name="GOOGLE_RECAPTCHA_SITE_KEY" value=""/>
         <env name="GOOGLE_RECAPTCHA_SECRET" value=""/>
         <!-- ###- google/recaptcha ### -->
+=======
+        <!-- ###+ symfony/mercure-bundle ### -->
+        <!-- See https://symfony.com/doc/current/mercure.html#configuration -->
+        <!-- The URL of the Mercure hub, used by the app to publish updates (can be a local URL) -->
+        <env name="MERCURE_URL" value="https://example.com/.well-known/mercure"/>
+        <!-- The public URL of the Mercure hub, used by the browser to connect -->
+        <env name="MERCURE_PUBLIC_URL" value="https://example.com/.well-known/mercure"/>
+        <!-- The secret used to sign the JWTs -->
+        <env name="MERCURE_JWT_SECRET" value="!ChangeThisMercureHubJWTSecretKey!"/>
+        <!-- ###- symfony/mercure-bundle ### -->
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
     </php>
 
     <testsuites>

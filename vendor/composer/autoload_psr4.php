@@ -76,6 +76,7 @@ return array(
     'Symfony\\Bundle\\TwigBundle\\' => array($vendorDir . '/symfony/twig-bundle'),
     'Symfony\\Bundle\\SecurityBundle\\' => array($vendorDir . '/symfony/security-bundle'),
     'Symfony\\Bundle\\MonologBundle\\' => array($vendorDir . '/symfony/monolog-bundle'),
+    'Symfony\\Bundle\\MercureBundle\\' => array($vendorDir . '/symfony/mercure-bundle/src'),
     'Symfony\\Bundle\\MakerBundle\\' => array($vendorDir . '/symfony/maker-bundle/src'),
     'Symfony\\Bundle\\FrameworkBundle\\' => array($vendorDir . '/symfony/framework-bundle'),
     'Symfony\\Bundle\\DebugBundle\\' => array($vendorDir . '/symfony/debug-bundle'),
@@ -85,6 +86,7 @@ return array(
     'Symfony\\Bridge\\Doctrine\\' => array($vendorDir . '/symfony/doctrine-bridge'),
     'Svg\\' => array($vendorDir . '/dompdf/php-svg-lib/src/Svg'),
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'StellaMaris\\Clock\\' => array($vendorDir . '/stella-maris/clock/src'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
     'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
@@ -95,11 +97,17 @@ return array(
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
+<<<<<<< HEAD
     'Knp\\Component\\' => array($vendorDir . '/knplabs/knp-components/src/Knp/Component'),
     'Knp\\Bundle\\PaginatorBundle\\' => array($vendorDir . '/knplabs/knp-paginator-bundle/src'),
+=======
+    'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
+    'Lcobucci\\Clock\\' => array($vendorDir . '/lcobucci/clock/src'),
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
     'FontLib\\' => array($vendorDir . '/dompdf/php-font-lib/src/FontLib'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),

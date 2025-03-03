@@ -3,7 +3,11 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '1a3fca0bff20eb199f82a278d1594556589c069e',
+=======
+        'reference' => '91ed8fee82fd9d735e6e3789b6f1086b9e57ad50',
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +17,11 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '1a3fca0bff20eb199f82a278d1594556589c069e',
+=======
+            'reference' => '91ed8fee82fd9d735e6e3789b6f1086b9e57ad50',
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -208,6 +216,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
         'knplabs/knp-components' => array(
             'pretty_version' => 'v5.1.0',
             'version' => '5.1.0.0',
@@ -223,6 +232,23 @@
             'reference' => '1a00f88149d25418bd99d8954eba951f04cc3acf',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../knplabs/knp-paginator-bundle',
+=======
+        'lcobucci/clock' => array(
+            'pretty_version' => '2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => 'c7aadcd6fd97ed9e199114269c0be3f335e38876',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lcobucci/clock',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'lcobucci/jwt' => array(
+            'pretty_version' => '4.0.4',
+            'version' => '4.0.4.0',
+            'reference' => '55564265fddf810504110bd68ca311932324b0e9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../lcobucci/jwt',
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -316,6 +342,15 @@
             'reference' => '679e3ce485b99e84c775d28e2e96fade9a7fb50a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpdocumentor/type-resolver',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.9.3',
+            'version' => '6.9.3.0',
+            'reference' => '2f5c94fe7493efc213f643c23b1b1c249d40f47e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -637,6 +672,15 @@
             'install_path' => __DIR__ . '/../sebastian/version',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'stella-maris/clock' => array(
+            'pretty_version' => '0.1.7',
+            'version' => '0.1.7.0',
+            'reference' => 'fa23ce16019289a18bb3446fdecd45befcdd94f8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../stella-maris/clock',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'stripe/stripe-php' => array(
             'pretty_version' => 'v16.6.0',
@@ -962,6 +1006,18 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+<<<<<<< HEAD
+=======
+        'symfony/mercure-bundle' => array(
+            'pretty_version' => 'v0.3.9',
+            'version' => '0.3.9.0',
+            'reference' => '77435d740b228e9f5f3f065b6db564f85f2cdb64',
+            'type' => 'symfony-bundle',
+            'install_path' => __DIR__ . '/../symfony/mercure-bundle',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
         'symfony/messenger' => array(
             'pretty_version' => 'v6.4.19',
             'version' => '6.4.19.0',

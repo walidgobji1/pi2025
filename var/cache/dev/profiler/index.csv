@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0428c6,127.0.0.1,GET,http://127.0.0.1:8000/dashboard/users,1740970577,,200,request
 9bd794,127.0.0.1,GET,http://127.0.0.1:8000/formation,1740970583,,200,request
 855331,127.0.0.1,GET,http://127.0.0.1:8000/formation?page=2,1740970586,,200,request
@@ -27,3 +28,36 @@ c80cfd,127.0.0.1,GET,http://127.0.0.1:8000/formation?search=t,1740970655,,200,re
 eada09,127.0.0.1,GET,http://127.0.0.1:8000/formation?search=,1740970656,,200,request
 3fc659,127.0.0.1,GET,http://127.0.0.1:8000/,1740970680,,200,request
 46bbbc,127.0.0.1,GET,http://127.0.0.1:8000/,1740970680,,200,request
+=======
+19c973,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960764,,200,request
+c5ba8c,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960772,,200,request
+383e3a,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960774,,200,request
+3ac989,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960779,,200,request
+9d6ca6,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960784,,200,request
+8f5e56,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960789,,200,request
+e2c017,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960794,,200,request
+6f5f8f,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960799,,200,request
+9bf6fa,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960804,,200,request
+4f5155,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960809,,200,request
+023c1f,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960814,,200,request
+871ca8,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960852,,200,request
+3c66a3,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960912,,200,request
+d86a43,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740960972,,200,request
+8ada9e,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961032,,200,request
+14a761,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961038,,200,request
+53de46,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961039,,200,request
+fb0343,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961044,,200,request
+db205a,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961049,,200,request
+6f37ca,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961054,,200,request
+f9ba85,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961059,,200,request
+431651,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961064,,200,request
+b2670a,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961069,,200,request
+2c9094,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961074,,200,request
+eeea02,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961079,,200,request
+f010ba,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961084,,200,request
+85a036,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961089,,200,request
+f14590,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961094,,200,request
+1fa1db,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961099,,200,request
+689a20,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961104,,200,request
+0e1318,127.0.0.1,GET,https://127.0.0.1:8000/notification/notifications,1740961109,,200,request
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa

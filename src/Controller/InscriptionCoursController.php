@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\InscriptionCours;
 use App\Entity\Formation;
 use App\Entity\Apprenant;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\ApprenantRepository;
 
 use App\Form\InscriptionCoursType;
 use App\Repository\InscriptionCoursRepository;
@@ -118,4 +120,55 @@ use Symfony\Component\Routing\Annotation\Route;
 
         return $this->redirectToRoute('app_inscription_cours_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/mes-inscriptions/{id}', name: 'app_mes_inscriptions', methods: ['GET'])]
+   public function mesInscriptions(int $id, InscriptionCoursRepository $inscriptionCoursRepository, ApprenantRepository $apprenantRepository): Response
+   {
+    // Récupérer l'apprenant via son ID
+    $apprenant = $apprenantRepository->find($id);
+
+    // Vérifier si l'apprenant existe
+    if (!$apprenant) {
+        throw $this->createNotFoundException("Apprenant non trouvé.");
+    }
+
+    // Récupérer les inscriptions de cet apprenant
+    $inscriptions = $inscriptionCoursRepository->findBy(['apprenant' => $apprenant]);
+
+    return $this->render('inscription_cours/mes_inscriptions.html.twig', [
+        'inscriptions' => $inscriptions,
+    ]);
 }
+
+
+#[Route('/search', name: 'app_inscription_cours_search', methods: ['GET'])]
+public function search(Request $request, InscriptionCoursRepository $inscriptionCoursRepository): JsonResponse
+{
+    $query = $request->query->get('q', '');
+
+    // Recherche par titre de formation
+    $inscriptions = $inscriptionCoursRepository->searchByFormationTitle($query);
+
+    $data = array_map(fn($inscription) => [
+        'id' => $inscription->getId(),
+        'apprenant' => $inscription->getNomApprenant(),
+        'formation' => $inscription->getFormation()->getTitre(), // Récupère le titre de la formation
+        'email' => $inscription->getEmail(),
+        'cin' => $inscription->getCin(),
+        'status' => $inscription->getStatus(),
+        'montant' => $inscription->getMontant(),
+        'dateInscription' => $inscription->getDateInscreption()?->format('Y-m-d'),
+    ], $inscriptions);
+
+    return $this->json($data);
+}
+
+    
+}
+
+
+    
+
+
+

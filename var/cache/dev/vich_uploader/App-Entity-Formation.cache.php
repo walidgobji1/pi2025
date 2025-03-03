@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 <?php return unserialize('O:42:"Vich\\UploaderBundle\\Metadata\\ClassMetadata":1:{i:0;s:409:"a:2:{i:0;a:1:{s:9:"imageFile";a:7:{s:7:"mapping";s:17:"formations_images";s:12:"propertyName";s:9:"imageFile";s:16:"fileNameProperty";s:9:"imageName";s:4:"size";N;s:8:"mimeType";N;s:12:"originalName";N;s:10:"dimensions";N;}}i:1;s:171:"a:5:{i:0;s:20:"App\\Entity\\Formation";i:1;a:0:{}i:2;a:0:{}i:3;a:1:{i:0;s:74:"C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\src\\Entity\\Formation.php";}i:4;i:1740970556;}";}";}');
+=======
+<?php return unserialize('O:42:"Vich\\UploaderBundle\\Metadata\\ClassMetadata":1:{i:0;s:392:"a:2:{i:0;a:1:{s:9:"imageFile";a:7:{s:7:"mapping";s:17:"formations_images";s:12:"propertyName";s:9:"imageFile";s:16:"fileNameProperty";s:9:"imageName";s:4:"size";N;s:8:"mimeType";N;s:12:"originalName";N;s:10:"dimensions";N;}}i:1;s:154:"a:5:{i:0;s:20:"App\\Entity\\Formation";i:1;a:0:{}i:2;a:0:{}i:3;a:1:{i:0;s:57:"C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\src\\Entity\\Formation.php";}i:4;i:1740960760;}";}";}');
+>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa

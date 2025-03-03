@@ -1,24 +1,40 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Gestion des Inscriptions{% endblock %}
+{% block title %}Gestion des Promotions{% endblock %}
 
 {% block body %}
 <section class="section">
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold text-primary">Liste des Inscriptions</h4>
+            <h4 class="fw-bold text-primary">Liste des Promotions</h4>
             <a href="{{ path('admin_promotion_create') }}" class="btn btn-success">
                 <i class="fas fa-plus"></i> Ajouter une promotion
             </a>
         </div>
+         
+        <!-- Barre de Recherche -->
+        <div class="card p-2 shadow-sm mb-8">
+            <form class="search-form d-flex align-items-center" method="GET" action="#">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    name="q" 
+                    class="form-control me-2 w-50" 
+                    placeholder="Rechercher par nom d'apprenant..." 
+                    title="Entrez le nom de l'apprenant"
+                    value="{{ query|default('') }}">
+                
+            </form>
+        </div>
+
 
         <div class="card shadow-lg">
             <div class="card-body">
-                <!-- Table stylisée avec Bootstrap -->
                 <table class="table table-hover table-striped align-middle">
                     <thead class="table-dark text-center">
                         <tr>
                             <th>ID</th>
+                            <th>Apprenant</th>
                             <th>Code Promo</th>
                             <th>Description</th>
                             <th>Remise</th>
@@ -26,10 +42,13 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody id="promotion-list" class="text-center">
                         {% for promotion in promotions %}
                             <tr>
                                 <td>{{ promotion.id }}</td>
+                                <td>
+                                    {{ promotion.apprenant.nom }} {{ promotion.apprenant.prenom }}
+                                </td>
                                 <td><span class="badge bg-info text-dark">{{ promotion.codePromo }}</span></td>
                                 <td>{{ promotion.description }}</td>
                                 <td class="fw-bold text-success">{{ promotion.remise }}%</td>
@@ -37,19 +56,17 @@
                                 <td class="d-flex justify-content-center gap-2">
                                     <a href="{{ path('admin_promotion_edit', { id: promotion.id }) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i> Modifier
-                                    </a>
-                                    
+                                        </a>
                                     <form action="{{ path('admin_promotion_delete', { id: promotion.id }) }}" method="post">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promotion.id) }}">
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?');">
-                                            <i class="fas fa-trash"></i> Supprimer
-                                        </button>
-                                    </form>
-                                </td>
+                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ promotion.id) }}">
+                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?');">
+                               <i class="fas fa-trash"></i> Supprimer
+                             </button>
+                            </form>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="6" class="text-center text-muted">Aucune promotion trouvée.</td>
+                                <td colspan="7" class="text-center text-muted">Aucune promotion trouvée.</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -58,4 +75,75 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    $(document).on("click", ".delete-btn", function () {
+        let promotionId = $(this).data("id");
+        let csrfToken = $(this).data("token");
+        
+        if (!confirm("Êtes-vous sûr de vouloir supprimer cette promotion ?")) {
+            return;
+        }
+        
+        $.ajax({
+            url: "/dashboard/promotion/" + promotionId + "/delete",
+            type: "POST",
+            data: { _token: csrfToken },
+            success: function (response) {
+                alert("Promotion supprimée avec succès !");
+                location.reload();
+            },
+            error: function (xhr) {
+                alert("Erreur lors de la suppression !");
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    $("#search-input").on("keyup", function () {
+        let query = $(this).val().trim();
+        $.ajax({
+            url: "{{ path('admin_promotion_search') }}",
+            type: "GET",
+            data: { q: query },
+            dataType: "json",
+            success: function (data) {
+                let resultsTable = $("#promotion-list");
+                resultsTable.empty();
+
+                if (data.length === 0) {
+                    resultsTable.append(`<tr><td colspan="7" class="text-center text-muted">Aucune promotion trouvée.</td></tr>`);
+                    return;
+                }
+                data.forEach(function (promotion) {
+                    resultsTable.append(`
+                        <tr>
+                            <td>${promotion.id}</td>
+                            <td>${promotion.apprenant}</td>
+                            <td><span class="badge bg-info text-dark">${promotion.codePromo}</span></td>
+                            <td>${promotion.description}</td>
+                            <td class="fw-bold text-success">${promotion.remise}%</td>
+                            <td>${promotion.dateExpiration ? promotion.dateExpiration : 'N/A'}</td>
+                            <td class="d-flex justify-content-center gap-2">
+                                <a href="/dashboard/promotion/${promotion.id}/edit" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </a>
+                                <button class="btn btn-danger btn-sm delete-btn" data-id="${promotion.id}" data-token="${promotion.csrfToken}">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </td>
+                        </tr>`);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Erreur AJAX :", error);
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
