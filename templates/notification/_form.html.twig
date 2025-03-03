@@ -1,132 +1,132 @@
 <div class="notification-container">
-    <h2 class="notification-title">📢 Envoyer une Notification</h2>
+  <h2 class="notification-title">📢 Envoyer une Notification</h2>
 
-    <div class="notification-card">
-   {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+  <div class="notification-card">
+ {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
 
-        <!-- Global Error Display -->
-        {% if form.vars.errors|length > 0 %}
-            <div class="form-errors">
-                <ul>
-                    {% for error in form.vars.errors %}
-                        <li>{{ error.message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+      <!-- Global Error Display -->
+      {% if form.vars.errors|length > 0 %}
+          <div class="form-errors">
+              <ul>
+                  {% for error in form.vars.errors %}
+                      <li>{{ error.message }}</li>
+                  {% endfor %}
+              </ul>
+          </div>
+      {% endif %}
 
-        <div class="form-group">
-            {{ form_widget(form.titre, {'attr': {'class': 'form-input', 'placeholder': 'Titre de la notification'}}) }}
-            {% for error in form.titre.vars.errors %}
-                <div class="error-message">{{ error.message }}</div>
-            {% endfor %}
-        </div>
+      <div class="form-group">
+          {{ form_widget(form.titre, {'attr': {'class': 'form-input', 'placeholder': 'Titre de la notification'}}) }}
+          {% for error in form.titre.vars.errors %}
+              <div class="error-message">{{ error.message }}</div>
+          {% endfor %}
+      </div>
 
-        <div class="form-group">
-            {{ form_widget(form.contenu, {'attr': {'class': 'form-textarea', 'placeholder': 'Tapez votre message ici...'}}) }}
-            {% for error in form.contenu.vars.errors %}
-                <div class="error-message">{{ error.message }}</div>
-            {% endfor %}
-        </div>
+      <div class="form-group">
+          {{ form_widget(form.contenu, {'attr': {'class': 'form-textarea', 'placeholder': 'Tapez votre message ici...'}}) }}
+          {% for error in form.contenu.vars.errors %}
+              <div class="error-message">{{ error.message }}</div>
+          {% endfor %}
+      </div>
 
-        <div class="form-group">
-            <label for="sentAt">📅 Date d'envoi</label>
-            {{ form_widget(form.sentAt, {'attr': {'class': 'form-input'}}) }}
-            {% for error in form.sentAt.vars.errors %}
-                <div class="error-message">{{ error.message }}</div>
-            {% endfor %}
-        </div>
+      <div class="form-group">
+          <label for="sentAt">📅 Date d'envoi</label>
+          {{ form_widget(form.sentAt, {'attr': {'class': 'form-input'}}) }}
+          {% for error in form.sentAt.vars.errors %}
+              <div class="error-message">{{ error.message }}</div>
+          {% endfor %}
+      </div>
 
-        <div class="form-group">
-            <label for="evenement">📌 Événement concerné</label>
-            {{ form_widget(form.evenement, {'attr': {'class': 'form-select'}}) }}
-            {% for error in form.evenement.vars.errors %}
-                <div class="error-message">{{ error.message }}</div>
-            {% endfor %}
-        </div>
+      <div class="form-group">
+          <label for="evenement">📌 Événement concerné</label>
+          {{ form_widget(form.evenement, {'attr': {'class': 'form-select'}}) }}
+          {% for error in form.evenement.vars.errors %}
+              <div class="error-message">{{ error.message }}</div>
+          {% endfor %}
+      </div>
 
-        <button type="submit" class="send-button">📨 Envoyer Notification</button>
+      <button type="submit" class="send-button">📨 Envoyer Notification</button>
 
-        {{ form_end(form) }}
-    </div>
+      {{ form_end(form) }}
+  </div>
 </div>
 
 <!-- Add Some Styles -->
 <style>
-    .notification-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 40px;
-    }
+  .notification-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+  }
 
-    .notification-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 20px;
-    }
+  .notification-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+  }
 
-    .notification-card {
-        background: rgb(228, 239, 254);
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 480px;
-        width: 100%;
-        text-align: center;
-    }
+  .notification-card {
+      background: rgb(228, 239, 254);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+  }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+  .form-group {
+      margin-bottom: 15px;
+  }
 
-    .form-input, .form-textarea, .form-select {
-        width: 100%;
-        padding: 12px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        background: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-    .form-textarea {
-        height: 100px;
-        resize: none;
-    }
+  .form-textarea {
+      height: 100px;
+      resize: none;
+  }
 
-    .send-button {
-        width: 100%;
-        padding: 12px;
-        font-size: 18px;
-        font-weight: bold;
-        color: white;
-        background: rgba(25, 177, 223, 0.87);
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
+  .send-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background: rgba(25, 177, 223, 0.87);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+  }
 
-    .send-button:hover {
-        background: rgba(15, 150, 200, 1);
-    }
+  .send-button:hover {
+      background: rgba(15, 150, 200, 1);
+  }
 
-    .error-message {
-        color: red;
-        font-size: 14px;
-        margin-top: 5px;
-    }
+  .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+  }
 
-    .form-errors ul {
-        color: red;
-        font-size: 14px;
-        padding-left: 20px;
-    }
+  .form-errors ul {
+      color: red;
+      font-size: 14px;
+      padding-left: 20px;
+  }
 
-    .form-errors li {
-        list-style-type: disc;
-    }
+  .form-errors li {
+      list-style-type: disc;
+  }
 </style>

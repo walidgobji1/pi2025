@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class CategorieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -14,7 +15,7 @@ class CategorieType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-        
+           
         ;
     }
 

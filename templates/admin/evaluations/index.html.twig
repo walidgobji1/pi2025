@@ -1,0 +1,280 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Liste des Évaluations{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2 class="cute-title">Évaluations des Instructeurs</h2>
+        {% if evaluations|length > 0 %}
+            <div class="table-wrapper">
+                <table class="table cute-table" id="evaluations-table">
+                    <thead>
+                        <tr>
+                            
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Score</th>
+                            <th>Niveau</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evaluation in evaluations %}
+                            <tr class="evaluation-row">
+                                
+                                <td>{{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</td>
+                                <td>{{ evaluation.instructor.email }}</td>
+                                <td>
+                                    <span class="score-badge">{{ evaluation.score }}</span>
+                                </td>
+                                <td>
+                                    <span style="font-weight: 500; color: {% if evaluation.niveau == 'Beginner' %}#ffc107{% elseif evaluation.niveau == 'Intermediate' %}#17a2b8{% else %}#28a745{% endif %}">
+                                        {{ evaluation.niveau }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-dot {{ evaluation.status ? 'accepted' : 'not-accepted' }}"></span>
+                                    {{ evaluation.status ? 'Accepté' : 'Non Accepté' }}
+                                </td>
+                                <td>{{ evaluation.dateCreation|date('d/m/Y ') }}</td>
+                                <td>
+                                    <a href="{{ path('admin_evaluation_details', { id: evaluation.id }) }}" class="btn btn-sm btn-cute">Détails</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- Simplified Pagination Controls (Default Bootstrap 5 Template) -->
+                <div class="pagination-container">
+                    {{ knp_pagination_render(evaluations) }}
+                </div>
+                <!-- Add Bootstrap Modal for Details -->
+<div class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="evaluationModalLabel">Détails de l’Évaluation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="evaluationModalBody">
+                <!-- Details will be loaded here via AJAX -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Aucune évaluation trouvée. 😿</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Styling aligned with baseAdmin.html.twig */
+        .cute-title {
+            font-family: 'Nunito', sans-serif;
+            color: #012970;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        .cute-title::after {
+            content: '✨';
+            position: absolute;
+            right: -25px;
+            top: 5px;
+            font-size: 1.2rem;
+            color: #4154f1;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+            overflow: hidden;
+        }
+
+        .cute-table {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .cute-table thead th {
+            background: #f6f9ff;
+            color: #4154f1;
+            font-weight: 600;
+            padding: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e6e9ff;
+        }
+
+        .evaluation-row td {
+            padding: 12px 15px;
+            vertical-align: middle;
+            font-size: 0.95rem;
+            color: #444444;
+            border-bottom: 1px solid #f0f4fb;
+            transition: background 0.2s ease;
+        }
+
+        .evaluation-row:hover {
+            background: #f6f9ff;
+        }
+
+        .score-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #e6e9ff;
+            color: #4154f1;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .niveau-text {
+            font-weight: 500;
+        }
+        .niveau-text.Beginner { color: #ffc107; } /* Bootstrap warning yellow */
+        .niveau-text.Intermediate { color: #17a2b8; } /* Bootstrap info teal */
+        .niveau-text.Advanced { color: #28a745; } /* Bootstrap success green */
+
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .status-dot.accepted { background: #28a745; }
+        .status-dot.not-accepted { background: #dc3545; }
+
+        .btn-cute {
+            background: #4154f1;
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-cute:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(65, 84, 241, 0.3);
+            background: #3644d9;
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+            margin-top: 20px;
+        }
+        .empty-state p {
+            font-size: 1.2rem;
+            color: #899bbd;
+        }
+        .pagination-container {
+    padding: 10px 0;
+    text-align: center;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 0 20px rgba(1, 41, 112, 0.1);
+}
+.pagination-container .pagination {
+    margin-bottom: 0;
+}
+.pagination-container .page-item .page-link {
+    color: #4154f1 !important;
+    padding: 8px 14px;
+    margin: 0 2px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #f6f9ff !important;
+    border: 1px solid #e6e9ff !important;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pagination-container .page-item.active .page-link {
+    background: #4154f1 !important;
+    color: #fff !important;
+    font-weight: 600;
+    border: 1px solid #4154f1 !important;
+    box-shadow: 0 2px 5px rgba(65, 84, 241, 0.3);
+}
+.pagination-container .page-item.disabled .page-link {
+    color: #899bbd !important;
+    background: #f6f9ff !important;
+    cursor: not-allowed;
+    border: 1px solid #e6e9ff !important;
+}
+.pagination-container .page-item .page-link:hover {
+    background: #e6e9ff !important;
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(1, 41, 112, 0.1);
+}
+
+    </style>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        async function updateEvaluationsList(url) {
+            const response = await fetch(url, {
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'same-origin'
+            });
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('.table-wrapper');
+
+            if (newContent) {
+                const currentContent = document.querySelector('.table-wrapper');
+                currentContent.parentNode.replaceChild(newContent, currentContent);
+                attachPaginationListeners(); // Reattach listeners to new pagination links
+            }
+        }
+
+        function attachPaginationListeners() {
+            document.querySelectorAll('.pagination .page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href && href !== '#') {
+                        window.history.pushState({ path: href }, '', href);
+                        updateEvaluationsList(href);
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEvaluationsList(window.location.href);
+            attachPaginationListeners();
+
+            window.addEventListener('popstate', (event) => {
+                const url = event.state ? event.state.path : window.location.href;
+                updateEvaluationsList(url);
+            });
+        });
+    </script>
+{% endblock %}

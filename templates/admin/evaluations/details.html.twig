@@ -1,0 +1,96 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Détails de l’Évaluation{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow-sm p-4 mb-4 rounded">
+            <h2 class="mb-4">Détails de l’Évaluation</h2>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    
+                    <p><strong>Nom de l’Instructeur :</strong> {{ evaluation.instructor.nom ~ ' ' ~ evaluation.instructor.prenom }}</p>
+                    <p><strong>Email   :</strong> {{ evaluation.instructor.email }}</p>
+                    <p><strong>Score :</strong> {{ evaluation.score }}</p>
+                    <p><strong>Niveau :</strong> {{ evaluation.niveau }}</p>
+                    <p><strong>Statut Actuel :</strong> 
+                        <span class="fw-bold {% if evaluation.status %}text-success{% else %}text-danger{% endif %}">
+                            {{ evaluation.status ? 'Accepté' : 'Non Accepté' }}
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Éducation :</strong> {{ evaluation.education }}</p>
+                    <p><strong>Années d’Expérience :</strong> {{ evaluation.yearsOfExperience }}</p>
+                    <p><strong>Compétences :</strong> {{ evaluation.skills }}</p>
+                    <p><strong>Certifications :</strong> {{ evaluation.certifications }}</p>
+                    <p><strong>Date d’Évaluation :</strong> {{ evaluation.dateCreation|date('Y-m-d H:i:s') }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3 class="mb-3">Modifier le Statut</h3>
+            <form id="statusForm">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="status" class="form-label">Choisir le statut :</label>
+                        <select name="status" id="status" class="form-select">
+                            <option value="accepted" {% if evaluation.status %}selected{% endif %}>Accepté</option>
+                            <option value="not_accepted" {% if not evaluation.status %}selected{% endif %}>Non Accepté</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 align-self-end">
+                        <button type="submit" class="btn btn-primary w-100">Mettre à Jour</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="statusFeedback" class="mb-3"></div>
+
+            <a href="{{ path('admin_evaluations') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script>
+            document.getElementById('statusForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const feedback = document.getElementById('statusFeedback');
+
+                try {
+                    feedback.innerHTML = '<span class="text-info">Mise à jour en cours...</span>';
+                    const response = await fetch('{{ path('admin_evaluation_update_status', { id: evaluation.id }) }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(formData).toString()
+                    });
+
+                    if (!response.ok) throw new Error('Erreur réseau');
+
+                    const data = await response.json();
+                    if (data.success) {
+                        feedback.innerHTML = '<span class="text-success">Statut mis à jour avec succès.</span>';
+                        
+                        const currentStatus = document.querySelector('.fw-bold');
+                        if (currentStatus) {
+                            currentStatus.textContent = data.newStatus === 'accepted' ? 'Accepté' : 'Non Accepté';
+                            currentStatus.className = 'fw-bold ' + (data.newStatus === 'accepted' ? 'text-success' : 'text-danger');
+                        }
+
+                        setTimeout(() => feedback.innerHTML = '', 3000);
+                    } else {
+                        feedback.innerHTML = '<span class="text-danger">Erreur : ' + data.error + '</span>';
+                    }
+                } catch (error) {
+                    feedback.innerHTML = '<span class="text-danger">Erreur lors de la mise à jour : ' + error.message + '</span>';
+                }
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

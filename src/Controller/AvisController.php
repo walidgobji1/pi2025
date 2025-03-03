@@ -9,6 +9,7 @@ use App\Entity\Apprenant;
 
 use App\Form\AvisType;
 use App\Entity\FormationScore;
+use App\Entity\User;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManager;
 
@@ -20,14 +21,28 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+
+
 
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
-    #[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
-    public function index(int $formationId , AvisRepository $avisRepository, EntityManagerInterface $entityManager): Response
+    private $httpClient;
+    
+    public function __construct(HttpClientInterface $httpClient)
     {
-        $userId = 2;
+        $this->httpClient = $httpClient;
+        
+    }
+
+    #[Route('/{formationId<\d+>?1}', name: 'app_avis_index', methods: ['GET'])]
+    public function index(int $formationId , AvisRepository $avisRepository, EntityManagerInterface $entityManager,Security $security): Response
+    {
+        // $user = $security->getUser();
+        // $userId = ($user instanceof User) ? $user->getId() : 2; // ✅ Cast and check
 
         $avis = $entityManager->getRepository(Avis::class)->findBy(
             ['formation' => $formationId],
@@ -37,25 +52,97 @@ final class AvisController extends AbstractController
         return $this->render('avis/index.html.twig', [
             'avis' => $avis,
             'formationId' => $formationId,
-            'userId' => $userId,
+            // 'userId' => $userId,
         ]);
     }
-
-    #[Route('/add/{formationId}/{userId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
-    public function addAvis(int $formationId, int $userId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
+    #[Route('/spellcheck', name: 'app_avis_spellcheck', methods: ['POST'])]
+    public function spellcheck(Request $request): JsonResponse
     {
-        // Fetch the user and formation from the database
-        $userById = $entityManager->getRepository(Apprenant::class)->find($userId);
-        $formation = $entityManager->getRepository(Formation::class)->find($formationId);
+        $text = $request->request->get('text');
+        if (!$text) {
+            return new JsonResponse(['error' => 'No text provided'], 400);
+        }
 
-        if (!$userById || !$formation) {
-            $this->addFlash('error', 'Utilisateur ou formation non trouvé !');
-            return $this->redirectToRoute('homepage'); // Redirect to homepage or another relevant page
+        try {
+            $url = 'https://api.languagetool.org/v2/check';
+            $body = http_build_query([
+                'text' => $text,
+                'language' => 'fr',
+            ]);
+            $response = $this->httpClient->request('POST', $url, [
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ],
+                'body' => $body,
+            ]);
+            $data = $response->toArray();
+
+            $correctedText = $text;
+            foreach ($data['matches'] as $match) {
+                $offset = $match['offset'];
+                $length = $match['length'];
+                $replacement = $match['replacements'][0]['value'] ?? null;
+                if ($replacement) {
+                    $correctedText = substr_replace($correctedText, $replacement, $offset, $length);
+                }
+            }
+
+            return new JsonResponse(['corrected' => $correctedText]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Spellcheck failed: ' . $e->getMessage()], 500);
+        }
+    }
+
+    // NEW: Add this translation route
+    #[Route('/translate/{id}', name: 'app_avis_translate', methods: ['GET'])]
+    public function translate(Avis $avis): JsonResponse
+    {
+        $url = 'https://translate.googleapis.com/translate_a/single';
+        $params = [
+            'client' => 'gtx',
+            'sl' => 'fr', // French as source
+            'tl' => 'en', // English as target
+            'dt' => 't',
+            'q' => $avis->getCommentaire(), // The review text to translate
+        ];
+
+        try {
+            $response = $this->httpClient->request('GET', $url, [
+                'query' => $params,
+            ]);
+
+            $data = $response->toArray();
+            $translatedText = $data[0][0][0] ?? 'Translation unavailable';
+
+            return new JsonResponse(['translatedText' => $translatedText]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'Translation failed'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    #[Route('/add/{formationId}', name: 'app_avis_add', methods: ['GET', 'POST'])]
+    public function addAvis(int $formationId, Request $request, EntityManagerInterface $entityManager, FormationScoreRepository $formationScoreRepository): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour ajouter un avis.');
+            return $this->redirectToRoute('app_login'); // Redirect to login page
+        }
+    
+        if (!in_array('ROLE_APPRENANT', $user->getRoles())) {
+            $this->addFlash('error', 'Seuls les apprenants peuvent ajouter un avis.');
+            return $this->redirectToRoute('app_avis_index', ['formationId' => $formationId]);
+        }
+    
+        $formation = $entityManager->getRepository(Formation::class)->find($formationId);
+        if (!$formation) {
+            $this->addFlash('error', 'Formation non trouvée.');
+            return $this->redirectToRoute('homepage');
         }
 
         // Create the Avis entity
         $avi = new Avis();
-        $avi->setApprenant($userById);
+        $avi->setApprenant($user);
         $avi->setFormation($formation);
 
         //handel creation formationscore 
@@ -81,6 +168,7 @@ final class AvisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $avi->getNote();
             $count = $formationScore->getNombreAvis();
             if ($count > 0) {
@@ -112,7 +200,7 @@ final class AvisController extends AbstractController
         return $this->render('avis/new.html.twig', [
             'form' => $form->createView(),
             'formationId' => $formationId,
-            'userId' => $userId,
+            // 'userId' => $userId,
         ]);
     }
 
@@ -195,4 +283,7 @@ final class AvisController extends AbstractController
         return $this->redirectToRoute('app_avis_index', ['formationId' => $avi->getFormation()->getId()], Response::HTTP_SEE_OTHER);
 
     }
+  
+
+
 }

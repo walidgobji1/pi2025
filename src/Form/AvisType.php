@@ -42,6 +42,10 @@ class AvisType extends AbstractType
             ->add('commentaire', TextareaType::class, [
                 'label' => 'Commentaire',
                 'required' => true,
+                'attr' => [
+                    'rows' => 5,
+                    'id' => 'avis_content', // Add ID for real-time correction
+                ],
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Veuillez ajouter un commentaire.',

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Formation;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
+use App\Repository\ProgressionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\InscriptionCoursRepository;
 use App\Service\FormationScoreService;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/formation')]
 final class FormationController extends AbstractController
@@ -23,38 +27,34 @@ final class FormationController extends AbstractController
         $this->formationScoreService = $formationScoreService;
     }
 
-    #[Route('/formations', name: 'app_formations')]
-    public function indextemp(FormationRepository $formationRepository): Response
-    {
-        $formations = $formationRepository->findAll();
-        $formationScores = $this->formationScoreService->getAllScores();
-
-        return $this->render('/formation/formations.html.twig', [
-            'formations' => $formations,
-            'formationScores' => $formationScores,
-        ]);
-    }
-
     #[Route(name: 'app_formation_index', methods: ['GET'])]
-    public function index(Request $request, FormationRepository $formationRepository): Response
+    public function index(PaginatorInterface $paginator, Request $request, FormationRepository $formationRepository): Response
     {
-        // Get the search query from the request (if any)
-        $searchQuery = $request->query->get('search', ''); // Default to empty if not set
+        $searchQuery = $request->query->get('search', ''); // Get search query
 
-        // Fetch formations, and if there's a search query, filter the formations
+        // Create the query for search & pagination
+        $queryBuilder = $formationRepository->createQueryBuilder('f');
+
         if ($searchQuery) {
-            $formations = $formationRepository->findBySearchQuery($searchQuery);  // Ensure this method exists in your repository
-        } else {
-            $formations = $formationRepository->findAll();
+            $queryBuilder->where('f.titre LIKE :search OR f.description LIKE :search')
+                         ->setParameter('search', "%$searchQuery%");
         }
+
+        // Paginate results
+        $formations = $paginator->paginate(
+            $queryBuilder->getQuery(),
+            $request->query->getInt('page', 1), // Get page number
+            3 // Number of items per page
+        );
 
         return $this->render('formation/index.html.twig', [
             'formations' => $formations,
+            'searchQuery' => $searchQuery,
         ]);
     }
 
     #[Route('/new', name: 'app_formation_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
@@ -63,6 +63,15 @@ final class FormationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($formation);
             $entityManager->flush();
+
+            // Send Email Notification
+            $emailMessage = (new Email())
+                ->from('gobjiwalid1@gmail.com')
+                ->to('ahmedallaya@gmail.com')
+                ->subject('Nouvelle formation ajoutée')
+                ->html("<p>Une nouvelle formation a été ajoutée sur notre plateforme. Connectez-vous pour la découvrir !</p>");
+
+            $mailer->send($emailMessage);
 
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -74,17 +83,20 @@ final class FormationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository): Response
+    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository, ProgressionRepository $progressionRepository): Response
     {
         $user = $this->getUser();
-        $inscription = $user ? $inscriptionCoursRepository->findOneBy([
-            'formation' => $formation,
-            'apprenant' => $user
-        ]) : null;
+        $inscription = $user ? $inscriptionCoursRepository->findByFormationAndUser($formation, $user) : null;
+        $progression = $user ? $progressionRepository->findOneBy(['apprenant' => $user, 'formation' => $formation]) : null;
+
+        $totalLecons = count($formation->getLecons());
+        $completedLeconsCount = $progression ? count($progression->getLeconsTerminees()) : 0;
 
         return $this->render('formation/showClient.html.twig', [
             'formation' => $formation,
-            'inscription' => $inscription
+            'inscription' => $inscription,
+            'progression' => $completedLeconsCount,
+            'total_lecons' => $totalLecons
         ]);
     }
 

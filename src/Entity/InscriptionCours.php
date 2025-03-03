@@ -6,6 +6,7 @@ use App\Repository\InscriptionCoursRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Apprenant;
 
 #[ORM\Entity(repositoryClass: InscriptionCoursRepository::class)]
 class InscriptionCours
@@ -68,6 +69,9 @@ class InscriptionCours
         $this->dateInscreption = new \DateTimeImmutable(); // Date actuelle
         $this->montant = 0; // Par défaut 0
         $this->status = "en attente"; // Par défaut "en attente"
+
+
+
     }
 
     // Getters et Setters
@@ -219,5 +223,9 @@ class InscriptionCours
 
     return $this;
 }
+
+
+
+
 
 }

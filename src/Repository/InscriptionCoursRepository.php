@@ -5,10 +5,8 @@ namespace App\Repository;
 use App\Entity\InscriptionCours;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Apprenant;
 
-/**
- * @extends ServiceEntityRepository<InscriptionCours>
- */
 class InscriptionCoursRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +14,15 @@ class InscriptionCoursRepository extends ServiceEntityRepository
         parent::__construct($registry, InscriptionCours::class);
     }
 
-//    /**
-//     * @return InscriptionCours[] Returns an array of InscriptionCours objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?InscriptionCours
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    // Custom method to find inscription by formation and user (apprenant)
+    public function findByFormationAndUser($formation, $user): ?InscriptionCours
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.formation = :formation')
+            ->andWhere('i.apprenant = :user')
+            ->setParameter('formation', $formation)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

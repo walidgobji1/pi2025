@@ -1,0 +1,3 @@
+lexik_translation:
+    fallback_locale: en # Default fallback language (English)
+    managed_locales: [en, fr] # Languages to manage (English and French for your Avis module)
