@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* bootstrap_5_horizontal_layout.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/c9/c9846e2ed8f6118860f138cc6489f195.php
 class __TwigTemplate_16d3c7d331093b36948e5af3b95ae25e extends Template
-========
-class __TwigTemplate_f79395a39091d9f9995f580ef89b1084 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7f/7ff3642d023bd3e9ed5e1f80dd7d9c61.php
 {
     private Source $source;
     /**
@@ -743,10 +739,6 @@ class __TwigTemplate_f79395a39091d9f9995f580ef89b1084 extends Template
 {% block form_group_class -%}
     col-sm-10
 {%- endblock form_group_class %}
-<<<<<<<< HEAD:var/cache/dev/twig/c9/c9846e2ed8f6118860f138cc6489f195.php
-", "bootstrap_5_horizontal_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_5_horizontal_layout.html.twig");
-========
-", "bootstrap_5_horizontal_layout.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_5_horizontal_layout.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7f/7ff3642d023bd3e9ed5e1f80dd7d9c61.php
+", "bootstrap_5_horizontal_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_5_horizontal_layout.html.twig");
     }
 }

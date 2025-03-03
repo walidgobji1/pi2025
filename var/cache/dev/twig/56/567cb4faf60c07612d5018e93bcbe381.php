@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* baseAdmin.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/56/567cb4faf60c07612d5018e93bcbe381.php
 class __TwigTemplate_0e7960540d4d9735a11a93c458cc0fbe extends Template
-========
-class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/05/05fd94a6a1ce059493bdbb1ca512195c.php
 {
     private Source $source;
     /**
@@ -52,30 +48,30 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "baseAdmin.html.twig"));
 
-        // line 509
+        // line 504
         yield "<!DOCTYPE html>
 <html>
 \t<head>
 \t\t<meta charset=\"UTF-8\">
 \t\t<title>
 \t\t\t";
-        // line 514
+        // line 509
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
-        // line 516
+        // line 511
         yield "\t\t</title>
 \t\t<link
 \t\thref=\"";
-        // line 518
+        // line 513
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/formini.jpeg"), "html", null, true);
         yield "\" rel=\"icon\">
 \t\t<!-- Favicons -->
 \t\t<link href=\"";
-        // line 520
+        // line 515
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/formini.jpeg"), "html", null, true);
         yield "\" rel=\"icon\">
 \t\t<link
 \t\thref=\"";
-        // line 522
+        // line 517
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/formini.jpeg"), "html", null, true);
         yield "\" rel=\"apple-touch-icon\">
 
@@ -86,54 +82,54 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t<!-- Vendor CSS Files -->
 \t\t<link href=\"";
-        // line 530
+        // line 525
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/bootstrap/css/bootstrap.min.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link href=\"";
-        // line 531
+        // line 526
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/bootstrap-icons/bootstrap-icons.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link href=\"";
-        // line 532
+        // line 527
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/boxicons/css/boxicons.min.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link href=\"";
-        // line 533
+        // line 528
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/quill/quill.snow.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link href=\"";
-        // line 534
+        // line 529
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/quill/quill.bubble.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link href=\"";
-        // line 535
+        // line 530
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/remixicon/remixicon.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 \t\t<link
 \t\thref=\"";
-        // line 537
+        // line 532
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/simple-datatables/style.css"), "html", null, true);
         yield "\" rel=\"stylesheet\">
 
 \t\t<!-- Template Main CSS File -->
 \t\t<link href=\"";
-        // line 540
+        // line 535
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/css/style.css"), "html", null, true);
         yield "\" rel=\"stylesheet\"> ";
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         yield from $this->unwrap()->yieldBlock('javascripts', $context, $blocks);
-        // line 541
+        // line 536
         yield "\t\t</head>
 \t\t<body>
 \t\t\t<header id=\"header\" class=\"header fixed-top d-flex align-items-center\">
 
 \t\t\t\t<div class=\"d-flex align-items-center justify-content-between\">
 \t\t\t\t\t<a href=";
-        // line 546
+        // line 541
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_home");
         yield " class=\"logo d-flex align-items-center\">
 \t\t\t\t\t\t<img src=\"";
-        // line 547
+        // line 542
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/formini.jpeg"), "html", null, true);
         yield "\" alt=\"\" style=\"max-height: 60px;\">
 \t\t\t\t\t\t<span class=\"d-none d-lg-block\">FORMINI</span>
@@ -267,7 +263,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t\t\t\t<img src=\"";
-        // line 678
+        // line 673
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-1.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t\t\t\t<div>
@@ -284,7 +280,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t\t\t\t<img src=\"";
-        // line 692
+        // line 687
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-2.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t\t\t\t<div>
@@ -301,7 +297,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t\t\t\t<img src=\"";
-        // line 706
+        // line 701
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-3.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t\t\t\t<div>
@@ -328,13 +324,13 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<li class=\"nav-item dropdown pe-3\">
 \t\t\t\t\t\t\t<a class=\"nav-link nav-profile d-flex align-items-center pe-0\" href=\"#\" data-bs-toggle=\"dropdown\">
 \t\t\t\t\t\t\t\t<img src=\"";
-        // line 730
+        // line 725
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/profile-img.jpg"), "html", null, true);
         yield "\" alt=\"Profile\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t\t<span class=\"d-none d-md-block dropdown-toggle ps-2\">
 \t\t\t\t\t\t\t\t\t";
-        // line 732
-        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 732, $this->source); })()), "user", [], "any", false, false, false, 732)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 732, $this->source); })()), "user", [], "any", false, false, false, 732), "nom", [], "any", false, false, false, 732), "html", null, true)) : ("Utilisateur"));
+        // line 727
+        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 727, $this->source); })()), "user", [], "any", false, false, false, 727)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 727, $this->source); })()), "user", [], "any", false, false, false, 727), "nom", [], "any", false, false, false, 727), "html", null, true)) : ("Utilisateur"));
         yield "
 \t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t</a>
@@ -342,37 +338,37 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t<ul class=\"dropdown-menu dropdown-menu-end dropdown-menu-arrow profile\">
 \t\t\t\t\t\t\t\t";
-        // line 738
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 738, $this->source); })()), "user", [], "any", false, false, false, 738)) {
-            // line 739
+        // line 733
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 733, $this->source); })()), "user", [], "any", false, false, false, 733)) {
+            // line 734
             yield "\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">
 \t\t\t\t\t\t\t\t\t\t<h6>";
-            // line 740
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 740, $this->source); })()), "user", [], "any", false, false, false, 740), "nom", [], "any", false, false, false, 740), "html", null, true);
+            // line 735
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 735, $this->source); })()), "user", [], "any", false, false, false, 735), "nom", [], "any", false, false, false, 735), "html", null, true);
             yield "
 \t\t\t\t\t\t\t\t\t\t\t";
-            // line 741
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 741, $this->source); })()), "user", [], "any", false, false, false, 741), "prenom", [], "any", false, false, false, 741), "html", null, true);
+            // line 736
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 736, $this->source); })()), "user", [], "any", false, false, false, 736), "prenom", [], "any", false, false, false, 736), "html", null, true);
             yield "</h6>
 \t\t\t\t\t\t\t\t\t\t<span>
 \t\t\t\t\t\t\t\t\t\t\t";
-            // line 743
-            if (CoreExtension::inFilter("ROLE_ADMIN", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 743, $this->source); })()), "user", [], "any", false, false, false, 743), "roles", [], "any", false, false, false, 743))) {
-                // line 744
+            // line 738
+            if (CoreExtension::inFilter("ROLE_ADMIN", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 738, $this->source); })()), "user", [], "any", false, false, false, 738), "roles", [], "any", false, false, false, 738))) {
+                // line 739
                 yield "\t\t\t\t\t\t\t\t\t\t\t\tAdministrateur
 \t\t\t\t\t\t\t\t\t\t\t";
-            } elseif (CoreExtension::inFilter("ROLE_INSTRUCTEUR", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,             // line 745
-(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 745, $this->source); })()), "user", [], "any", false, false, false, 745), "roles", [], "any", false, false, false, 745))) {
-                // line 746
+            } elseif (CoreExtension::inFilter("ROLE_INSTRUCTEUR", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,             // line 740
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 740, $this->source); })()), "user", [], "any", false, false, false, 740), "roles", [], "any", false, false, false, 740))) {
+                // line 741
                 yield "\t\t\t\t\t\t\t\t\t\t\t\tInstructeur
 \t\t\t\t\t\t\t\t\t\t\t";
-            } elseif (CoreExtension::inFilter("ROLE_APPRENANT", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,             // line 747
-(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 747, $this->source); })()), "user", [], "any", false, false, false, 747), "roles", [], "any", false, false, false, 747))) {
-                // line 748
+            } elseif (CoreExtension::inFilter("ROLE_APPRENANT", CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source,             // line 742
+(isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 742, $this->source); })()), "user", [], "any", false, false, false, 742), "roles", [], "any", false, false, false, 742))) {
+                // line 743
                 yield "\t\t\t\t\t\t\t\t\t\t\t\tApprenant
 \t\t\t\t\t\t\t\t\t\t\t";
             }
-            // line 750
+            // line 745
             yield "\t\t\t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t\t<li>
@@ -401,7 +397,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item d-flex align-items-center\" href=\"";
-            // line 777
+            // line 772
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             yield "\">
 \t\t\t\t\t\t\t\t\t\t\t<i class=\"bi bi-box-arrow-right\"></i>
@@ -410,7 +406,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t";
         } else {
-            // line 783
+            // line 778
             yield "\t\t\t\t\t\t\t\t\t<li class=\"dropdown-header\">
 \t\t\t\t\t\t\t\t\t\t<h6>Utilisateur invité</h6>
 \t\t\t\t\t\t\t\t\t\t<span>Veuillez vous connecter</span>
@@ -420,7 +416,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t\t\t<a class=\"dropdown-item d-flex align-items-center\" href=\"";
-            // line 791
+            // line 786
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
             yield "\">
 \t\t\t\t\t\t\t\t\t\t\t<i class=\"bi bi-box-arrow-in-right\"></i>
@@ -429,7 +425,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t\t";
         }
-        // line 797
+        // line 792
         yield "\t\t\t\t\t\t\t</ul>
 \t\t\t\t\t\t\t<!-- End Profile Dropdown Items -->
 \t\t\t\t\t\t</li>
@@ -464,7 +460,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<ul id=\"components-nav\" class=\"nav-content collapse \" data-bs-parent=\"#sidebar-nav\">
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 830
+        // line 825
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_new");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -474,7 +470,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 837
+        // line 832
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -494,7 +490,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 854
+        // line 849
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_users_list");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -512,7 +508,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<ul id=\"components-nav\" class=\"nav-content collapse \" data-bs-parent=\"#sidebar-nav\">
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 869
+        // line 864
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evenement_new");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -521,7 +517,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 875
+        // line 870
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evenement_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -540,7 +536,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 891
+        // line 886
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_notification_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -560,7 +556,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<ul id=\"components-nav\" class=\"nav-content collapse \" data-bs-parent=\"#sidebar-nav\">
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 908
+        // line 903
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_new");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -569,7 +565,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t\t</li>
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 914
+        // line 909
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_categorie_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -582,7 +578,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t</li>
 \t\t\t\t\t<li class=\"nav-item\">
 \t\t\t\t\t\t<a class=\"nav-link collapsed\" href=\"";
-        // line 924
+        // line 919
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_formation_list");
         yield "\">
 \t\t\t\t\t\t\t<i class=\"bi bi-bar-chart\"></i>
@@ -600,7 +596,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<ul id=\"tables-nav\" class=\"nav-content collapse show\" data-bs-parent=\"#sidebar-nav\">
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 939
+        // line 934
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_inscription_cours_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -620,7 +616,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t\t<ul id=\"forms-nav\" class=\"nav-content collapse show\" data-bs-parent=\"#sidebar-nav\">
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 956
+        // line 951
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_promotion_create");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -630,7 +626,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
 \t\t\t\t\t\t\t<li>
 \t\t\t\t\t\t\t\t<a href=\"";
-        // line 963
+        // line 958
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_promotion_index");
         yield "\">
 \t\t\t\t\t\t\t\t\t<i class=\"bi bi-circle\"></i>
@@ -677,7 +673,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t<img src=\"";
-        // line 1007
+        // line 1002
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-1.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t<div>
@@ -694,7 +690,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t<img src=\"";
-        // line 1021
+        // line 1016
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-2.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t<div>
@@ -711,7 +707,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t\t<li class=\"message-item\">
 \t\t\t\t\t\t<a href=\"#\">
 \t\t\t\t\t\t\t<img src=\"";
-        // line 1035
+        // line 1030
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/img/messages-3.jpg"), "html", null, true);
         yield "\" alt=\"\" class=\"rounded-circle\">
 \t\t\t\t\t\t\t<div>
@@ -736,9 +732,9 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t<!-- End Messages Nav -->
 
 \t\t\t<main id=\"main\" class=\"main\"> ";
-        // line 1057
+        // line 1052
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 1058
+        // line 1053
         yield "\t\t\t\t</main>
 
 \t\t\t\t<footer id=\"footer\" class=\"footer\">
@@ -757,41 +753,41 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t<!-- End Footer -->
 \t\t\t\t<!-- Vendor JS Files -->
 \t\t\t\t<script src=\"";
-        // line 1075
+        // line 1070
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/apexcharts/apexcharts.min.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1076
+        // line 1071
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/bootstrap/js/bootstrap.bundle.min.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1077
+        // line 1072
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/chart.js/chart.umd.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1078
+        // line 1073
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/echarts/echarts.min.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1079
+        // line 1074
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/quill/quill.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1080
+        // line 1075
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/simple-datatables/simple-datatables.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1081
+        // line 1076
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/tinymce/tinymce.min.js"), "html", null, true);
         yield "\"></script>
 \t\t\t\t<script src=\"";
-        // line 1082
+        // line 1077
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/vendor/php-email-form/validate.js"), "html", null, true);
         yield "\"></script>
 
 \t\t\t\t<!-- Template Main JS File -->
 \t\t\t\t<script src=\"";
-        // line 1085
+        // line 1080
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("backOffice/js/main.js"), "html", null, true);
         yield "\"></script>
 \t\t\t</body>
@@ -805,7 +801,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
         yield from [];
     }
 
-    // line 514
+    // line 509
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -829,7 +825,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
         yield from [];
     }
 
-    // line 540
+    // line 535
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -872,7 +868,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
         yield from [];
     }
 
-    // line 1057
+    // line 1052
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -915,7 +911,7 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  872 => 1057,  829 => 540,  805 => 514,  791 => 1085,  785 => 1082,  781 => 1081,  777 => 1080,  773 => 1079,  769 => 1078,  765 => 1077,  761 => 1076,  757 => 1075,  738 => 1058,  736 => 1057,  711 => 1035,  694 => 1021,  677 => 1007,  630 => 963,  620 => 956,  600 => 939,  582 => 924,  569 => 914,  560 => 908,  540 => 891,  521 => 875,  512 => 869,  494 => 854,  474 => 837,  464 => 830,  429 => 797,  420 => 791,  410 => 783,  401 => 777,  372 => 750,  368 => 748,  366 => 747,  363 => 746,  361 => 745,  358 => 744,  356 => 743,  351 => 741,  347 => 740,  344 => 739,  342 => 738,  333 => 732,  328 => 730,  301 => 706,  284 => 692,  267 => 678,  133 => 547,  129 => 546,  122 => 541,  117 => 540,  111 => 537,  106 => 535,  102 => 534,  98 => 533,  94 => 532,  90 => 531,  86 => 530,  75 => 522,  70 => 520,  65 => 518,  61 => 516,  59 => 514,  52 => 509,);
+        return array (  872 => 1052,  829 => 535,  805 => 509,  791 => 1080,  785 => 1077,  781 => 1076,  777 => 1075,  773 => 1074,  769 => 1073,  765 => 1072,  761 => 1071,  757 => 1070,  738 => 1053,  736 => 1052,  711 => 1030,  694 => 1016,  677 => 1002,  630 => 958,  620 => 951,  600 => 934,  582 => 919,  569 => 909,  560 => 903,  540 => 886,  521 => 870,  512 => 864,  494 => 849,  474 => 832,  464 => 825,  429 => 792,  420 => 786,  410 => 778,  401 => 772,  372 => 745,  368 => 743,  366 => 742,  363 => 741,  361 => 740,  358 => 739,  356 => 738,  351 => 736,  347 => 735,  344 => 734,  342 => 733,  333 => 727,  328 => 725,  301 => 701,  284 => 687,  267 => 673,  133 => 542,  129 => 541,  122 => 536,  117 => 535,  111 => 532,  106 => 530,  102 => 529,  98 => 528,  94 => 527,  90 => 526,  86 => 525,  75 => 517,  70 => 515,  65 => 513,  61 => 511,  59 => 509,  52 => 504,);
     }
 
     public function getSourceContext(): Source
@@ -1314,11 +1310,6 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 
      <!-- End Profile Page Nav -->
 
-      
-
-      
-
-      
       
 
      <!-- End Blank Page Nav -->
@@ -2006,10 +1997,6 @@ class __TwigTemplate_8c8905fa931083fb52a5cd16f6563c51 extends Template
 \t\t\t\t<!-- Template Main JS File -->
 \t\t\t\t<script src=\"{{asset('backOffice/js/main.js')}}\"></script>
 \t\t\t</body>
-<<<<<<<< HEAD:var/cache/dev/twig/56/567cb4faf60c07612d5018e93bcbe381.php
-\t\t</html>", "baseAdmin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\baseAdmin.html.twig");
-========
-\t\t</html>", "baseAdmin.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\baseAdmin.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/05/05fd94a6a1ce059493bdbb1ca512195c.php
+\t\t</html>", "baseAdmin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\baseAdmin.html.twig");
     }
 }

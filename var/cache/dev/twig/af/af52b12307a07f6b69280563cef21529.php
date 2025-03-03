@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* payment/success.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/af/af52b12307a07f6b69280563cef21529.php
 class __TwigTemplate_cf109986e01e03b323d5461e73f30c72 extends Template
-========
-class __TwigTemplate_0fe3b41fb45d97682649c3aff4552704 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fe/fe7b3ce4d085faf79766c71271ed9672.php
 {
     private Source $source;
     /**
@@ -405,10 +401,6 @@ class __TwigTemplate_0fe3b41fb45d97682649c3aff4552704 extends Template
         </div>
     </div>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/af/af52b12307a07f6b69280563cef21529.php
-", "payment/success.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\payment\\success.html.twig");
-========
-", "payment/success.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\payment\\success.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/fe/fe7b3ce4d085faf79766c71271ed9672.php
+", "payment/success.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\payment\\success.html.twig");
     }
 }

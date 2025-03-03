@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* lecon/_form.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/eb/ebbee64654bf679109c22c2488524919.php
 class __TwigTemplate_640f5c19f19d593c5545316d18055ca9 extends Template
-========
-class __TwigTemplate_ada1ff2b7e1b8c26776784eb23ef9bfa extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/17/17707be2b6903f81433e98d54857dd84.php
 {
     private Source $source;
     /**
@@ -503,10 +499,6 @@ class __TwigTemplate_ada1ff2b7e1b8c26776784eb23ef9bfa extends Template
 }
 
 </style>
-<<<<<<<< HEAD:var/cache/dev/twig/eb/ebbee64654bf679109c22c2488524919.php
-{% endblock %}", "lecon/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\_form.html.twig");
-========
-{% endblock %}", "lecon/_form.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\lecon\\_form.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/17/17707be2b6903f81433e98d54857dd84.php
+{% endblock %}", "lecon/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\lecon\\_form.html.twig");
     }
 }

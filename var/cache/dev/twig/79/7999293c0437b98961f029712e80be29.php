@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* categorie/edit.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/79/7999293c0437b98961f029712e80be29.php
 class __TwigTemplate_d0e8197842da075f5087a16035f8eec7 extends Template
-========
-class __TwigTemplate_1d59dee0dabf9cf16453021ff3642961 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/0b/0ba156c5393904c1175493bae6a361c3.php
 {
     private Source $source;
     /**
@@ -163,10 +159,6 @@ class __TwigTemplate_1d59dee0dabf9cf16453021ff3642961 extends Template
 
     {{ include('categorie/_delete_form.html.twig') }}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/79/7999293c0437b98961f029712e80be29.php
-", "categorie/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\edit.html.twig");
-========
-", "categorie/edit.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\categorie\\edit.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/0b/0ba156c5393904c1175493bae6a361c3.php
+", "categorie/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\categorie\\edit.html.twig");
     }
 }

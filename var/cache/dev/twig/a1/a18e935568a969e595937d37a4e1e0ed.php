@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* categorie/index2.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/a1/a18e935568a969e595937d37a4e1e0ed.php
 class __TwigTemplate_393813731022139bf93f41ee396a8090 extends Template
-========
-class __TwigTemplate_b6c3da0317634a921b9469ad23a1593b extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/18/18e0df2efc967b44374ddcfbb1b1b5ff.php
 {
     private Source $source;
     /**
@@ -75,10 +71,6 @@ class __TwigTemplate_b6c3da0317634a921b9469ad23a1593b extends Template
 
     public function getSourceContext(): Source
     {
-<<<<<<<< HEAD:var/cache/dev/twig/a1/a18e935568a969e595937d37a4e1e0ed.php
-        return new Source("", "categorie/index2.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\categorie\\index2.html.twig");
-========
-        return new Source("", "categorie/index2.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\categorie\\index2.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/18/18e0df2efc967b44374ddcfbb1b1b5ff.php
+        return new Source("", "categorie/index2.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\categorie\\index2.html.twig");
     }
 }

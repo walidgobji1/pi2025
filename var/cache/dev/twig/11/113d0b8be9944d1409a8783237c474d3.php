@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* admin/AvisEtScore.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/11/113d0b8be9944d1409a8783237c474d3.php
 class __TwigTemplate_ec035a619c964d40daa5b7015f8fcc18 extends Template
-========
-class __TwigTemplate_ba5433b8293f2495007d7a2da9e346b2 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/f1/f12b47024136c81e212cec0d0c05ab77.php
 {
     private Source $source;
     /**
@@ -403,10 +399,6 @@ class __TwigTemplate_ba5433b8293f2495007d7a2da9e346b2 extends Template
         
     </style>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/11/113d0b8be9944d1409a8783237c474d3.php
-", "admin/AvisEtScore.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\AvisEtScore.html.twig");
-========
-", "admin/AvisEtScore.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\admin\\AvisEtScore.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/f1/f12b47024136c81e212cec0d0c05ab77.php
+", "admin/AvisEtScore.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\admin\\AvisEtScore.html.twig");
     }
 }

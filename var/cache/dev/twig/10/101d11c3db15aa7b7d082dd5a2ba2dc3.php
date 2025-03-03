@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* evenement/new.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/10/101d11c3db15aa7b7d082dd5a2ba2dc3.php
 class __TwigTemplate_910df02457be6645cd41f139454003c1 extends Template
-========
-class __TwigTemplate_78242a5ef42a8c393b520369b48f2162 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/99/9960b3b6d3b7f19e0efda0cd61ee1bbd.php
 {
     private Source $source;
     /**
@@ -156,10 +152,6 @@ class __TwigTemplate_78242a5ef42a8c393b520369b48f2162 extends Template
 
   
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/10/101d11c3db15aa7b7d082dd5a2ba2dc3.php
-", "evenement/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\evenement\\new.html.twig");
-========
-", "evenement/new.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\evenement\\new.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/99/9960b3b6d3b7f19e0efda0cd61ee1bbd.php
+", "evenement/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\evenement\\new.html.twig");
     }
 }

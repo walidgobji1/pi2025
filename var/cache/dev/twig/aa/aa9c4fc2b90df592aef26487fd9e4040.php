@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* notification/edit.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/aa/aa9c4fc2b90df592aef26487fd9e4040.php
 class __TwigTemplate_b6d2622fe7982a5f44c4b128373015e0 extends Template
-========
-class __TwigTemplate_8371ed3c157ecfab52aaf8970b296fc8 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/e6/e682507a658d91a030db811433d93ba4.php
 {
     private Source $source;
     /**
@@ -181,10 +177,6 @@ class __TwigTemplate_8371ed3c157ecfab52aaf8970b296fc8 extends Template
         }
     </style>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/aa/aa9c4fc2b90df592aef26487fd9e4040.php
-", "notification/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\notification\\edit.html.twig");
-========
-", "notification/edit.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\notification\\edit.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/e6/e682507a658d91a030db811433d93ba4.php
+", "notification/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\notification\\edit.html.twig");
     }
 }

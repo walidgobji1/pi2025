@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* admin/users_list.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/44/44d9bf4d869f550459f2e602b28387c3.php
 class __TwigTemplate_54083e5816977b66125a8b1490712369 extends Template
-========
-class __TwigTemplate_452503790e9ed833b1e95972fd8f44c8 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/32/b68a67ac7dee4d24bb29657eeda8dcd3.php
 {
     private Source $source;
     /**
@@ -269,10 +265,6 @@ $context["user"], "roles", [], "any", false, false, false, 29))) {
 \t</table>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/44/44d9bf4d869f550459f2e602b28387c3.php
-", "admin/users_list.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\admin\\users_list.html.twig");
-========
-", "admin/users_list.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\admin\\users_list.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/32/b68a67ac7dee4d24bb29657eeda8dcd3.php
+", "admin/users_list.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\admin\\users_list.html.twig");
     }
 }

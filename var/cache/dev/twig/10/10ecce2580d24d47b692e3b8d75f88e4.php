@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* avis/_form.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/10/10ecce2580d24d47b692e3b8d75f88e4.php
 class __TwigTemplate_f1ed265709688f6aff6a60b766c033dc extends Template
-========
-class __TwigTemplate_f9cc9a07a96f1f5f7a42dec8c0fcca67 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/89/89d8aa2c35521f00a7872d2e0a175d8c.php
 {
     private Source $source;
     /**
@@ -103,10 +99,6 @@ class __TwigTemplate_f9cc9a07a96f1f5f7a42dec8c0fcca67 extends Template
     {{ form_widget(form) }}
     <button class=\"btn\">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
-<<<<<<<< HEAD:var/cache/dev/twig/10/10ecce2580d24d47b692e3b8d75f88e4.php
-", "avis/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\avis\\_form.html.twig");
-========
-", "avis/_form.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\avis\\_form.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/89/89d8aa2c35521f00a7872d2e0a175d8c.php
+", "avis/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\avis\\_form.html.twig");
     }
 }

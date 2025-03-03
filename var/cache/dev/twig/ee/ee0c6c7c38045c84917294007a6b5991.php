@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @VichUploader/Form/fields.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/ee/ee0c6c7c38045c84917294007a6b5991.php
 class __TwigTemplate_ec5bf7853e77e670e6aaca3c36f1c226 extends Template
-========
-class __TwigTemplate_60f2c3fa900eeea6c3c2c43df3cffaad extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5331f6c86d452d2966b9b116a096ddc4.php
 {
     private Source $source;
     /**
@@ -301,10 +297,6 @@ class __TwigTemplate_60f2c3fa900eeea6c3c2c43df3cffaad extends Template
         {%- endif -%}
     </div>
 {%- endblock -%}
-<<<<<<<< HEAD:var/cache/dev/twig/ee/ee0c6c7c38045c84917294007a6b5991.php
-", "@VichUploader/Form/fields.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Form\\fields.html.twig");
-========
-", "@VichUploader/Form/fields.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Form\\fields.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5331f6c86d452d2966b9b116a096ddc4.php
+", "@VichUploader/Form/fields.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Form\\fields.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Profiler/cancel.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/89/895435667c20897c1d867a27dda68355.php
 class __TwigTemplate_51ae57399ccf3573994842c71ca07fba extends Template
-========
-class __TwigTemplate_b16062dc527711d19f8ee93b12ea4b45 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7e/7eb7e6ce66969f12cd7c658d0ae981b7.php
 {
     private Source $source;
     /**
@@ -171,10 +167,6 @@ class __TwigTemplate_b16062dc527711d19f8ee93b12ea4b45 extends Template
 
     {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: profiler_url }) }}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/89/895435667c20897c1d867a27dda68355.php
-", "@WebProfiler/Profiler/cancel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\cancel.html.twig");
-========
-", "@WebProfiler/Profiler/cancel.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\cancel.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/7e/7eb7e6ce66969f12cd7c658d0ae981b7.php
+", "@WebProfiler/Profiler/cancel.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\cancel.html.twig");
     }
 }

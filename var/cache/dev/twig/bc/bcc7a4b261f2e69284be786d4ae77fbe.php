@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* inscription_cours/edit.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/bc/bcc7a4b261f2e69284be786d4ae77fbe.php
 class __TwigTemplate_5068ed0e72bfff686ace7efaa4f22d30 extends Template
-========
-class __TwigTemplate_c43502bb24430247efcd887667a51dcc extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/95/95b82bbd087abe9f30c6365e0a29a002.php
 {
     private Source $source;
     /**
@@ -199,10 +195,6 @@ class __TwigTemplate_c43502bb24430247efcd887667a51dcc extends Template
     <a href=\"{{ path('app_inscription_cours_index') }}\">Retour à la liste des inscriptions</a>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/bc/bcc7a4b261f2e69284be786d4ae77fbe.php
-", "inscription_cours/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\edit.html.twig");
-========
-", "inscription_cours/edit.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\inscription_cours\\edit.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/95/95b82bbd087abe9f30c6365e0a29a002.php
+", "inscription_cours/edit.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\inscription_cours\\edit.html.twig");
     }
 }

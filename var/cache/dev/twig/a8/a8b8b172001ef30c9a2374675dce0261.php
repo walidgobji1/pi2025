@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @email/default/notification/body.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/a8/a8b8b172001ef30c9a2374675dce0261.php
 class __TwigTemplate_f2d10581ede2f4c4713ed49883a5614c extends Template
-========
-class __TwigTemplate_9541e051497cc02195104d3374bff2f8 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/22/2250f7cf7a80e81ae9bf23cfd074e303.php
 {
     private Source $source;
     /**
@@ -89,10 +85,6 @@ class __TwigTemplate_9541e051497cc02195104d3374bff2f8 extends Template
     public function getSourceContext(): Source
     {
         return new Source("{% extends \"@email/zurb_2/notification/body.html.twig\" %}
-<<<<<<<< HEAD:var/cache/dev/twig/a8/a8b8b172001ef30c9a2374675dce0261.php
-", "@email/default/notification/body.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\default\\notification\\body.html.twig");
-========
-", "@email/default/notification/body.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\default\\notification\\body.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/22/2250f7cf7a80e81ae9bf23cfd074e303.php
+", "@email/default/notification/body.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\default\\notification\\body.html.twig");
     }
 }

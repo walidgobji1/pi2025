@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/mailer.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/0d/0dda03d7d703afb1e386783fa8b04430.php
 class __TwigTemplate_d48670549f4dbd09b886042f9361ed72 extends Template
-========
-class __TwigTemplate_4418ac4869f654436b540cc91b39f47c extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/30/30801643f8ea8d0e174dda8f4b4cfb3f.php
 {
     private Source $source;
     /**
@@ -1735,10 +1731,6 @@ $context["event"], "message", [], "any", false, false, false, 293), "headers", [
         {%- endif -%}
     {% endmacro %}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/0d/0dda03d7d703afb1e386783fa8b04430.php
-", "@WebProfiler/Collector/mailer.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\mailer.html.twig");
-========
-", "@WebProfiler/Collector/mailer.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\mailer.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/30/30801643f8ea8d0e174dda8f4b4cfb3f.php
+", "@WebProfiler/Collector/mailer.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\mailer.html.twig");
     }
 }

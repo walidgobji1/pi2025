@@ -111,6 +111,6 @@ class __TwigTemplate_491a3c0cc436ee73cea1383d61f8e203 extends Template
         <link rel=\"next\" href=\"{{ path(route, knp_pagination_query(query, next)) }}\" />
     {% endif %}
 {% endif %}
-", "@KnpPaginator/Pagination/rel_links.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\rel_links.html.twig");
+", "@KnpPaginator/Pagination/rel_links.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\knplabs\\knp-paginator-bundle\\templates\\Pagination\\rel_links.html.twig");
     }
 }

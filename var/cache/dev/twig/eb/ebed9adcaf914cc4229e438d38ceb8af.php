@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* formation/index.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/eb/ebed9adcaf914cc4229e438d38ceb8af.php
 class __TwigTemplate_3ab45d22b04777f84d0d8da93789f383 extends Template
-========
-class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/93/93d8da874283e2f7baacf03597089311.php
 {
     private Source $source;
     /**
@@ -107,78 +103,87 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
         <form method=\"get\" action=\"";
         // line 9
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_index");
-        yield "\" class=\"input-group\" style=\"width: 40%;\">
-            <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"";
-        // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 10, $this->source); })()), "request", [], "any", false, false, false, 10), "query", [], "any", false, false, false, 10), "get", ["search"], "method", false, false, false, 10), "html", null, true);
-        yield "\" oninput=\"this.form.submit()\">
-            <span class=\"input-group-append\">
-            </span>
+        yield "\" class=\"input-group mb-4\" style=\"max-width: 40%;\">
+            <input 
+                class=\"form-control border-end-0 border rounded-pill py-2\" 
+                type=\"search\" 
+                name=\"search\" 
+                id=\"example-search-input\" 
+                placeholder=\"Rechercher une formation...\" 
+                value=\"";
+        // line 16
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "request", [], "any", false, false, false, 16), "query", [], "any", false, false, false, 16), "get", ["search"], "method", false, false, false, 16), "html", null, true);
+        yield "\"
+                style=\"font-size: 0.875rem;\"
+            >
+            <button class=\"btn btn-outline-secondary rounded-pill\" type=\"submit\">
+                <i class=\"fas fa-search\"></i>
+            </button>
         </form>
 
         <div class=\"row\">
             ";
-        // line 16
+        // line 25
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 16, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 25, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["formation"]) {
-            // line 17
+            // line 26
             yield "                <div class=\"col-md-4 mb-4\">
                     <div class=\"card\">
-                        <div class=\"card-header\">
+                        <div class=\"card-header text-center\">
                             <h5 class=\"card-title\">";
-            // line 20
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "titre", [], "any", false, false, false, 20), "html", null, true);
+            // line 29
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "titre", [], "any", false, false, false, 29), "html", null, true);
             yield "</h5>
                         </div>
                         <div class=\"text-center\">
                             <img src=\"";
-            // line 23
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "imageName", [], "any", false, false, false, 23))), "html", null, true);
-            yield "\" class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
+            // line 32
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "imageName", [], "any", false, false, false, 32))), "html", null, true);
+            yield "\" class=\"img-fluid mb-3\" style=\"height: 150px; width: 70%;\" alt=\"Image de la formation\">
                         </div>
 
                         <div class=\"card-body\">
                             <p class=\"card-text\">";
-            // line 27
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 27), "html", null, true);
-            yield "</p>
+            // line 36
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(Twig\Extension\CoreExtension::slice($this->env->getCharset(), CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "description", [], "any", false, false, false, 36), 0, 100), "html", null, true);
+            yield "...</p>
                             <ul class=\"list-unstyled\">
                                 <li><strong>Durée:</strong> ";
-            // line 29
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "duree", [], "any", false, false, false, 29), "html", null, true);
-            yield "</li>
+            // line 38
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "duree", [], "any", false, false, false, 38), "html", null, true);
+            yield " heures</li>
                                 <li><strong>Niveau:</strong> ";
-            // line 30
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "niveau", [], "any", false, false, false, 30), "html", null, true);
+            // line 39
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "niveau", [], "any", false, false, false, 39), "html", null, true);
             yield "</li>
                                 <li><strong>Date de création:</strong> ";
-            // line 31
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "dateCreation", [], "any", false, false, false, 31)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "dateCreation", [], "any", false, false, false, 31), "Y-m-d"), "html", null, true)) : (""));
+            // line 40
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "dateCreation", [], "any", false, false, false, 40)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "dateCreation", [], "any", false, false, false, 40), "Y-m-d"), "html", null, true)) : ("N/A"));
             yield "</li>
                                 <li><strong>Prix:</strong> ";
-            // line 32
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "prix", [], "any", false, false, false, 32), "html", null, true);
+            // line 41
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "prix", [], "any", false, false, false, 41), "html", null, true);
             yield " DT</li>
                                 <li><strong>Catégorie:</strong> ";
-            // line 33
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "categorie", [], "any", false, false, false, 33)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "categorie", [], "any", false, false, false, 33), "nom", [], "any", false, false, false, 33), "html", null, true)) : (""));
+            // line 42
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "categorie", [], "any", false, false, false, 42)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "categorie", [], "any", false, false, false, 42), "nom", [], "any", false, false, false, 42), "html", null, true)) : ("Non spécifiée"));
             yield "</li>
                             </ul>
                         </div>
                         <div class=\"card-footer text-center\">
                             <a href=\"";
-            // line 37
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show_admin", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 37)]), "html", null, true);
+            // line 46
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_show_admin", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 46)]), "html", null, true);
             yield "\" class=\"btn btn-info btn-sm\">Afficher</a>
                             <a href=\"";
-            // line 38
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 38)]), "html", null, true);
+            // line 47
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_formation_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 47)]), "html", null, true);
             yield "\" class=\"btn btn-warning btn-sm\">Modifier</a>
                             <a href=\"";
-            // line 39
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_lecon_new", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 39)]), "html", null, true);
+            // line 48
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_lecon_new", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["formation"], "id", [], "any", false, false, false, 48)]), "html", null, true);
             yield "\" class=\"btn btn-secondary btn-sm\">Ajouter leçon</a>
                         </div>
                     </div>
@@ -186,11 +191,11 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
             ";
             $context['_iterated'] = true;
         }
-        // line 43
+        // line 52
         if (!$context['_iterated']) {
-            // line 44
+            // line 53
             yield "                <div class=\"col-12\">
-                    <div class=\"alert alert-warning\" role=\"alert\">
+                    <div class=\"alert alert-warning text-center\" role=\"alert\">
                         Aucun enregistrement trouvé.
                     </div>
                 </div>
@@ -199,46 +204,27 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['formation'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 50
+        // line 59
         yield "        </div>
 
-        <!-- Pagination should be OUTSIDE the loop -->
-        <nav aria-label=\"Page navigation example\">
-            <ul class=\"pagination justify-content-center\">
-                ";
-        // line 55
-        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 55, $this->source); })()));
+        <!-- Pagination -->
+        <div class=\"d-flex justify-content-center mt-4\">
+            ";
+        // line 63
+        yield $this->env->getRuntime('Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationRuntime')->render($this->env, (isset($context["formations"]) || array_key_exists("formations", $context) ? $context["formations"] : (function () { throw new RuntimeError('Variable "formations" does not exist.', 63, $this->source); })()));
         yield "
-            </ul>
-        </nav>
-
+        </div>
     </div>
- <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); 
 
-       
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); 
-            var description = \$(this).find('.detail-box p').text().toLowerCase();
-
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); 
-            } else {
-                \$(this).hide();
-            }
+    <script>
+        document.addEventListener(\"DOMContentLoaded\", function () {
+            let searchInput = document.getElementById(\"example-search-input\");
+            searchInput.addEventListener(\"input\", function (event) {
+                event.preventDefault();
+                this.form.submit();
+            });
         });
-
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
+    </script>
 
 ";
         
@@ -271,11 +257,7 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
      */
     public function getDebugInfo(): array
     {
-<<<<<<<< HEAD:var/cache/dev/twig/eb/ebed9adcaf914cc4229e438d38ceb8af.php
-        return array (  206 => 55,  199 => 50,  188 => 44,  186 => 43,  177 => 39,  173 => 38,  169 => 37,  162 => 33,  158 => 32,  154 => 31,  150 => 30,  146 => 29,  141 => 27,  134 => 23,  128 => 20,  123 => 17,  118 => 16,  109 => 10,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
-========
-        return array (  199 => 50,  188 => 44,  186 => 43,  177 => 39,  173 => 38,  169 => 37,  162 => 33,  158 => 32,  154 => 31,  150 => 30,  146 => 29,  141 => 27,  134 => 23,  128 => 20,  123 => 17,  118 => 16,  108 => 9,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/93/93d8da874283e2f7baacf03597089311.php
+        return array (  214 => 63,  208 => 59,  197 => 53,  195 => 52,  186 => 48,  182 => 47,  178 => 46,  171 => 42,  167 => 41,  163 => 40,  159 => 39,  155 => 38,  150 => 36,  143 => 32,  137 => 29,  132 => 26,  127 => 25,  115 => 16,  105 => 9,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -288,31 +270,40 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
 
     <div class=\"container mt-5\">
         <!-- Dynamic Search Form -->
-        <form method=\"get\" action=\"{{ path('app_formation_index') }}\" class=\"input-group\" style=\"width: 40%;\">
-            <input class=\"form-control border-end-0 border rounded-pill py-2\" type=\"search\" name=\"search\" id=\"example-search-input\" style=\"font-size: 0.875rem;\" placeholder=\"Search...\" value=\"{{ app.request.query.get('search') }}\" oninput=\"this.form.submit()\">
-            <span class=\"input-group-append\">
-            </span>
+        <form method=\"get\" action=\"{{ path('app_formation_index') }}\" class=\"input-group mb-4\" style=\"max-width: 40%;\">
+            <input 
+                class=\"form-control border-end-0 border rounded-pill py-2\" 
+                type=\"search\" 
+                name=\"search\" 
+                id=\"example-search-input\" 
+                placeholder=\"Rechercher une formation...\" 
+                value=\"{{ app.request.query.get('search') }}\"
+                style=\"font-size: 0.875rem;\"
+            >
+            <button class=\"btn btn-outline-secondary rounded-pill\" type=\"submit\">
+                <i class=\"fas fa-search\"></i>
+            </button>
         </form>
 
         <div class=\"row\">
             {% for formation in formations %}
                 <div class=\"col-md-4 mb-4\">
                     <div class=\"card\">
-                        <div class=\"card-header\">
+                        <div class=\"card-header text-center\">
                             <h5 class=\"card-title\">{{ formation.titre }}</h5>
                         </div>
                         <div class=\"text-center\">
-                            <img src=\"{{ asset('uploads/images/' ~ formation.imageName) }}\" class=\"img-fluid mb-3\" style=\"height: 150px;width: 70%;\" />
+                            <img src=\"{{ asset('uploads/images/' ~ formation.imageName) }}\" class=\"img-fluid mb-3\" style=\"height: 150px; width: 70%;\" alt=\"Image de la formation\">
                         </div>
 
                         <div class=\"card-body\">
-                            <p class=\"card-text\">{{ formation.description }}</p>
+                            <p class=\"card-text\">{{ formation.description|slice(0, 100) }}...</p>
                             <ul class=\"list-unstyled\">
-                                <li><strong>Durée:</strong> {{ formation.duree }}</li>
+                                <li><strong>Durée:</strong> {{ formation.duree }} heures</li>
                                 <li><strong>Niveau:</strong> {{ formation.niveau }}</li>
-                                <li><strong>Date de création:</strong> {{ formation.dateCreation ? formation.dateCreation|date('Y-m-d') : '' }}</li>
+                                <li><strong>Date de création:</strong> {{ formation.dateCreation ? formation.dateCreation|date('Y-m-d') : 'N/A' }}</li>
                                 <li><strong>Prix:</strong> {{ formation.prix }} DT</li>
-                                <li><strong>Catégorie:</strong> {{ formation.categorie ? formation.categorie.nom }}</li>
+                                <li><strong>Catégorie:</strong> {{ formation.categorie ? formation.categorie.nom : 'Non spécifiée' }}</li>
                             </ul>
                         </div>
                         <div class=\"card-footer text-center\">
@@ -324,53 +315,30 @@ class __TwigTemplate_ea092a5ae4864e118d04b75d88824512 extends Template
                 </div>
             {% else %}
                 <div class=\"col-12\">
-                    <div class=\"alert alert-warning\" role=\"alert\">
+                    <div class=\"alert alert-warning text-center\" role=\"alert\">
                         Aucun enregistrement trouvé.
                     </div>
                 </div>
             {% endfor %}
         </div>
 
-        <!-- Pagination should be OUTSIDE the loop -->
-        <nav aria-label=\"Page navigation example\">
-            <ul class=\"pagination justify-content-center\">
-                {{ knp_pagination_render(formations) }}
-            </ul>
-        </nav>
-
+        <!-- Pagination -->
+        <div class=\"d-flex justify-content-center mt-4\">
+            {{ knp_pagination_render(formations) }}
+        </div>
     </div>
- <script>
-\$(document).ready(function () {
-    \$('#searchButton').click(function () {
-        var searchQuery = \$('#example-search-input').val().toLowerCase(); 
 
-       
-        \$('.course_owl-carousel .item').each(function () {
-            var titre = \$(this).find('.detail-box h4').text().toLowerCase(); 
-            var description = \$(this).find('.detail-box p').text().toLowerCase();
-
-            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
-                \$(this).show(); 
-            } else {
-                \$(this).hide();
-            }
+    <script>
+        document.addEventListener(\"DOMContentLoaded\", function () {
+            let searchInput = document.getElementById(\"example-search-input\");
+            searchInput.addEventListener(\"input\", function (event) {
+                event.preventDefault();
+                this.form.submit();
+            });
         });
-
-        if (\$('.course_owl-carousel .item:visible').length === 0) {
-            \$('.course_owl-carousel').hide();
-        } else {
-            \$('.course_owl-carousel').show();
-        }
-    });
-});
-
-        </script>
+    </script>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/eb/ebed9adcaf914cc4229e438d38ceb8af.php
-", "formation/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\formation\\index.html.twig");
-========
-", "formation/index.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\formation\\index.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/93/93d8da874283e2f7baacf03597089311.php
+", "formation/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\formation\\index.html.twig");
     }
 }

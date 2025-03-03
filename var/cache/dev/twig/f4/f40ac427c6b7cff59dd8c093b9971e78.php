@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @VichUploader/Collector/mapping_collector.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f4/f40ac427c6b7cff59dd8c093b9971e78.php
 class __TwigTemplate_d0c6339fdb490e5035ed0f8f157dd98a extends Template
-========
-class __TwigTemplate_2128f9fa485fd02edcbd4091ccece43c extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/09/09d7adaf505e3803b05d9e1202665f1d.php
 {
     private Source $source;
     /**
@@ -347,10 +343,6 @@ class __TwigTemplate_2128f9fa485fd02edcbd4091ccece43c extends Template
         </tbody>
     </table>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/f4/f40ac427c6b7cff59dd8c093b9971e78.php
-", "@VichUploader/Collector/mapping_collector.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Collector\\mapping_collector.html.twig");
-========
-", "@VichUploader/Collector/mapping_collector.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Collector\\mapping_collector.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/09/09d7adaf505e3803b05d9e1202665f1d.php
+", "@VichUploader/Collector/mapping_collector.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Collector\\mapping_collector.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* promotion/create.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/06/06274d6a8ba7c3c20bea74cb59009f20.php
 class __TwigTemplate_a5067f0db54fda4defc220c627cfaf97 extends Template
-========
-class __TwigTemplate_ab1894d9c487b37cf0e5327a18399991 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/8d/909f646c9eef2eb09402d52172a0a4db.php
 {
     private Source $source;
     /**
@@ -592,10 +588,6 @@ class __TwigTemplate_ab1894d9c487b37cf0e5327a18399991 extends Template
    </div>
 
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/06/06274d6a8ba7c3c20bea74cb59009f20.php
-", "promotion/create.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\promotion\\create.html.twig");
-========
-", "promotion/create.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\promotion\\create.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/8d/909f646c9eef2eb09402d52172a0a4db.php
+", "promotion/create.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\promotion\\create.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* formation_score/index.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/7f/7f0d6cb334dc359083cd9009466658f0.php
 class __TwigTemplate_0313008d3b68de1e853c28cd3a7c9166 extends Template
-========
-class __TwigTemplate_48a3d6db2c2b7b57262f5eb67f0a79d3 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/aa/f0afe31bfa14c09598b867080297403c.php
 {
     private Source $source;
     /**
@@ -174,10 +170,6 @@ class __TwigTemplate_48a3d6db2c2b7b57262f5eb67f0a79d3 extends Template
     </ul>
 </div>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/7f/7f0d6cb334dc359083cd9009466658f0.php
-", "formation_score/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\formation_score\\index.html.twig");
-========
-", "formation_score/index.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\formation_score\\index.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/aa/f0afe31bfa14c09598b867080297403c.php
+", "formation_score/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\formation_score\\index.html.twig");
     }
 }

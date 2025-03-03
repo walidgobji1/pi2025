@@ -3,11 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-        'reference' => '1a3fca0bff20eb199f82a278d1594556589c069e',
-=======
-        'reference' => '91ed8fee82fd9d735e6e3789b6f1086b9e57ad50',
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+        'reference' => '97a783b1b970209b9c112ce2f5dc619c3b3f2262',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -17,11 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-            'reference' => '1a3fca0bff20eb199f82a278d1594556589c069e',
-=======
-            'reference' => '91ed8fee82fd9d735e6e3789b6f1086b9e57ad50',
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
+            'reference' => '97a783b1b970209b9c112ce2f5dc619c3b3f2262',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -216,7 +208,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-<<<<<<< HEAD
         'knplabs/knp-components' => array(
             'pretty_version' => 'v5.1.0',
             'version' => '5.1.0.0',
@@ -232,7 +223,9 @@
             'reference' => '1a00f88149d25418bd99d8954eba951f04cc3acf',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../knplabs/knp-paginator-bundle',
-=======
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'lcobucci/clock' => array(
             'pretty_version' => '2.3.0',
             'version' => '2.3.0.0',
@@ -248,7 +241,6 @@
             'reference' => '55564265fddf810504110bd68ca311932324b0e9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../lcobucci/jwt',
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -1006,8 +998,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-<<<<<<< HEAD
-=======
         'symfony/mercure-bundle' => array(
             'pretty_version' => 'v0.3.9',
             'version' => '0.3.9.0',
@@ -1017,7 +1007,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
         'symfony/messenger' => array(
             'pretty_version' => 'v6.4.19',
             'version' => '6.4.19.0',

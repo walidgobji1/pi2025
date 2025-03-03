@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @email/zurb_2/notification/body.txt.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/8f/8f088d88f074dce2ac5946ce4946b741.php
 class __TwigTemplate_5e32f860eae5ac94d7facd63b27784b0 extends Template
-========
-class __TwigTemplate_5c71c7d0a6bc0169c9dec016a4d8e5b4 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/4e/4e71308c692080bbf23547f446e44db6.php
 {
     private Source $source;
     /**
@@ -231,10 +227,6 @@ Exception stack trace attached.
 {{ exception }}
 {% endif %}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/8f/8f088d88f074dce2ac5946ce4946b741.php
-", "@email/zurb_2/notification/body.txt.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\zurb_2\\notification\\body.txt.twig");
-========
-", "@email/zurb_2/notification/body.txt.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\zurb_2\\notification\\body.txt.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/4e/4e71308c692080bbf23547f446e44db6.php
+", "@email/zurb_2/notification/body.txt.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Email\\zurb_2\\notification\\body.txt.twig");
     }
 }

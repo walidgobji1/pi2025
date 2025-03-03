@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* instructeur/instrform.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/b7/b77565e09a8818f5e0588125e0aa3f26.php
 class __TwigTemplate_ed00a824dcea4d978cd690088a264e03 extends Template
-========
-class __TwigTemplate_436c845057c37e7fa049541cb7e95943 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/44/44792e4455a698e141e83602cfd10d7e.php
 {
     private Source $source;
     /**
@@ -394,10 +390,6 @@ class __TwigTemplate_436c845057c37e7fa049541cb7e95943 extends Template
         </div>
     </section>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/b7/b77565e09a8818f5e0588125e0aa3f26.php
-", "instructeur/instrform.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\instructeur\\instrform.html.twig");
-========
-", "instructeur/instrform.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\instructeur\\instrform.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/44/44792e4455a698e141e83602cfd10d7e.php
+", "instructeur/instrform.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\instructeur\\instrform.html.twig");
     }
 }

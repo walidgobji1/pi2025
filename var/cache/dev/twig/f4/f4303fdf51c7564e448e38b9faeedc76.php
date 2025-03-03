@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @Security/Collector/security.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f4/f4303fdf51c7564e448e38b9faeedc76.php
 class __TwigTemplate_c738cb31c35c4097dfdf455d6573ac73 extends Template
-========
-class __TwigTemplate_88d983f2bf52efbbf832e35443f7ebc7 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5361b01fc005dd692ab817c13e200834.php
 {
     private Source $source;
     /**
@@ -1747,10 +1743,6 @@ $context["voter_detail"], "vote", [], "array", false, false, false, 483) == Twig
         </div>
     {% endif %}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/f4/f4303fdf51c7564e448e38b9faeedc76.php
-", "@Security/Collector/security.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\security-bundle\\Resources\\views\\Collector\\security.html.twig");
-========
-", "@Security/Collector/security.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\security-bundle\\Resources\\views\\Collector\\security.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/53/5361b01fc005dd692ab817c13e200834.php
+", "@Security/Collector/security.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\security-bundle\\Resources\\views\\Collector\\security.html.twig");
     }
 }

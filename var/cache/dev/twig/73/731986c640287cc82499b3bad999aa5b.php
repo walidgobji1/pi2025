@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* inscription_cours/show.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/73/731986c640287cc82499b3bad999aa5b.php
 class __TwigTemplate_504d33df98678ce90346f7740262134d extends Template
-========
-class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/08/08d2578ba67bd8cb0fdb76fc56b16390.php
 {
     private Source $source;
     /**
@@ -78,8 +74,7 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "InscriptionCours
-";
+        yield "Détails de l'Inscription";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -89,7 +84,7 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
         yield from [];
     }
 
-    // line 6
+    // line 5
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -102,71 +97,111 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "head"));
 
-        // line 7
-        yield "\t<style>
-\t\t/* Centrage global du contenu */
-\t\t.container {
-\t\t\tmax-width: 800px;
-\t\t\tmargin-top: 30px;
-\t\t\tmargin-bottom: 30px;
-\t\t}
+        // line 6
+        yield "    <style>
+        /* Global */
+        body {
+            background: linear-gradient(135deg, #f3f4f6, #dfe4ea);
+            font-family: 'Poppins', sans-serif;
+        }
 
-\t\t/* Centrer le titre */
-\t\th1.text-center {
-\t\t\tfont-family: 'Arial', sans-serif;
-\t\t\tfont-size: 2rem;
-\t\t\tcolor: #007bff;
-\t\t\tmargin-bottom: 20px;
-\t\t}
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+        }
 
-\t\t/* Espacement de la table */
-\t\t.table {
-\t\t\tmargin-bottom: 30px;
-\t\t\tborder: 1px solid #ddd;
-\t\t\tborder-radius: 5px;
-\t\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-\t\t}
+        /* Titre */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
 
-\t\t/* Ajouter des bordures arrondies aux cellules de la table */
-\t\t.table th,
-\t\t.table td {
-\t\t\tpadding: 15px;
-\t\t\ttext-align: left;
-\t\t\tvertical-align: middle;
-\t\t}
+        /* Table */
+        .table {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border-collapse: collapse;
+        }
 
-\t\t/* Boutons */
-\t\t.btn {
-\t\t\tmargin: 10px;
-\t\t}
+        .table th, .table td {
+            padding: 15px;
+            font-size: 1rem;
+        }
 
-\t\t.btn-primary {
-\t\t\tbackground-color: #007bff;
-\t\t\tborder-color: #007bff;
-\t\t}
+        .table th {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+        }
 
-\t\t.btn-warning {
-\t\t\tbackground-color: #ffc107;
-\t\t\tborder-color: #ffc107;
-\t\t}
+        .table td {
+            border-bottom: 1px solid #ddd;
+            color: #444;
+            font-weight: 500;
+        }
 
-\t\t.btn-danger {
-\t\t\tbackground-color: #dc3545;
-\t\t\tborder-color: #dc3545;
-\t\t}
+        .table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
 
-\t\t/* Section des liens */
-\t\t.text-center a {
-\t\t\tmargin: 10px;
-\t\t\ttext-decoration: none;
-\t\t\tfont-weight: bold;
-\t\t\tpadding: 10px 20px;
-\t\t}
+        /* Status badge */
+        .badge {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
 
-\t\t.text-center a:hover {
-\t\t\topacity: 0.8;
-\t\t}
-\t</style>
+        .badge-payé {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-en-attente {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        /* Bouton */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Centrage */
+        .text-center {
+            text-align: center;
+        }
+    </style>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -177,7 +212,7 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
         yield from [];
     }
 
-    // line 73
+    // line 112
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -190,72 +225,81 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 74
-        yield "\t<div class=\"container\">
-\t\t<h1 class=\"text-center\">InscriptionCours</h1>
+        // line 113
+        yield "    <div class=\"container\">
+        <h1>Inscription Détails</h1>
 
-\t\t<table class=\"table mx-auto\">
-\t\t\t<tbody>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Id</th>
-\t\t\t\t\t<td>";
-        // line 81
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 81, $this->source); })()), "id", [], "any", false, false, false, 81), "html", null, true);
+        <table class=\"table\">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>";
+        // line 120
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 120, $this->source); })()), "id", [], "any", false, false, false, 120), "html", null, true);
         yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Status</th>
-\t\t\t\t\t<td>";
-        // line 85
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 85, $this->source); })()), "status", [], "any", false, false, false, 85), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        ";
+        // line 125
+        if ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 125, $this->source); })()), "status", [], "any", false, false, false, 125) == "Payé")) {
+            // line 126
+            yield "                            <span class=\"badge badge-payé\">Payé</span>
+                        ";
+        } else {
+            // line 128
+            yield "                            <span class=\"badge badge-en-attente\">En attente</span>
+                        ";
+        }
+        // line 130
+        yield "                    </td>
+                </tr>
+                <tr>
+                    <th>Date d'Inscription</th>
+                    <td>";
+        // line 134
+        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 134, $this->source); })()), "dateInscreption", [], "any", false, false, false, 134)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 134, $this->source); })()), "dateInscreption", [], "any", false, false, false, 134), "Y-m-d H:i:s"), "html", null, true)) : ("-"));
         yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>DateInscreption</th>
-\t\t\t\t\t<td>";
-        // line 89
-        yield ((CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 89, $this->source); })()), "dateInscreption", [], "any", false, false, false, 89)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 89, $this->source); })()), "dateInscreption", [], "any", false, false, false, 89), "Y-m-d H:i:s"), "html", null, true)) : (""));
+                </tr>
+                <tr>
+                    <th>Montant</th>
+                    <td>";
+        // line 138
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 138, $this->source); })()), "montant", [], "any", false, false, false, 138), "html", null, true);
+        yield " €</td>
+                </tr>
+                <tr>
+                    <th>Type de Paiement</th>
+                    <td>";
+        // line 142
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 142, $this->source); })()), "typePaiement", [], "any", false, false, false, 142), "html", null, true);
         yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Montant</th>
-\t\t\t\t\t<td>";
-        // line 93
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 93, $this->source); })()), "montant", [], "any", false, false, false, 93), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Nom de l'Apprenant</th>
+                    <td>";
+        // line 146
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 146, $this->source); })()), "nomApprenant", [], "any", false, false, false, 146), "html", null, true);
         yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>TypePaiement</th>
-\t\t\t\t\t<td>";
-        // line 97
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 97, $this->source); })()), "typePaiement", [], "any", false, false, false, 97), "html", null, true);
+                </tr>
+                <tr>
+                    <th>Nom de la Formation</th>
+                    <td>";
+        // line 150
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 150, $this->source); })()), "nomFormation", [], "any", false, false, false, 150), "html", null, true);
         yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>NomApprenant</th>
-\t\t\t\t\t<td>";
-        // line 101
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 101, $this->source); })()), "nomApprenant", [], "any", false, false, false, 101), "html", null, true);
-        yield "</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>NomFormation</th>
-\t\t\t\t\t<td>";
-        // line 105
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["inscription_cour"]) || array_key_exists("inscription_cour", $context) ? $context["inscription_cour"] : (function () { throw new RuntimeError('Variable "inscription_cour" does not exist.', 105, $this->source); })()), "nomFormation", [], "any", false, false, false, 105), "html", null, true);
-        yield "</td>
-\t\t\t\t</tr>
-\t\t\t</tbody>
-\t\t</table>
+                </tr>
+            </tbody>
+        </table>
 
-\t\t<div class=\"text-center\">
-\t\t\t<a href=\"";
-        // line 111
+        <div class=\"text-center\">
+            <a href=\"";
+        // line 156
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_inscription_cours_index");
         yield "\" class=\"btn btn-primary\">Retour à la liste des inscriptions</a>
-\t\t</div>
-
-\t</div>
+        </div>
+    </div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -287,130 +331,170 @@ class __TwigTemplate_07369a9f7ce95c5aed28f35c7814354d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  250 => 111,  241 => 105,  234 => 101,  227 => 97,  220 => 93,  213 => 89,  206 => 85,  199 => 81,  190 => 74,  177 => 73,  102 => 7,  89 => 6,  65 => 3,  42 => 1,);
+        return array (  299 => 156,  290 => 150,  283 => 146,  276 => 142,  269 => 138,  262 => 134,  256 => 130,  252 => 128,  248 => 126,  246 => 125,  238 => 120,  229 => 113,  216 => 112,  101 => 6,  88 => 5,  65 => 3,  42 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}InscriptionCours
-{% endblock %}
+{% block title %}Détails de l'Inscription{% endblock %}
 
 {% block head %}
-\t<style>
-\t\t/* Centrage global du contenu */
-\t\t.container {
-\t\t\tmax-width: 800px;
-\t\t\tmargin-top: 30px;
-\t\t\tmargin-bottom: 30px;
-\t\t}
+    <style>
+        /* Global */
+        body {
+            background: linear-gradient(135deg, #f3f4f6, #dfe4ea);
+            font-family: 'Poppins', sans-serif;
+        }
 
-\t\t/* Centrer le titre */
-\t\th1.text-center {
-\t\t\tfont-family: 'Arial', sans-serif;
-\t\t\tfont-size: 2rem;
-\t\t\tcolor: #007bff;
-\t\t\tmargin-bottom: 20px;
-\t\t}
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+        }
 
-\t\t/* Espacement de la table */
-\t\t.table {
-\t\t\tmargin-bottom: 30px;
-\t\t\tborder: 1px solid #ddd;
-\t\t\tborder-radius: 5px;
-\t\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-\t\t}
+        /* Titre */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
 
-\t\t/* Ajouter des bordures arrondies aux cellules de la table */
-\t\t.table th,
-\t\t.table td {
-\t\t\tpadding: 15px;
-\t\t\ttext-align: left;
-\t\t\tvertical-align: middle;
-\t\t}
+        /* Table */
+        .table {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border-collapse: collapse;
+        }
 
-\t\t/* Boutons */
-\t\t.btn {
-\t\t\tmargin: 10px;
-\t\t}
+        .table th, .table td {
+            padding: 15px;
+            font-size: 1rem;
+        }
 
-\t\t.btn-primary {
-\t\t\tbackground-color: #007bff;
-\t\t\tborder-color: #007bff;
-\t\t}
+        .table th {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+        }
 
-\t\t.btn-warning {
-\t\t\tbackground-color: #ffc107;
-\t\t\tborder-color: #ffc107;
-\t\t}
+        .table td {
+            border-bottom: 1px solid #ddd;
+            color: #444;
+            font-weight: 500;
+        }
 
-\t\t.btn-danger {
-\t\t\tbackground-color: #dc3545;
-\t\t\tborder-color: #dc3545;
-\t\t}
+        .table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
 
-\t\t/* Section des liens */
-\t\t.text-center a {
-\t\t\tmargin: 10px;
-\t\t\ttext-decoration: none;
-\t\t\tfont-weight: bold;
-\t\t\tpadding: 10px 20px;
-\t\t}
+        /* Status badge */
+        .badge {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
 
-\t\t.text-center a:hover {
-\t\t\topacity: 0.8;
-\t\t}
-\t</style>
+        .badge-payé {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-en-attente {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        /* Bouton */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Centrage */
+        .text-center {
+            text-align: center;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
-\t<div class=\"container\">
-\t\t<h1 class=\"text-center\">InscriptionCours</h1>
+    <div class=\"container\">
+        <h1>Inscription Détails</h1>
 
-\t\t<table class=\"table mx-auto\">
-\t\t\t<tbody>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Id</th>
-\t\t\t\t\t<td>{{ inscription_cour.id }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Status</th>
-\t\t\t\t\t<td>{{ inscription_cour.status }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>DateInscreption</th>
-\t\t\t\t\t<td>{{ inscription_cour.dateInscreption ? inscription_cour.dateInscreption|date('Y-m-d H:i:s') : '' }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>Montant</th>
-\t\t\t\t\t<td>{{ inscription_cour.montant }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>TypePaiement</th>
-\t\t\t\t\t<td>{{ inscription_cour.typePaiement }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>NomApprenant</th>
-\t\t\t\t\t<td>{{ inscription_cour.nomApprenant }}</td>
-\t\t\t\t</tr>
-\t\t\t\t<tr>
-\t\t\t\t\t<th>NomFormation</th>
-\t\t\t\t\t<td>{{ inscription_cour.nomFormation }}</td>
-\t\t\t\t</tr>
-\t\t\t</tbody>
-\t\t</table>
+        <table class=\"table\">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ inscription_cour.id }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        {% if inscription_cour.status == 'Payé' %}
+                            <span class=\"badge badge-payé\">Payé</span>
+                        {% else %}
+                            <span class=\"badge badge-en-attente\">En attente</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date d'Inscription</th>
+                    <td>{{ inscription_cour.dateInscreption ? inscription_cour.dateInscreption|date('Y-m-d H:i:s') : '-' }}</td>
+                </tr>
+                <tr>
+                    <th>Montant</th>
+                    <td>{{ inscription_cour.montant }} €</td>
+                </tr>
+                <tr>
+                    <th>Type de Paiement</th>
+                    <td>{{ inscription_cour.typePaiement }}</td>
+                </tr>
+                <tr>
+                    <th>Nom de l'Apprenant</th>
+                    <td>{{ inscription_cour.nomApprenant }}</td>
+                </tr>
+                <tr>
+                    <th>Nom de la Formation</th>
+                    <td>{{ inscription_cour.nomFormation }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-\t\t<div class=\"text-center\">
-\t\t\t<a href=\"{{ path('app_inscription_cours_index') }}\" class=\"btn btn-primary\">Retour à la liste des inscriptions</a>
-\t\t</div>
-
-\t</div>
+        <div class=\"text-center\">
+            <a href=\"{{ path('app_inscription_cours_index') }}\" class=\"btn btn-primary\">Retour à la liste des inscriptions</a>
+        </div>
+    </div>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/73/731986c640287cc82499b3bad999aa5b.php
-", "inscription_cours/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\inscription_cours\\show.html.twig");
-========
-", "inscription_cours/show.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\inscription_cours\\show.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/08/08d2578ba67bd8cb0fdb76fc56b16390.php
+", "inscription_cours/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\inscription_cours\\show.html.twig");
     }
 }

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* lecon/showClient.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/d4/d49379198bf801618eee0865f45d84c3.php
 class __TwigTemplate_3b71c4bd20be9a657ac9559db77bc0ab extends Template
-========
-class __TwigTemplate_e812f2b0053444c638d74dcdf7848bb3 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/1d/1dff97a5cacd81880b2e45a49c47d8ea.php
 {
     private Source $source;
     /**
@@ -449,10 +445,6 @@ class __TwigTemplate_e812f2b0053444c638d74dcdf7848bb3 extends Template
     <!-- Bootstrap JS for Tabs -->
     <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/d4/d49379198bf801618eee0865f45d84c3.php
-", "lecon/showClient.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\lecon\\showClient.html.twig");
-========
-", "lecon/showClient.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\lecon\\showClient.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/1d/1dff97a5cacd81880b2e45a49c47d8ea.php
+", "lecon/showClient.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\lecon\\showClient.html.twig");
     }
 }

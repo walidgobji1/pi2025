@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* bootstrap_3_layout.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/d4/d417096c9362d9a6acc419f06623767a.php
 class __TwigTemplate_37db35b8d15ca966ee318a7bc728bc5e extends Template
-========
-class __TwigTemplate_3ed76a09e464dfaca77c8349a0c67048 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/51/512fcfcf9204134aa66ab87f89c34a2b.php
 {
     private Source $source;
     /**
@@ -1249,10 +1245,6 @@ class __TwigTemplate_3ed76a09e464dfaca77c8349a0c67048 extends Template
         </span>
     {%- endif -%}
 {%- endblock form_help %}
-<<<<<<<< HEAD:var/cache/dev/twig/d4/d417096c9362d9a6acc419f06623767a.php
-", "bootstrap_3_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_3_layout.html.twig");
-========
-", "bootstrap_3_layout.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_3_layout.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/51/512fcfcf9204134aa66ab87f89c34a2b.php
+", "bootstrap_3_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_3_layout.html.twig");
     }
 }

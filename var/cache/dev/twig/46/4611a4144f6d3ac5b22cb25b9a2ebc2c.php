@@ -139,37 +139,35 @@ class __TwigTemplate_cd91de1cfb4e77ed60841b09f7c9491b extends Template
             // line 16
             if ((null === CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "notification", [], "any", false, false, false, 16))) {
                 // line 17
-                yield "                    <div>
-                        <form action=\"";
+                yield "                <div>
+                    <form action=\"";
                 // line 18
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_notification_new", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 18)]), "html", null, true);
                 yield "\" method=\"get\">
-                            <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Informer les apprenants</button>
-                        </form>
-                        <form action=\"";
+                        <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Informer les apprenants</button>
+                    </form>
+                     <form action=\"";
                 // line 21
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_evenement_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["evenement"], "id", [], "any", false, false, false, 21)]), "html", null, true);
                 yield "\" method=\"get\">
-                            <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Modifier</button>
-                        </form>
+                    <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Modifier</button>
+                </form>
+                ";
+                // line 24
+                yield Twig\Extension\CoreExtension::include($this->env, $context, "evenement/_delete_form.html.twig");
+                yield "
                     </div>
+                </form>
                 ";
             } else {
-                // line 26
+                // line 28
                 yield "                    <button class=\"bg-green-500 text-black px-4 py-2 rounded cursor-not-allowed opacity-50\" disabled>
                         Notification déjà envoyée
                     </button>
                 ";
             }
-            // line 30
-            yield "                
-                <!-- Le bouton de suppression est toujours affiché -->
-                ";
             // line 32
-            yield Twig\Extension\CoreExtension::include($this->env, $context, "evenement/_delete_form.html.twig");
-            yield "
-
-            </div>
+            yield "            </div>
             <hr class=\"my-4\">
         ";
             $context['_iterated'] = true;
@@ -182,16 +180,16 @@ class __TwigTemplate_cd91de1cfb4e77ed60841b09f7c9491b extends Template
                 $context['loop']['last'] = 0 === $context['loop']['revindex0'];
             }
         }
-        // line 36
+        // line 34
         if (!$context['_iterated']) {
-            // line 37
+            // line 35
             yield "            <p class=\"text-gray-600\">Aucun événement à afficher pour le moment.</p>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['evenement'], $context['_parent'], $context['_iterated'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 39
+        // line 37
         yield "
     </div>
 </div>
@@ -272,7 +270,7 @@ class __TwigTemplate_cd91de1cfb4e77ed60841b09f7c9491b extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  195 => 39,  188 => 37,  186 => 36,  169 => 32,  165 => 30,  159 => 26,  151 => 21,  145 => 18,  142 => 17,  140 => 16,  135 => 14,  131 => 13,  127 => 12,  124 => 11,  106 => 10,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  193 => 37,  186 => 35,  184 => 34,  170 => 32,  164 => 28,  157 => 24,  151 => 21,  145 => 18,  142 => 17,  140 => 16,  135 => 14,  131 => 13,  127 => 12,  124 => 11,  106 => 10,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -293,23 +291,21 @@ class __TwigTemplate_cd91de1cfb4e77ed60841b09f7c9491b extends Template
                 <p class=\"text-gray-700 mt-2\">{{ evenement.description }}</p>
                
                 {% if evenement.notification is null %}
-                    <div>
-                        <form action=\"{{ path('app_notification_new', {'id': evenement.id}) }}\" method=\"get\">
-                            <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Informer les apprenants</button>
-                        </form>
-                        <form action=\"{{ path('app_evenement_edit', {'id': evenement.id}) }}\" method=\"get\">
-                            <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Modifier</button>
-                        </form>
+                <div>
+                    <form action=\"{{ path('app_notification_new', {'id': evenement.id}) }}\" method=\"get\">
+                        <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Informer les apprenants</button>
+                    </form>
+                     <form action=\"{{ path('app_evenement_edit', {'id': evenement.id}) }}\" method=\"get\">
+                    <button type=\"submit\" class=\"bg-blue-600 text-blue px-4 py-2 rounded\">Modifier</button>
+                </form>
+                {{ include('evenement/_delete_form.html.twig') }}
                     </div>
+                </form>
                 {% else %}
                     <button class=\"bg-green-500 text-black px-4 py-2 rounded cursor-not-allowed opacity-50\" disabled>
                         Notification déjà envoyée
                     </button>
                 {% endif %}
-                
-                <!-- Le bouton de suppression est toujours affiché -->
-                {{ include('evenement/_delete_form.html.twig') }}
-
             </div>
             <hr class=\"my-4\">
         {% else %}
@@ -365,6 +361,6 @@ class __TwigTemplate_cd91de1cfb4e77ed60841b09f7c9491b extends Template
 </style>
 
 {% endblock %}
-", "evenement/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\evenement\\index.html.twig");
+", "evenement/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\evenement\\index.html.twig");
     }
 }

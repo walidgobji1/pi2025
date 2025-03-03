@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/exception.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/91/9179cc240ef20d866e9b09e247b5e534.php
 class __TwigTemplate_cd9fb5aad2b065be60781bd838c360ee extends Template
-========
-class __TwigTemplate_d7737bfa692ecc8fb52502631aad09e3 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/e0/e07697fa400ef34622f84a883830b953.php
 {
     private Source $source;
     /**
@@ -273,10 +269,6 @@ class __TwigTemplate_d7737bfa692ecc8fb52502631aad09e3 extends Template
         </div>
     {% endif %}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/91/9179cc240ef20d866e9b09e247b5e534.php
-", "@WebProfiler/Collector/exception.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\exception.html.twig");
-========
-", "@WebProfiler/Collector/exception.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\exception.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/e0/e07697fa400ef34622f84a883830b953.php
+", "@WebProfiler/Collector/exception.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\exception.html.twig");
     }
 }

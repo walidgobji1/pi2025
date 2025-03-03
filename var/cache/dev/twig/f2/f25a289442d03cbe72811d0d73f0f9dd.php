@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/time.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/f2/f25a289442d03cbe72811d0d73f0f9dd.php
 class __TwigTemplate_1a499c1c44119aff1f6ec299d059d276 extends Template
-========
-class __TwigTemplate_34f5ec06f479a8f7a4c58421d35333c7 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/68/682fc1ebeb711ae24438a9f36efd08bb.php
 {
     private Source $source;
     /**
@@ -1007,10 +1003,6 @@ class __TwigTemplate_34f5ec06f479a8f7a4c58421d35333c7 extends Template
         {% endautoescape %}</script>
     </div>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/f2/f25a289442d03cbe72811d0d73f0f9dd.php
-", "@WebProfiler/Collector/time.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
-========
-", "@WebProfiler/Collector/time.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/68/682fc1ebeb711ae24438a9f36efd08bb.php
+", "@WebProfiler/Collector/time.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
     }
 }

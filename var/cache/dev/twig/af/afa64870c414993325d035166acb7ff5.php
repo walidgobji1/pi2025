@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* avis/show.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/af/afa64870c414993325d035166acb7ff5.php
 class __TwigTemplate_d7707716a45aa2dd30a7b6ebf3f3ab06 extends Template
-========
-class __TwigTemplate_4acb62656291d46e44c4f75a1613b176 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/86/86d0f3bd48074558dd4271ac63f4e60a.php
 {
     private Source $source;
     /**
@@ -231,10 +227,6 @@ class __TwigTemplate_4acb62656291d46e44c4f75a1613b176 extends Template
 
     {{ include('avis/_delete_form.html.twig') }}
 {% endblock %}
-<<<<<<<< HEAD:var/cache/dev/twig/af/afa64870c414993325d035166acb7ff5.php
-", "avis/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\avis\\show.html.twig");
-========
-", "avis/show.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\avis\\show.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/86/86d0f3bd48074558dd4271ac63f4e60a.php
+", "avis/show.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\avis\\show.html.twig");
     }
 }

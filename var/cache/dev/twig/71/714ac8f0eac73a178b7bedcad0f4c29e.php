@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Profiler/ajax_layout.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/71/714ac8f0eac73a178b7bedcad0f4c29e.php
 class __TwigTemplate_b31a938aab29f6a3ad02360f9dd35725 extends Template
-========
-class __TwigTemplate_db712f76092d13062bdb3507e2e16e6f extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/46/461c298267e9bb6c786ccb101b128a3a.php
 {
     private Source $source;
     /**
@@ -101,10 +97,6 @@ class __TwigTemplate_db712f76092d13062bdb3507e2e16e6f extends Template
     public function getSourceContext(): Source
     {
         return new Source("{% block panel '' %}
-<<<<<<<< HEAD:var/cache/dev/twig/71/714ac8f0eac73a178b7bedcad0f4c29e.php
-", "@WebProfiler/Profiler/ajax_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\ajax_layout.html.twig");
-========
-", "@WebProfiler/Profiler/ajax_layout.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\ajax_layout.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/46/461c298267e9bb6c786ccb101b128a3a.php
+", "@WebProfiler/Profiler/ajax_layout.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\ajax_layout.html.twig");
     }
 }

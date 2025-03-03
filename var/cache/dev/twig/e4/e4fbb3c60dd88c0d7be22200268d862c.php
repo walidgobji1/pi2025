@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* base_admin.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/e4/e4fbb3c60dd88c0d7be22200268d862c.php
 class __TwigTemplate_745cbdbeb2a38d68c6c45d110e0623f4 extends Template
-========
-class __TwigTemplate_69afbe9978cbd01058626441511f91c2 extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/b9/b9c3aa1a9f8a6140ada770c51f39e4d0.php
 {
     private Source $source;
     /**
@@ -365,10 +361,6 @@ class __TwigTemplate_69afbe9978cbd01058626441511f91c2 extends Template
 \t\t\t<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js\"></script>
 \t\t</body>
 \t</html>
-<<<<<<<< HEAD:var/cache/dev/twig/e4/e4fbb3c60dd88c0d7be22200268d862c.php
-", "base_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\templates\\base_admin.html.twig");
-========
-", "base_admin.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\templates\\base_admin.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/b9/b9c3aa1a9f8a6140ada770c51f39e4d0.php
+", "base_admin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\templates\\base_admin.html.twig");
     }
 }

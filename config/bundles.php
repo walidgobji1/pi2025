@@ -14,9 +14,5 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
-<<<<<<< HEAD
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
-=======
-    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
->>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa
 ];

@@ -15,11 +15,7 @@ use Twig\Template;
 use Twig\TemplateWrapper;
 
 /* @WebProfiler/Collector/logger.html.twig */
-<<<<<<<< HEAD:var/cache/dev/twig/8d/8d833f407c42ac4e9c9b6ae3a51d1137.php
 class __TwigTemplate_01a48b46ff744d6ee0feae90968856ca extends Template
-========
-class __TwigTemplate_b938282456064b5beab41a20d2d9ac9b extends Template
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/d7/d76e3ab1bd1609eebe10ad7097124be0.php
 {
     private Source $source;
     /**
@@ -1755,10 +1751,6 @@ $context["log"], "type", [], "any", false, false, false, 459))) ? ("silenced") :
         {% endif %}
     </div>
 {% endmacro %}
-<<<<<<<< HEAD:var/cache/dev/twig/8d/8d833f407c42ac4e9c9b6ae3a51d1137.php
-", "@WebProfiler/Collector/logger.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (2)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\logger.html.twig");
-========
-", "@WebProfiler/Collector/logger.html.twig", "C:\\Users\\Dell\\Desktop\\pi2\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\logger.html.twig");
->>>>>>>> 8611b6e672bfc92a3280990b1971f5e769fb70aa:var/cache/dev/twig/d7/d76e3ab1bd1609eebe10ad7097124be0.php
+", "@WebProfiler/Collector/logger.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier (3)\\pi2025\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\logger.html.twig");
     }
 }
