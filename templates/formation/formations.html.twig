@@ -14,22 +14,17 @@
         <h2>Nos Formations</h2>
         <p>Découvrez nos formations pour enrichir vos compétences.</p>
       </div>
-
       <div class="course_container">
         <div class="course_owl-carousel owl-carousel owl-theme">
           {% for formation in formations %}
             <div class="item">
               <div class="box">
                 <div class="img-box">
-                                 <div class="text-center">
-                    <img src="{{ asset('uploads/images/' ~ formation.imageName) }}"  class="img-fluid mb-3" style="height: 150px;width: 100%;" />
-                </div>
-      
+                 
                 </div>
                 <div class="detail-box">
                   <h4>{{ formation.titre }}</h4>
                   <p>{{ formation.description|length > 100 ? formation.description|slice(0, 100) ~ '...' : formation.description }}</p>
-                  
 
 <div class="score-section">
     {% if formationScores is defined %}

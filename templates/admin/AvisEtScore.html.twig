@@ -3,7 +3,7 @@
 {% block title %}Gestion des Formations{% endblock %}
 
 {% block body %}
-    <div class="container-fluid p-0">
+    <div class="container mt-5">
         <h1 class="mb-4 text-primary font-weight-bold">Liste des Formations</h1>
 
         <div class="table-responsive">
@@ -41,31 +41,13 @@
 
 {% block stylesheets %}
     <style>
-        /* Remove any margin or padding from body, html, container, etc. */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        .container-fluid {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Reset margin/padding from Bootstrap */
-        .container, .row, .col, .table-responsive, table {
-            margin: 0;
-            padding: 0;
-        }
-
         /* Custom Button Color (same as title color) */
         .btn-custom {
             background-color: #007bff; /* Primary color (same as title) */
             color: white;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
+        
         /* Hover Effect for Button */
         .btn-custom:hover {
             background-color: #0056b3;

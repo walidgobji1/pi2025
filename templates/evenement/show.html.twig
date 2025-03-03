@@ -4,38 +4,59 @@
 
 {% block body %}
 <div class="container mx-auto my-10 p-5">
-    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <!-- Event Header -->
-        <div class="bg-blue-600 text-white p-4 text-center">
-            <h1 class="text-2xl font-semibold">{{ evenement.titre }}</h1>
+        <div class="bg-blue-600 text-white p-6 text-center">
+            <h1 class="text-3xl font-semibold">{{ evenement.titre }}</h1>
         </div>
 
         <!-- Event Details -->
-        <div class="p-4">
-            <div class="card shadow-lg rounded-lg">
-                <!-- Photo de l'événement -->
-                <img src="{{ asset('uploads/photos/' ~ evenement.photo) }}" class="card-img-top object-cover w-full h-48" alt="Image de l'événement">
-
-                <!-- Date Section -->
-                <div class="mb-4 mt-4">
-                    <p>Date: {{ evenement.date ? evenement.date|date('d M Y') : 'Date non disponible' }}</p>
-                    <p class="text-lg font-semibold text-gray-700"><strong>Description: </strong></p>
-                    <p class="text-base text-gray-600 mt-2">{{ evenement.description }}</p>
-                </div>
+        <div class="p-6">
+            <!-- Date Section -->
+            <div class="mb-6">
+             <p><strong>Date: </strong></p>
+                <p>Date: {{ evenement.date ? evenement.date|date('d M Y') : 'Date not available' }}</p>
+                <p class="text-lg font-semibold text-gray-700"><strong>Description: </strong></p>
+                <p class="text-base text-gray-600 mt-2">{{ evenement.description }}</p>
             </div>
         </div>
+
+        <!-- Actions (Buttons) -->
     </div>
 </div>
 
 <style>
+    .btn {
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-primary {
+        background-color: rgba(255, 153, 0, 0.18);
+        color: white;
+    }
+
+    .btn-warning {
+        background-color: #f0ad4e;
+        color: white;
+    }
+
     .container {
         padding: 40px;
         max-width: 900px;
         margin: 0 auto;
     }
 
-    .max-w-2xl {
-        max-width: 700px; /* Réduit la largeur de la card */
+    .max-w-3xl {
+        max-width: 100%;
     }
 
     .shadow-lg {
@@ -58,8 +79,8 @@
         color: white;
     }
 
-    .p-4 {
-        padding: 16px; /* Réduit la taille des paddings */
+    .p-6 {
+        padding: 24px;
     }
 
     .text-center {
@@ -90,20 +111,16 @@
         margin-top: 0.5rem;
     }
 
-    .mb-4 {
-        margin-bottom: 1rem; /* Réduit la marge du bas */
+    .mb-6 {
+        margin-bottom: 1.5rem;
     }
 
-    .object-cover {
-        object-fit: cover;
+    .flex {
+        display: flex;
     }
 
-    .w-full {
-        width: 100%;
-    }
-
-    .h-48 {
-        height: 192px; /* Hauteur plus petite pour l'image */
+    .justify-between {
+        justify-content: space-between;
     }
 </style>
 {% endblock %}

@@ -42,21 +42,22 @@ class InscriptionCours
     private ?Formation $formation = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le nom de l'apprenant est obligatoire.")]
+    #[Assert\NotBlank(message: "Le nom de l'apprenant est requis.")]
+    #[Assert\Length(min: 3, max: 255, minMessage: "Le nom doit contenir au moins 3 caractères.")]
     private ?string $nomApprenant = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le nom de la formation est requis.")]
     private ?string $nomFormation = null;
 
-    #[ORM\Column(length: 8)]
-    #[Assert\NotBlank(message: "Le CIN est obligatoire.")]
+    #[ORM\Column(length: 8, unique: true)]
+    #[Assert\NotBlank(message: "Le CIN est requis.")]
     #[Assert\Length(min: 8, max: 8, exactMessage: "Le CIN doit contenir exactement 8 chiffres.")]
     #[Assert\Regex(pattern: "/^\d{8}$/", message: "Le CIN doit contenir uniquement des chiffres.")]
     private ?string $cin = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "L'email est obligatoire.")]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(message: "L'email est requis.")]
     #[Assert\Email(message: "L'adresse email n'est pas valide.")]
     private ?string $email = null;
 
@@ -199,25 +200,4 @@ class InscriptionCours
 
         return $this;
     }
-
-    public function finaliserPaiement(): static
-{
-    if ($this->formation && $this->montant == 0) {
-        $this->montant = $this->formation->getPrix();
-    }
-
-    if ($this->promotion && $this->promotion->isValid()) {
-        $remise = $this->promotion->getRemise();
-        $nouveauMontant = $this->montant - ($this->montant * $remise / 100);
-        $this->montant = max(0, round($nouveauMontant, 2));
-
-        // Enregistrer l'inscription dans la promotion
-        $this->promotion->setInscriptionCours($this);
-    }
-
-    $this->status = "payé";
-
-    return $this;
-}
-
 }

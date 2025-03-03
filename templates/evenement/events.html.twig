@@ -3,25 +3,27 @@
 {% block title %}Liste des événements{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-  <h2 class="text-center font-bold text-2xl mb-4">Liste des événements</h2>
-  <div class="row">
-    {% for evenement in evenements %}
-          <div class="col-md-4 mb-4">
-              <div class="card shadow-lg rounded-lg transform transition hover:scale-105 hover:shadow-xl">
-                <img src="{{ asset('uploads/photos/' ~ evenement.photo) }}" class="card-img-top object-cover" alt="Image de l'événement">
-                  <div class="card-body">
-                      <h5 class="card-title font-bold">{{ evenement.titre }}</h5>
-                      <p class="card-text text-gray-700">{{ evenement.description|slice(0, 100) }}...</p>
-                      <p class="text-sm text-gray-500">Date : {{ evenement.date|date('d/m/Y') }}</p>
-                      <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-primary w-full">Voir les détails</a>
-                  </div>
-              </div>
-          </div>
-      {% else %}
-          <p class="text-center text-gray-600 w-full">Aucun événement à afficher pour le moment.</p>
-      {% endfor %}
-  </div>
+<div class="container mx-auto my-10 p-5">
+    <h2 class="text-center text-3xl font-bold mb-6 text-gray-800">Liste des événements</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for evenement in evenements %}
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                
+
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ evenement.titre }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">{{ evenement.date ? evenement.date|date('d M Y') : 'Date not available' }}</p>
+                    <p class="text-base text-gray-700 mb-6">{{ evenement.description|slice(0, 100) ~ (evenement.description|length > 100 ? '...' : '') }}</p>
+                    <div class="text-center">
+                        <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 w-full">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600 w-full">Aucun événement à afficher pour le moment.</p>
+        {% endfor %}
+    </div>
 </div>
 
 <style>
@@ -103,8 +105,6 @@
 
     .object-cover {
         object-fit: cover;
-        height: 200px;
-        width: 100%;
     }
 
     .text-sm {

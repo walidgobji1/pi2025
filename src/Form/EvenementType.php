@@ -8,8 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\File;
 
 class EvenementType extends AbstractType
 {
@@ -30,6 +28,7 @@ class EvenementType extends AbstractType
                     new Assert\NotBlank([
                         'message' => 'Veuillez choisir une date.',
                     ])
+                 
                 ]
             ])
             ->add('description', null, [
@@ -37,19 +36,6 @@ class EvenementType extends AbstractType
                     new Assert\NotBlank([
                         'message' => 'Veuillez ajouter une description.',
                     ]),  
-                ]
-            ])
-            // Ajout du champ photo
-            ->add('photo', FileType::class, [
-                'label' => 'Photo de l\'événement (format jpg, png, etc.)',
-                'mapped' => false, // ne pas mapper directement avec l'entité
-                'required' => false, // Rendre le champ optionnel
-                'constraints' => [
-                    new Assert\File([
-                        'maxSize' => '5M',
-                        'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG).',
-                    ])
                 ]
             ])
         ;

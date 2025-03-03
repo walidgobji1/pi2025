@@ -52,6 +52,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'form-control'],
             ])
+          
             ->add('image', FileType::class, [
                 'label' => 'Image de profil (JPG, PNG)',
                 'mapped' => false,

@@ -9,15 +9,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\InscriptionCoursRepository;
-use App\Service\FormationScoreService;
+use Symfony\Component\Routing\Attribute\Route;
+use App\Service\FormationScoreService; // Import du service
 
 #[Route('/formation')]
 final class FormationController extends AbstractController
 {
     private $formationScoreService;
 
+    // Injection du service FormationScoreService dans le contrôleur
     public function __construct(FormationScoreService $formationScoreService)
     {
         $this->formationScoreService = $formationScoreService;
@@ -26,8 +26,8 @@ final class FormationController extends AbstractController
     #[Route('/formations', name: 'app_formations')]
     public function indextemp(FormationRepository $formationRepository): Response
     {
-        $formations = $formationRepository->findAll();
-        $formationScores = $this->formationScoreService->getAllScores();
+        $formations = $formationRepository->findAll(); // Récupération des formations
+        $formationScores = $this->formationScoreService->getAllScores(); // Récupération des scores
 
         return $this->render('/formation/formations.html.twig', [
             'formations' => $formations,
@@ -36,20 +36,10 @@ final class FormationController extends AbstractController
     }
 
     #[Route(name: 'app_formation_index', methods: ['GET'])]
-    public function index(Request $request, FormationRepository $formationRepository): Response
+    public function index(FormationRepository $formationRepository): Response
     {
-        // Get the search query from the request (if any)
-        $searchQuery = $request->query->get('search', ''); // Default to empty if not set
-
-        // Fetch formations, and if there's a search query, filter the formations
-        if ($searchQuery) {
-            $formations = $formationRepository->findBySearchQuery($searchQuery);  // Ensure this method exists in your repository
-        } else {
-            $formations = $formationRepository->findAll();
-        }
-
         return $this->render('formation/index.html.twig', [
-            'formations' => $formations,
+            'formations' => $formationRepository->findAll(),
         ]);
     }
 
@@ -74,17 +64,10 @@ final class FormationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_formation_show', methods: ['GET'])]
-    public function showForClient(Formation $formation, InscriptionCoursRepository $inscriptionCoursRepository): Response
+    public function showForClient(Formation $formation): Response
     {
-        $user = $this->getUser();
-        $inscription = $user ? $inscriptionCoursRepository->findOneBy([
-            'formation' => $formation,
-            'apprenant' => $user
-        ]) : null;
-
         return $this->render('formation/showClient.html.twig', [
             'formation' => $formation,
-            'inscription' => $inscription
         ]);
     }
 
@@ -104,6 +87,7 @@ final class FormationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
             return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -117,10 +101,14 @@ final class FormationController extends AbstractController
     public function delete(Request $request, Formation $formation, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $formation->getId(), $request->getPayload()->getString('_token'))) {
+            $hasLessons = !$formation->getLecons()->isEmpty();
+
             $entityManager->remove($formation);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La formation a été supprimée avec succès.');
+            $this->addFlash('success', $hasLessons
+                ? 'La formation et ses leçons associées ont été supprimées avec succès.'
+                : 'La formation a été supprimée avec succès.');
         }
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);

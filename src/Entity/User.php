@@ -36,6 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 6, max: 30)]
     private string $password;
 
+    
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     private ?string $nom = null;
@@ -46,17 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: "date", nullable: true)]
     private ?\DateTimeInterface $dateDeNaissance = null;
+
+
+
+
     #[ORM\Column(length: 255, nullable: true)]
-private ?string $image = null;
-
-public function getImage(): ?string {
-    return $this->image;
-}
-
-public function setImage(?string $image): self {
-    $this->image = $image;
-    return $this;
-}
+    private ?string $resetToken = null;
 
     public function getId(): ?int { return $this->id; }
 
@@ -85,4 +82,14 @@ public function setImage(?string $image): self {
     public function getUserIdentifier(): string { return $this->email; }
 
     public function eraseCredentials(): void {}
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+        return $this;
+    }
 }

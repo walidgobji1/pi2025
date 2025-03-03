@@ -16,17 +16,70 @@
             </div>
         {% endif %}
 
-        <!-- Ajout des autres champs (avant l'image) -->
-        {% for field in form %}
-            {% if field is not same as(form.imageFile) %}
-                {{ form_row(field) }}
-            {% endif %}
-        {% endfor %}
+        <!-- Champ Titre -->
+        <div class="form-group">
+            {{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control', 'placeholder': 'Titre de la formation'}}) }}
+            {% for error in form.titre.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
 
-        <!-- Ajout du champ image en dernier -->
-        {{ form_row(form.imageFile) }}
+        <!-- Champ Description -->
+        <div class="form-group">
+            {{ form_label(form.description, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control form-textarea', 'placeholder': 'Description de la formation'}}) }}
+            {% for error in form.description.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
 
-        <!-- Bouton de soumission à la fin -->
+        <!-- Champ Durée -->
+        <div class="form-group">
+            {{ form_label(form.duree, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.duree, {'attr': {'class': 'form-control', 'placeholder': 'Durée'}}) }}
+            {% for error in form.duree.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Niveau -->
+        <div class="form-group">
+            {{ form_label(form.niveau, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.niveau, {'attr': {'class': 'form-control', 'placeholder': 'Niveau'}}) }}
+            {% for error in form.niveau.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Date de Création -->
+        <div class="form-group">
+            {{ form_label(form.dateCreation, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.dateCreation, {'attr': {'class': 'form-control', 'placeholder': 'AAAA/MM/JJ'}}) }}
+            {% for error in form.dateCreation.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Champ Prix -->
+        <div class="form-group">
+            {{ form_label(form.prix, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Prix'}}) }}
+            {% for error in form.prix.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Sélection de la catégorie -->
+        <div class="form-group">
+            {{ form_label(form.categorie, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-select'}}) }}
+            {% for error in form.categorie.vars.errors %}
+                <div class="error-message">❌ {{ error.message }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Bouton de soumission -->
         <button type="submit" class="submit-button">💾 {{ button_label|default('Enregistrer') }}</button>
 
         {{ form_end(form) }}
@@ -76,7 +129,7 @@
         display: block;
     }
 
-    .form-control, .form-textarea {
+    .form-control, .form-textarea, .form-select {
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
@@ -87,7 +140,7 @@
         transition: border-color 0.3s ease;
     }
 
-    .form-control:focus, .form-textarea:focus {
+    .form-control:focus, .form-textarea:focus, .form-select:focus {
         border-color: #3498db;
         outline: none;
     }
@@ -129,5 +182,6 @@
     .form-errors li {
         list-style-type: disc;
     }
+    
 </style>
 {% endblock %}

@@ -15,16 +15,16 @@ class Discussion
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]  // ✅ Remplacement de Utilisateur par User
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $sender = null;
+    private ?Utilisateur $sender = null;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]  // ✅ Remplacement de Utilisateur par User
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull(message: "Le destinataire est requis.")]
-    private ?User $receiver = null;
+    private ?Utilisateur $receiver = null;
 
-    #[ORM\OneToMany(mappedBy: 'discussion', targetEntity: 'App\Entity\Message', cascade: ['remove'])]
+    #[ORM\OneToMany(mappedBy: 'discussion', targetEntity: 'App\Entity\Message')]
     private Collection $messages;
 
     public function __construct()
@@ -37,23 +37,23 @@ class Discussion
         return $this->id;
     }
 
-    public function getSender(): ?User  // ✅ Changement de type
+    public function getSender(): ?Utilisateur
     {
         return $this->sender;
     }
 
-    public function setSender(?User $sender): self  // ✅ Changement de type
+    public function setSender(?Utilisateur $sender): self
     {
         $this->sender = $sender;
         return $this;
     }
 
-    public function getReceiver(): ?User  // ✅ Changement de type
+    public function getReceiver(): ?Utilisateur
     {
         return $this->receiver;
     }
 
-    public function setReceiver(?User $receiver): self  // ✅ Changement de type
+    public function setReceiver(?Utilisateur $receiver): self
     {
         $this->receiver = $receiver;
         return $this;
@@ -88,4 +88,3 @@ class Discussion
         return $this;
     }
 }
-

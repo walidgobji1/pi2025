@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil Utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4 fw-bold">Mon Profil</h2>
+
+            <!-- Image de Profil statique -->
+            <div class="d-flex align-items-center mb-4 justify-content-center">
+                <img src="{{ asset('image/avatr.png') }}" alt="Avatar" class="rounded-circle border shadow-sm" width="90" height="90">
+            </div>
+
+            <!-- Nom -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nom</label>
+                <input type="text" class="form-control" id="displayNom" value="{{ app.user.nom }}" disabled>
+            </div>
+
+            <!-- Prénom -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Prénom</label>
+                <input type="text" class="form-control" id="displayPrenom" value="{{ app.user.prenom }}" disabled>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Email</label>
+                <input type="email" class="form-control" value="{{ app.user.email }}" disabled>
+            </div>
+
+            <!-- Date de Naissance -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Date de naissance</label>
+                <input type="text" class="form-control" id="displayDateDeNaissance" value="{{ app.user.dateDeNaissance|date('d/m/Y') }}" disabled>
+            </div>
+
+            <!-- Bouton pour ouvrir le modal de modification -->
+            <div class="mt-4">
+                <button type="button" class="btn btn-primary w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    Modifier le profil
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de modification du profil -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <form action="{{ path('app_profile_edit') }}" method="post" id="editProfileForm">
+        <div class="modal-header bg-light">
+          <h5 class="modal-title fw-bold" id="editProfileModalLabel">Modifier le profil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nom" class="form-label fw-semibold">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" value="{{ app.user.nom }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="prenom" class="form-label fw-semibold">Prénom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ app.user.prenom }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="dateDeNaissance" class="form-label fw-semibold">Date de naissance</label>
+            <input type="date" class="form-control" id="dateDeNaissance" name="dateDeNaissance" value="{{ app.user.dateDeNaissance|date('Y-m-d') }}" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('#editProfileForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // On supprime la ligne qui affichait l'alerte
+                        // alert(data.message);
+
+                        // Mettre à jour le DOM avec les nouvelles valeurs
+                        document.querySelector('#displayNom').value = data.data.nom;
+                        document.querySelector('#displayPrenom').value = data.data.prenom;
+                        document.querySelector('#displayDateDeNaissance').value = data.data.dateDeNaissance;
+
+                        // Fermer le modal (avec Bootstrap)
+                        const modalEl = document.getElementById('editProfileModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl);
+                        modal.hide();
+                    } else {
+                        alert(data.message); // Vous pouvez aussi le retirer ou remplacer par un autre système de notification
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('#editProfileForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Mettre à jour le DOM du profil
+                        document.querySelector('#displayNom').value = data.data.nom;
+                        document.querySelector('#displayPrenom').value = data.data.prenom;
+                        document.querySelector('#displayDateDeNaissance').value = data.data.dateDeNaissance;
+
+                        // Mettre à jour le nom dans la navbar
+                        const navbarUserName = document.querySelector('#navbarUserName');
+                        if (navbarUserName) {
+                            navbarUserName.textContent = data.data.nom;
+                        }
+
+                        // Fermer le modal
+                        const modalEl = document.getElementById('editProfileModal');
+                        const modal = bootstrap.Modal.getInstance(modalEl);
+                        modal.hide();
+                    } else {
+                        // Gérer les erreurs éventuelles
+                        console.error('Erreur:', data.message);
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    </script>
+{% endblock %}

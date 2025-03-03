@@ -10,8 +10,8 @@
                 <select name="receiver_id" id="receiver_id" class="form-control {% if errors is not empty %}is-invalid{% endif %}">
                     <option value="">Sélectionnez un destinataire</option>
                     {% for utilisateur in utilisateurs %}
-                        {% if utilisateur.id != app.user.id %}
-                            <option value="{{ utilisateur.id }}">{{ utilisateur.prenom }} {{ utilisateur.nom }}  </option>
+                        {% if utilisateur.id != 1 %}
+                            <option value="{{ utilisateur.id }}">{{ utilisateur.username }}</option>
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -27,8 +27,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Créer la discussion</button>
-            <a href="{{ path('app_message') }}" class="btn btn-danger mt-3">Annuler</a>
-
         </form>
     </div>
 {% endblock %}

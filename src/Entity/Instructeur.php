@@ -20,24 +20,14 @@ class Instructeur extends User
     private ?string $email_instructeur = null;
 
     #[ORM\Column(type: "string", nullable: true)]
-    
     private ?string $cv = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image_ins = null;
-    
-    public function getImage(): ?string {
-        return $this->image_ins;
-    }
-    
-    public function setImage(?string $image): self {
-        $this->image_ins = $image;
-        return $this;
-    }
-    
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $image = null;
 
     #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'instructeur')]
     private Collection $avis;
+ 
 
     public function __construct()
     {
@@ -90,7 +80,16 @@ class Instructeur extends User
         return $this;
     }
 
-   
+    public function getImage(): ?string 
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self 
+    {
+        $this->image = $image;
+        return $this;
+    }
 
     public function getAvis(): Collection 
     {
@@ -115,4 +114,5 @@ class Instructeur extends User
         }
         return $this;
     }
+
 }

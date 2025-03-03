@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: 'App\Repository\MessageRepository')]
 class Message
@@ -13,20 +14,20 @@ class Message
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]  // ✅ Remplacement de Utilisateur par User
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $sender = null;
+    private ?Utilisateur $sender = null;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]  // ✅ Remplacement de Utilisateur par User
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Utilisateur')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $receiver = null;
+    private ?Utilisateur $receiver = null;
 
     #[ORM\ManyToOne(targetEntity: 'App\Entity\Discussion', inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Discussion $discussion = null;
 
     #[ORM\Column(type: 'text')]
-    #[Assert\NotBlank(message: "Le contenu du message ne peut pas être vide.")]
+    #[Assert\NotBlank(message: "**Le contenu du message ne peut pas être vide.")]
     #[Assert\Length(
         max: 1000,
         maxMessage: "Le message ne peut pas dépasser 1000 caractères."
@@ -38,7 +39,7 @@ class Message
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime(); // ✅ Date par défaut
+        $this->createdAt = new \DateTime(); // Par défaut, la date est définie à l'heure actuelle
     }
 
     public function getId(): ?int
@@ -46,23 +47,23 @@ class Message
         return $this->id;
     }
 
-    public function getSender(): ?User  // ✅ Changement de type
+    public function getSender(): ?Utilisateur
     {
         return $this->sender;
     }
 
-    public function setSender(?User $sender): self  // ✅ Changement de type
+    public function setSender(?Utilisateur $sender): self
     {
         $this->sender = $sender;
         return $this;
     }
 
-    public function getReceiver(): ?User  // ✅ Changement de type
+    public function getReceiver(): ?Utilisateur
     {
         return $this->receiver;
     }
 
-    public function setReceiver(?User $receiver): self  // ✅ Changement de type
+    public function setReceiver(?Utilisateur $receiver): self
     {
         $this->receiver = $receiver;
         return $this;

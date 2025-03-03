@@ -13,7 +13,7 @@
         </section>
     </div>
 
-    <section class="contact_section layout_padding" id="instructor-registration-form-section">
+    <section class="contact_section layout_padding">
         <div class="container">
             <div class="heading_container text-center">
                 <h2>Inscription Instructeur</h2>
@@ -99,16 +99,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        // Attendre que la page soit complètement chargée
-        document.addEventListener("DOMContentLoaded", function() {
-            // Faire défiler la page jusqu'à la section du formulaire d'inscription instructeur
-            const instructorRegistrationFormSection = document.getElementById('instructor-registration-form-section');
-            if (instructorRegistrationFormSection) {
-                instructorRegistrationFormSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    </script>
-
 {% endblock %}

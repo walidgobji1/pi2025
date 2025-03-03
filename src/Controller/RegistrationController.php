@@ -47,7 +47,6 @@ class RegistrationController extends AbstractController
                 $user->setNomApprenant($form->get('nom')->getData());
                 $user->setPrenomApprenant($form->get('prenom')->getData());
                 $user->setEmailApprenant($form->get('email')->getData());
-
             } elseif ($user instanceof Instructeur) {
                 $user->setNomInstructeur($form->get('nom')->getData());
                 $user->setPrenomInstructeur($form->get('prenom')->getData());

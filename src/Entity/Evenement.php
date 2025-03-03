@@ -22,8 +22,6 @@ class Evenement
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $photo = null; // Ajout du champ photo
 
     #[ORM\OneToOne(mappedBy: 'evenement', targetEntity: Notification::class, cascade: ['persist', 'remove'])]
     private ?Notification $notification = null;
@@ -79,16 +77,6 @@ class Evenement
             $notification->setEvenement($this);
         }
 
-        return $this;
-    }
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?string $photo): static
-    {
-        $this->photo = $photo;
         return $this;
     }
 }

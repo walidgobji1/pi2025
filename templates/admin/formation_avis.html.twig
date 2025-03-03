@@ -3,7 +3,7 @@
 {% block title %}Reviews for {{ formation.titre }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid p-0 m-0">
+<div class="container mt-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-primary text-white rounded-top">
             <h3 class="mb-0">Avis pour la formation  {{ formation.titre }}</h3>
@@ -59,20 +59,4 @@
 
 <!-- FontAwesome for stars and icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-{% block stylesheets %}
-    <style>
-        /* Remove margin and padding from the body */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Also apply to container to prevent margin issues */
-        .container-fluid {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-{% endblock %}
 {% endblock %}
