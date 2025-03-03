@@ -409,6 +409,6 @@ class __TwigTemplate_ddc6caa68bb42826c4e002df9e410247 extends Template
     }
 </style>
 {% endblock %}
-", "formation/_form.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\_form.html.twig");
+", "formation/_form.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\formation\\_form.html.twig");
     }
 }

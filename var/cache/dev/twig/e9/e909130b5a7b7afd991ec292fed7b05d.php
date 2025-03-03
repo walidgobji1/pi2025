@@ -2002,6 +2002,6 @@ class __TwigTemplate_63e9138774978489121325a3f74e2d75 extends Template
 \t\t\t\t<!-- Template Main JS File -->
 \t\t\t\t<script src=\"{{asset('backOffice/js/main.js')}}\"></script>
 \t\t\t</body>
-\t\t</html>", "baseAdmin.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\baseAdmin.html.twig");
+\t\t</html>", "baseAdmin.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\baseAdmin.html.twig");
     }
 }

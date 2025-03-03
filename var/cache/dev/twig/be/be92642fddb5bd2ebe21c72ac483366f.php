@@ -288,6 +288,6 @@ class __TwigTemplate_1642ee7f786e995105e9bfe784b3e0ce extends Template
     </div>
 
 {% endblock %}
-", "formation/index.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\index.html.twig");
+", "formation/index.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\formation\\index.html.twig");
     }
 }

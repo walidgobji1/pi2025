@@ -48,6 +48,40 @@
                 </div>
             {% endfor %}
         </div>
+
+        <!-- Pagination should be OUTSIDE the loop -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {{ knp_pagination_render(formations) }}
+            </ul>
+        </nav>
+
     </div>
+ <script>
+$(document).ready(function () {
+    $('#searchButton').click(function () {
+        var searchQuery = $('#example-search-input').val().toLowerCase(); 
+
+       
+        $('.course_owl-carousel .item').each(function () {
+            var titre = $(this).find('.detail-box h4').text().toLowerCase(); 
+            var description = $(this).find('.detail-box p').text().toLowerCase();
+
+            if (titre.includes(searchQuery) || description.includes(searchQuery)) {
+                $(this).show(); 
+            } else {
+                $(this).hide();
+            }
+        });
+
+        if ($('.course_owl-carousel .item:visible').length === 0) {
+            $('.course_owl-carousel').hide();
+        } else {
+            $('.course_owl-carousel').show();
+        }
+    });
+});
+
+        </script>
 
 {% endblock %}

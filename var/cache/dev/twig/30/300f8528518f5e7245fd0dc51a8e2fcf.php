@@ -265,6 +265,6 @@ $context["user"], "roles", [], "any", false, false, false, 29))) {
 \t</table>
 
 {% endblock %}
-", "admin/users_list.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\admin\\users_list.html.twig");
+", "admin/users_list.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\admin\\users_list.html.twig");
     }
 }

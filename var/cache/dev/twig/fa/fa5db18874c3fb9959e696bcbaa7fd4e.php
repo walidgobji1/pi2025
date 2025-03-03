@@ -148,6 +148,6 @@ class __TwigTemplate_4b526a094ba9b6757370f9f2a1de5582 extends Template
     {{ include('formation/_form.html.twig') }}
 
 {% endblock %}
-", "formation/new.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\templates\\formation\\new.html.twig");
+", "formation/new.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\templates\\formation\\new.html.twig");
     }
 }

@@ -343,6 +343,6 @@ class __TwigTemplate_d3aa1599baa34df07fb2eb273c085278 extends Template
         </tbody>
     </table>
 {% endblock %}
-", "@VichUploader/Collector/mapping_collector.html.twig", "C:\\Users\\walid\\Desktop\\Nouveau dossier\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Collector\\mapping_collector.html.twig");
+", "@VichUploader/Collector/mapping_collector.html.twig", "C:\\Users\\walid\\Desktop\\finalPI\\pi2025\\vendor\\vich\\uploader-bundle\\templates\\Collector\\mapping_collector.html.twig");
     }
 }
